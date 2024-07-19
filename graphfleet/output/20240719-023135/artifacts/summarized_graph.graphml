@@ -1,0 +1,965 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d5" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d4" for="edge" attr.name="description" attr.type="string" />
+  <key id="d3" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;DARREN EDGE&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Darren Edge is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;HA TRINH&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ha Trinh is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;NEWMAN CHENG&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Newman Cheng is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;JOSHUA BRADLEY&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Joshua Bradley is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;ALEX CHAO&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Alex Chao is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;APURVA MODY&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Apurva Mody is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;STEVEN TRUITT&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Steven Truitt is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;JONATHAN LARSON&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Jonathan Larson is one of the authors of the paper and a contributor to the research on Graph RAG approach to query-focused summarization."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;MICROSOFT RESEARCH&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Microsoft Research is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;MICROSOFT STRATEGIC MISSIONS AND TECHNOLOGIES&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Microsoft Strategic Missions and Technologies is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;MICROSOFT OFFICE OF THE CTO&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Microsoft Office of the CTO is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d2">76f53fb8722af58423d32a9f95018b18</data>
+    </node>
+    <node id="&quot;GRAPH RAG&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">Graph RAG is an approach proposed in a paper for query-focused summarization over private text corpora using a graph-based text index. It leverages the natural modularity of graphs to partition data for global summarization, achieving competitive performance in various evaluations.</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45,76f53fb8722af58423d32a9f95018b18,77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;TRAAG ET AL., 2019&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Traag et al., 2019 refers to the authors of the Leiden algorithm, which is used for hierarchical community detection."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;MULTIHOP-RAG&quot;">
+      <data key="d0">"DATASET"</data>
+      <data key="d1">"MultiHop-RAG is a dataset used for indexing and graph community detection, as mentioned in the text."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;TANG AND YANG, 2024&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Tang and Yang, 2024 refers to the authors associated with the MultiHop-RAG dataset."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;OPENORD&quot;">
+      <data key="d0">"TECHNOLOGY"</data>
+      <data key="d1">"OpenORD is a node layout algorithm used for visualizing graph communities."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;MARTIN ET AL., 2011&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Martin et al., 2011 refers to the authors of the OpenORD algorithm."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;FORCE ATLAS 2&quot;">
+      <data key="d0">"TECHNOLOGY"</data>
+      <data key="d1">"Force Atlas 2 is a node layout algorithm used for visualizing graph communities."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;JACOMY ET AL., 2014&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Jacomy et al., 2014 refers to the authors of the Force Atlas 2 algorithm."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;KEVIN SCOTT&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Kevin Scott is the CTO of Microsoft and a participant in the podcast conversations compiled in the dataset."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;MICROSOFT&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">Microsoft is a technology company where Kevin Scott serves as Chief Technology Officer (CTO). In 2023, Microsoft conducted a preliminary study on the impact of large language models on scientific discovery using GPT-4.</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d,4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;BEHIND THE TECH&quot;">
+      <data key="d0">"PODCAST"</data>
+      <data key="d1">"Behind the Tech is a podcast series featuring conversations between Kevin Scott and other technology leaders."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;SCOTT, 2024&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Scott, 2024 refers to Kevin Scott, who is associated with the Behind the Tech podcast."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;HOTPOTQA&quot;">
+      <data key="d0">"DATASET"</data>
+      <data key="d1">"HotPotQA is a benchmark dataset for open-domain question answering."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;YANG ET AL., 2018&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Yang et al., 2018 refers to the authors of the HotPotQA dataset."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;MT-BENCH&quot;">
+      <data key="d0">"DATASET"</data>
+      <data key="d1">"MT-Bench is a benchmark dataset for open-domain question answering."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;ZHENG ET AL., 2024&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Zheng et al., 2024 refers to the authors of the MT-Bench dataset."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;KOESTEN ET AL., 2021&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Koesten et al., 2021 refers to the authors who discussed the process of data sensemaking."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;XU AND LAPATA, 2021&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Xu and Lapata, 2021 refers to the authors who worked on methods for extracting latent summarization queries from source texts."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;WANG ET AL., 2023A&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Wang et al., 2023a refers to the authors who discussed the evaluation of natural language generation using LLMs."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;ES ET AL., 2023&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Es et al., 2023 refers to the authors who worked on evaluating the performance of RAG systems."</data>
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;DATA SENSEMAKING&quot;">
+      <data key="d0" />
+      <data key="d1" />
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;LATENT SUMMARIZATION QUERIES&quot;">
+      <data key="d0" />
+      <data key="d1" />
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;NATURAL LANGUAGE GENERATION EVALUATION&quot;">
+      <data key="d0" />
+      <data key="d1" />
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;RAG SYSTEM EVALUATION&quot;">
+      <data key="d0" />
+      <data key="d1" />
+      <data key="d2">4a924a483e795e5e40dbdb018113c06e</data>
+    </node>
+    <node id="&quot;NA&#207;VE RAG&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Na&#239;ve RAG is a basic retrieval-augmented generation system that converts documents to text, splits text into chunks, and embeds these chunks into a vector space for retrieval."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;PODCAST DATASET&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The Podcast Dataset is a collection of podcast transcripts used for evaluating the performance of different RAG systems."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;NEWS DATASET&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"The News Dataset is a collection of news articles used for evaluating the performance of different RAG systems."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;COMPREHENSIVENESS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Comprehensiveness refers to the ability of a system to provide detailed and complete answers."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;DIVERSITY&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Diversity refers to the ability of a system to provide varied and rich responses covering a wide range of perspectives."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;EMPOWERMENT&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Empowerment refers to the ability of a system to help users reach an informed understanding by providing specific examples, quotes, and citations."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;DIRECTNESS&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Directness refers to the ability of a system to provide concise and specific answers to questions."</data>
+      <data key="d2">77f9589bc5acd4c518314fae6c3769c8</data>
+    </node>
+    <node id="&quot;LANGCHAIN&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"LangChain is an organization that supports a variety of graph databases and provides libraries for creating and reasoning over knowledge graphs."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;LLAMAINDEX&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"LlamaIndex is an organization that supports graph databases and provides libraries for creating and reasoning over knowledge graphs."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;NEO4J&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">Neo4J is a company that initiated Project NaLLM, as mentioned in their GitHub repository in 2024. Neo4J is also an organization that offers a graph database format used for creating and reasoning over knowledge graphs.</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45,39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;NEBULAGRAPH&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">NebulaGraph is a company that launched the industry-first graph RAG: Retrieval-augmented generation with LLM based on knowledge graphs in 2024. Additionally, NebulaGraph is an organization that offers a graph database format used for creating and reasoning over knowledge graphs.</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45,39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SELFCHECKGPT&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"SelfCheckGPT is an organization that provides approaches for comparing fabrication rates to improve analysis."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;ALONSO GUEVARA FERN&#193;NDEZ&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Alonso Guevara Fern&#225;ndez is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;AMBER HOAK&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Amber Hoak is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;ANDR&#201;S MORALES ESQUIVEL&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Andr&#233;s Morales Esquivel is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;BEN CUTLER&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ben Cutler is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;BILLIE RINALDI&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Billie Rinaldi is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;CHRIS SANCHEZ&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Chris Sanchez is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;CHRIS TREVINO&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Chris Trevino is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;CHRISTINE CAGGIANO&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Christine Caggiano is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;DAVID TITTSWORTH&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"David Tittsworth is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;DAYENNE DE SOUZA&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Dayenne de Souza is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;DOUGLAS ORBAKER&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Douglas Orbaker is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;ED CLARK&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ed Clark is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;GABRIEL NIEVES-PONCE&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Gabriel Nieves-Ponce is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;GAUDY BLANCO MENESES&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Gaudy Blanco Meneses is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;KATE LYTVYNETS&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Kate Lytvynets is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;KATY SMITH&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Katy Smith is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;M&#211;NICA CARVAJAL&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"M&#243;nica Carvajal is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;NATHAN EVANS&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Nathan Evans is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;RICHARD ORTEGA&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Richard Ortega is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;RODRIGO RACANICCI&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Rodrigo Racanicci is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;SARAH SMITH&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Sarah Smith is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;SHANE SOLOMON&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shane Solomon is one of the contributors to the work presented in the document."</data>
+      <data key="d2">27f5bd73115aa334eae2c121c53f8a45</data>
+    </node>
+    <node id="&quot;MAO, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Mao, Y. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;HE, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"He, P. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;LIU, X.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Liu, X. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SHEN, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shen, Y. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;GAO, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Gao, J. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;HAN, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Han, J. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;CHEN, W.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Chen, W. is an author who contributed to the paper 'Generation-augmented retrieval for open-domain question answering' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;MARTIN, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Martin, S. is an author who contributed to the paper 'Openord: An open-source toolbox for large graph layout' presented at the SPIE Conference on Visualization and Data Analysis (VDA) in 2011."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BROWN, W. M.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Brown, W. M. is an author who contributed to the paper 'Openord: An open-source toolbox for large graph layout' presented at the SPIE Conference on Visualization and Data Analysis (VDA) in 2011."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;KLAVANS, R.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Klavans, R. is an author who contributed to the paper 'Openord: An open-source toolbox for large graph layout' presented at the SPIE Conference on Visualization and Data Analysis (VDA) in 2011."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BOYACK, K.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Boyack, K. is an author who contributed to the paper 'Openord: An open-source toolbox for large graph layout' presented at the SPIE Conference on Visualization and Data Analysis (VDA) in 2011."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;NEWMAN, M. E.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Newman, M. E. is an author who wrote about modularity and community structure in networks, published in the Proceedings of the National Academy of Sciences in 2006."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;RAM, O.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ram, O. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;LEVINE, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Levine, Y. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;DALMEDIGOS, I.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Dalmedigos, I. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;MUHLGAY, D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Muhlgay, D. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SHASHUA, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shashua, A. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;LEYTON-BROWN, K.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Leyton-Brown, K. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SHOHAM, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shoham, Y. is an author who contributed to the paper 'In-context retrieval-augmented language models' published in the Transactions of the Association for Computational Linguistics in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;RANADE, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Ranade, P. is an author who contributed to the paper 'Fabula: Intelligence report generation using retrieval-augmented narrative construction' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;JOSHI, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Joshi, A. is an author who contributed to the paper 'Fabula: Intelligence report generation using retrieval-augmented narrative construction' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SARTHI, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Sarthi, P. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ABDULLAH, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Abdullah, S. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TULI, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Tuli, A. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;KHANNA, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Khanna, S. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;GOLDIE, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Goldie, A. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;MANNING, C. D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Manning, C. D. is an author who contributed to the paper 'Raptor: Recursive abstractive processing for tree-organized retrieval' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SCOTT, K.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Scott, K. is associated with 'Behind the Tech,' a platform or publication by Microsoft in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SHAO, Z.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shao, Z. is an author who contributed to the paper 'Enhancing retrieval-augmented large language models with iterative retrieval-generation synergy' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;GONG, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Gong, Y. is an author who contributed to the paper 'Enhancing retrieval-augmented large language models with iterative retrieval-generation synergy' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;HUANG, M.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Huang, M. is an author who contributed to the paper 'Enhancing retrieval-augmented large language models with iterative retrieval-generation synergy' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;DUAN, N.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Duan, N. is an author who contributed to the paper 'Enhancing retrieval-augmented large language models with iterative retrieval-generation synergy' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SU, D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Su, D. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;XU, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Xu, Y. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;YU, T.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Yu, T. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SIDDIQUE, F. B.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Siddique, F. B. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BAREZI, E. J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Barezi, E. J. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;FUNG, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Fung, P. is an author who contributed to the paper 'Caire-covid: A question answering and query-focused multi-document summarization system for covid-19 scholarly information management' published in 2020."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TANG, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Tang, Y. is an author who contributed to the paper 'MultiHop-RAG: Benchmarking retrieval-augmented generation for multi-hop queries' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;YANG, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Yang, Y. is an author who contributed to the paper 'MultiHop-RAG: Benchmarking retrieval-augmented generation for multi-hop queries' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TOUVRON, H.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Touvron, H. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;MARTIN, L.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Martin, L. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;STONE, K.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Stone, K. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ALBERT, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Albert, P. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ALMAHAIRI, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Almahairi, A. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BABAEI, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Babaei, Y. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BASHLYKOV, N.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bashlykov, N. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BATRA, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Batra, S. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BHARGAVA, P.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bhargava, P. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BHOSALE, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Bhosale, S. is an author who contributed to the paper 'Llama 2: Open foundation and fine-tuned chat models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TRAAG, V. A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Traag, V. A. is an author who contributed to the paper 'From Louvain to Leiden: guaranteeing well-connected communities' published in Scientific Reports in 2019."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;WALTMAN, L.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Waltman, L. is an author who contributed to the paper 'From Louvain to Leiden: guaranteeing well-connected communities' published in Scientific Reports in 2019."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;VAN ECK, N. J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Van Eck, N. J. is an author who contributed to the paper 'From Louvain to Leiden: guaranteeing well-connected communities' published in Scientific Reports in 2019."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TRAJANOSKA, M.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Trajanoska, M. is an author who contributed to the paper 'Enhancing knowledge graph construction using large language models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;STOJANOV, R.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Stojanov, R. is an author who contributed to the paper 'Enhancing knowledge graph construction using large language models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TRAJANOV, D.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Trajanov, D. is an author who contributed to the paper 'Enhancing knowledge graph construction using large language models' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;TRIVEDI, H.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Trivedi, H. is an author who contributed to the paper 'Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions' published in 2022."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;BALASUBRAMANIAN, N.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Balasubramanian, N. is an author who contributed to the paper 'Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions' published in 2022."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;KHOT, T.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Khot, T. is an author who contributed to the paper 'Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions' published in 2022."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SABHARWAL, A.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Sabharwal, A. is an author who contributed to the paper 'Interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions' published in 2022."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;WANG, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Wang, J. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;LIANG, Y.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Liang, Y. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;MENG, F.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Meng, F. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SUN, Z.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Sun, Z. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;SHI, H.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Shi, H. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;LI, Z.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Li, Z. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;XU, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Xu, J. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;QU, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Qu, J. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ZHOU, J.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Zhou, J. is an author who contributed to the paper 'Is chatgpt a good nlg evaluator? a preliminary study' published in 2023."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;WANG, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Wang, S. is an author who contributed to the paper 'Feb4rag: Evaluating federated search in the context of retrieval augmented generation' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;KHRAMTSOVA, E.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Khramtsova, E. is an author who contributed to the paper 'Feb4rag: Evaluating federated search in the context of retrieval augmented generation' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ZHUANG, S.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Zhuang, S. is an author who contributed to the paper 'Feb4rag: Evaluating federated search in the context of retrieval augmented generation' published in 2024."</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <node id="&quot;ZUCCON, G.&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Zuccon, G.</data>
+      <data key="d2">39aecf1064d6b3e3cca60cd12e9ff74d</data>
+    </node>
+    <edge source="&quot;DARREN EDGE&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Darren Edge is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;DARREN EDGE&quot;" target="&quot;MICROSOFT RESEARCH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Darren Edge is affiliated with Microsoft Research."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;HA TRINH&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Ha Trinh is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;HA TRINH&quot;" target="&quot;MICROSOFT RESEARCH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Ha Trinh is affiliated with Microsoft Research."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;NEWMAN CHENG&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Newman Cheng is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;NEWMAN CHENG&quot;" target="&quot;MICROSOFT STRATEGIC MISSIONS AND TECHNOLOGIES&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Newman Cheng is affiliated with Microsoft Strategic Missions and Technologies."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;JOSHUA BRADLEY&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Joshua Bradley is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;JOSHUA BRADLEY&quot;" target="&quot;MICROSOFT STRATEGIC MISSIONS AND TECHNOLOGIES&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Joshua Bradley is affiliated with Microsoft Strategic Missions and Technologies."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;ALEX CHAO&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Alex Chao is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;ALEX CHAO&quot;" target="&quot;MICROSOFT OFFICE OF THE CTO&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Alex Chao is affiliated with Microsoft Office of the CTO."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;APURVA MODY&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Apurva Mody is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;APURVA MODY&quot;" target="&quot;MICROSOFT OFFICE OF THE CTO&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Apurva Mody is affiliated with Microsoft Office of the CTO."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;STEVEN TRUITT&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Steven Truitt is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;STEVEN TRUITT&quot;" target="&quot;MICROSOFT STRATEGIC MISSIONS AND TECHNOLOGIES&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Steven Truitt is affiliated with Microsoft Strategic Missions and Technologies."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;JONATHAN LARSON&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Jonathan Larson is one of the contributors to the development and research of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;JONATHAN LARSON&quot;" target="&quot;MICROSOFT RESEARCH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Jonathan Larson is affiliated with Microsoft Research."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;MICROSOFT RESEARCH&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Microsoft Research is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;MICROSOFT STRATEGIC MISSIONS AND TECHNOLOGIES&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Microsoft Strategic Missions and Technologies is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;MICROSOFT OFFICE OF THE CTO&quot;" target="&quot;GRAPH RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Microsoft Office of the CTO is one of the organizations involved in the research and development of the Graph RAG approach."</data>
+      <data key="d5">76f53fb8722af58423d32a9f95018b18</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;NA&#207;VE RAG&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG outperforms Na&#239;ve RAG in terms of comprehensiveness and diversity across datasets."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;PODCAST DATASET&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG uses the Podcast Dataset to evaluate its performance in providing comprehensive and diverse answers."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;NEWS DATASET&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG uses the News Dataset to evaluate its performance in providing comprehensive and diverse answers."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;COMPREHENSIVENESS&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG achieves high comprehensiveness win rates in evaluations."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;DIVERSITY&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG achieves high diversity win rates in evaluations."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;EMPOWERMENT&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG shows mixed results in empowerment, indicating room for improvement in providing specific examples and citations."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;LANGCHAIN&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG's approach is supported by LangChain's libraries for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;LLAMAINDEX&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG's approach is supported by LlamaIndex's libraries for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;NEO4J&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG's approach can be implemented using the Neo4J graph database format."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;NEBULAGRAPH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG's approach can be implemented using the NebulaGraph database format."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;GRAPH RAG&quot;" target="&quot;SELFCHECKGPT&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Graph RAG's evaluation approach could be improved by comparing fabrication rates using SelfCheckGPT's methods."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;MULTIHOP-RAG&quot;" target="&quot;TANG AND YANG, 2024&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"MultiHop-RAG dataset was created by Tang and Yang, 2024."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;OPENORD&quot;" target="&quot;MARTIN ET AL., 2011&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"OpenORD algorithm was developed by Martin et al., 2011 for node layout in graph visualizations."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;FORCE ATLAS 2&quot;" target="&quot;JACOMY ET AL., 2014&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Force Atlas 2 algorithm was developed by Jacomy et al., 2014 for node layout in graph visualizations."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;KEVIN SCOTT&quot;" target="&quot;MICROSOFT&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Kevin Scott is the CTO of Microsoft."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;KEVIN SCOTT&quot;" target="&quot;BEHIND THE TECH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Behind the Tech is a podcast series featuring conversations with Kevin Scott."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;BEHIND THE TECH&quot;" target="&quot;SCOTT, 2024&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Scott, 2024 refers to Kevin Scott, who is associated with the Behind the Tech podcast."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;HOTPOTQA&quot;" target="&quot;YANG ET AL., 2018&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"HotPotQA dataset was created by Yang et al., 2018."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;MT-BENCH&quot;" target="&quot;ZHENG ET AL., 2024&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"MT-Bench dataset was created by Zheng et al., 2024."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;KOESTEN ET AL., 2021&quot;" target="&quot;DATA SENSEMAKING&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Koesten et al., 2021 discussed the process of data sensemaking."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;XU AND LAPATA, 2021&quot;" target="&quot;LATENT SUMMARIZATION QUERIES&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Xu and Lapata, 2021 worked on methods for extracting latent summarization queries from source texts."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;WANG ET AL., 2023A&quot;" target="&quot;NATURAL LANGUAGE GENERATION EVALUATION&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Wang et al., 2023a discussed the evaluation of natural language generation using LLMs."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;ES ET AL., 2023&quot;" target="&quot;RAG SYSTEM EVALUATION&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Es et al., 2023 worked on evaluating the performance of RAG systems."</data>
+      <data key="d5">4a924a483e795e5e40dbdb018113c06e</data>
+    </edge>
+    <edge source="&quot;NA&#207;VE RAG&quot;" target="&quot;PODCAST DATASET&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Na&#239;ve RAG uses the Podcast Dataset to evaluate its performance in providing direct answers."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;NA&#207;VE RAG&quot;" target="&quot;NEWS DATASET&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Na&#239;ve RAG uses the News Dataset to evaluate its performance in providing direct answers."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;NA&#207;VE RAG&quot;" target="&quot;DIRECTNESS&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"Na&#239;ve RAG produces the most direct responses across all comparisons."</data>
+      <data key="d5">77f9589bc5acd4c518314fae6c3769c8</data>
+    </edge>
+    <edge source="&quot;LANGCHAIN&quot;" target="&quot;NEO4J&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"LangChain supports the Neo4J graph database format for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;LANGCHAIN&quot;" target="&quot;NEBULAGRAPH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"LangChain supports the NebulaGraph database format for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;LLAMAINDEX&quot;" target="&quot;NEO4J&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"LlamaIndex supports the Neo4J graph database format for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+    <edge source="&quot;LLAMAINDEX&quot;" target="&quot;NEBULAGRAPH&quot;">
+      <data key="d3">1.0</data>
+      <data key="d4">"LlamaIndex supports the NebulaGraph database format for creating and reasoning over knowledge graphs."</data>
+      <data key="d5">27f5bd73115aa334eae2c121c53f8a45</data>
+    </edge>
+  </graph>
+</graphml>
