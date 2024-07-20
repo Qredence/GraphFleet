@@ -23,7 +23,6 @@ from azure.search.documents.indexes.models import (
     VectorSearchProfile,
 )
 from azure.search.documents.models import VectorizedQuery
-
 from graphrag.model.types import TextEmbedder
 
 from .base import (
