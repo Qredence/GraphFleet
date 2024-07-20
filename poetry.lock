@@ -189,6 +189,16 @@ files = [
 typing-extensions = {version = ">=4.0.0", markers = "python_version < \"3.11\""}
 
 [[package]]
+name = "at"
+version = "0.0.3"
+description = "A set of utilities I use frequently in interactive environments"
+optional = false
+python-versions = "*"
+files = [
+    {file = "at-0.0.3.tar.gz", hash = "sha256:e52908449ceabd4913599c94aff9b0307e71ac0dff491ea139992e0ce2880954"},
+]
+
+[[package]]
 name = "attrs"
 version = "23.2.0"
 description = "Classes Without Boilerplate"
@@ -5089,6 +5099,20 @@ files = [
 ]
 
 [[package]]
+name = "yfiles-jupyter-graphs"
+version = "1.7.3"
+description = "A diagram visualization extension for JupyterLab and Jupyter Notebooks powered by yFiles for HTML"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "yfiles_jupyter_graphs-1.7.3-py3-none-any.whl", hash = "sha256:55706f0d687263e1e9feca2aa87cd97492d101b976c2027d414538252db30fb4"},
+    {file = "yfiles_jupyter_graphs-1.7.3.tar.gz", hash = "sha256:653cb7434d9b48d3cdf3c96118d439ab552fd4e0946f0076cd7f9cefa68c4bb4"},
+]
+
+[package.dependencies]
+ipywidgets = ">=8.0.0"
+
+[[package]]
 name = "zipp"
 version = "3.19.2"
 description = "Backport of pathlib-compatible object wrapper for zip files"
@@ -5106,4 +5130,4 @@ test = ["big-O", "importlib-resources", "jaraco.functools", "jaraco.itertools", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "01ee5a94c60b640ad124c27244a21cf97ddbd7effdd7aaf89ff8c896af3a0887"
+content-hash = "5067bf450930c3af07178d82e1765e3a93b9bd9ecb6dc9aadde0f810750709ff"
