@@ -110,3 +110,6 @@ For Global query mode :
 ```
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
