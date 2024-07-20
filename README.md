@@ -45,21 +45,26 @@ cd GraphFleet
 
 
 2. Install dependencies using Poetry:
-```
-poetry install
-```
+
 ```
 poetry shell
+```
+
+```
+poetry install
 ```
 
 ### Usage
 
 1. Setting up your settings:
+
 ```
 cd graphfleet
 ```
+
 - Set up the necessary environment variables in the `.env.example` file and change the name to .env.
-The required ones being : 
+The required ones being :
+
 ```
 # Base LLM Settings
 GRAPHRAG_API_KEY="your_api_key"
@@ -84,10 +89,7 @@ GRAPHRAG_INPUT_TYPE="text"
 
 
 2. Run the indexing process:
-```
-poetry run poe cli --config /graphfleet/settings.yaml
-```
-Or you might prefer using 
+
 ```
 python -m graphrag.index --root ./graphfleet
 ```
@@ -95,16 +97,13 @@ python -m graphrag.index --root ./graphfleet
 
 3. Perform queries in local mode or global mode depending on your usecase learn more in the [GraphRAG documentation](https://microsoft.github.io/graphrag/posts/query/overview/):
 For local query mode :
+
 ```
-python -m graphrag.query \                                                                     
---root ./graphfleet \
---method local \
-"What are the key features of GraphRAG ??"
+python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
 ```
-For Global query mode : 
+
+For Global query mode :
+
 ```
-python -m graphrag.query \
---root ./graphfleet \
---method global \
-"What are the top main features of GraphRAG"
+python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
