@@ -9,17 +9,8 @@ packages = [{ include = "graphfleet" }]
 
 [tool.poetry-dynamic-versioning]
 enable = true
-style = "pep440"
 vcs = "git"
-bump = true
-format-jinja = """
-    {%- if distance == 0 -%}
-        {{ serialize_pep440(base, stage, revision) }}
-    {%- else -%}
-        {{ serialize_pep440(base, stage, revision, dev=distance) }}
-    {%- endif -%}
-"""
-
+style = "semver"
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"
 environs = "^11.0.0"
@@ -242,4 +233,3 @@ asyncio_mode = "auto"
 timeout = 600
 log_cli = true
 log_cli_level = "INFO"
-
