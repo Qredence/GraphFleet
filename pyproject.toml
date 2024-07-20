@@ -5,7 +5,7 @@ description = "Build upon GraphRAG, provide a quick solution setup and is part o
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "graphrag" }]
+packages = [{ include = "graphfleet" }]
 
 [tool.poetry-dynamic-versioning]
 enable = true
@@ -242,3 +242,4 @@ asyncio_mode = "auto"
 timeout = 600
 log_cli = true
 log_cli_level = "INFO"
+
