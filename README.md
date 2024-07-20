@@ -51,7 +51,7 @@ poetry shell
 ```
 
 ```
-poetry install
+poetry install .
 ```
 
 ### Usage
