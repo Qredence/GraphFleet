@@ -7,17 +7,18 @@ GraphFleet is based for now from the great  [GraphRAG from Microsoft](https://gi
 
 GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches by:
 
-1. Connecting disparate pieces of information through shared attributes.
-2. Structured, hierarchical approach to Retrieval Augmented Generation
-3. Knowledge graph extraction from raw text
-4. Community hierarchy building
-5. Hierarchical summarization
-6. Enhanced reasoning capabilities for LLMs on private datasets
-3. (Soon) Improve the structure of the overall repository.
-4. (Soon) Add our dedicated prompts for the indexing & queriying, more vectordatabase
-5. (Soon) Add pull requests features
-6. (Soon) Provide an User Interface and a quicker way of starting GraphFleet locally
-7. (Soon) Access GraphFleet among our set of solution through a secure and enterprise ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV)
+- [x] Connecting disparate pieces of information through shared attributes.
+- [x] Structured, hierarchical approach to Retrieval Augmented Generation
+- [x] Knowledge graph extraction from raw text
+- [x] Community hierarchy building
+- [x] Hierarchical summarization
+- [x] Enhanced reasoning capabilities for LLMs on private datasets
+- [ ] Improve the structure of the overall repository.
+- [ ] Add our dedicated prompts for the indexing & queriying, more vectordatabase
+- [ ] Add more notebooks
+- [ ] Provide an FleetUI Design Kit and a quicker way of starting GraphFleet locally
+- [ ] Add integrations (Langchain, Flowise, Langflow, Microsoft Fabric, Composio, Neo4j..)
+- [ ] Access GraphFleet  through a secure and enterprise ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV)
 8. And way more... 👀
 
 ## Key Features
