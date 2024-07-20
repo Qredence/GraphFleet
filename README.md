@@ -19,7 +19,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 - [ ] Provide an FleetUI Design Kit and a quicker way of starting GraphFleet locally
 - [ ] Add integrations (Langchain, Flowise, Langflow, Microsoft Fabric, Composio, Neo4j..)
 - [ ] Access GraphFleet  through a secure and enterprise ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV)
-8. And way more... 👀
+- [ ] And way more... 👀
 
 ## Key Features
 
