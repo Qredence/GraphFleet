@@ -3,6 +3,8 @@
 
 GraphFleet is based for now from the great  [GraphRAG from Microsoft](https://github.com/microsoft/graphrag) is an advanced implementation of GraphRAG (Retrieval Augmented Generation using Graph structures), designed to enhance large language models' ability to reason about complex information and private datasets. GraphFleet will gradually adopts its own path to fullfilled our roadmap at Qredence.
 
+<a href="https://www.buymeacoffee.com/zacharyq" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## GraphFleet
 
 GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches by:
