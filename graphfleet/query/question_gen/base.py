@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from typing import Any
 
 import tiktoken
-
 from graphrag.query.context_builder.builders import (
     GlobalContextBuilder,
     LocalContextBuilder,
