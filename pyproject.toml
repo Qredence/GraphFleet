@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.1.2"
+version = "0.1.21"
 description = "Build upon GraphRAG, provide a quick solution setup and is part of the overall Qredence System like AgenticFleet and FleetUI"
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "MIT"
@@ -70,6 +70,8 @@ jupyter = "^1.0.0"
 
 graphrag = "^0.1.1"
 packaging = "^24.1"
+pdfreader = "^0.1.15"
+pypdf2 = "^3.0.1"
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.6.0"
 ipykernel = "^6.29.4"
