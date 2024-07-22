@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.1.0"
+version = "0.1.1"
 description = "Build upon GraphRAG, provide a quick solution setup and is part of the overall Qredence System like AgenticFleet and FleetUI"
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "MIT"
