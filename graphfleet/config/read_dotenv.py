@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 def read_dotenv(root: str) -> None:
     """Read a .env file in the given root path."""
-    env_path = Path(root) / ".env"
+    env_path = Path(root) / "graphfleet/.env"
     if env_path.exists():
         log.info("Loading pipeline .env file")
         env_config = dotenv_values(f"{env_path}")

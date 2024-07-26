@@ -21,7 +21,7 @@ ENCODING_MODEL = "cl100k_base"
 # LLM Parameters
 #
 LLM_TYPE = LLMType.OpenAIChat
-LLM_MODEL = "gpt-4-turbo-preview"
+LLM_MODEL = "gpt-4o"
 LLM_MAX_TOKENS = 4000
 LLM_TEMPERATURE = 0
 LLM_TOP_P = 1

@@ -3,18 +3,18 @@ encoding_model: cl100k_base
 skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
-  type: azure_openai_chat # or azure_openai_chat
+  type: azure_openai_chat # or openai_chat
   model: ="gpt-4o"
   model_supports_json: true # recommended if this is available for your model.
   # max_tokens: 4000
   # request_timeout: 180.0
-  api_base: https://.openai.azure.com
+  api_base: https://swedenai090534642465.openai.azure.com
   api_version: 2024-02-15-preview
   # organization: <organization_id>
   deployment_name: "gpt-4o"
   tokens_per_minute: 150_000 # set a leaky bucket throttle
   requests_per_minute: 20_000 # set a leaky bucket throttle
-  max_retries: 6
+  max_retries: 10
   max_retry_wait: 5.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
   # concurrent_requests: 25 # the number of parallel inflight requests that may be made
@@ -32,7 +32,7 @@ embeddings:
     api_key: ${GRAPHRAG_API_KEY}
     type: azure_openai_embedding
     model: ${GRAPHRAG_EMBEDDING_MODEL}
-    api_base: https://openai.azure.com
+    api_base: https://swedenai090534642465.openai.azure.com
     # api_version: 2024-02-15-preview
     # organization: <organization_id>
     deployment_name: ${GRAPHRAG_EMBEDDING_MODEL}
@@ -107,15 +107,15 @@ community_report:
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/community_report.txt"
-  max_length: 2000
-  max_input_length: 3000
+  max_length: 4000
+  max_input_length: 8000
 
 cluster_graph:
   max_cluster_size: 10
 
 embed_graph:
   enabled: true # if true, will generate node2vec embeddings for nodes
-  # num_walks: 10
+  num_walks: 10
   # walk_length: 40
   # window_size: 2
   # iterations: 3
@@ -126,7 +126,7 @@ umap:
 
 snapshots:
   graphml: true
-  raw_entities: false
+  raw_entities: true
   top_level_nodes: true
 
 local_search:

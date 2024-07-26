@@ -1,8 +1,7 @@
 # Overview
 ![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
 
-GraphFleet is based for now from the great  [GraphRAG from Microsoft](https://github.com/microsoft/graphrag) is an advanced implementation of GraphRAG (Retrieval Augmented Generation using Graph structures), designed to enhance large language models' ability to reason about complex information and private datasets. GraphFleet will gradually adopts its own path to fullfilled our roadmap at Qredence.
-
+GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 <a href="https://www.buymeacoffee.com/zacharyq" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## GraphFleet
@@ -10,38 +9,38 @@ GraphFleet is based for now from the great  [GraphRAG from Microsoft](https://gi
 GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches by:
 
 - [x] Connecting disparate pieces of information through shared attributes.
-- [x] Structured, hierarchical approach to Retrieval Augmented Generation
-- [x] Knowledge graph extraction from raw text
-- [x] Community hierarchy building
-- [x] Hierarchical summarization
-- [x] Enhanced reasoning capabilities for LLMs on private datasets
+- [x] Structured, hierarchical approach to Retrieval Augmented Generation.
+- [x] Knowledge graph extraction from raw text.
+- [x] Community hierarchy building.
+- [x] Hierarchical summarization.
+- [x] Enhanced reasoning capabilities for LLMs on private datasets.
 - [ ] Improve the structure of the overall repository.
-- [ ] Add our dedicated prompts for the indexing & queriying, more vectordatabase
-- [ ] Add more notebooks
-- [ ] Provide an FleetUI Design Kit and a quicker way of starting GraphFleet locally
-- [ ] Add integrations (Langchain, Flowise, Langflow, Microsoft Fabric, Composio, Neo4j..)
-- [ ] Access GraphFleet  through a secure and enterprise ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV)
+- [ ] Add dedicated prompts for indexing and querying, and more vector databases.
+- [ ] Add more notebooks.
+- [ ] Provide a FleetUI Design Kit and a quicker way of starting GraphFleet locally.
+- [ ] Add integrations (Langchain, Flowise, Langflow, Microsoft Fabric, Composio, Neo4j, etc.).
+- [ ] Access GraphFleet through a secure and enterprise-ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV).
 - [ ] And way more... 👀
 
 ## Key Features
 
-- Structured, hierarchical approach to Retrieval Augmented Generation
-- Knowledge graph extraction from raw text
-- Community hierarchy building
-- Hierarchical summarization
-- Enhanced reasoning capabilities for LLMs on private datasets
+- Structured, hierarchical approach to Retrieval Augmented Generation.
+- Knowledge graph extraction from raw text.
+- Community hierarchy building.
+- Hierarchical summarization.
+- Enhanced reasoning capabilities for LLMs on private datasets.
 
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.10 (ideally 3.12)
 - Poetry (for dependency management)
 
 ### Installation
 
 1. Clone the repository:
-```
+   ```sh
 git clone https://github.com/Qredence/GraphFleet.git
 cd GraphFleet
 ```
@@ -54,7 +53,7 @@ poetry shell
 ```
 
 ```
-poetry install .
+poetry install 
 ```
 
 ### Usage
@@ -93,9 +92,7 @@ GRAPHRAG_INPUT_TYPE="text"
 
 2. Run the indexing process:
 
-```
-python -m graphrag.index --root ./graphfleet
-```
+[Get started quickly](notebook/get-started-graphfleet.ipynb)
 
 
 3. Perform queries in local mode or global mode depending on your usecase learn more in the [GraphRAG documentation](https://microsoft.github.io/graphrag/posts/query/overview/):
@@ -113,3 +110,4 @@ python -m graphrag.query --root ./graphfleet --method global "What are the top m
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
+
