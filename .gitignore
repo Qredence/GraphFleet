@@ -31,12 +31,13 @@ python/*/lib/
 .coverage
 coverage/
 licenses.txt
-examples_notebooks/*/lancedb
-examples_notebooks/*/data
+notebooks/*/lancedb
+notebooks/*/data
 tests/fixtures/cache
 tests/fixtures/*/cache
 tests/fixtures/*/output
 lancedb/
+graphfleet/cache
 
 # Random
 .DS_Store
