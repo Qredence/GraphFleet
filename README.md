@@ -40,7 +40,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 ### Installation
 
 1. Clone the repository:
-   ```sh
+```sh
 git clone https://github.com/Qredence/GraphFleet.git
 cd GraphFleet
 ```
@@ -107,6 +107,7 @@ For Global query mode :
 ```
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
