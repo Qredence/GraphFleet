@@ -49,7 +49,7 @@ embeddings:
 
 
 chunks:
-  size: 3000
+  size: 1000
   overlap: 100
   group_by_columns: [id] # by default, we don't allow chunks to cross documents
     
@@ -83,24 +83,24 @@ entity_extraction:
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/entity_extraction.txt"
-  entity_types: [organization,person,geo,event]
-  max_gleanings: 0
+  entity_types: [domain,subdomain,goals,event]
+  max_gleanings: 1
 
 summarize_descriptions:
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/summarize_descriptions.txt"
-  max_length: 500
+  max_length: 2000
 
 claim_extraction:
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
-  ## async_mode: override the global async_mode settings for this task
-  # enabled: true
+  async_mode: override the global async_mode settings for this task
+  enabled: true
   prompt: "prompts/claim_extraction.txt"
   description: "Any claims or facts that could be relevant to information discovery."
-  max_gleanings: 0
+  max_gleanings: 1
 
 community_report:
   ## llm: override the global llm settings for this task

@@ -4,6 +4,7 @@
 """Common default configuration values."""
 
 from datashaper import AsyncType
+from sympy import true
 
 from .enums import (
     CacheType,
@@ -38,7 +39,7 @@ LLM_CONCURRENT_REQUESTS = 25
 # Text Embedding Parameters
 #
 EMBEDDING_TYPE = LLMType.OpenAIEmbedding
-EMBEDDING_MODEL = "text-embedding-3-small"
+EMBEDDING_MODEL = "text-embedding-3-large"
 EMBEDDING_BATCH_SIZE = 16
 EMBEDDING_BATCH_MAX_TOKENS = 8191
 EMBEDDING_TARGET = TextEmbeddingTarget.required
@@ -52,7 +53,7 @@ CLAIM_DESCRIPTION = (
     "Any claims or facts that could be relevant to information discovery."
 )
 CLAIM_MAX_GLEANINGS = 1
-CLAIM_EXTRACTION_ENABLED = False
+CLAIM_EXTRACTION_ENABLED = true
 MAX_CLUSTER_SIZE = 10
 COMMUNITY_REPORT_MAX_LENGTH = 2000
 COMMUNITY_REPORT_MAX_INPUT_LENGTH = 8000
