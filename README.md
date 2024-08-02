@@ -92,7 +92,7 @@ GRAPHRAG_INPUT_TYPE="text"
 
 2. Run the indexing process:
 
-[Get started quickly](notebook/get-started-graphfleet.ipynb)
+[Get started quickly](notebooks/get-started-graphfleet.ipynb)
 
 
 3. Perform queries in local mode or global mode depending on your usecase learn more in the [GraphRAG documentation](https://microsoft.github.io/graphrag/posts/query/overview/):
