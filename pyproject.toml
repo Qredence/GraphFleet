@@ -80,7 +80,7 @@ streamlit = "^1.36.0"
 azure-cli-core = "^2.62.0"
 yq = "^3.4.3"
 jq = "^1.7.0"
-fastapi = "^0.111.1"
+fastapi = ">=0.111.1,<0.113.0"
 
 promptflow = "^1.14.0"
 promptflow-tools = "^1.4.0"
