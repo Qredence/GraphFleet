@@ -3,6 +3,7 @@ encoding_model: cl100k_base
 skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
+<<<<<<< Updated upstream
   type: azure_openai_chat # or openai_chat
   model: ="gpt-4o"
   model_supports_json: true # recommended if this is available for your model.
@@ -18,6 +19,26 @@ llm:
   max_retry_wait: 5.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
   # concurrent_requests: 25 # the number of parallel inflight requests that may be made
+=======
+  type: azure_openai_chat
+  model: gpt-4o
+  model_supports_json: true # recommended if this is available for your model.
+  # max_tokens: 4000
+  # request_timeout: 180.0
+  api_base: https://swedenai090534642465.openai.azure.com
+  api_version: 2024-02-15-preview
+  # organization: <organization_id>
+  deployment_name: gpt-4o
+  tokens_per_minute: 150_000 # set a leaky bucket throttle
+  requests_per_minute: 10_000 # set a leaky bucket throttle
+  max_retries: 10
+  max_retry_wait: 10.0
+  sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
+  # concurrent_requests: 25 # the number of parallel inflight requests that may be made
+  # temperature: 0 # temperature for sampling
+  # top_p: 1 # top-p sampling
+  # n: 1 # Number of completions to generate
+>>>>>>> Stashed changes
 
 parallelization:
   stagger: 0.3
@@ -30,6 +51,7 @@ embeddings:
   async_mode: threaded # or asyncio
   llm:
     api_key: ${GRAPHRAG_API_KEY}
+<<<<<<< Updated upstream
     type: azure_openai_embedding # or openai_embedding
     model: ${GRAPHRAG_EMBEDDING_MODEL}
     api_base: ${GRAPHRAG_API_BASE}
@@ -37,6 +59,15 @@ embeddings:
     # organization: <organization_id>
     deployment_name: ${GRAPHRAG_EMBEDDING_MODEL}
     tokens_per_minute: 200_000 # set a leaky bucket throttle
+=======
+    type: azure_openai_embedding
+    model: text-embedding-ada-002
+    api_base: https://swedenai090534642465.openai.azure.com
+    # api_version: 2024-02-15-preview
+    # organization: <organization_id>
+    deployment_name: text-embedding-ada-002
+    tokens_per_minute: 150_000 # set a leaky bucket throttle
+>>>>>>> Stashed changes
     requests_per_minute: 10_000 # set a leaky bucket throttle
     max_retries: 10
     max_retry_wait: 10.0
@@ -49,7 +80,11 @@ embeddings:
 
 
 chunks:
+<<<<<<< Updated upstream
   size: 1000
+=======
+  size: 1200
+>>>>>>> Stashed changes
   overlap: 100
   group_by_columns: [id] # by default, we don't allow chunks to cross documents
     
@@ -83,7 +118,11 @@ entity_extraction:
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/entity_extraction.txt"
+<<<<<<< Updated upstream
   entity_types: [domain,subdomain,goals,event]
+=======
+  entity_types: [organization,person,geo,event]
+>>>>>>> Stashed changes
   max_gleanings: 1
 
 summarize_descriptions:
@@ -91,43 +130,73 @@ summarize_descriptions:
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/summarize_descriptions.txt"
+<<<<<<< Updated upstream
   max_length: 2000
+=======
+  max_length: 500
+>>>>>>> Stashed changes
 
 claim_extraction:
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
+<<<<<<< Updated upstream
   async_mode: override the global async_mode settings for this task
+=======
+  ## async_mode: override the global async_mode settings for this task
+>>>>>>> Stashed changes
   enabled: true
   prompt: "prompts/claim_extraction.txt"
   description: "Any claims or facts that could be relevant to information discovery."
   max_gleanings: 1
 
+<<<<<<< Updated upstream
 community_report:
+=======
+community_reports:
+>>>>>>> Stashed changes
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/community_report.txt"
+<<<<<<< Updated upstream
   max_length: 4000
+=======
+  max_length: 2000
+>>>>>>> Stashed changes
   max_input_length: 8000
 
 cluster_graph:
   max_cluster_size: 10
 
 embed_graph:
+<<<<<<< Updated upstream
   enabled: true # if true, will generate node2vec embeddings for nodes
   num_walks: 10
+=======
+  enabled: false # if true, will generate node2vec embeddings for nodes
+  # num_walks: 10
+>>>>>>> Stashed changes
   # walk_length: 40
   # window_size: 2
   # iterations: 3
   # random_seed: 597832
 
 umap:
+<<<<<<< Updated upstream
   enabled: true # if true, will generate UMAP embeddings for nodes
 
 snapshots:
   graphml: true
   raw_entities: true
   top_level_nodes: true
+=======
+  enabled: false # if true, will generate UMAP embeddings for nodes
+
+snapshots:
+  graphml: false
+  raw_entities: false
+  top_level_nodes: false
+>>>>>>> Stashed changes
 
 local_search:
   # text_unit_prop: 0.5
@@ -135,9 +204,21 @@ local_search:
   # conversation_history_max_turns: 5
   # top_k_mapped_entities: 10
   # top_k_relationships: 10
+<<<<<<< Updated upstream
   # max_tokens: 12000
 
 global_search:
+=======
+  # llm_temperature: 0 # temperature for sampling
+  # llm_top_p: 1 # top-p sampling
+  # llm_n: 1 # Number of completions to generate
+  # max_tokens: 12000
+
+global_search:
+  # llm_temperature: 0 # temperature for sampling
+  # llm_top_p: 1 # top-p sampling
+  # llm_n: 1 # Number of completions to generate
+>>>>>>> Stashed changes
   # max_tokens: 12000
   # data_max_tokens: 12000
   # map_max_tokens: 1000
