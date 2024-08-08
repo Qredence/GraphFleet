@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "yfiles-jupyter-graphs/extension": true
+  }
+}

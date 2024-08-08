@@ -1,0 +1,13 @@
+ipykernel
+PyPDF2
+ipywidgets
+python-dotenv
+fastapi
+fastapi
+packaging
+azure-core
+plotly
+azure-storage-blob
+openai
+streamlit
+requests

@@ -1,0 +1,129 @@
+{
+  "name": "yfiles-jupyter-graphs",
+  "version": "1.7.3",
+  "description": "A diagram visualization extension for JupyterLab and Jupyter Notebooks powered by yFiles for HTML",
+  "keywords": [
+    "jupyter",
+    "jupyterlab",
+    "jupyterlab-extension",
+    "widgets",
+    "yfiles",
+    "visualization",
+    "graph",
+    "diagrams"
+  ],
+  "files": [
+    "lib/**/*.js",
+    "dist/*.js",
+    "css/*.css"
+  ],
+  "homepage": "https://www.yworks.com/products/yfiles-graphs-for-jupyter",
+  "bugs": {
+    "url": "https://github.com/yWorks/yfiles-jupyter-graphs/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": {
+    "name": "yWorks Support Team",
+    "email": "yfileshtml@yworks.com"
+  },
+  "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yWorks/yfiles-jupyter-graphs"
+  },
+  "scripts": {
+    "create-wheel": "jlpm run clean && python -m build",
+    "build": "jlpm run build:lib && jlpm run build:nbextension && jlpm run build:labextension:dev",
+    "build:prod": "jlpm run preprocess && jlpm run build:lib && jlpm run build:nbextension && jlpm run build:labextension && jlpm run postprocess",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc && node -e \"require('fs').copyFileSync('./src/workers/layout.worker.js', 'lib/workers/layout.worker.js');\"",
+    "build:nbextension": "webpack --mode=production",
+    "build:nbextension:dev": "webpack --mode=development",
+    "clean": "jlpm run clean:lib && jlpm run clean:nbextension && jlpm run clean:labextension",
+    "clean:lib": "rimraf lib",
+    "clean:labextension": "rimraf yfiles_jupyter_graphs/labextension",
+    "clean:nbextension": "rimraf yfiles_jupyter_graphs/nbextension/static/index.js",
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "lint:check": "eslint . --ext .ts,.tsx",
+    "local:build": "webpack --config webpack.local.build.config.js",
+    "local:watch": "webpack serve --config webpack.local.build.config.js --open",
+    "prepack": "jlpm run build:lib",
+    "test": "jest",
+    "watch": "npm-run-all -p watch:*",
+    "watch:lib": "tsc -w",
+    "watch:nbextension": "webpack --watch",
+    "watch:labextension": "jupyter labextension watch .",
+    "preprocess": "grunt pre-build",
+    "postprocess": "grunt post-build && cd ./umd/ && npm pack"
+  },
+  "dependencies": {
+    "@ctrl/tinycolor": "^3.4.1",
+    "@jupyter-widgets/base": "^1.1.10 || ^2 || ^3 || ^4 || ^5 || ^6",
+    "@mdi/js": "^6.5.95",
+    "leaflet": "^1.9.4",
+    "vue": "^2.6.14",
+    "vue-json-viewer": "^2.2.19",
+    "yfiles": "../yfiles-26.0.4-jupyter-widget.tgz"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@jupyter-widgets/base-manager": "^1.0.7",
+    "@jupyterlab/builder": "^4.0.11",
+    "@lumino/application": "^2.3.0",
+    "@lumino/widgets": "^2.3.1",
+    "@types/jest": "^29.5.11",
+    "@types/leaflet": "^1.9.11",
+    "@types/resize-observer-browser": "^0.1.6",
+    "@types/webpack-env": "^1.18.4",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
+    "@yworks/optimizer": "^1.8.1",
+    "acorn": "^8.11.3",
+    "css-loader": "^6.9.1",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "fs-extra": "^11.2.0",
+    "grunt": "^1.6.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "load-grunt-tasks": "^5.1.0",
+    "mkdirp": "^3.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
+    "source-map-loader": "^5.0.0",
+    "style-loader": "^3.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-loader": "^9.5.1",
+    "typescript": "~5.3.3",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4",
+    "webpack-license-plugin": "^4.4.2",
+    "worker-loader": "^3.0.8"
+  },
+  "devDependenciesComments": {
+    "@jupyterlab/builder": "pinned to the latest JupyterLab 3.x release",
+    "@lumino/application": "pinned to the latest Lumino 1.x release",
+    "@lumino/widgets": "pinned to the latest Lumino 1.x release"
+  },
+  "jupyterlab": {
+    "extension": "lib/plugin",
+    "webpackConfig": "./webpack.labextension.config.js",
+    "outputDir": "yfiles_jupyter_graphs/labextension/",
+    "sharedPackages": {
+      "@jupyter-widgets/base": {
+        "bundled": false,
+        "singleton": true
+      }
+    },
+    "_build": {
+      "load": "static/remoteEntry.cfeb9762d6889451e193.js",
+      "extension": "./extension"
+    }
+  }
+}

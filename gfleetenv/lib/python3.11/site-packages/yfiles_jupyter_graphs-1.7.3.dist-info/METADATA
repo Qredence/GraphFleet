@@ -1,0 +1,245 @@
+Metadata-Version: 2.3
+Name: yfiles_jupyter_graphs
+Version: 1.7.3
+Summary: A diagram visualization extension for JupyterLab and Jupyter Notebooks powered by yFiles for HTML
+Project-URL: Homepage, https://www.yworks.com/products/yfiles-graphs-for-jupyter
+Project-URL: License, https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/LICENSE.md
+Project-URL: Bug Tracker, https://github.com/yWorks/yfiles-jupyter-graphs/issues
+Project-URL: Documentation, https://yworks.github.io/yfiles-jupyter-graphs/
+Author-email: yWorks Support Team <yfileshtml@yworks.com>
+License: # yWorks GmbH - yFiles Graphs for Jupyter Free License
+        
+        Version 1.1, April 2022
+        
+        # TERMS AND CONDITIONS FOR USE AND DISTRIBUTION
+        
+        ## DEFINITIONS
+        
+        **"License"**  shall mean the terms and conditions for use and distribution as defined by this document.
+        
+        **"Licensor"** shall mean the copyright owner yWorks GmbH that is granting the License.
+        
+        **"You"** shall mean an individual or legal entity exercising the rights granted by this License.
+        
+        **"Software"** shall mean yFiles Graphs for Jupyter Prebuilt Extension.
+        
+        **"Jupyter System"** shall refer to both a JupyterLab software system as well as Jupyter Notebook software system.
+        
+        1. **LICENSE GRANT**
+        
+           1.1. **Title.** The Software and all copies thereof are proprietary to Licensor (yWorks GmbH) and title thereto
+           remains in Licensor (yWorks GmbH), at all times.
+        
+           1.2. **All Use.** You are granted a perpetual, worldwide, non-exclusive, no-charge, royalty-free, non-transferable
+           license to install and dynamically use the Software in your browser on top of your Jupyter System on a per-user
+           level, provided that the following conditions are met:
+            1. **No-Wrapping.** The Software may not be used as part of an automated process or outside of the Jupyter System.
+               You may not expose the functionality provided by the Software in a way that enables a third party to use it. This
+               especially means that you may not expose an API to a third party that will allow them to access functionality
+               provided by the Software.
+           2. **No-Reverse-Engineering.** You are not allowed to reverse engineer, decompile, de-obfuscate or otherwise attempt
+              to derive the de-obfuscated source code of Software, create derivative works, modify, translate, or disassemble the
+              Software, unless and only to the extent that such activity is expressly permitted by applicable lawor by this
+              License.
+           3. **No-Distribution.** You may not sell, rent, loan, or otherwise encumber or transfer the Software in whole or in
+              part, to a third party, except as expressly granted herein. You may not reproduce or redistribute copies of the
+              Software in any medium.
+           4. **Trademark Notices.** You may not remove, alter, or obscure any confidentiality or proprietary notices (including
+              copyright and trademark notices) of yWorks or its suppliers on, in, or displayed by the Software.
+        
+           1.3 **License Breach.** If You fail to comply with any term of this License,this License shall be revoked and You
+           shall cease use of, and destroy, all copies of the Software.
+        
+        2. **ANALYTICS FEATURES**
+        
+           The Software may include analytics features to analyze data that help Licensor improve the included layout
+           algorithms, user experience, and products and services in general. These analytics features may send anonymized usage
+           statistics to Licensor, including but not limited to information about what Software features are used and what types
+           of graphs are laid out, as well as anonymized graph data, including but not limited to label texts, images, or icons
+           that are replaced with placeholder data. The provided data does not contain or associate with any personal
+           information, it does not allow to reconstruct the original contents and Licensor does not use them to identify any
+           individual patterns of use or behavior.
+        
+        3. **DISCLAIMER OF WARRANTY**
+        
+           Unless required by applicable law or agreed to in writing, Licensor provides the Software on an "AS IS" BASIS, WITHOUT
+           WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or
+           conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely
+           responsible for determining the appropriateness of using the Software and assume any risks associated with your
+           exercise of rights under this License.
+        
+        4. **LIMITATION OF LIABILITY**
+        
+           In no event and under no legal theory, whether in tort (including negligence), contract, or otherwise, unless
+           required by applicable law (such as deliberate and grossly negligent acts) or agreed to in writing, shall Licensor be
+           liable to You for damages, including any direct, indirect, special, incidental, or consequential damages of any
+           character arising as a result of this License or out of the use or inability to use the Software (including but not
+           limited to damages for loss of goodwill, work stoppage, computer failure or malfunction, or any and all other
+           commercial damages or losses), even if Licensor has been advised of the possibility of such damages.
+        
+        5. **APPLICABLE LAW AND COURT OF JURISDICTION**
+        
+           This Agreement is made and shall be construed in accordance with the laws of Germany. Court of Jurisdiction is
+           Tübingen, Germany.
+License-File: LICENSE.md
+Keywords: Jupyter,JupyterLab,JupyterLab3,diagrams,graph,ipython,visualization,widgets,yfiles
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Framework :: Jupyter
+Classifier: Framework :: Jupyter :: JupyterLab
+Classifier: Framework :: Jupyter :: JupyterLab :: 3
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions
+Classifier: Framework :: Jupyter :: JupyterLab :: Extensions :: Prebuilt
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Multimedia :: Graphics
+Requires-Python: >=3.9
+Requires-Dist: ipywidgets>=8.0.0
+Description-Content-Type: text/markdown
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/yfiles-jupyter-graphs-logo.svg" alt='yFiles Graphs for Jupyter logo'  width="400px" style='max-width: 400px'>
+</p>
+
+[![PyPI version](https://badge.fury.io/py/yfiles-jupyter-graphs.svg)](https://badge.fury.io/py/yfiles-jupyter-graphs)
+
+A graph diagram visualization widget for Jupyter Notebooks and Labs powered by [yFiles for HTML](https://www.yworks.com/yfiles-overview?utm_campaign=yfiles4jupyter&utm_source=github&utm_medium=readme).
+
+Easily visualize graphs from various sources: [Networkx](https://networkx.org/)✅, [igraph](https://igraph.org/python/)✅, [neo4j](https://pypi.org/project/neo4j/)✅, [pygraphviz](https://pygraphviz.github.io/)✅, and any structured Python dictionaries and lists. Many more formats supported indirectly via [Networkx imports](https://networkx.org/documentation/stable/reference/readwrite/index.html#reading-and-writing-graphs)!
+
+The widget is supported in the default Jupyter environments, but also in other environments like VS Code or Google Colab.
+
+[![yFiles Graphs for Jupyter](https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/yfiles-jupyter-graphs.gif)](https://player.vimeo.com/video/715615671)
+
+Try the [Introduction](https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/01_introduction.ipynb) notebook on Google Colab [here](https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/01_introduction.ipynb).
+
+## Supported Environments
+- [JupyterLab or Jupyter Notebook](https://jupyter.org/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Google Colaboratory](https://colab.research.google.com/)
+- [Google Vertex AI Workbench](https://cloud.google.com/vertex-ai)
+- [Google Dataproc](https://cloud.google.com/dataproc)
+- [Azure Machine Learning Studio Notebooks](https://azure.microsoft.com/en-us/products/machine-learning/)
+- [Amazon SageMaker](https://aws.amazon.com/sagemaker/)
+- Just try it in your preferred platform for Jupyter notebooks
+
+## Requirements
+- [python](https://www.python.org/) >= 3.6
+- [jupyter](https://jupyter.org/install) notebook or lab
+- [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) >= 7.6.0
+
+## Installation
+
+If you already have Jupyter installed, just `pip install` the prebuilt extension from the [Python Package Index](https://pypi.org/).
+
+```bash
+pip install yfiles_jupyter_graphs
+```
+
+If you want to start clean and get a fresh new Jupyter Lab with the widget readily installed and available, you can use [`docker`](https://www.docker.com/), too:
+
+Form a shell, create a docker image that contains all that is required:
+
+```bash
+mkdir yfiles-jupyter && cd yfiles-jupyter
+echo -e "FROM jupyter/scipy-notebook\nRUN pip install yfiles-jupyter-graphs" > Dockerfile
+docker build -t yfiles-jupyter-graphs-on-docker .
+```
+
+(the above has been tested successfully with `scipy-notebook:lab-3.4.7` and `yfiles-jupyter-graphs==1.2.1`), but we want to make sure that it will also work with  upcoming versions - file an issue if it doesn't work for you!)
+
+You can then create a fresh new instance of your server from this image like so:
+
+```bash
+docker run -it -p 8888:8888 --name yfiles-jupyter yfiles-jupyter-graphs-on-docker
+```
+
+## Usage
+
+In a notebook which has the wiget installed in the server, in a Python cell, you can then do this:
+
+```python
+"""Execute in jupyter notebook or jupyter lab"""
+from yfiles_jupyter_graphs import GraphWidget
+# shows empty widget
+GraphWidget()
+```
+
+You can find the full documentation [here](https://yworks.github.io/yfiles-jupyter-graphs/).
+
+## Features
+<table>
+    <tr>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/28_little-alchemy_example.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/neighborhood.png" title="See Node Neighborhood" alt="neighborhood sidebar"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/28_little-alchemy_example.ipynb">See Node Neighborhood</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/28_little-alchemy_example.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/22_layouts.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/layouts.png" title="Choose Graph Layout" alt="layouts"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/22_layouts.ipynb">Choose Graph Layout</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/22_layouts.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/data.png" title="Investigate Nodes and Edges Data" alt="data sidebar"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb">Investigate Nodes or Edges Data</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/search.png" title="Search for Nodes or Edges" alt="search sidebar"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb">Search for Nodes or Edges</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/23_sidebar.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/13_networkx_import.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/importer.png" title="Import Graph Data" alt="importer"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/13_networkx_import.ipynb">Import Graph Data</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/13_networkx_import.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/03_color_mapping.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/element_color_mapping.png" title="Make Data Dependent Property Changes" alt="element color mapping"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/03_color_mapping.ipynb">Make Data Dependent Property Changes</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/03_color_mapping.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/29_heat_mapping.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/heat_mapping.png" title="Define a heatmap background" alt="heat mapping"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/29_heat_mapping.ipynb">Define a Heatmap Background</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/29_heat_mapping.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/30_leaflet_mapping.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/leaflet_map.png" title="Use a Map background" alt="leaflet mapping"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/30_leaflet_mapping.ipynb">Use a Map Background</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/30_leaflet_mapping.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+    </tr>
+    <tr>
+        <td><a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/31_nested_graphs.ipynb"><img src="https://raw.githubusercontent.com/yWorks/yfiles-jupyter-graphs/main/screenshots/nesting.png" title="Visualize nested data" alt="nested graph"></a>
+        <a href="https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/31_nested_graphs.ipynb">Visualize nested data</a><br><a target="_blank" href="https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/31_nested_graphs.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></td>
+    </tr>
+</table>
+
+For example code look [here](https://github.com/yWorks/yfiles-jupyter-graphs/tree/master/examples).
+
+### Google Colab Examples
+You can try the [example notebooks](https://github.com/yWorks/yfiles-jupyter-graphs/tree/master/examples) in Google Colab by
+opening GitHub notebook URL: `https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/<notebook.ipynb>`.
+
+For example the [Introduction](https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/examples/01_introduction.ipynb) notebook: <br>
+https://colab.research.google.com/github/yWorks/yfiles-jupyter-graphs/blob/main/examples/01_introduction.ipynb
+
+## Documentation
+You can find the documentation [here](https://yworks.github.io/yfiles-jupyter-graphs/).
+
+## Code of Conduct
+This project and everyone participating in it is governed by the [Code of Conduct](https://github.com/yWorks/yfiles-jupyter-graphs/blob/master/CODE_OF_CONDUCT.md).
+By participating, you are expected to uphold this code.
+Please report unacceptable behavior to [contact@yworks.com](mailto:contact@yworks.com).
+
+## Feedback
+This widget is by no means perfect.
+If you find something is not working as expected
+we are glad to receive an issue report from you.
+Please make sure to [search for existing issues](https://github.com/yWorks/yfiles-jupyter-graphs/search?q=is%3Aissue+repo%3AyWorks%2Fyfiles-jupyter-graphs&type=issues) first
+and check if the issue is not an unsupported feature or known issue.
+If you did not find anything related, report a new issue with necessary information.
+Please also provide a clear and descriptive title and stick to the issue templates.
+See [issues](https://github.com/yWorks/yfiles-jupyter-graphs/issues).
+
+## Dependencies
+- [yFiles for HTML](https://www.yworks.com/yfiles)
+- [@ctrl/tinycolor](https://github.com/scttcper/tinycolor)
+- [@jupyter-widgets/base](https://github.com/jupyter-widgets/ipywidgets)
+- [@mdi/js](https://github.com/Templarian/MaterialDesign-JS)
+- [Vue](https://vuejs.org/)
+- [vue-json-viewer](https://github.com/chenfengjw163/vue-json-viewer)
+
+## License
+See [LICENSE](https://github.com/yWorks/yfiles-jupyter-graphs/blob/main/LICENSE.md) file.

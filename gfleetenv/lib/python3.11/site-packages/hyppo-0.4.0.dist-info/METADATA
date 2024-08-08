@@ -1,0 +1,41 @@
+Metadata-Version: 2.1
+Name: hyppo
+Version: 0.4.0
+Summary: A comprehensive independence testing package
+Home-page: https://github.com/neurodata/hyppo
+Author: ('Sambit Panda',)
+Author-email: spanda3@jhu.edu
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
+Requires-Dist: numpy (>=1.17)
+Requires-Dist: scipy (>=1.4.0)
+Requires-Dist: numba (>=0.46)
+Requires-Dist: scikit-learn (>=0.19.1)
+Requires-Dist: autograd (>=1.3)
+
+
+hyppo (**HYP**othesis Testing in **P**yth**O**n, pronounced "Hippo") is an open-source
+software package for multivariate hypothesis testing. We decided to develop hyppo for
+the following reasons:
+
+* With the increase in the amount of data in many fields, hypothesis testing for high
+dimensional and nonlinear data is important
+* Libraries in R exist, but their interfaces are inconsistent and most are not available
+in Python
+
+hyppo intends to be a comprehensive multivariate hypothesis testing package and runs on
+all major versions of operating systems. It also includes novel tests not found in other
+packages. It is quick to install and free of charge. If you need to use multivariate
+hypothesis testing, be sure to give hyppo a try!"
