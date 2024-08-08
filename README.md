@@ -1,12 +1,12 @@
 # Overview
+
 ![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
 
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
-
 ## GraphFleet
 
-GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches by:
+GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches:
 
 - [x] Connecting disparate pieces of information through shared attributes.
 - [x] Structured, hierarchical approach to Retrieval Augmented Generation.
@@ -34,69 +34,64 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 ### Prerequisites
 
-- Python 3.10 (ideally 3.12)
-- Poetry (for dependency management)
+- Python 3.11 
+- Make sure to have a virtual environment manager such as `virtualenv` installed 
 
 ### Installation
 
 1. Clone the repository:
-```sh
-git clone https://github.com/Qredence/GraphFleet.git
-cd GraphFleet
+
+``` bash
+   git clone https://github.com/Qredence/GraphFleet.git
+   cd GraphFleet
 ```
 
 
-2. Install dependencies using Poetry:
+2. Create a virtual environment and activate it:
+
+``` bash
+python3.11 -m venv gfleetenv
+source gfleetenv/bin/activate
+```
+
+3. Install dependencies:
 
 ```
-poetry shell
-```
-
-```
-poetry install 
+pip install -r requirements.txt
 ```
 
 ### Usage
 
-1. Setting up your settings:
+1. Configuration:
+Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
 
 ```
-cd graphfleet
+GRAPHRAG_API_KEY
+GRAPHRAG_API_BASE (for Azure OpenAI)
+GRAPHRAG_API_VERSION (for Azure OpenAI)
+Other settings related to your LLM and embedding models.
+settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
 ```
 
-- Set up the necessary environment variables in the `.env.example` file and change the name to .env.
-The required ones being :
+2. Data Indexing:
 
+Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
+
+3. Interacting with GraphFleet:
+Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
+
+get-started-graphfleet.ipynb: A comprehensive guide to indexing your data and running basic queries.
+Local Search Notebook.ipynb: Demonstrates local search techniques.
+[Add descriptions of other notebooks and their purpose here]
+app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface:
+
+Start the application: 
 ```
-# Base LLM Settings
-GRAPHRAG_API_KEY="your_api_key"
-GRAPHRAG_API_BASE="http://<domain>.openai.azure.com" # For Azure OpenAI Users
-GRAPHRAG_API_VERSION="api_version" # For Azure OpenAI Users
-
-# Text Generation Settings
-GRAPHRAG_LLM_TYPE="azure_openai_chat" # or openai_chat
-GRAPHRAG_LLM_DEPLOYMENT_NAME="gpt-4-turbo-preview"
-GRAPHRAG_LLM_MODEL_SUPPORTS_JSON=True
-
-# Text Embedding Settings
-GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding" # or openai_embedding
-GRAPHRAG_LLM_DEPLOYMENT_NAME="text-embedding-3-small"
-
-# Data Mapping Settings
-GRAPHRAG_INPUT_TYPE="text"
+streamlit run app.py
 ```
+Access the interface in your web browser at the provided URL (usually http://localhost:8080).
 
 
-- Open `settings.yaml` and fill the parameter you wish to fill according to your needs.
-
-
-2. Run the indexing process:
-
-[Get started quickly](notebooks/get-started-graphfleet.ipynb)
-
-
-3. Perform queries in local mode or global mode depending on your usecase learn more in the [GraphRAG documentation](https://microsoft.github.io/graphrag/posts/query/overview/):
-For local query mode :
 
 ```
 python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
