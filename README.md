@@ -85,22 +85,28 @@ Local Search Notebook.ipynb: Demonstrates local search techniques.
 [Add descriptions of other notebooks and their purpose here]
 app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface:
 
-Start the application: 
+### Start the application: 
+
 ```
 streamlit run app.py
 ```
 Access the interface in your web browser at the provided URL (usually http://localhost:8080).
 
-
-
-```
+``` bash
 python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
 ```
 
 For Global query mode :
 
-```
+``` bash
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
+```
+### Running the API only
+
+To run the API, save the code in a file named api.py and execute the following command in your terminal:
+
+``` bash
+uvicorn api:app --reload --port 8001
 ```
 
 ## Star History
