@@ -109,7 +109,14 @@ To run the API, save the code in a file named api.py and execute the following c
 uvicorn api:app --reload --port 8001
 ```
 
+## Security
+
+[Security](SECURITY.md)
+
+## License
+
+[text](LICENSE)
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
-

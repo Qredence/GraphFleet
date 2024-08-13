@@ -16,11 +16,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.12'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
-        pip install poetry
+        pip install venv
         poetry install
 
     - name: Build package

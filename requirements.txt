@@ -12,3 +12,7 @@ openai
 streamlit
 requests
 uvicorn
+python-dotenv
+chainlit
+pyautogen
+marker-pdf
