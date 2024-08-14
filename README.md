@@ -10,8 +10,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 <<<<<<< HEAD
 
 ## Roadmap
-=======
->>>>>>> origin/main
+
 
 - [ ] Provide a FleetUI Design Kit and a quicker way of starting GraphFleet locally.
 - [ ] Provide a Toddle interface ready to use for GraphFleet
@@ -33,7 +32,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 - Leave us a star ♥
 - Fork and contribute to the project
-- [![Join the discord](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
+- [![Join the discord](https://discord.gg/BD8MPgzEJc)
 
 ## Getting Started
 
@@ -51,21 +50,19 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 ### Installation
 
 1. Clone the repository:
-<<<<<<< HEAD
-=======
 
 ``` bash
    git clone https://github.com/Qredence/GraphFleet.git
    cd GraphFleet
 ```
->>>>>>> origin/main
+
 
    ``` bash
    git clone https://github.com/Qredence/GraphFleet.git
    cd GraphFleet
    ```
 
-<<<<<<< HEAD
+
 2. Simply run these in your terminal:
 
    ``` bash
@@ -73,7 +70,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
    poetry install
    ```
 
-=======
+
 2. Create a virtual environment and activate it:
 
 ``` bash
@@ -86,13 +83,13 @@ source gfleetenv/bin/activate
 ```
 pip install -r requirements.txt
 ```
->>>>>>> origin/main
+
 
 ### Usage
 
 1. Configuration:
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
-<<<<<<< HEAD
+
 
    ```sh
    export GRAPHRAG_API_KEY="<apikey>"
@@ -125,7 +122,7 @@ streamlit run app.py
 
 Access the interface in your web browser at the provided URL (usually <http://localhost:8080>).
 
-=======
+
 
 ```
 GRAPHRAG_API_KEY
@@ -154,7 +151,7 @@ streamlit run app.py
 ```
 Access the interface in your web browser at the provided URL (usually http://localhost:8080).
 
->>>>>>> origin/main
+
 ``` bash
 python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
 ```
@@ -164,10 +161,8 @@ For Global query mode :
 ``` bash
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
+
 ### Running the API only
 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
@@ -186,8 +181,5 @@ uvicorn api:app --reload --port 8001
 
 ## Star History
 
-<<<<<<< HEAD
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
-=======
-[![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
->>>>>>> origin/main
+
