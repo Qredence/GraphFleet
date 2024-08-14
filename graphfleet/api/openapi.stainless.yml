@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://app.stainlessapi.com/config.schema.json
 
 organization:
-  name: graphfleet
+  name: Qredence
   docs: https://docs.qredence.ai
   contact: zachary@qredence.ai
   github_org: Qredence
