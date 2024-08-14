@@ -10,8 +10,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 <<<<<<< HEAD
 
 ## Roadmap
-=======
->>>>>>> origin/main
+
 
 - [ ] Provide a FleetUI Design Kit and a quicker way of starting GraphFleet locally.
 - [ ] Provide a Toddle interface ready to use for GraphFleet
