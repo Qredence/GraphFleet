@@ -7,7 +7,7 @@ GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://gi
 ## GraphFleet
 
 GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches:
-<<<<<<< HEAD
+
 
 ## Roadmap
 
@@ -38,14 +38,11 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 ### Prerequisites
 
-<<<<<<< HEAD
+
 - Python 3.10
 - Poetry
 - Make sure to have a virtual environment manager such as `virtualenv` installed
-=======
-- Python 3.11 
-- Make sure to have a virtual environment manager such as `virtualenv` installed 
->>>>>>> origin/main
+
 
 ### Installation
 
@@ -56,34 +53,12 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
    cd GraphFleet
 ```
 
-
-   ``` bash
-   git clone https://github.com/Qredence/GraphFleet.git
-   cd GraphFleet
-   ```
-
-
-2. Simply run these in your terminal:
+1. Simply run these in your terminal:
 
    ``` bash
    poetry shell
    poetry install
    ```
-
-
-2. Create a virtual environment and activate it:
-
-``` bash
-python3.11 -m venv gfleetenv
-source gfleetenv/bin/activate
-```
-
-3. Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-
 
 ### Usage
 
@@ -114,25 +89,16 @@ Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks
 
    app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface.
 
-### Start the application
+### Start the application API only
 
-```
-streamlit run app.py
-```
-
-Access the interface in your web browser at the provided URL (usually <http://localhost:8080>).
-
-
-
-```
-GRAPHRAG_API_KEY
-GRAPHRAG_API_BASE (for Azure OpenAI)
-GRAPHRAG_API_VERSION (for Azure OpenAI)
-Other settings related to your LLM and embedding models.
-settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
+``` bash
+uvicorn graphfleet.api.api:app --host 0.0.0.0 --port 8001
 ```
 
-2. Data Indexing:
+Access the interface in your web browser at the provided URL  <http://0.0.0.0:8001/docs> .
+
+
+1. Data Indexing:
 
 Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
 
@@ -144,13 +110,19 @@ Local Search Notebook.ipynb: Demonstrates local search techniques.
 [Add descriptions of other notebooks and their purpose here]
 app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface:
 
-### Start the application: 
+### Running the API only
 
-```
-streamlit run app.py
-```
-Access the interface in your web browser at the provided URL (usually http://localhost:8080).
+To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
+``` bash
+uvicorn api:app --reload --port 8001
+```
+
+### Start the application
+
+``` bash
+streamlit run app.py # Access the interface in your web browser at the provided URL (usually http://localhost:8080).
+```
 
 ``` bash
 python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
@@ -161,7 +133,6 @@ For Global query mode :
 ``` bash
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
-
 
 ### Running the API only
 
@@ -182,4 +153,3 @@ uvicorn api:app --reload --port 8001
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
-

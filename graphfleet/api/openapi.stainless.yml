@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://app.stainlessapi.com/config.schema.json
+
+organization:
+  name: Qredence
+  docs: https://docs.qredence.ai
+  contact: zachary@qredence.ai
+  github_org: Qredence
+resources:
+  root:
+    methods:
+      retrieve: get /
+  $client:
+    methods:
+      process_local_query: post /process_local_query/
+      process_global_query: post /process_global_query/
+      add_message: post /add_message/
+  chat_history:
+    methods:
+      list: get /get_chat_history/
+      delete: delete /clear_chat_history/
+targets:
+  node:
+    package_name: graphfleet
+    production_repo: null
+    publish:
+      npm: false
+  python:
+    package_name: graphfleet
+    production_repo: null
+    publish:
+      pypi: false
+settings:
+  license: Apache-2.0
+client_settings:
+  opts: {}
+  omit_platform_headers: false
+  default_headers: {}
+  default_timeout: PT60S
+  default_retries:
+    max_retries: 2
+    initial_delay_seconds: 0.5
+    max_delay_seconds: 8
+environments:
+  production: https://localhost:8080/test-api
+query_settings:
+  nested_format: brackets
+  array_format: comma
+readme:
+  example_requests:
+    default:
+      type: request
+      endpoint: post /add_message/
+      params: &ref_0 {}
+    headline:
+      type: request
+      endpoint: post /add_message/
+      params: *ref_0
+    pagination:
+      type: request
+      endpoint: get /get_chat_history/
+      params: {}
