@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+
+=======
 # Team
 Alonso
+>>>>>>> origin/main
 
 # Pythonisms
 PYTHONPATH
@@ -97,6 +101,15 @@ retryer
 agenerate
 aembed
 dedupe
+<<<<<<< HEAD
+GRAPHRAG
+graphrag
+GraphFleet
+graphfleet
+Qredence
+
+=======
+>>>>>>> origin/main
 
 # LLM Terms
 AOAI
@@ -123,9 +136,14 @@ docstore
 datasource
 devcontainers
 codebases
+<<<<<<< HEAD
+gfleetenv
+
+=======
 
 # Microsoft
 MSRC
+>>>>>>> origin/main
 
 # Broken Upstream
 # TODO FIX IN DATASHAPER

@@ -1,0 +1,113 @@
+[tool.poetry]
+name = "graphfleet"
+version = "0.4.0"
+description = "Build upon GraphRAG, provide a quick solution setup and is part of the overall Qredence System like AgenticFleet and FleetUI"
+authors = ["Zachary <zachary@qredence.ai>"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [{ include = "graphfleet" }]
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+style = "semver"
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+environs = "^11.0.0"
+datashaper = "^0.0.49"
+
+
+# Vector Stores
+azure-search-documents = "^11.4.0"
+lancedb = ">=0.11.0,<0.12.0"
+azure-cosmos = "^4.7.0"
+
+# Event Loops
+uvloop = { version = "^0.19.0", markers = "platform_system != 'Windows'" }
+nest-asyncio = { version = "^1.6.0", markers = "platform_system == 'Windows'" }
+
+# Async IO
+aiolimiter = "^1.1.0"
+aiofiles = "^24.1.0"
+
+# LLM
+openai = "^1.35.7"
+nltk = "3.8.1"
+tiktoken = "^0.7.0"
+
+# Data-Sci
+numba = "0.60.0"
+numpy = "^1.25.2"
+graspologic = "^3.4.1"
+networkx = "^3"
+fastparquet = "^2024.2.0"
+# 1.13.0 was a footgun
+scipy = "1.12.0"
+
+# Configuration
+pyyaml = "^6.0.1"
+pyaml-env = "^1.2.1"
+python-dotenv = "^1.0.0"
+
+# Network
+tenacity = ">=9.0.0,<10.0.0"
+
+swifter = "^1.4.0"
+pydantic = "^2"
+rich = "^13.6.0"
+textual = ">=0.74.0,<0.75.0"
+devtools = "^0.12.2"
+
+typing-extensions = "^4.12.2"
+
+#Azure
+azure-storage-blob = "^12.19.0"
+azure-identity = "^1.17.1"
+
+at = "^0.0.3"
+yfiles-jupyter-graphs = "^1.7.3"
+jupyter-contrib-nbextensions = "^0.7.0"
+jupyter = "^1.0.0"
+
+graphrag = "0.3.0"
+packaging = "^24.1"
+pdfreader = "^0.1.15"
+pypdf2 = "^3.0.1"
+
+
+azure-cli-core = "^2.62.0"
+yq = "^3.4.3"
+jq = "^1.7.0"
+fastapi = "^0.111.1"
+
+
+promptflow = "^1.14.0"
+promptflow-tools = "^1.4.0"
+microsoft-bing-websearch = "^1.0.0"
+build = "^1.2.1"
+uvicorn = "^0.30.6"
+
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.6.0"
+ipykernel = "^6.29.4"
+jupyter = "^1.0.0"
+nbconvert = "^7.16.3"
+poethepoet = ">=0.26,<0.28"
+pyright = "^1.1.371"
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.4"
+pytest-timeout = "^2.3.1"
+ruff = "^0.5.2"
+semversioner = "^2.0.3"
+
+update-toml = "^0.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.poe.tasks]
+_sort_imports = "ruff check --select I --fix . --preview"
+_format_code = "ruff format  . --preview"
+_ruff_check = 'ruff check . --preview'

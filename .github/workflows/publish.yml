@@ -16,7 +16,11 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
+<<<<<<< HEAD
+        python-version: '3.10'
+=======
         python-version: '3.11'
+>>>>>>> origin/main
 
     - name: Install dependencies
       run: |

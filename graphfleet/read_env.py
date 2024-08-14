@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+"""
+Module for reading environment variables and configuration files.
+
+This module provides functionality to read environment variables and configuration files
+using the `os`, `re`, and `yaml` modules.
+"""
+
+
+import os
+import re
+import yaml
+from dotenv import load_dotenv
+
+
+# Load environment variables from .env file
+def load_dotenv(
+    dotenv_path: StrPath | None = None,
+    stream: IO[str] | None = None,
+    verbose: bool = False,
+    override: bool = False,
+    interpolate: bool = True,
+    encoding: str | None = "utf-8"
+):
+=======
 from dotenv import load_dotenv
 import os
 import yaml
@@ -5,6 +30,7 @@ import re
 
 # Load environment variables from .env file
 load_dotenv()
+>>>>>>> origin/main
 
 # Function to replace placeholders with environment variables
 def replace_placeholders(content):
