@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.2.3"
+version = "0.4.0"
 description = "Build upon GraphRAG, provide a quick solution setup and is part of the overall Qredence System like AgenticFleet and FleetUI"
 authors = ["Zachary <zachary@qredence.ai>"]
-license = "MIT"
+license = "Apache-2.0"
 readme = "README.md"
 packages = [{ include = "graphfleet" }]
 
@@ -19,7 +19,7 @@ datashaper = "^0.0.49"
 
 # Vector Stores
 azure-search-documents = "^11.4.0"
-lancedb = ">=0.10.0,<0.11.0"
+lancedb = ">=0.11.0,<0.12.0"
 azure-cosmos = "^4.7.0"
 
 # Event Loops
@@ -50,12 +50,12 @@ pyaml-env = "^1.2.1"
 python-dotenv = "^1.0.0"
 
 # Network
-tenacity = "^8.5.0"
+tenacity = ">=9.0.0,<10.0.0"
 
 swifter = "^1.4.0"
 pydantic = "^2"
 rich = "^13.6.0"
-textual = ">=0.72.0,<0.73.0"
+textual = ">=0.74.0,<0.75.0"
 devtools = "^0.12.2"
 
 typing-extensions = "^4.12.2"
@@ -69,12 +69,11 @@ yfiles-jupyter-graphs = "^1.7.3"
 jupyter-contrib-nbextensions = "^0.7.0"
 jupyter = "^1.0.0"
 
-graphrag = "^0.2.0"
+graphrag = "0.3.0"
 packaging = "^24.1"
 pdfreader = "^0.1.15"
 pypdf2 = "^3.0.1"
-streamlit-nested-layout = "==0.1.3"
-streamlit = "^1.36.0"
+
 
 azure-cli-core = "^2.62.0"
 yq = "^3.4.3"
@@ -85,6 +84,10 @@ fastapi = "^0.111.1"
 promptflow = "^1.14.0"
 promptflow-tools = "^1.4.0"
 microsoft-bing-websearch = "^1.0.0"
+build = "^1.2.1"
+uvicorn = "^0.30.6"
+
+
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.6.0"
 ipykernel = "^6.29.4"

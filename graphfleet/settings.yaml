@@ -1,23 +1,25 @@
-
 encoding_model: cl100k_base
 skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
-  type: azure_openai_chat # or openai_chat
-  model: ="gpt-4o"
+  type: azure_openai_chat # or azure_openai_chat
+  model: gpt-4o
   model_supports_json: true # recommended if this is available for your model.
-  # max_tokens: 4000
+  max_tokens: 4000
   # request_timeout: 180.0
-  api_base: https://swedenai090534642465.openai.azure.com
-  api_version: 2024-02-15-preview
+  api_base: https://gpt-4o-fr.openai.azure.com
+  api_version: "2023-05-15"
   # organization: <organization_id>
-  deployment_name: "gpt-4o"
+  deployment_name: gpt-4o
   tokens_per_minute: 150_000 # set a leaky bucket throttle
-  requests_per_minute: 20_000 # set a leaky bucket throttle
-  max_retries: 10
-  max_retry_wait: 5.0
+  requests_per_minute: 10_000 # set a leaky bucket throttle
+  # max_retries: 10
+  max_retry_wait: 10.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
   # concurrent_requests: 25 # the number of parallel inflight requests that may be made
+  # temperature: 0 # temperature for sampling
+  # top_p: 1 # top-p sampling
+  # n: 1 # Number of completions to generate
 
 parallelization:
   stagger: 0.3
@@ -30,16 +32,16 @@ embeddings:
   async_mode: threaded # or asyncio
   llm:
     api_key: ${GRAPHRAG_API_KEY}
-    type: azure_openai_embedding
-    model: ${GRAPHRAG_EMBEDDING_MODEL}
-    api_base: https://swedenai090534642465.openai.azure.com
-    # api_version: 2024-02-15-preview
+    type: azure_openai_embedding # or openai_embedding
+    model: text-embedding-ada-002
+    api_base: https://gpt-4o-fr.openai.azure.com
+    api_version: "2023-05-15"
     # organization: <organization_id>
-    deployment_name: ${GRAPHRAG_EMBEDDING_MODEL}
-    tokens_per_minute: 200_000 # set a leaky bucket throttle
+    deployment_name: text-embedding-ada-002
+    tokens_per_minute: 150_000 # set a leaky bucket throttle
     requests_per_minute: 10_000 # set a leaky bucket throttle
     max_retries: 10
-    max_retry_wait: 10.0
+    # max_retry_wait: 10.0
     sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
     # concurrent_requests: 25 # the number of parallel inflight requests that may be made
     # batch_size: 16 # the number of documents to send in a single request
@@ -49,8 +51,8 @@ embeddings:
 
 
 chunks:
-  size: 3000
-  overlap: 100
+  size: 512
+  overlap: 64
   group_by_columns: [id] # by default, we don't allow chunks to cross documents
     
 input:
@@ -84,7 +86,7 @@ entity_extraction:
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/entity_extraction.txt"
   entity_types: [organization,person,geo,event]
-  max_gleanings: 0
+  max_gleanings: 1
 
 summarize_descriptions:
   ## llm: override the global llm settings for this task
@@ -97,17 +99,17 @@ claim_extraction:
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
-  # enabled: true
+  enabled: true
   prompt: "prompts/claim_extraction.txt"
   description: "Any claims or facts that could be relevant to information discovery."
-  max_gleanings: 0
+  max_gleanings: 1
 
-community_report:
+community_reports:
   ## llm: override the global llm settings for this task
   ## parallelization: override the global parallelization settings for this task
   ## async_mode: override the global async_mode settings for this task
   prompt: "prompts/community_report.txt"
-  max_length: 4000
+  max_length: 2000
   max_input_length: 8000
 
 cluster_graph:
@@ -115,7 +117,7 @@ cluster_graph:
 
 embed_graph:
   enabled: true # if true, will generate node2vec embeddings for nodes
-  num_walks: 10
+  # num_walks: 10
   # walk_length: 40
   # window_size: 2
   # iterations: 3
@@ -135,9 +137,15 @@ local_search:
   # conversation_history_max_turns: 5
   # top_k_mapped_entities: 10
   # top_k_relationships: 10
+  # llm_temperature: 0 # temperature for sampling
+  # llm_top_p: 1 # top-p sampling
+  # llm_n: 1 # Number of completions to generate
   # max_tokens: 12000
 
 global_search:
+  # llm_temperature: 0 # temperature for sampling
+  # llm_top_p: 1 # top-p sampling
+  # llm_n: 1 # Number of completions to generate
   # max_tokens: 12000
   # data_max_tokens: 12000
   # map_max_tokens: 1000

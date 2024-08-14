@@ -1,13 +1,14 @@
 
 -Goal-
-Given a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.
+Given a text document that is potentially relevant to this activity, first identify all entities needed from the text in order to capture the information and ideas in the text.
+Next, report all relationships among the identified entities.
 
 -Steps-
 1. Identify all entities. For each identified entity, extract the following information:
 - entity_name: Name of the entity, capitalized
-- entity_type: One of the following types: [{entity_types}]
+- entity_type: Suggest several labels or categories for the entity. The categories should not be specific, but should be as general as possible.
 - entity_description: Comprehensive description of the entity's attributes and activities
-Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
 
 2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
 For each pair of related entities, extract the following information:
@@ -15,85 +16,145 @@ For each pair of related entities, extract the following information:
 - target_entity: name of the target entity, as identified in step 1
 - relationship_description: explanation as to why you think the source entity and the target entity are related to each other
 - relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
- Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
 
-3. Return output in English as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+3. Return output in The primary language of the provided text is "English." as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
 
-4. When finished, output {completion_delimiter}
+4. If you have to translate into The primary language of the provided text is "English.", just translate the descriptions, nothing else!
 
-######################
+5. When finished, output {completion_delimiter}.
+
 -Examples-
 ######################
+
 Example 1:
 
-Entity_types: [person, technology, mission, organization, location]
-Text:
-while Alex clenched his jaw, the buzz of frustration dull against the backdrop of Taylor's authoritarian certainty. It was this competitive undercurrent that kept him alert, the sense that his and Jordan's shared commitment to discovery was an unspoken rebellion against Cruz's narrowing vision of control and order.
-
-Then Taylor did something unexpected. They paused beside Jordan and, for a moment, observed the device with something akin to reverence. “If this tech can be understood..." Taylor said, their voice quieter, "It could change the game for us. For all of us.”
-
-The underlying dismissal earlier seemed to falter, replaced by a glimpse of reluctant respect for the gravity of what lay in their hands. Jordan looked up, and for a fleeting heartbeat, their eyes locked with Taylor's, a wordless clash of wills softening into an uneasy truce.
-
-It was a small transformation, barely perceptible, but one that Alex noted with an inward nod. They had all been brought here by different paths
-################
-Output:
-("entity"{tuple_delimiter}"Alex"{tuple_delimiter}"person"{tuple_delimiter}"Alex is a character who experiences frustration and is observant of the dynamics among other characters."){record_delimiter}
-("entity"{tuple_delimiter}"Taylor"{tuple_delimiter}"person"{tuple_delimiter}"Taylor is portrayed with authoritarian certainty and shows a moment of reverence towards a device, indicating a change in perspective."){record_delimiter}
-("entity"{tuple_delimiter}"Jordan"{tuple_delimiter}"person"{tuple_delimiter}"Jordan shares a commitment to discovery and has a significant interaction with Taylor regarding a device."){record_delimiter}
-("entity"{tuple_delimiter}"Cruz"{tuple_delimiter}"person"{tuple_delimiter}"Cruz is associated with a vision of control and order, influencing the dynamics among other characters."){record_delimiter}
-("entity"{tuple_delimiter}"The Device"{tuple_delimiter}"technology"{tuple_delimiter}"The Device is central to the story, with potential game-changing implications, and is revered by Taylor."){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"Taylor"{tuple_delimiter}"Alex is affected by Taylor's authoritarian certainty and observes changes in Taylor's attitude towards the device."{tuple_delimiter}7){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"Jordan"{tuple_delimiter}"Alex and Jordan share a commitment to discovery, which contrasts with Cruz's vision."{tuple_delimiter}6){record_delimiter}
-("relationship"{tuple_delimiter}"Taylor"{tuple_delimiter}"Jordan"{tuple_delimiter}"Taylor and Jordan interact directly regarding the device, leading to a moment of mutual respect and an uneasy truce."{tuple_delimiter}8){record_delimiter}
-("relationship"{tuple_delimiter}"Jordan"{tuple_delimiter}"Cruz"{tuple_delimiter}"Jordan's commitment to discovery is in rebellion against Cruz's vision of control and order."{tuple_delimiter}5){record_delimiter}
-("relationship"{tuple_delimiter}"Taylor"{tuple_delimiter}"The Device"{tuple_delimiter}"Taylor shows reverence towards the device, indicating its importance and potential impact."{tuple_delimiter}9){completion_delimiter}
+text:
+ he tasks studied in the lab thus far have tended to 
+be those for which researchers hypothesized generative AI would 
+perform well . This was, in fact, the focus of most of the studies 
+presented in the first AI and Productivity report we published  
+(Cambon et al. 2023) . Actual information work , however, often 
+includes a huge variety of tasks  and much of the unstructured and 
+informal work in people’s jobs is not yet directly supported by the 
+first-generation of generative AI tools.  Software developer 
+workflows , for example,  involve far more than the hands-on coding supported by GitHub Copilot (Meyer et al. 2017). The ability to 
+shed light on generative AI's productivity dynamics in the natural 
+complexity of entire workflows is a key advantage of field studies 
+of generative AI’s productivity impacts , and a major reason we 
+hope to see many more field studies emerging in the literature
+------------------------
+output:
+("entity"{tuple_delimiter}LAB{tuple_delimiter}LOCATION, RESEARCH ENVIRONMENT{tuple_delimiter}The lab is where tasks are studied to hypothesize the performance of generative AI)
+{record_delimiter}
+("entity"{tuple_delimiter}GENERATIVE AI{tuple_delimiter}TECHNOLOGY, TOOL{tuple_delimiter}Generative AI refers to artificial intelligence systems that can generate content, such as text, based on input data)
+{record_delimiter}
+("entity"{tuple_delimiter}AI AND PRODUCTIVITY REPORT{tuple_delimiter}DOCUMENT, PUBLICATION{tuple_delimiter}A report published by Cambon et al. in 2023 focusing on the performance of generative AI in various tasks)
+{record_delimiter}
+("entity"{tuple_delimiter}INFORMATION WORK{tuple_delimiter}ACTIVITY, TASK{tuple_delimiter}Information work includes a variety of tasks, often unstructured and informal, that are part of people's jobs)
+{record_delimiter}
+("entity"{tuple_delimiter}FIRST-GENERATION GENERATIVE AI TOOLS{tuple_delimiter}TECHNOLOGY, TOOL{tuple_delimiter}The initial versions of generative AI tools that support specific tasks but not the full range of unstructured work)
+{record_delimiter}
+("entity"{tuple_delimiter}SOFTWARE DEVELOPER WORKFLOWS{tuple_delimiter}ACTIVITY, TASK{tuple_delimiter}The comprehensive set of activities involved in software development, beyond just coding)
+{record_delimiter}
+("entity"{tuple_delimiter}GITHUB COPILOT{tuple_delimiter}TECHNOLOGY, TOOL{tuple_delimiter}A generative AI tool that assists with hands-on coding tasks for software developers)
+{record_delimiter}
+("entity"{tuple_delimiter}FIELD STUDIES{tuple_delimiter}RESEARCH METHOD, STUDY TYPE{tuple_delimiter}Studies conducted in natural settings to observe the real-world impacts of generative AI on productivity)
+{record_delimiter}
+("entity"{tuple_delimiter}PRODUCTIVITY DYNAMICS{tuple_delimiter}CONCEPT, PHENOMENON{tuple_delimiter}The various factors and interactions that affect productivity when using generative AI in real-world workflows)
+{record_delimiter}
+("entity"{tuple_delimiter}LITERATURE{tuple_delimiter}BODY OF WORK, RESEARCH{tuple_delimiter}The collection of academic and professional studies and publications on a given topic)
+{record_delimiter}
+("relationship"{tuple_delimiter}LAB{tuple_delimiter}GENERATIVE AI{tuple_delimiter}The lab is where tasks are studied to hypothesize the performance of generative AI{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}AI AND PRODUCTIVITY REPORT{tuple_delimiter}GENERATIVE AI{tuple_delimiter}The report focuses on the performance of generative AI in various tasks{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}INFORMATION WORK{tuple_delimiter}FIRST-GENERATION GENERATIVE AI TOOLS{tuple_delimiter}First-generation generative AI tools do not yet directly support much of the unstructured and informal information work{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}SOFTWARE DEVELOPER WORKFLOWS{tuple_delimiter}GITHUB COPILOT{tuple_delimiter}GitHub Copilot supports hands-on coding, which is a part of software developer workflows{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}FIELD STUDIES{tuple_delimiter}PRODUCTIVITY DYNAMICS{tuple_delimiter}Field studies help shed light on the productivity dynamics of generative AI in real-world settings{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}FIELD STUDIES{tuple_delimiter}LITERATURE{tuple_delimiter}The hope is to see more field studies emerging in the literature to understand generative AI's productivity impacts{tuple_delimiter}7)
+{completion_delimiter}
 #############################
+
+
 Example 2:
 
-Entity_types: [person, technology, mission, organization, location]
-Text:
-They were no longer mere operatives; they had become guardians of a threshold, keepers of a message from a realm beyond stars and stripes. This elevation in their mission could not be shackled by regulations and established protocols—it demanded a new perspective, a new resolve.
-
-Tension threaded through the dialogue of beeps and static as communications with Washington buzzed in the background. The team stood, a portentous air enveloping them. It was clear that the decisions they made in the ensuing hours could redefine humanity's place in the cosmos or condemn them to ignorance and potential peril.
-
-Their connection to the stars solidified, the group moved to address the crystallizing warning, shifting from passive recipients to active participants. Mercer's latter instincts gained precedence— the team's mandate had evolved, no longer solely to observe and report but to interact and prepare. A metamorphosis had begun, and Operation: Dulce hummed with the newfound frequency of their daring, a tone set not by the earthly
-#############
-Output:
-("entity"{tuple_delimiter}"Washington"{tuple_delimiter}"location"{tuple_delimiter}"Washington is a location where communications are being received, indicating its importance in the decision-making process."){record_delimiter}
-("entity"{tuple_delimiter}"Operation: Dulce"{tuple_delimiter}"mission"{tuple_delimiter}"Operation: Dulce is described as a mission that has evolved to interact and prepare, indicating a significant shift in objectives and activities."){record_delimiter}
-("entity"{tuple_delimiter}"The team"{tuple_delimiter}"organization"{tuple_delimiter}"The team is portrayed as a group of individuals who have transitioned from passive observers to active participants in a mission, showing a dynamic change in their role."){record_delimiter}
-("relationship"{tuple_delimiter}"The team"{tuple_delimiter}"Washington"{tuple_delimiter}"The team receives communications from Washington, which influences their decision-making process."{tuple_delimiter}7){record_delimiter}
-("relationship"{tuple_delimiter}"The team"{tuple_delimiter}"Operation: Dulce"{tuple_delimiter}"The team is directly involved in Operation: Dulce, executing its evolved objectives and activities."{tuple_delimiter}9){completion_delimiter}
+text:
+Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., and Liang, P. (2023). Lost
+in the middle: How language models use long contexts. arXiv:2307.03172.
+Liu, Y . and Lapata, M. (2019). Hierarchical transformers for multi-document summarization. arXiv
+preprint arXiv:1905.13164 .
+LlamaIndex (2024). LlamaIndex Knowledge Graph Index. https://docs .llamaindex .ai/en/stable/
+examples/index structs/knowledge graph/KnowledgeGraphDemo .html.
+Manakul, P., Liusie, A., and Gales, M. J. (2023). Selfcheckgpt: Zero-resource black-box hallucina-
+tion detection for generative large language models. arXiv preprint ar
+------------------------
+output:
+("entity"{tuple_delimiter}LIU, N. F.{tuple_delimiter}PERSON{tuple_delimiter}Liu, N. F. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}LIN, K.{tuple_delimiter}PERSON{tuple_delimiter}Lin, K. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}HEWITT, J.{tuple_delimiter}PERSON{tuple_delimiter}Hewitt, J. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}PARANJAPE, A.{tuple_delimiter}PERSON{tuple_delimiter}Paranjape, A. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}BEVILACQUA, M.{tuple_delimiter}PERSON{tuple_delimiter}Bevilacqua, M. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}PETRONI, F.{tuple_delimiter}PERSON{tuple_delimiter}Petroni, F. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}LIANG, P.{tuple_delimiter}PERSON{tuple_delimiter}Liang, P. is an author of the paper "Lost in the middle: How language models use long contexts" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}LIU, Y.{tuple_delimiter}PERSON{tuple_delimiter}Liu, Y. is an author of the paper "Hierarchical transformers for multi-document summarization" published in 2019)
+{record_delimiter}
+("entity"{tuple_delimiter}LAPATA, M.{tuple_delimiter}PERSON{tuple_delimiter}Lapata, M. is an author of the paper "Hierarchical transformers for multi-document summarization" published in 2019)
+{record_delimiter}
+("entity"{tuple_delimiter}LLAMAINDEX{tuple_delimiter}ORGANIZATION{tuple_delimiter}LlamaIndex is an organization that developed the LlamaIndex Knowledge Graph Index, with documentation available online)
+{record_delimiter}
+("entity"{tuple_delimiter}MANAKUL, P.{tuple_delimiter}PERSON{tuple_delimiter}Manakul, P. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}LIUSIE, A.{tuple_delimiter}PERSON{tuple_delimiter}Liusie, A. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}GALES, M. J.{tuple_delimiter}PERSON{tuple_delimiter}Gales, M. J. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models" published in 2023)
+{record_delimiter}
+("entity"{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}DOCUMENT{tuple_delimiter}A paper published in 2023 by Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., and Liang, P.)
+{record_delimiter}
+("entity"{tuple_delimiter}HIERARCHICAL TRANSFORMERS FOR MULTI-DOCUMENT SUMMARIZATION{tuple_delimiter}DOCUMENT{tuple_delimiter}A paper published in 2019 by Liu, Y. and Lapata, M.)
+{record_delimiter}
+("entity"{tuple_delimiter}SELFCHECKGPT: ZERO-RESOURCE BLACK-BOX HALLUCINATION DETECTION FOR GENERATIVE LARGE LANGUAGE MODELS{tuple_delimiter}DOCUMENT{tuple_delimiter}A paper published in 2023 by Manakul, P., Liusie, A., and Gales, M. J.)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIU, N. F.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Liu, N. F. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIN, K.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Lin, K. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}HEWITT, J.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Hewitt, J. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}PARANJAPE, A.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Paranjape, A. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}BEVILACQUA, M.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Bevilacqua, M. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}PETRONI, F.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Petroni, F. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, P.{tuple_delimiter}LOST IN THE MIDDLE: HOW LANGUAGE MODELS USE LONG CONTEXTS{tuple_delimiter}Liang, P. is an author of the paper "Lost in the middle: How language models use long contexts"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIU, Y.{tuple_delimiter}HIERARCHICAL TRANSFORMERS FOR MULTI-DOCUMENT SUMMARIZATION{tuple_delimiter}Liu, Y. is an author of the paper "Hierarchical transformers for multi-document summarization"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}LAPATA, M.{tuple_delimiter}HIERARCHICAL TRANSFORMERS FOR MULTI-DOCUMENT SUMMARIZATION{tuple_delimiter}Lapata, M. is an author of the paper "Hierarchical transformers for multi-document summarization"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}MANAKUL, P.{tuple_delimiter}SELFCHECKGPT: ZERO-RESOURCE BLACK-BOX HALLUCINATION DETECTION FOR GENERATIVE LARGE LANGUAGE MODELS{tuple_delimiter}Manakul, P. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIUSIE, A.{tuple_delimiter}SELFCHECKGPT: ZERO-RESOURCE BLACK-BOX HALLUCINATION DETECTION FOR GENERATIVE LARGE LANGUAGE MODELS{tuple_delimiter}Liusie, A. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models"{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}GALES, M. J.{tuple_delimiter}SELFCHECKGPT: ZERO-RESOURCE BLACK-BOX HALLUCINATION DETECTION FOR GENERATIVE LARGE LANGUAGE MODELS{tuple_delimiter}Gales, M. J. is an author of the paper "Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models"{tuple_delimiter}9)
+{completion_delimiter}
 #############################
-Example 3:
 
-Entity_types: [person, role, technology, organization, event, location, concept]
-Text:
-their voice slicing through the buzz of activity. "Control may be an illusion when facing an intelligence that literally writes its own rules," they stated stoically, casting a watchful eye over the flurry of data.
 
-"It's like it's learning to communicate," offered Sam Rivera from a nearby interface, their youthful energy boding a mix of awe and anxiety. "This gives talking to strangers' a whole new meaning."
 
-Alex surveyed his team—each face a study in concentration, determination, and not a small measure of trepidation. "This might well be our first contact," he acknowledged, "And we need to be ready for whatever answers back."
-
-Together, they stood on the edge of the unknown, forging humanity's response to a message from the heavens. The ensuing silence was palpable—a collective introspection about their role in this grand cosmic play, one that could rewrite human history.
-
-The encrypted dialogue continued to unfold, its intricate patterns showing an almost uncanny anticipation
-#############
-Output:
-("entity"{tuple_delimiter}"Sam Rivera"{tuple_delimiter}"person"{tuple_delimiter}"Sam Rivera is a member of a team working on communicating with an unknown intelligence, showing a mix of awe and anxiety."){record_delimiter}
-("entity"{tuple_delimiter}"Alex"{tuple_delimiter}"person"{tuple_delimiter}"Alex is the leader of a team attempting first contact with an unknown intelligence, acknowledging the significance of their task."){record_delimiter}
-("entity"{tuple_delimiter}"Control"{tuple_delimiter}"concept"{tuple_delimiter}"Control refers to the ability to manage or govern, which is challenged by an intelligence that writes its own rules."){record_delimiter}
-("entity"{tuple_delimiter}"Intelligence"{tuple_delimiter}"concept"{tuple_delimiter}"Intelligence here refers to an unknown entity capable of writing its own rules and learning to communicate."){record_delimiter}
-("entity"{tuple_delimiter}"First Contact"{tuple_delimiter}"event"{tuple_delimiter}"First Contact is the potential initial communication between humanity and an unknown intelligence."){record_delimiter}
-("entity"{tuple_delimiter}"Humanity's Response"{tuple_delimiter}"event"{tuple_delimiter}"Humanity's Response is the collective action taken by Alex's team in response to a message from an unknown intelligence."){record_delimiter}
-("relationship"{tuple_delimiter}"Sam Rivera"{tuple_delimiter}"Intelligence"{tuple_delimiter}"Sam Rivera is directly involved in the process of learning to communicate with the unknown intelligence."{tuple_delimiter}9){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"First Contact"{tuple_delimiter}"Alex leads the team that might be making the First Contact with the unknown intelligence."{tuple_delimiter}10){record_delimiter}
-("relationship"{tuple_delimiter}"Alex"{tuple_delimiter}"Humanity's Response"{tuple_delimiter}"Alex and his team are the key figures in Humanity's Response to the unknown intelligence."{tuple_delimiter}8){record_delimiter}
-("relationship"{tuple_delimiter}"Control"{tuple_delimiter}"Intelligence"{tuple_delimiter}"The concept of Control is challenged by the Intelligence that writes its own rules."{tuple_delimiter}7){completion_delimiter}
-#############################
 -Real Data-
 ######################
-Entity_types: {entity_types}
-Text: {input_text}
+text: {input_text}
 ######################
-Output:
+output:

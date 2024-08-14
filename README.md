@@ -1,25 +1,21 @@
 # Overview
+
 ![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
 
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
-<a href="https://www.buymeacoffee.com/zacharyq" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## GraphFleet
 
-GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches by:
+GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches:
 
-- [x] Connecting disparate pieces of information through shared attributes.
-- [x] Structured, hierarchical approach to Retrieval Augmented Generation.
-- [x] Knowledge graph extraction from raw text.
-- [x] Community hierarchy building.
-- [x] Hierarchical summarization.
-- [x] Enhanced reasoning capabilities for LLMs on private datasets.
-- [ ] Improve the structure of the overall repository.
-- [ ] Add dedicated prompts for indexing and querying, and more vector databases.
-- [ ] Add more notebooks.
+## Roadmap
+
 - [ ] Provide a FleetUI Design Kit and a quicker way of starting GraphFleet locally.
-- [ ] Add integrations (Langchain, Flowise, Langflow, Microsoft Fabric, Composio, Neo4j, etc.).
-- [ ] Access GraphFleet through a secure and enterprise-ready Azure Cloud hosting version. [Join the waitlist now](https://forms.office.com/e/9cHKxgrQgV).
+- [ ] Provide a Toddle interface ready to use for GraphFleet
+- [ ] Add integrations of Composio
+- [ ] Add integrations of LangSmith
+- [ ] Add few selfhosting  one click deploy solutions.
+- [ ] Access GraphFleet through a secure and enterprise-ready Azure Cloud hosting version.
 - [ ] And way more... 👀
 
 ## Key Features
@@ -30,84 +26,99 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 - Hierarchical summarization.
 - Enhanced reasoning capabilities for LLMs on private datasets.
 
+## Contribute
+
+- Leave us a star ♥
+- Fork and contribute to the project
+- [![Join the discord](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
+
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.10 (ideally 3.12)
-- Poetry (for dependency management)
+- Python 3.10
+- Poetry
+- Make sure to have a virtual environment manager such as `virtualenv` installed
 
 ### Installation
 
 1. Clone the repository:
-   ```sh
-git clone https://github.com/Qredence/GraphFleet.git
-cd GraphFleet
-```
 
+   ``` bash
+   git clone https://github.com/Qredence/GraphFleet.git
+   cd GraphFleet
+   ```
 
-2. Install dependencies using Poetry:
+2. Simply run these in your terminal:
 
-```
-poetry shell
-```
+   ``` bash
+   poetry shell
+   poetry install
+   ```
 
-```
-poetry install 
-```
 
 ### Usage
 
-1. Setting up your settings:
+1. Configuration:
+Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
+
+   ```sh
+   export GRAPHRAG_API_KEY="<apikey>"
+   export GRAPHRAG_API_BASE="custom base api url"
+   export GRAPHRAG_API_VERSION="version (if not OpenAI)"
+   export GRAPHRAG_LLM_MODEL="model name"
+   export GRAPHRAG_DEPLOYMENT_NAME="model name"
+   export GRAPHRAG_EMBEDDING_MODEL="embedding model"
+   ```
+
+   settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
+
+1. Data Indexing:
+Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
+
+1. Interacting with GraphFleet:
+Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
+
+   get-started-graphfleet.ipynb: A comprehensive guide to indexing your data and running basic queries.
+
+   Local Search Notebook.ipynb: Demonstrates local search techniques.
+
+   app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface.
+
+### Start the application
 
 ```
-cd graphfleet
+streamlit run app.py
 ```
 
-- Set up the necessary environment variables in the `.env.example` file and change the name to .env.
-The required ones being :
+Access the interface in your web browser at the provided URL (usually <http://localhost:8080>).
 
-```
-# Base LLM Settings
-GRAPHRAG_API_KEY="your_api_key"
-GRAPHRAG_API_BASE="http://<domain>.openai.azure.com" # For Azure OpenAI Users
-GRAPHRAG_API_VERSION="api_version" # For Azure OpenAI Users
-
-# Text Generation Settings
-GRAPHRAG_LLM_TYPE="azure_openai_chat" # or openai_chat
-GRAPHRAG_LLM_DEPLOYMENT_NAME="gpt-4-turbo-preview"
-GRAPHRAG_LLM_MODEL_SUPPORTS_JSON=True
-
-# Text Embedding Settings
-GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding" # or openai_embedding
-GRAPHRAG_LLM_DEPLOYMENT_NAME="text-embedding-3-small"
-
-# Data Mapping Settings
-GRAPHRAG_INPUT_TYPE="text"
-```
-
-
-- Open `settings.yaml` and fill the parameter you wish to fill according to your needs.
-
-
-2. Run the indexing process:
-
-[Get started quickly](notebook/get-started-graphfleet.ipynb)
-
-
-3. Perform queries in local mode or global mode depending on your usecase learn more in the [GraphRAG documentation](https://microsoft.github.io/graphrag/posts/query/overview/):
-For local query mode :
-
-```
+``` bash
 python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
 ```
 
 For Global query mode :
 
-```
+``` bash
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
+
+### Running the API only
+
+To run the API, save the code in a file named api.py and execute the following command in your terminal:
+
+``` bash
+uvicorn api:app --reload --port 8001
+```
+
+## Security
+
+[Security](SECURITY.md)
+
+## License
+
+[text](LICENSE)
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
-
