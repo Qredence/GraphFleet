@@ -53,18 +53,20 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
    cd GraphFleet
 ```
 
-1. Simply run these in your terminal:
+
+2. Simply run these in your terminal:
 
    ``` bash
    poetry shell
    poetry install
    ```
 
+
+
 ### Usage
 
 1. Configuration:
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
-
 
    ```sh
    export GRAPHRAG_API_KEY="<apikey>"
@@ -96,6 +98,7 @@ uvicorn graphfleet.api.api:app --host 0.0.0.0 --port 8001
 ```
 
 Access the interface in your web browser at the provided URL  <http://0.0.0.0:8001/docs> .
+
 
 
 1. Data Indexing:
@@ -134,6 +137,7 @@ For Global query mode :
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
 
+
 ### Running the API only
 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
@@ -151,5 +155,4 @@ uvicorn api:app --reload --port 8001
 [text](LICENSE)
 
 ## Star History
-
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
