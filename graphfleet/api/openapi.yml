@@ -1,0 +1,155 @@
+openapi: '3.1.0'
+info:
+  title: 'GraphFleet'
+  version: '0.4.0'
+paths:
+  '/':
+    get:
+      summary: 'Read Root'
+      operationId: 'read_root__get'
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+  '/process_local_query/':
+    post:
+      summary: 'Process Local Query Endpoint'
+      operationId: 'process_local_query_endpoint_process_local_query__post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+        required: true
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: 'Validation Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  '/process_global_query/':
+    post:
+      summary: 'Process Global Query Endpoint'
+      operationId: 'process_global_query_endpoint_process_global_query__post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+        required: true
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: 'Validation Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  '/add_message/':
+    post:
+      summary: 'Add Message'
+      operationId: 'add_message_add_message__post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessage'
+        required: true
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: 'Validation Error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  '/get_chat_history/':
+    get:
+      summary: 'Get Chat History'
+      operationId: 'get_chat_history_get_chat_history__get'
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+  '/clear_chat_history/':
+    delete:
+      summary: 'Clear Chat History'
+      operationId: 'clear_chat_history_clear_chat_history__delete'
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema: {}
+components:
+  schemas:
+    ChatMessage:
+      type: 'object'
+      title: 'ChatMessage'
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: 'string'
+          title: 'Role'
+        content:
+          type: 'string'
+          title: 'Content'
+    HTTPValidationError:
+      type: 'object'
+      title: 'HTTPValidationError'
+      properties:
+        detail:
+          type: 'array'
+          title: 'Detail'
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    QueryRequest:
+      type: 'object'
+      title: 'QueryRequest'
+      required:
+        - query
+      properties:
+        query:
+          type: 'string'
+          title: 'Query'
+    ValidationError:
+      type: 'object'
+      title: 'ValidationError'
+      required:
+        - loc
+        - msg
+        - type
+      properties:
+        loc:
+          type: 'array'
+          title: 'Location'
+          items:
+            anyOf:
+              - type: 'string'
+              - type: 'integer'
+        msg:
+          type: 'string'
+          title: 'Message'
+        type:
+          type: 'string'
+          title: 'Error Type'
