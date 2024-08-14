@@ -7,6 +7,7 @@ app = FastAPI()
 
 class QueryRequest(BaseModel):
     query: str
+
 class ChatMessage(BaseModel):
     role: str
     content: str
@@ -17,7 +18,13 @@ class ChatHistory(BaseModel):
 # In-memory storage for chat history
 chat_history = []
 
+# Allowlist of accepted search methods
+ALLOWED_METHODS = ["local", "global"]
+
 def process_query(query: str, search_method: str) -> str:
+    if search_method not in ALLOWED_METHODS:
+        raise HTTPException(status_code=400, detail=f"Invalid search method: {search_method}")
+
     cmd = [
         "python3", "-m", "graphrag.query",
         "--root", "./graphfleet",
