@@ -1,0 +1,1687 @@
+From Louvain to Leiden: guaranteeing well-connected communities
+V.A. Traag,∗L. Waltman, and N.J. van Eck
+Centre for Science and Technology Studies, Leiden University, the Netherlands
+(Dated: October 31, 2019)
+Community detection is often used to understand the structure of large and complex networks.
+One of the most popular algorithms for uncovering community structure is the so-called Louvain
+algorithm. We show that this algorithm has a major defect that largely went unnoticed until
+now: the Louvain algorithm may yield arbitrarily badly connected communities. In the worst case,
+communities may even be disconnected, especially when running the algorithm iteratively. In our
+experimental analysis, we observe that up to 25%of the communities are badly connected and up
+to16%are disconnected. To address this problem, we introduce the Leiden algorithm. We prove
+that the Leiden algorithm yields communities that are guaranteed to be connected. In addition, we
+prove that, when the Leiden algorithm is applied iteratively, it converges to a partition in which all
+subsets of all communities are locally optimally assigned. Furthermore, by relying on a fast local
+move approach, the Leiden algorithm runs faster than the Louvain algorithm. We demonstrate
+the performance of the Leiden algorithm for several benchmark and real-world networks. We ﬁnd
+that the Leiden algorithm is faster than the Louvain algorithm and uncovers better partitions, in
+addition to providing explicit guarantees.
+I. INTRODUCTION
+In many complex networks, nodes cluster and form rel-
+atively dense groups—often called communities [1, 2].
+Such a modular structure is usually not known before-
+hand. Detecting communities in a network is therefore
+an important problem. One of the best-known methods
+for community detection is called modularity [3]. This
+method tries to maximise the diﬀerence between the ac-
+tual number of edges in a community and the expected
+number of such edges. We denote by ecthe actual num-
+ber of edges in community c. The expected number of
+edges can be expressed asK2
+c
+2m, whereKcis the sum of the
+degrees of the nodes in community candmis the total
+number of edges in the network. This way of deﬁning
+the expected number of edges is based on the so-called
+conﬁguration model. Modularity is given by
+H=1
+2m/summationdisplay
+c/parenleftbigg
+ec−γK2
+c
+2m/parenrightbigg
+, (1)
+whereγ >0is a resolution parameter [4]. Higher resolu-
+tions lead to more communities, while lower resolutions
+lead to fewer communities.
+Optimising modularity is NP-hard [5], and consequen-
+tially many heuristic algorithms have been proposed,
+such as hierarchical agglomeration [6], extremal optimi-
+sation [7], simulated annealing [4, 8] and spectral [9] al-
+gorithms. One of the most popular algorithms to opti-
+mise modularity is the so-called Louvain algorithm [10],
+named after the location of its authors. It was found to
+be one of the fastest and best performing algorithms in
+comparative analyses [11, 12], and it is one of the most-
+cited works in the community detection literature.
+∗v.a.traag@cwts.leidenuniv.nlAlthough originally deﬁned for modularity, the Lou-
+vain algorithm can also be used to optimise other quality
+functions. An alternative quality function is the Con-
+stant Potts Model (CPM) [13], which overcomes some
+limitations of modularity. CPM is deﬁned as
+H=/summationdisplay
+c/bracketleftbigg
+ec−γ/parenleftbiggnc
+2/parenrightbigg/bracketrightbigg
+, (2)
+wherencis the number of nodes in community c. The
+interpretation of the resolution parameter γis quite
+straightforward. The parameter functions as a sort of
+threshold: communities should have a density of at least
+γ,whilethedensitybetweencommunitiesshouldbelower
+thanγ. Higher resolutions lead to more communities and
+lower resolutions lead to fewer communities, similarly to
+the resolution parameter for modularity.
+In this paper, we show that the Louvain algorithm has
+a major problem, for both modularity and CPM. The
+algorithm may yield arbitrarily badly connected commu-
+nities, over and above the well-known issue of the reso-
+lution limit [14] (Section IIA). Communities may even
+be internally disconnected. To address this important
+shortcoming, we introduce a new algorithm that is faster,
+ﬁnds better partitions and provides explicit guarantees
+and bounds (Section III). The new algorithm integrates
+several earlier improvements, incorporating a combina-
+tion of smart local move [15], fast local move [16, 17] and
+random neighbour move [18]. We prove that the new
+algorithm is guaranteed to produce partitions in which
+all communities are internally connected. In addition,
+we prove that the algorithm converges to an asymptot-
+ically stable partition in which all subsets of all com-
+munities are locally optimally assigned. The quality of
+such an asymptotically stable partition provides an up-
+per bound on the quality of an optimal partition. Fi-
+nally, we demonstrate the excellent performance of the
+algorithm for several benchmark and real-world networks
+(Section IV). To ensure readability of the paper to thearXiv:1810.08473v3  [cs.SI]  30 Oct 20192
+a) b)
+c) d)Move nodes
+Aggregate
+Move nodesLevel 1
+Level 2
+FIG. 1.Louvain algorithm . The Louvain algorithm starts
+from a singleton partition in which each node is in its own
+community (a). The algorithm moves individual nodes from
+one community to another to ﬁnd a partition (b). Based on
+this partition, an aggregate network is created (c). The algo-
+rithm then moves individual nodes in the aggregate network
+(d). These steps are repeated until the quality cannot be
+increased further.
+broadest possible audience, we have chosen to relegate
+all technical details to appendices. The main ideas of our
+algorithm are explained in an intuitive way in the main
+text of the paper. We name our algorithm the Leiden
+algorithm , after the location of its authors.
+II. LOUVAIN ALGORITHM
+The Louvain algorithm [10] is very simple and elegant.
+Thealgorithmoptimisesaqualityfunctionsuchasmodu-
+larityorCPMintwoelementaryphases: (1)localmoving
+of nodes; and (2) aggregation of the network. In the local
+movingphase, individualnodesaremovedtothecommu-
+nity that yields the largest increase in the quality func-
+tion. In the aggregation phase, an aggregate network is
+created based on the partition obtained in the local mov-
+ing phase. Each community in this partition becomes
+a node in the aggregate network. The two phases are
+repeated until the quality function cannot be increased
+further. The Louvain algorithm is illustrated in Fig. 1
+and summarised in pseudo-code in Algorithm A.1 in Ap-
+pendix A.
+Usually, the Louvain algorithm starts from a singleton
+partition, in which each node is in its own community.
+a) b)
+012
+3
+45
+6
+Rest of network012
+3
+45
+6
+Rest of networkFIG. 2.Disconnected community. Consider the partition
+shownin(a). Whennode0ismovedtoadiﬀerentcommunity,
+theredcommunitybecomesinternallydisconnected, asshown
+in(b). However, nodes1–6arestilllocallyoptimallyassigned,
+and therefore these nodes will stay in the red community.
+However, it is also possible to start the algorithm from
+a diﬀerent partition [15]. In particular, in an attempt
+to ﬁnd better partitions, multiple consecutive iterations
+of the algorithm can be performed, using the partition
+identiﬁed in one iteration as starting point for the next
+iteration.
+A. Badly connected communities
+We now show that the Louvain algorithm may ﬁnd
+arbitrarily badly connected communities. In particular,
+we show that Louvain may identify communities that
+are internally disconnected. That is, one part of such
+an internally disconnected community can reach another
+part only through a path going outside the community.
+Importantly, the problem of disconnected communities
+is not just a theoretical curiosity. As we will demon-
+strate in Section IV, the problem occurs frequently in
+practice when using the Louvain algorithm. Perhaps sur-
+prisingly, iterating the algorithm aggravates the problem,
+even though it does increase the quality function.
+In the Louvain algorithm, a node may be moved to a
+diﬀerent community while it may have acted as a bridge
+between diﬀerent components of its old community. Re-
+moving such a node from its old community disconnects
+the old community. One may expect that other nodes in
+the old community will then also be moved to other com-
+munities. However, this is not necessarily the case, as the
+other nodes may still be suﬃciently strongly connected
+to their community, despite the fact that the community
+has become disconnected.
+To elucidate the problem, we consider the example il-
+lustrated in Fig. 2. The numerical details of the example
+can be found in Appendix B. The thick edges in Fig. 2
+representstrongerconnections, whiletheotheredgesrep-
+resent weaker connections. At some point, the Louvain
+algorithm may end up in the community structure shown3
+in Fig. 2(a). Nodes 0–6 are in the same community.
+Nodes 1–6 have connections only within this community,
+whereas node 0 also has many external connections. The
+algorithm continues to move nodes in the rest of the net-
+work. At some point, node 0 is considered for moving.
+When a suﬃcient number of neighbours of node 0 have
+formed a community in the rest of the network, it may
+be optimal to move node 0 to this community, thus cre-
+ating the situation depicted in Fig. 2(b). In this new
+situation, nodes 2, 3, 5 and 6 have only internal connec-
+tions. These nodes are therefore optimally assigned to
+their current community. On the other hand, after node
+0 has been moved to a diﬀerent community, nodes 1 and
+4 have not only internal but also external connections.
+Nevertheless, depending on the relative strengths of the
+diﬀerent connections, these nodes may still be optimally
+assigned to their current community. In that case, nodes
+1–6 are all locally optimally assigned, despite the fact
+that their community has become disconnected. Clearly,
+it would be better to split up the community. Nodes 1–3
+should form a community and nodes 4–6 should form an-
+other community. However, the Louvain algorithm does
+not consider this possibility, since it considers only indi-
+vidual node movements. Moreover, when no more nodes
+can be moved, the algorithm will aggregate the network.
+When a disconnected community has become a node in
+an aggregate network, there are no more possibilities to
+split up the community. Hence, the community remains
+disconnected, unless it is merged with another commu-
+nity that happens to act as a bridge.
+Obviously, this is a worst case example, showing that
+disconnected communities may be identiﬁed by the Lou-
+vain algorithm. More subtle problems may occur as well,
+causing Louvain to ﬁnd communities that are connected,
+but only in a very weak sense. Hence, in general, Louvain
+may ﬁnd arbitrarily badly connected communities.
+This problem is diﬀerent from the well-known issue
+of the resolution limit of modularity [14]. Due to the
+resolution limit, modularity may cause smaller commu-
+nities to be clustered into larger communities. In other
+words, modularity may “hide” smaller communities and
+may yield communities containing signiﬁcant substruc-
+ture. CPM does not suﬀer from this issue [13]. Never-
+theless, when CPM is used as the quality function, the
+Louvain algorithm may still ﬁnd arbitrarily badly con-
+nected communities. Hence, the problem of Louvain out-
+linedaboveisindependentfromtheissueoftheresolution
+limit. In the case of modularity, communities may have
+signiﬁcant substructure both because of the resolution
+limit and because of the shortcomings of Louvain.
+In fact, although it may seem that the Louvain al-
+gorithm does a good job at ﬁnding high quality parti-
+tions, in its standard form the algorithm provides only
+one guarantee: the algorithm yields partitions for which
+it is guaranteed that no communities can be merged. In
+other words, communities are guaranteed to be well sep-
+arated. Somewhat stronger guarantees can be obtained
+by iterating the algorithm, using the partition obtainedin one iteration of the algorithm as starting point for the
+next iteration. When iterating Louvain, the quality of
+the partitions will keep increasing until the algorithm is
+unable to make any further improvements. At this point,
+it is guaranteed that each individual node is optimally
+assigned. In this iterative scheme, Louvain provides two
+guarantees: (1) no communities can be merged and (2)
+no nodes can be moved.
+Contrary to what might be expected, iterating the
+Louvain algorithm aggravates the problem of badly con-
+nected communities, as we will also see in Section IV.
+This is not too diﬃcult to explain. After the ﬁrst itera-
+tion of the Louvain algorithm, some partition has been
+obtained. In the ﬁrst step of the next iteration, Louvain
+will again move individual nodes in the network. Some
+of these nodes may very well act as bridges, similarly to
+node 0in the above example. By moving these nodes,
+Louvain creates badly connected communities. More-
+over, Louvain has no mechanism for ﬁxing these commu-
+nities. Iterating the Louvain algorithm can therefore be
+seen as a double-edged sword: it improves the partition
+in some way, but degrades it in another way.
+The problem of disconnected communities has been
+observed before in the context of the label propagation
+algorithm [19]. However, so far this problem has never
+been studied for the Louvain algorithm. Moreover, the
+deeper signiﬁcance of the problem was not recognised:
+disconnected communities are merely the most extreme
+manifestation of the problem of arbitrarily badly con-
+nected communities. Trying to ﬁx the problem by sim-
+ply considering the connected components of communi-
+ties[19–21]isunsatisfactorybecauseitaddressesonlythe
+most extreme case and does not resolve the more funda-
+mental problem. We therefore require a more principled
+solution, which we will introduce in the next section.
+III. LEIDEN ALGORITHM
+We here introduce the Leiden algorithm, which guaran-
+tees that communities are well connected. The Leiden
+algorithm is partly based on the previously introduced
+smart local move algorithm [15], which itself can be seen
+as an improvement of the Louvain algorithm. The Lei-
+den algorithm also takes advantage of the idea of speed-
+ing up the local moving of nodes [16, 17] and the idea of
+moving nodes to random neighbours [18]. We consider
+these ideas to represent the most promising directions
+in which the Louvain algorithm can be improved, even
+though we recognise that other improvements have been
+suggested as well [22]. The Leiden algorithm consists of
+three phases: (1) local moving of nodes, (2) reﬁnement of
+the partition and (3) aggregation of the network based on
+the reﬁned partition, using the non-reﬁned partition to
+create an initial partition for the aggregate network. The
+Leiden algorithm is considerably more complex than the
+Louvain algorithm. Fig. 3 provides an illustration of the
+algorithm. The algorithm is described in pseudo-code in4
+a) b) c)
+d) e) f)Move nodes Reﬁne
+Aggregate
+Move nodes ReﬁneLevel 1
+Level 2
+FIG. 3.Leiden algorithm . The Leiden algorithm starts from a singleton partition (a). The algorithm moves individual nodes
+from one community to another to ﬁnd a partition (b), which is then reﬁned (c). An aggregate network (d) is created based
+on the reﬁned partition, using the non-reﬁned partition to create an initial partition for the aggregate network. For example,
+the red community in (b) is reﬁned into two subcommunities in (c), which after aggregation become two separate nodes in (d),
+both belonging to the same community. The algorithm then moves individual nodes in the aggregate network (e). In this case,
+reﬁnement does not change the partition (f). These steps are repeated until no further improvements can be made.
+Algorithm A.2 in Appendix A.
+In the Louvain algorithm, an aggregate network is cre-
+ated based on the partition Presulting from the local
+moving phase. The idea of the reﬁnement phase in the
+Leiden algorithm is to identify a partition Preﬁnedthat
+is a reﬁnement of P. Communities in Pmay be split
+into multiple subcommunities in Preﬁned. The aggregate
+network is created based on the partition Preﬁned. How-
+ever, the initial partition for the aggregate network is
+based on P, just like in the Louvain algorithm. By cre-
+ating the aggregate network based on Preﬁnedrather than
+P, the Leiden algorithm has more room for identifying
+high-quality partitions. In fact, by implementing the re-
+ﬁnement phase in the right way, several attractive guar-
+antees can be given for partitions produced by the Leidenalgorithm.
+The reﬁned partition Preﬁnedis obtained as follows.
+Initially, Preﬁnedis set to a singleton partition, in which
+each node is in its own community. The algorithm then
+locally merges nodes in Preﬁned: nodes that are on their
+own in a community in Preﬁnedcan be merged with a dif-
+ferent community. Importantly, mergers are performed
+only within each community of the partition P. In ad-
+dition, a node is merged with a community in Preﬁned
+only if both are suﬃciently well connected to their com-
+munity in P. After the reﬁnement phase is concluded,
+communities in Poften will have been split into multiple
+communities in Preﬁned, but not always.
+In the reﬁnement phase, nodes are not necessarily
+greedily merged with the community that yields the5
+largest increase in the quality function. Instead, a node
+maybemergedwithanycommunityforwhichthequality
+function increases. The community with which a node is
+merged is selected randomly (similar to [18]). The larger
+the increase in the quality function, the more likely a
+community is to be selected. The degree of randomness
+intheselectionofacommunityisdeterminedbyaparam-
+eterθ>0. Randomness in the selection of a community
+allows the partition space to be explored more broadly.
+Node mergers that cause the quality function to decrease
+are not considered. This contrasts with optimisation al-
+gorithms such as simulated annealing, which do allow the
+quality function to decrease [4, 8]. Such algorithms are
+rather slow, making them ineﬀective for large networks.
+Excluding node mergers that decrease the quality func-
+tion makes the reﬁnement phase more eﬃcient. As we
+prove in Appendix C1, even when node mergers that
+decrease the quality function are excluded, the optimal
+partition of a set of nodes can still be uncovered. This
+is not the case when nodes are greedily merged with the
+community that yields the largest increase in the quality
+function. In that case, some optimal partitions cannot
+be found, as we show in Appendix C2.
+Another important diﬀerence between the Leiden al-
+gorithm and the Louvain algorithm is the implementa-
+tion of the local moving phase. Unlike the Louvain algo-
+rithm, the Leiden algorithm uses a fast local move pro-
+cedure in this phase. Louvain keeps visiting all nodes
+in a network until there are no more node movements
+that increase the quality function. In doing so, Louvain
+keeps visiting nodes that cannot be moved to a diﬀer-
+ent community. In the fast local move procedure in the
+Leiden algorithm, only nodes whose neighbourhood has
+changed are visited. This is similar to ideas proposed re-
+cently as “pruning” [16] and in a slightly diﬀerent form
+as “prioritisation” [17]. The fast local move procedure
+can be summarised as follows. We start by initialising
+a queue with all nodes in the network. The nodes are
+added to the queue in a random order. We then remove
+the ﬁrst node from the front of the queue and we deter-
+mine whether the quality function can be increased by
+moving this node from its current community to a diﬀer-
+ent one. If we move the node to a diﬀerent community,
+we add to the rear of the queue all neighbours of the
+node that do not belong to the node’s new community
+and that are not yet in the queue. We keep removing
+nodes from the front of the queue, possibly moving these
+nodes to a diﬀerent community. This continues until the
+queue is empty. For a full speciﬁcation of the fast local
+move procedure, we refer to the pseudo-code of the Lei-
+den algorithm in Algorithm A.2 in Appendix A. Using
+the fast local move procedure, the ﬁrst visit to all nodes
+in a network in the Leiden algorithm is the same as in
+the Louvain algorithm. However, after all nodes have
+been visited once, Leiden visits only nodes whose neigh-
+bourhood has changed, whereas Louvain keeps visiting
+all nodes in the network. In this way, Leiden implements
+the local moving phase more eﬃciently than Louvain.TABLE I. Overview of the guarantees provided by the Lou-
+vain algorithm and the Leiden algorithm.
+Louvain Leiden
+Each
+iterationγ-separation 3 3
+γ-connectivity 3
+Stable
+iterationNode optimality 3 3
+Subpartition γ-density 3
+AsymptoticUniformγ-density 3
+Subset optimality 3
+A. Guarantees
+We now consider the guarantees provided by the Lei-
+den algorithm. The algorithm is run iteratively, using
+the partition identiﬁed in one iteration as starting point
+for the next iteration. We can guarantee a number of
+properties of the partitions found by the Leiden algo-
+rithm at various stages of the iterative process. Below
+we oﬀer an intuitive explanation of these properties. We
+provide the full deﬁnitions of the properties as well as the
+mathematical proofs in Appendix D.
+After each iteration of the Leiden algorithm, it is guar-
+anteed that:
+1. All communities are γ-separated.
+2. All communities are γ-connected.
+In these properties, γrefers to the resolution parameter
+in the quality function that is optimised, which can be
+either modularity or CPM. The property of γ-separation
+is also guaranteed by the Louvain algorithm. It states
+that there are no communities that can be merged. The
+property of γ-connectivity is a slightly stronger variant
+of ordinary connectivity. As discussed in Section IIA,
+the Louvain algorithm does not guarantee connectivity.
+It therefore does not guarantee γ-connectivity either.
+An iteration of the Leiden algorithm in which the par-
+tition does not change is called a stable iteration. After a
+stable iteration of the Leiden algorithm, it is guaranteed
+that:
+3. All nodes are locally optimally assigned.
+4. All communities are subpartition γ-dense.
+Node optimality is also guaranteed after a stable itera-
+tion of the Louvain algorithm. It means that there are no
+individual nodes that can be moved to a diﬀerent com-
+munity. Subpartition γ-density is not guaranteed by the
+Louvain algorithm. A community is subpartition γ-dense
+if it can be partitioned into two parts such that: (1) the
+two parts are well connected to each other; (2) neither
+part can be separated from its community; and (3) each
+part is also subpartition γ-dense itself. Subpartition γ-
+density does not imply that individual nodes are locally
+optimally assigned. It only implies that individual nodes
+are well connected to their community.6
+TABLE II. Overview of the empirical networks and of the
+maximalmodularityafter 10replicationsof 10iterationseach,
+both for the Louvain and for the Leiden algorithm.
+Max. modularity
+Nodes Degree Louvain Leiden
+DBLPa317 080 6 .6 0.8262 0.8387
+Amazona334 863 5 .6 0.9301 0.9341
+IMDBb374 511 80 .2 0.7062 0.7069
+Live Journala3 997 962 17 .4 0.7653 0.7739
+Web of Sciencec9 811 130 21 .2 0.7911 0.7951
+Web UKd39 252 879 39 .8 0.9796 0.9801
+ahttps://snap.stanford.edu/data/
+bhttps://sparse.tamu.edu/Barabasi/NotreDame_actors
+cData cannot be shared due to license restrictions.
+dhttp://law.di.unimi.it/webdata/uk-2005/
+In the case of the Louvain algorithm, after a stable it-
+eration, all subsequent iterations will be stable as well.
+Hence, no further improvements can be made after a sta-
+ble iteration of the Louvain algorithm. This contrasts
+with the Leiden algorithm. After a stable iteration of
+the Leiden algorithm, the algorithm may still be able to
+make further improvements in later iterations. In fact,
+when we keep iterating the Leiden algorithm, it will con-
+verge to a partition for which it is guaranteed that:
+5. All communities are uniformly γ-dense.
+6. All communities are subset optimal.
+A community is uniformly γ-dense if there are no subsets
+of the community that can be separated from the com-
+munity. Uniform γ-density means that no matter how a
+community is partitioned into two parts, the two parts
+willalwaysbewellconnectedtoeachother. Furthermore,
+if all communities in a partition are uniformly γ-dense,
+the quality of the partition is not too far from optimal,
+as shown in Appendix E. A community is subset optimal
+if all subsets of the community are locally optimally as-
+signed. That is, no subset can be moved to a diﬀerent
+community. Subset optimality is the strongest guarantee
+that is provided by the Leiden algorithm. It implies uni-
+formγ-density and all the other above-mentioned prop-
+erties.
+An overview of the various guarantees is presented in
+Table I.
+IV. EXPERIMENTAL ANALYSIS
+In the previous section, we showed that the Leiden
+algorithm guarantees a number of properties of the par-
+titions uncovered at diﬀerent stages of the algorithm. We
+also suggested that the Leiden algorithm is faster than
+the Louvain algorithm, because of the fast local move
+approach. In this section, we analyse and compare theperformance of the two algorithms in practice1. All ex-
+periments were run on a computer with 64 Intel Xeon
+E5-4667v3 2GHz CPUs and 1TB internal memory. In all
+experiments reported here, we used a value of 0.01for the
+parameterθthat determines the degree of randomness in
+the reﬁnement phase of the Leiden algorithm. However,
+values ofθwithin a range of roughly [0.0005,0.1]all pro-
+vide reasonable results, thus allowing for some, but not
+too much randomness. We use six empirical networks
+in our analysis. These are the same networks that were
+also studied in an earlier paper introducing the smart lo-
+cal move algorithm [15]. Table II provides an overview of
+the six networks. First, we show that the Louvain algo-
+rithm ﬁnds disconnected communities, and more gener-
+ally, badly connected communities in the empirical net-
+works. Second, to study the scaling of the Louvain and
+the Leiden algorithm, we use benchmark networks, al-
+lowing us to compare the algorithms in terms of both
+computational time and quality of the partitions. Fi-
+nally, we compare the performance of the algorithms on
+the empirical networks. We ﬁnd that the Leiden algo-
+rithm commonly ﬁnds partitions of higher quality in less
+time. The diﬀerence in computational time is especially
+pronounced for larger networks, with Leiden being up to
+20times faster than Louvain in empirical networks.
+A. Badly connected communities
+We study the problem of badly connected communi-
+ties when using the Louvain algorithm for several empir-
+ical networks. For each community in a partition that
+was uncovered by the Louvain algorithm, we determined
+whether it is internally connected or not. In addition,
+to analyse whether a community is badly connected, we
+ran the Leiden algorithm on the subnetwork consisting of
+all nodes belonging to the community.2The Leiden al-
+gorithm was run until a stable iteration was obtained.
+When the Leiden algorithm found that a community
+could be split into multiple subcommunities, we counted
+the community as badly connected. Note that if Lei-
+den ﬁnds subcommunities, splitting up the community is
+guaranteed to increase modularity. Conversely, if Leiden
+does not ﬁnd subcommunities, there is no guarantee that
+modularity cannot be increased by splitting up the com-
+munity. Hence, by counting the number of communities
+thathavebeensplitup, weobtainedalowerboundonthe
+number of communities that are badly connected. The
+1We implemented both algorithms in Java, available from
+github.com/CWTSLeiden/networkanalysis and deposited at
+Zenodo [23]. Additionally, we implemented a Python pack-
+age, available from github.com/vtraag/leidenalg and deposited
+at Zenodo [24].
+2We ensured that modularity optimisation for the subnetwork
+was fully consistent with modularity optimisation for the whole
+network [13].7
+051015202530DBLP Amazon
+05IMDB Live Journal
+1 2 3 40510152025Web of Science
+1 2 3 4Web UK (2005)Disconnected (Louvain) Badly connected (Louvain)
+Badly connected (Leiden)% communities
+Iterations
+FIG. 4. Badly connected communities . Percentage of
+communities found by the Louvain algorithm that are either
+disconnected or badly connected compared to percentage of
+badly connected communities found by the Leiden algorithm.
+Note that communities found by the Leiden algorithm are
+guaranteed to be connected.
+count of badly connected communities also included dis-
+connected communities. For each network, we repeated
+the experiment 10times. We used modularity with a
+resolution parameter of γ= 1for the experiments.
+As can be seen in Fig. 4, in the ﬁrst iteration of the
+Louvain algorithm, the percentage of badly connected
+communities can be quite high. For the Amazon, DBLP
+and Web UK networks, Louvain yields on average respec-
+tively 23%,16%and14%badly connected communities.
+The percentage of disconnected communities is more lim-
+ited, usually around 1%. However, in the case of the Web
+of Science network, more than 5%of the communities are
+disconnected in the ﬁrst iteration.
+Later iterations of the Louvain algorithm only ag-
+gravate the problem of disconnected communities, even
+though the quality function (i.e. modularity) increases.
+The second iteration of Louvain shows a large increase
+in the percentage of disconnected communities. In sub-
+sequent iterations, the percentage of disconnected com-
+munities remains fairly stable. The increase in the per-
+centage of disconnected communities is relatively limited
+for the Live Journal and Web of Science networks. Other
+networks show an almost tenfold increase in the percent-
+age of disconnected communities. The percentage of dis-
+connected communities even jumps to 16%for the DBLP
+network. The percentage of badly connected communi-
+ties is less aﬀected by the number of iterations of the
+Louvain algorithm. Presumably, many of the badly con-
+nected communities in the ﬁrst iteration of Louvain be-come disconnected in the second iteration. Indeed, the
+percentage of disconnected communities becomes more
+comparable to the percentage of badly connected com-
+munities in later iterations. Nonetheless, some networks
+still show large diﬀerences. For example, after four itera-
+tions, the Web UK network has 8%disconnected commu-
+nities, but twice as many badly connected communities.
+Even worse, the Amazon network has 5%disconnected
+communities, but 25%badly connected communities.
+The above results shows that the problem of discon-
+nected and badly connected communities is quite per-
+vasive in practice. Because the percentage of discon-
+nected communities in the ﬁrst iteration of the Louvain
+algorithm usually seems to be relatively low, the prob-
+lem may have escaped attention from users of the algo-
+rithm. However, focussing only on disconnected commu-
+nities masks the more fundamental issue: Louvain ﬁnds
+arbitrarily badly connected communities. The high per-
+centage of badly connected communities attests to this.
+Besides being pervasive, the problem is also sizeable. In
+the worst case, almost a quarter of the communities are
+badly connected. This may have serious consequences
+for analyses based on the resulting partitions. For exam-
+ple, nodes in a community in biological or neurological
+networks are often assumed to share similar functions or
+behaviour [25]. However, if communities are badly con-
+nected, this may lead to incorrect attributions of shared
+functionality. Similarly, in citation networks, such as the
+Web of Science network, nodes in a community are usu-
+ally considered to share a common topic [26, 27]. Again,
+if communities are badly connected, this may lead to in-
+correct inferences of topics, which will aﬀect bibliomet-
+ric analyses relying on the inferred topics. In short, the
+problem of badly connected communities has important
+practical consequences.
+The Leiden algorithm has been speciﬁcally designed
+to address the problem of badly connected communities.
+Fig. 4 shows how well it does compared to the Louvain
+algorithm. The Leiden algorithm guarantees all commu-
+nities to be connected, but it may yield badly connected
+communities. In terms of the percentage of badly con-
+nectedcommunitiesintheﬁrstiteration,Leidenperforms
+even worse than Louvain, as can be seen in Fig. 4. Cru-
+cially, however, the percentage of badly connected com-
+munities decreases with each iteration of the Leiden al-
+gorithm. Starting from the second iteration, Leiden out-
+performed Louvain in terms of the percentage of badly
+connected communities. In fact, if we keep iterating the
+Leiden algorithm, it will converge to a partition with-
+out any badly connected communities, as discussed in
+Section III. Hence, the Leiden algorithm eﬀectively ad-
+dresses the problem of badly connected communities.
+B. Benchmark networks
+To study the scaling of the Louvain and the Leiden al-
+gorithm, we rely on a variant of a well-known approach8
+0.740.760.780.8µ= 0.2
+0.540.560.580.6µ= 0.4
+0.340.360.380.4µ= 0.6
+0.220.240.26µ= 0.8
+10310510710−1101103
+10310510710−1101103
+10310510710−1101103
+10310510710−1102105Louvain Leiden
+NodesQuality Time (s)
+FIG. 5. Scaling of benchmark results for network size . Speed and quality of the Louvain and the Leiden algorithm
+for benchmark networks of increasing size (two iterations). For larger networks and higher values of µ, Louvain is much slower
+than Leiden. For higher values of µ, Leiden ﬁnds better partitions than Louvain.
+204060801000.797250.79730.797350.7974µ= 0.2
+4060801001200.5950.5960.597µ= 0.4
+100 200 3000.320.340.360.380.4µ= 0.6
+1021030.2020.2040.2060.2080.21µ= 0.8
+500 1,0000.800260.800280.80030.800320.80034
+500 1,000 1,5000.5990.59950.60.6005
+1,000 2,000 3,000 4,0000.320.340.360.380.4
+1031040.2040.2060.208Louvain Leiden
+Time (s)Qualityn= 106n= 107
+FIG. 6.Runtime versus quality for benchmark networks . Speed and quality for the ﬁrst 10iterations of the Louvain
+and the Leiden algorithm for benchmark networks ( n= 106andn= 107). The horizontal axis indicates the cumulative time
+taken to obtain the quality indicated on the vertical axis. Each point corresponds to a certain iteration of an algorithm, with
+results averaged over 10experiments. In general, Leiden is both faster than Louvain and ﬁnds better partitions.
+for constructing benchmark networks [28]. We generated
+benchmark networks in the following way. First, we cre-
+ated a speciﬁed number of nodes and we assigned each
+node to a community. Communities were all of equal
+size. A community size of 50nodes was used for the re-
+sultspresentedbelow, butlargercommunitysizesyielded
+qualitatively similar results. We then created a certain
+number of edges such that a speciﬁed average degree /angbracketleftk/angbracketright
+wasobtained. Fortheresultsreportedbelow, theaverage
+degree was set to /angbracketleftk/angbracketright= 10. Edges were created in such
+a way that an edge fell between two communities with aprobability µand within a community with a probability
+1−µ. We applied the Louvain and the Leiden algorithm
+to exactly the same networks, using the same seed for
+the random number generator. For both algorithms, 10
+iterations were performed. We used the CPM quality
+function. The value of the resolution parameter was de-
+termined based on the so-called mixing parameter µ[13].
+We generated networks with n= 103ton= 107nodes.
+For each set of parameters, we repeated the experiment
+10times. Below, the quality of a partition is reported as
+H
+2m, where His deﬁned in Eq. (2) and mis the number9
+0.2 0.4 0.6 0.8102103104105Louvain
+Leiden
+µTime (s)
+FIG. 7.Scaling of benchmark results for diﬃculty of
+the partition . Speed of the ﬁrst iteration of the Louvain
+and the Leiden algorithm for benchmark networks with in-
+creasingly diﬃcult partitions ( n= 107). In the most diﬃcult
+case (µ= 0.9), Louvain requires almost 2.5days, while Leiden
+needs fewer than 10minutes.
+of edges.
+As shown in Fig. 5, for lower values of µthe partition
+is well deﬁned, and neither the Louvain nor the Leiden
+algorithm has a problem in determining the correct par-
+tition in only two iterations. Hence, for lower values of
+µ, the diﬀerence in quality is negligible. However, as µ
+increases, the Leiden algorithm starts to outperform the
+Louvain algorithm. The diﬀerences are not very large,
+which is probably because both algorithms ﬁnd parti-
+tions for which the quality is close to optimal, related to
+the issue of the degeneracy of quality functions [29].
+TheLeidenalgorithmisclearlyfasterthantheLouvain
+algorithm. For lower values of µ, the correct partition
+is easy to ﬁnd and Leiden is only about twice as fast as
+Louvain. However, forhighervaluesof µ, Leidenbecomes
+ordersofmagnitudefasterthanLouvain, reaching 10–100
+times faster runtimes for the largest networks. As can be
+seen in Fig. 7, whereas Louvain becomes much slower for
+more diﬃcult partitions, Leiden is much less aﬀected by
+the diﬃculty of the partition.
+Fig. 6 presents total runtime versus quality for all iter-
+ations of the Louvain and the Leiden algorithm. As can
+be seen in the ﬁgure, Louvain quickly reaches a state in
+which it is unable to ﬁnd better partitions. On the other
+hand, Leiden keeps ﬁnding better partitions, especially
+for higher values of µ, for which it is more diﬃcult to
+identify good partitions. A number of iterations of the
+Leiden algorithm can be performed before the Louvain
+algorithm has ﬁnished its ﬁrst iteration. Later iterations
+of the Louvain algorithm are very fast, but this is only
+because the partition remains the same. With one ex-
+ception (µ= 0.2andn= 107), all results in Fig. 6 show
+that Leiden outperforms Louvain in terms of both com-
+putational time and quality of the partitions.
+DBLPAmazonIMDB
+Live Journal
+Web of ScienceWeb UK (2005)1101001,00010,000 Time (s)Louvain
+LeidenFIG. 8. First iteration runtime for empirical net-
+works. Speed of the ﬁrst iteration of the Louvain and the
+Leiden algorithm for six empirical networks. Leiden is faster
+than Louvain especially for larger networks.
+C. Empirical networks
+Analyses based on benchmark networks have only a
+limited value because these networks are not represen-
+tative of empirical real-world networks. In particular,
+benchmarknetworkshavea rather simplestructure. Em-
+pirical networks show a much richer and more complex
+structure. We now compare how the Leiden and the Lou-
+vain algorithm perform for the six empirical networks
+listed in Table II. Our analysis is based on modularity
+with resolution parameter γ= 1. For each network, Ta-
+ble II reports the maximal modularity obtained using the
+Louvain and the Leiden algorithm.
+AscanbeseeninFig.8, theLeidenalgorithmissigniﬁ-
+cantlyfasterthantheLouvainalgorithmalsoinempirical
+networks. In the ﬁrst iteration, Leiden is roughly 2–20
+times faster than Louvain. The speed diﬀerence is espe-
+cially large for larger networks. This is similar to what
+we have seen for benchmark networks. For the Ama-
+zon and IMDB networks, the ﬁrst iteration of the Leiden
+algorithm is only about 1.6times faster than the ﬁrst
+iteration of the Louvain algorithm. However, Leiden is
+more than 7times faster for the Live Journal network,
+more than 11times faster for the Web of Science network
+and more than 20times faster for the Web UK network.
+In fact, for the Web of Science and Web UK networks,
+Fig. 9 shows that more than 10iterations of the Leiden
+algorithmcanbeperformedbeforetheLouvainalgorithm
+has ﬁnished its ﬁrst iteration.
+As shown in Fig. 9, the Leiden algorithm also performs
+better than the Louvain algorithm in terms of the qual-10
+ity of the partitions that are obtained. For all networks,
+LeidenidentiﬁessubstantiallybetterpartitionsthanLou-
+vain. Louvainquicklyconvergestoapartitionandisthen
+unable to make further improvements. In contrast, Lei-
+den keeps ﬁnding better partitions in each iteration.
+The quality improvement realised by the Leiden algo-
+rithm relative to the Louvain algorithm is larger for em-
+pirical networks than for benchmark networks. Hence,
+the complex structure of empirical networks creates an
+even stronger need for the use of the Leiden algorithm.
+Leiden keeps ﬁnding better partitions for empirical net-
+works also after the ﬁrst 10iterations of the algorithm.
+This contrasts to benchmark networks, for which Leiden
+often converges after a few iterations. For empirical net-
+works, it may take quite some time before the Leiden
+algorithm reaches its ﬁrst stable iteration. As can be
+seen in Fig. 10, for the IMDB and Amazon networks,
+Leiden reaches a stable iteration relatively quickly, pre-
+sumablybecausethesenetworkshaveafairlysimplecom-
+munity structure. The DBLP network is somewhat more
+challenging, requiring almost 80iterations on average to
+reach a stable iteration. The Web of Science network is
+the most diﬃcult one. For this network, Leiden requires
+over 750iterations on average to reach a stable iteration.
+Importantly, the ﬁrst iteration of the Leiden algorithm is
+the most computationally intensive one, and subsequent
+iterations are faster. For example, for the Web of Science
+network, the ﬁrst iteration takes about 110–120seconds,while subsequent iterations require about 40seconds.
+V. DISCUSSION
+Community detection is an important task in the anal-
+ysis of complex networks. Finding communities in large
+networks is far from trivial: algorithms need to be fast,
+but they also need to provide high-quality results. One
+of the most widely used algorithms is the Louvain algo-
+rithm [10], which is reported to be among the fastest and
+bestperformingcommunitydetectionalgorithms[11,12].
+However, as shown in this paper, the Louvain algorithm
+has a major shortcoming: the algorithm yields commu-
+nities that may be arbitrarily badly connected. Commu-
+nities may even be disconnected.
+To overcome the problem of arbitrarily badly con-
+nected communities, we introduced a new algorithm,
+which we refer to as the Leiden algorithm. This algo-
+rithm provides a number of explicit guarantees. In par-
+ticular, it yields communities that are guaranteed to be
+connected. Moreover, when the algorithm is applied it-
+eratively, it converges to a partition in which all subsets
+of all communities are guaranteed to be locally optimally
+assigned. In practical applications, the Leiden algorithm
+convincingly outperforms the Louvain algorithm, both in
+terms of speed and in terms of quality of the results, as
+shown by the experimental analysis presented in this pa-
+per. We conclude that the Leiden algorithm is strongly
+preferable to the Louvain algorithm.
+[1] S. Fortunato, Phys. Rep. 486, 75 (2010).
+[2] M. A. Porter, J.-P. Onnela, and P. J. Mucha, Not. AMS
+56, 1082 (2009).
+[3] M. E. J. Newman and M. Girvan, Phys. Rev. E 69,
+026113 (2004).
+[4] J. Reichardt and S. Bornholdt, Phys. Rev. E 74, 016110
+(2006).
+[5] U. Brandes, D. Delling, M. Gaertler, R. Gorke, M. Hoe-
+fer, Z. Nikoloski, D. Wagner, R. G, M. Hoefer,
+Z. Nikoloski, and D. Wagner, IEEE Trans. Knowl. Data
+Eng.20, 172 (2008).
+[6] A. Clauset, M. E. J. Newman, and C. Moore, Phys. Rev.
+E70, 066111 (2004).
+[7] J. Duch and A. Arenas, Phys. Rev. E 72, 027104 (2005).
+[8] R. Guimerà and L. A. Nunes Amaral, Nature 433, 895
+(2005).
+[9] M. E. J. Newman, Phys. Rev. E 74, 036104 (2006).
+[10] V. D. Blondel, J.-L. Guillaume, R. Lambiotte, and
+E. Lefebvre, J. Stat. Mech.Theory Exp. 10008, 6 (2008).
+[11] A. Lancichinetti and S. Fortunato, Phys. Rev. E 80,
+056117 (2009).
+[12] Z. Yang, R. Algesheimer, and C. J. Tessone, Sci. Rep.
+6, 30750 (2016).
+[13] V. A. Traag, P. Van Dooren, and Y. Nesterov, Phys.
+Rev. E84, 016114 (2011).
+[14] S. Fortunato and M. Barthélemy, Proc. Natl. Acad. Sci.
+U. S. A.104, 36 (2007).[15] L. Waltman and N. J. van Eck, Eur. Phys. J. B 86, 471
+(2013).
+[16] N. Ozaki, H. Tezuka, and M. Inaba, Int. J. Comput.
+Electr. Eng. 8, 207 (2016).
+[17] S. Bae, D. Halperin, J. D. West, M. Rosvall, and
+B. Howe, ACM Trans. Knowl. Discov. Data 11, 1 (2017).
+[18] V. A. Traag, Phys. Rev. E 92, 032801 (2015).
+[19] U. Raghavan, R. Albert, and S. Kumara, Phys. Rev. E
+76, 036106 (2007).
+[20] M. D. Luecken, Application of multi-resolution partition-
+ing of interaction networks to the study of complex dis-
+ease, Ph.D. thesis, University of Oxford (2016).
+[21] F. A. Wolf, F. Hamey, M. Plass, J. Solana, J. S. Dahlin,
+B. Gottgens, N. Rajewsky, L. Simon, and F. J. Theis,
+bioRxiv (2018), 10.1101/208819.
+[22] R. Rotta and A. Noack, J. Exp. Algorithmics 16, 2.1
+(2011).
+[23] V. A. Traag, L. Waltman, and N. J. van Eck, “net-
+workanalysis,” Zenodo, 10.5281/zenodo.1466831 (2018),
+Source Code.
+[24] V. A. Traag, “leidenalg 0.7.0,” Zenodo, 10.5281/zen-
+odo.1469357 (2018), Source Code.
+[25] E. Bullmore and O. Sporns, Nat. Rev. Neurosci. 10, 186
+(2009).
+[26] L. Waltman and N. J. van Eck, J. Am. Soc. Inf. Sci.
+Technol.63, 2378 (2012).
+[27] R.KlavansandK.W.Boyack,J.Assoc.Inf.Sci.Technol.11
+1 2 3 40.8250.830.835QualityDBLP
+1 2 3 40.9260.9280.930.9320.934Amazon
+10 200.6980.70.7020.704QualityIMDB
+100 2000.750.760.77Live Journal
+1,000 2,0000.7750.780.7850.79
+Time (s)QualityWeb of Science
+2,000 4,0000.97940.97960.97980.98
+Time (s)Web UKLouvain Leiden
+FIG. 9. Runtime versus quality for empirical net-
+works. Speed and quality for the ﬁrst 10iterations of the
+Louvain and the Leiden algorithm for six empirical networks.
+The horizontal axis indicates the cumulative time taken to
+obtain the quality indicated on the vertical axis. Each point
+corresponds to a certain iteration of an algorithm, with re-
+sults averaged over 10experiments. Leiden is both faster
+than Louvain and ﬁnds better partitions.
+68, 984 (2017).
+[28] A. Lancichinetti, S. Fortunato, and F. Radicchi, Phys.
+Rev. E78, 046110 (2008).
+[29] B. H. Good, Y. A. De Montjoye, and A. Clauset, Phys.
+Rev. E81, 046106 (2010).
+[30] V. A. Traag and J. Bruggeman, Phys. Rev. E 80, 036115
+(2009).
+[31] T. N. Dinh, X. Li, and M. T. Thai, in 2015 IEEE Int.
+Conf. Data Min. (IEEE, 2015) pp. 101–110.
+ACKNOWLEDGMENTS
+We gratefully acknowledge computational facilities pro-
+vided by the LIACS Data Science Lab Computing Facili-
+ties through Frank Takes. We thank Lovro ˘Subelj for his
+comments on an earlier version of this paper.
+DBLPAmazonIMDB
+Live Journal
+Web of ScienceWeb UK (2005)301003001,000No. iterations until stabilityFIG. 10. Number of iterations until stability . Number
+of iterations before the Leiden algorithm has reached a stable
+iteration for six empirical networks. In a stable iteration, the
+partition is guaranteed to be node optimal and subpartition
+γ-dense.
+AUTHOR CONTRIBUTIONS STATEMENT
+All authors conceived the algorithm and contributed to
+the source code. VAT performed the experimental analy-
+sis. VAT and LW wrote the manuscript. NJvE reviewed
+the manuscript.
+ADDITIONAL INFORMATION
+Competing interests
+The authors act as bibliometric consultants to CWTS
+B.V., which makes use of community detection algo-
+rithms in commercial products and services.12
+Appendix A: Pseudo-code and mathematical notation
+Pseudo-codefortheLouvainalgorithmandtheLeidenalgorithmisprovidedinAlgorithmsA.1andA.2, respectively.
+Below we discuss the mathematical notation that is used in the pseudo-code and also in the mathematical results
+presented in Appendices C, D, and E. There are some uncommon elements in the notation. In particular, the idea of
+sets of sets plays an important role, and some concepts related to this idea need to be introduced.
+LetG= (V,E)be a graph with n=|V|nodes andm=|E|edges. Graphs are assumed to be undirected. With the
+exception of Theorem 14 in Appendix E, the mathematical results presented in this paper apply to both unweighted
+and weighted graphs. For simplicity, our mathematical notation assumes graphs to be unweighted, although the
+notation does allow for multigraphs. A partition P={C1,...,Cr}consists of r=|P|communities, where each
+community Ci⊆Vconsists of a set of nodes such that V=/uniontext
+iCiandCi∩Cj=∅for alli/negationslash=j. For two sets Rand
+S, we sometimes use R+Sto denote the union R∪SandR−Sto denote the diﬀerence R\S.
+A quality function H(G,P)assigns a “quality” to a partition Pof a graphG. We aim to ﬁnd a partition with the
+highest possible quality. The graph Gis often clear from the context, and we therefore usually write H(P)instead
+ofH(G,P). Based on partition P, graphGcan beaggregated into a new graph G/prime. GraphGis then called the base
+graph, while graph G/primeis called the aggregate graph . The nodes of the aggregate graph G/primeare the communities in the
+partition Pof the base graph G, i.e.V(G/prime) =P. The edges of the aggregate graph G/primeare multi-edges. The number of
+edgesbetweentwonodesintheaggregategraph G/primeequalsthenumberofedgesbetweennodesinthetwocorresponding
+communities in the base graph G. Hence,E(G/prime) ={(C,D)|(u,v)∈E(G),u∈C∈P,v∈D∈P}, whereE(G/prime)
+is a multiset. A quality function must have the property that H(G,P) =H(G/prime,P/prime), where P/prime={{v}|v∈V(G/prime)}
+denotes the singleton partition of the aggregate graph G/prime. This ensures that a quality function gives consistent results
+for base graphs and aggregate graphs.
+We denote by P(v/mapsto→C)the partition that is obtained when we start from partition Pand we then move node
+vto community C. We write ∆HP(v/mapsto→C)for the change in the quality function by moving node vto community
+Cfor some partition P. In other words, ∆HP(v/mapsto→C) =H(P(v/mapsto→C))−H(P). We usually leave the partition P
+implicit and simply write ∆H(v/mapsto→C). Similarly, we denote by ∆HP(S/mapsto→C)the change in the quality function by
+moving a set of nodes Sto community C. An empty community is denoted by ∅. Hence, ∆HP(S/mapsto→∅)is the change
+in the quality function by moving a set of nodes Sto an empty (i.e. new) community.
+Now consider a community Cthat consists of two parts S1andS2such thatC=S1∪S2andS1∩S2=∅. Suppose
+thatS1andS2are disconnected. In other words, there are no edges between nodes in S1andS2. We then require a
+quality function to have the property that ∆H(S1/mapsto→∅)>0and∆H(S2/mapsto→∅)>0. This guarantees that a partition
+can always be improved by splitting a community into its connected components. This comes naturally for most
+deﬁnitions of a community, but this is not the case when considering for example negative links [30].
+Because nodes in an aggregate graph are sets themselves, it is convenient to deﬁne some recursive properties.
+Deﬁnition 1. Therecursive size of a setSis deﬁned as
+/bardblS/bardbl=/summationdisplay
+s∈S/bardbls/bardbl, (A1)
+where/bardbls/bardbl= 1ifsis not a set itself. The ﬂattening operation for a set Sis deﬁned as
+ﬂat(S) =/uniondisplay
+s∈Sﬂat(s), (A2)
+where ﬂat(s) =sifsis not a set itself. A set that has been ﬂattened is called a ﬂat set.
+The recursive size of a set corresponds to the usual deﬁnition of set size in case the elements of a set are not
+sets themselves, but it generalizes this deﬁnition whenever the elements are sets themselves. For example, if S=
+{{a,b},{c},{d,e,f}}, then
+/bardblS/bardbl=/bardbl{a,b}/bardbl+/bardbl{c}/bardbl+/bardbl{d,e,f}/bardbl
+= (/bardbla/bardbl+/bardblb/bardbl) +/bardblc/bardbl+ (/bardbld/bardbl+/bardble/bardbl+/bardblf/bardbl)
+= 2 + 1 + 3 = 6 .
+This contrasts with the traditional size of a set, which is |S|= 3, becauseScontains 3elements. The fact that the
+elements are sets themselves plays no role in the traditional size of a set. The ﬂattening of Sis
+ﬂat(S) = ﬂat({a,b})∪ﬂat({c})∪ﬂat({d,e,f})
+=a∪b∪c∪d∪e∪f
+={a,b,c,d,e,f}.13
+Note that/bardblS/bardbl=|ﬂat(S)|.
+Deﬁnition 2. Theﬂattening operation for a partition Pis deﬁned as
+ﬂat∗(P) ={ﬂat(C)|C∈P}. (A3)
+Hence, ﬂat∗(P)denotes the operation in which each community C∈Pis ﬂattened. A partition that has been
+ﬂattened is called a ﬂat partition .
+For any partition of an aggregate graph, the equivalent partition of the base graph can be obtained by applying
+the ﬂattening operation.
+Additionally, we need some terminology to describe the connectivity of communities.
+Deﬁnition 3. LetG= (V,E)be a graph, and let Pbe a partition of G. Furthermore, let H(C)be the subgraph
+induced by a community C∈P, i.e.V(H) =CandE(H) ={(u,v)|(u,v)∈E(G),u,v∈C}. A community C∈P
+is calledconnected ifH(C)is a connected graph. Conversely, a community C∈Pis calleddisconnected ifH(C)is a
+disconnected graph.
+The mathematical proofs presented in this paper rely on the Constant Potts Model (CPM) [13]. This quality
+function has important advantages over modularity. In particular, unlike modularity, CPM does not suﬀer from the
+problem of the resolution limit [13, 14]. Moreover, our mathematical deﬁnitions and proofs are quite elegant when
+expressed in terms of CPM. The CPM quality function is deﬁned as
+H(G,P) =/summationdisplay
+C∈P/bracketleftbigg
+E(C,C)−γ/parenleftbigg/bardblC/bardbl
+2/parenrightbigg/bracketrightbigg
+, (A4)
+whereE(C,D) =|{(u,v)∈E(G)|u∈C,v∈D}|denotes the number of edges between nodes in communities Cand
+D. Note that this deﬁnition can also be used for aggregate graphs because E(G)is a multiset.
+The mathematical results presented in this paper also extend to modularity, although the formulations are less
+elegant. Results for modularity are straightforward to prove by redeﬁning the recursive size /bardblS/bardblof a setS. We need
+to deﬁne the size of a node vin the base graph as /bardblv/bardbl=kvinstead of/bardblv/bardbl= 1, wherekvis the degree of node v.
+Furthermore, we need to rescale the resolution parameter γby2m. Modularity can then be written as
+H(G,P) =/summationdisplay
+C∈P/bracketleftbigg
+E(C,C)−γ
+2m/parenleftbigg/bardblC/bardbl
+2/parenrightbigg/bracketrightbigg
+. (A5)
+Note that, in addition to the overall multiplicative factor of1
+2m, this adds a constantγ
+2m/summationtext
+C/bardblC/bardbl
+2=γ
+2to the ordinary
+deﬁnition of modularity [3]. However, this does not matter for optimisation or for the proofs.
+As discussed in the main text, the Louvain and the Leiden algorithm can be iterated by performing multiple
+consecutive iterations of the algorithm, using the partition identiﬁed in one iteration as starting point for the next
+iteration. In this way, a sequence of partitions P0,P1,...is obtained such that Pt+1=Louvain (G,Pt)orPt+1=
+Leiden (G,Pt). The initial partition P0usually is the singleton partition of the graph G, i.e.P0={{v}|v∈V}.
+Appendix B: Disconnected communities in the Louvain algorithm
+In this appendix, we analyse the problem that communities obtained using the Louvain algorithm may be discon-
+nected. This problem is also discussed in the main text (Section IIA), using the example presented in Fig. 2. However,
+the main text oﬀers no numerical details. These details are provided below.
+We consider the CPM quality function with a resolution of γ=1
+7. In the example presented in Fig. 2, the edges
+between nodes 0 and 1 and between nodes 0 and 4 have a weight of 2, as indicated by the thick lines in the ﬁgure.
+All other edges have a weight of 1. The Louvain algorithm starts from a singleton partition, with each node being
+assigned to its own community. The algorithm then keeps iterating over all nodes, moving each node to its optimal
+community. Depending on the order in which the nodes are visited, the following could happen. Node 1 is visited
+ﬁrst, followed by node 4. Nodes 1 and 4 join the community of node 0, because the weight of the edges between nodes
+0 and 1 and between nodes 0 and 4 is suﬃciently high. For node 1, the best move clearly is to join the community of
+node 0. For node 4, the beneﬁt of joining the community of nodes 0 and 1 then is 2−γ·2 =12
+7. This is larger than the
+beneﬁt of joining the community of node 5 or 6, which is 1−γ·1 =6
+7. Next, nodes 2, 3, 5 and 6 are visited. For these
+nodes, it is beneﬁcial to join the community of nodes 0, 1 and 4, because joining this community has a beneﬁt of at14
+1:function Louvain (GraphG, Partition P)
+2:do
+3: P←MoveNodes (G,P) ⊿Move nodes between communities
+4: done←|P|=|V(G)| ⊿Terminate when each community consists of only one node
+5:ifnot donethen
+6: G←AggregateGraph (G,P) ⊿Create aggregate graph based on partition P
+7: P←SingletonPartition (G) ⊿Assign each node in aggregate graph to its own community
+8:end if
+9:whilenot done
+10:return ﬂat∗(P)
+11:end function
+12:function MoveNodes (GraphG, Partition P)
+13:do
+14: Hold=H(P)
+15: forv∈V(G)do ⊿Visit nodes (in random order)
+16: C/prime←arg maxC∈P∪∅∆HP(v/mapsto→C) ⊿Determine best community for node v
+17: if∆HP(v/mapsto→C/prime)>0then ⊿Perform only strictly positive node movements
+18: v/mapsto→C/prime⊿Move node vto community C/prime
+19: end if
+20: end for
+21:while H(P)>Hold ⊿Continue until no more nodes can be moved
+22:return P
+23:end function
+24:function AggregateGraph (GraphG, Partition P)
+25:V←P ⊿Communities become nodes in aggregate graph
+26:E←{(C,D)|(u,v)∈E(G),u∈C∈P,v∈D∈P} ⊿ Eis a multiset
+27:return Graph (V,E)
+28:end function
+29:function SingletonPartition (GraphG)
+30:return{{v}|v∈V(G)} ⊿Assign each node to its own community
+31:end function
+ALGORITHM A.1. Louvain algorithm.
+least 1−γ·6 =1
+7>0. This then yields the situation portrayed in Fig. 2(a). After some node movements in the rest
+of the graph, some neighbours of node 0 in the rest of the graph end up together in a new community. Consequently,
+when node 0 is visited, it can best be moved to this new community, which gives the situation depicted in Fig. 2(b).
+In particular, suppose there are 5nodes in the new community, all of which are connected to node 0. In that case, the
+beneﬁt for node 0 of moving to this community is 5−γ·5 =30
+7, while the beneﬁt of staying in the current community
+is only 2·2−γ·6 =22
+7. After node 0 has moved, nodes 1 and 4 are still locally optimally assigned. For these nodes,
+the beneﬁt of moving to the new community of node 0 is 2−γ·6 =8
+7. This is smaller than the beneﬁt of staying
+in the current community, which is 2−γ·5 =9
+7. Finally, nodes 2, 3, 5 and 6 are all locally optimally assigned, as
+1−γ·5 =2
+7>0. Hence, we end up with a community that is disconnected. In later stages of the Louvain algorithm,
+there will be no possibility to repair this.
+The example presented above considers a weighted graph, but this graph can be assumed to be an aggregate graph
+of an unweighted base graph, thus extending the example also to unweighted graphs. Although the example uses
+the CPM quality function, similar examples can be given for modularity. However, because of the dependency of
+modularity on the number of edges m, the calculations for modularity are a bit more complex. Importantly, both for
+CPM and for modularity, the Louvain algorithm suﬀers from the problem of disconnected communities.
+Appendix C: Reachability of optimal partitions
+In this appendix, we consider two types of move sequences: non-decreasing move sequences and greedy move
+sequences. For each type of move sequence, we study whether all optimal partitions are reachable. We ﬁrst show that
+this is not the case for greedy move sequences. In particular, we show that for some optimal partitions there does not
+exist a greedy move sequence that is able to reach the partition. We then show that optimal partitions can always15
+1:function Leiden(GraphG, Partition P)
+2:do
+3: P←MoveNodesFast (G,P) ⊿Move nodes between communities
+4: done←|P|=|V(G)| ⊿Terminate when each community consists of only one node
+5:ifnot donethen
+6: Preﬁned←RefinePartition (G,P) ⊿Reﬁne partition P
+7: G←AggregateGraph (G,Preﬁned ) ⊿Create aggregate graph based on reﬁned partition Preﬁned
+8: P←{{v|v⊆C,v∈V(G)}|C∈P} ⊿But maintain partition P
+9:end if
+10:whilenot done
+11:return ﬂat∗(P)
+12:end function
+13:function MoveNodesFast (GraphG, Partition P)
+14:Q←Queue (V(G)) ⊿Make sure that all nodes will be visited (in random order)
+15:do
+16:v←Q.remove() ⊿Determine next node to visit
+17:C/prime←arg maxC∈P∪∅∆HP(v/mapsto→C) ⊿Determine best community for node v
+18: if∆HP(v/mapsto→C/prime)>0then ⊿Perform only strictly positive node movements
+19: v/mapsto→C/prime⊿Move node vto community C/prime
+20: N←{u|(u,v)∈E(G),u /∈C/prime} ⊿Identify neighbours of node vthat are not in community C/prime
+21: Q.add(N−Q) ⊿Make sure that these neighbours will be visited
+22: end if
+23:whileQ/negationslash=∅ ⊿Continue until there are no more nodes to visit
+24:return P
+25:end function
+26:function RefinePartition (GraphG, Partition P)
+27: Preﬁned←SingletonPartition (G) ⊿Assign each node to its own community
+28:forC∈Pdo ⊿Visit communities
+29: Preﬁned←MergeNodesSubset (G,Preﬁned,C) ⊿Reﬁne community C
+30:end for
+31:return Preﬁned
+32:end function
+33:function MergeNodesSubset (GraphG, Partition P, SubsetS)
+34:R={v|v∈S,E(v,S−v)≥γ/bardblv/bardbl·(/bardblS/bardbl−/bardblv/bardbl)}⊿Consider only nodes that are well connected within subset S
+35:forv∈Rdo ⊿Visit nodes (in random order)
+36: ifvin singleton community then ⊿Consider only nodes that have not yet been merged
+37: T←{C|C∈P,C⊆S,E(C,S−C)≥γ/bardblC/bardbl·(/bardblS/bardbl−/bardblC/bardbl)}⊿Consider only well-connected communities
+38: Pr(C/prime=C)∼/braceleftbigg
+exp/parenleftbig1
+θ∆HP(v/mapsto→C)/parenrightbig
+if∆HP(v/mapsto→C)≥0
+0 otherwiseforC∈T⊿Choose random community C/prime
+39: v/mapsto→C/prime⊿Move node vto community C/prime
+40: end if
+41:end for
+42:return P
+43:end function
+44:function AggregateGraph (GraphG, Partition P)
+45:V←P ⊿Communities become nodes in aggregate graph
+46:E←{(C,D)|(u,v)∈E(G),u∈C∈P,v∈D∈P} ⊿ Eis a multiset
+47:return Graph (V,E)
+48:end function
+49:function SingletonPartition (GraphG)
+50:return{{v}|v∈V(G)} ⊿Assign each node to its own community
+51:end function
+ALGORITHM A.2. Leiden algorithm.16
+be reached using a non-decreasing move sequence. This result forms the basis for the asymptotic guarantees of the
+Leiden algorithm, which are discussed in Appendix D3.
+We ﬁrst deﬁne the diﬀerent types of move sequences.
+Deﬁnition 4. LetG= (V,E)be a graph, and let P0,...,Pτbe partitions of G. A sequence of partitions P0,...,Pτ
+is called a move sequence if for eacht= 0,...,τ−1there exists a node vt∈Vand a community Ct∈Pt∪∅such
+thatPt+1=Pt(vt/mapsto→Ct). A move sequence is called non-decreasing ifH(Pt+1)≥H(Pt)for allt= 0,...,τ−1. A
+move sequence is called greedyifH(Pt+1) = maxCH(Pt(vt/mapsto→C))for allt= 0,...,τ−1.
+In other words, the next partition in a move sequence is obtained by moving a single node to a diﬀerent community.
+Clearly, a greedy move sequence must be non-decreasing, but a non-decreasing move sequence does not need to be
+greedy. A natural question is whether for any optimal partition P∗there exists a move sequence that starts from the
+singleton partition and that reaches the optimal partition, i.e., a move sequence P0,...,PτwithP0={{v}|v∈V}
+andPτ=P∗. Trivially, it is always possible to reach the optimal partition if we allow all moves—even moves that
+decrease the quality function—as is done for example in simulated annealing [4, 8]. However, it can be shown that
+there is no need to consider all moves in order to reach the optimal partition. It is suﬃcient to consider only non-
+decreasing moves. On the other hand, considering only greedy moves turns out to be too restrictive to guarantee that
+the optimal partition can be reached.
+1. Non-decreasing move sequences
+We here prove that for any graph there exists a non-decreasing move sequence that reaches the optimal partition
+P∗. The optimal partition can be reached in n−|P∗|steps.
+Theorem 1. LetG= (V,E)be a graph, and let P∗be an optimal partition of G. There then exists a non-decreasing
+move sequence P0,...,PτwithP0={{v}|v∈V},Pτ=P∗, andτ=n−|P∗|.
+Proof.LetC∗∈P∗be a community in the optimal partition P∗, letv0∈C∗be a node in this community, and
+letC0={v0}. LetP0={{v}|v∈V}be the singleton partition. For t= 1,...,|C∗|−1, letvt∈C∗−Ct−1,
+letCt={v0,...,vt}∈Pt, and let Pt=Pt−1(vt/mapsto→Ct−1). We prove by contradiction that there always exists a
+non-decreasing move sequence P0,...,P|C∗|−1. Assume that for some tthere does not exist a node vtfor which
+∆H(vt/mapsto→Ct−1)≥0. LetS=C∗−Ct−1andR=Ct−1. For allv∈S,
+E(v,R)−γ/bardblv/bardbl·/bardblR/bardbl<0.
+This implies that
+E(S,R) =/summationdisplay
+v∈SE(v,R)<γ/bardblS/bardbl·/bardblR/bardbl.
+However, by optimality, for all S⊆C∗andR=C∗−S,
+E(S,R)≥γ/bardblS/bardbl·/bardblR/bardbl.
+We therefore have a contradiction. Hence, there always exists a non-decreasing move sequence P0,...,P|C∗|−1. This
+move sequence reaches the community Ct=C∗. The above reasoning can be applied to each community C∗∈P∗.
+Consequently, each of these communities can be reached using a non-decreasing move sequence. In addition, for each
+community C∗∈P∗, this can be done in |C∗|−1steps, so that in total τ=/summationtext
+C∗∈P∗(|C∗|−1) =n−|P∗|steps are
+needed. 
+2. Greedy move sequences
+We here show that there does not always exist a greedy move sequence that reaches the optimal partition of a
+graph. To show this, we provide a counterexample in which we have a graph for which there is no greedy move
+sequence that reaches the optimal partition. Our counterexample includes two nodes that should be assigned to
+diﬀerent communities. However, because there is a strong connection between the nodes, in a greedy move sequence
+the nodes are always assigned to the same community. We use the CPM quality function in our counterexample, but
+a similar counterexample can be given for modularity. The counterexample is illustrated in Fig. C.1. The thick edges17
+a)
+b)0 1 23
+45
+67
+0 1 23
+45
+67
+FIG. C.1. Unreachable optimal partition. A greedy move sequence always reaches the partition in (a), whereas the
+partition in (b) is optimal. This demonstrates that for some graphs there does not exist a greedy move sequence that reaches
+the optimal partition.
+have a weight of 3, while the thin ones have a weight of3
+2. The resolution is set to γ= 1. In this situation, nodes 0
+and 1 are always joined together in a community. This has a beneﬁt of 3−γ= 2, which is larger than the beneﬁt of
+3·3
+2−γ·3 =3
+2obtained by node 0 joining the community of nodes 2, 3 and 4 or node 1 joining the community of
+nodes 5, 6 and 7. Hence, regardless of the exact node order, the partition reached by a greedy move sequence always
+consists of three communities. This gives a total quality of
+2·/parenleftbigg
+3·3−γ3·2
+2/parenrightbigg
++/parenleftbigg
+3−γ2·1
+2/parenrightbigg
+= 14,
+while the optimal partition has only two communities, consisting of nodes {0,2,3,4}and{1,5,6,7}and resulting in
+a total quality of
+2·/parenleftbigg
+3·3 + 3·3
+2−γ4·3
+2/parenrightbigg
+= 15.
+Hence, a greedy move sequence always reaches the partition in Fig. C.1(a), whereas the partition in Fig. C.1(b) is
+optimal.
+Appendix D: Guarantees of the Leiden algorithm
+In this appendix, we discuss the guarantees provided by the Leiden algorithm. The guarantees of the Leiden
+algorithm partly rely on the randomness in the algorithm. We therefore require that θ > 0. Before stating the
+guarantees of the Leiden algorithm, we ﬁrst deﬁne a number of properties. We start by introducing some relatively
+weak properties, and we then move on to stronger properties. In the following deﬁnitions, Pis a ﬂat partition of a
+graphG= (V,E).
+Deﬁnition5 (γ-separation) .Wecallapairofcommunities C,D∈Pγ-separated if∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0.
+A community C∈Pisγ-separated if Cisγ-separated with respect to all D∈P. A partition Pisγ-separated if all
+C∈Pareγ-separated.
+Deﬁnition 6 (γ-connectivity) .We call a set of nodes S⊆C∈Pγ-connected if|S|= 1or ifScan be partitioned into
+two setsRandTsuch thatE(R,T)≥γ/bardblR/bardbl·/bardblT/bardblandRandTareγ-connected. A community C∈Pisγ-connected
+ifS=Cisγ-connected. A partition Pisγ-connected if all C∈Pareγ-connected.
+Deﬁnition 7 (Subpartition γ-density).We call a set of nodes S⊆C∈Psubpartition γ-denseif the following two
+conditions are satisﬁed: (i) ∆H(S/mapsto→∅)≤0and (ii)|S|= 1orScan be partitioned into two sets RandTsuch that18
+E(R,T)≥γ/bardblR/bardbl·/bardblT/bardblandRandTare subpartition γ-dense. A community C∈Pis subpartition γ-dense ifS=C
+is subpartition γ-dense. A partition Pis subpartition γ-dense if all C∈Pare subpartition γ-dense.
+Deﬁnition 8 (Node optimality) .We call a community C∈Pnode optimal if∆H(v/mapsto→D)≤0for allv∈Cand all
+D∈P(orD=∅). A partition Pis node optimal if all C∈Pare node optimal.
+Deﬁnition 9 (Uniformγ-density).We call a community C∈Puniformlyγ-denseif∆H(S/mapsto→∅)≤0for allS⊆C.
+A partition Pis uniformly γ-dense if all C∈Pare uniformly γ-dense.
+Deﬁnition 10 (Subset optimality) .We call a community C∈Psubset optimal if∆H(S/mapsto→D)≤0for allS⊆C
+and allD∈P(orD=∅). A partition Pis subset optimal if all C∈Pare subset optimal.
+Subsetoptimalityclearlyisthestrongestpropertyandsubsumesallotherproperties. Uniform γ-densityissubsumed
+by subset optimality but may be somewhat more intuitive to grasp. It states that any subset of nodes in a community
+is always connected to the rest of the community with a density of at least γ. In other words, for all S⊆C∈Pwe
+have
+E(S,C−S)≥γ/bardblS/bardbl·/bardblC−S/bardbl. (D1)
+Imposingtherestriction D=∅inthedeﬁnitionofsubsetoptimalitygivesthepropertyofuniform γ-density, restricting
+Sto consist of only one node gives the property of node optimality, and imposing the restriction S=Cyields the
+property of γ-separation. Uniform γ-density implies subpartition γ-density, which in turn implies γ-connectivity.
+Subpartition γ-density also implies that individual nodes cannot be split from their community (but notice that this
+is a weaker property than node optimality). Ordinary connectivity is implied by γ-connectivity, but not vice versa.
+Obviously, any optimal partition is subset optimal, but not the other way around: a subset optimal partition is not
+necessarily an optimal partition (see Fig. C.1(a) for an example).
+In the rest of this appendix, we show that the Leiden algorithm guarantees that the above properties hold for
+partitions produced by the algorithm. The properties hold either in each iteration, in every stable iteration, or
+asymptotically. The ﬁrst two properties of γ-separation and γ-connectivity are guaranteed in each iteration of the
+Leiden algorithm. We prove this in Appendix D1. The next two properties of subpartition γ-density and node
+optimality are guaranteed in every stable iteration of the Leiden algorithm, as we prove in Appendix D2. Finally,
+in Appendix D3 we prove that asymptotically the Leiden algorithm guarantees the last two properties of uniform
+γ-density and subset optimality.
+1. Guarantees in each iteration
+In order to show that the property of γ-separation is guaranteed in each iteration of the Leiden algorithm, we ﬁrst
+need to prove some results for the MoveNodesFast function in the Leiden algorithm.
+We start by introducing some notation. The MoveNodesFast function iteratively evaluates nodes. When a node
+is evaluated, either it is moved to a diﬀerent (possibly empty) community or it is kept in its current community,
+depending on what is most beneﬁcial for the quality function. Let G= (V,E)be a graph, let Pbe a partition
+ofG, and let P/prime=MoveNodesFast (G,P). We denote by P0,...,Pra sequence of partitions generated by the
+MoveNodesFast function, with P0=Pdenoting the initial partition, P1denoting the partition after the ﬁrst
+evaluation of a node has taken place, and so on. Pr=P/primedenotes the partition after the ﬁnal evaluation of a node
+has taken place. The MoveNodesFast function maintains a queue of nodes that still need to be evaluated. Let Qs
+be the set of nodes that still need to be evaluated after snode evaluations have taken place, with Q0=V. Also, for
+allv∈V, letCv
+s∈Psbe the community in which node vﬁnds itself after snode evaluations have taken place.
+The following lemma states that at any point in the MoveNodesFast function, if a node is disconnected from the
+rest of its community, the node will ﬁnd itself in the queue of nodes that still need to be evaluated.
+Lemma2. Usingthenotationintroducedabove,forall v∈Vandalls,wehavev∈Qsor|Cv
+s|= 1orE(v,Cv
+s−v)>0.
+Proof.We are going to prove the lemma for an arbitrary node v∈V. We provide a proof by induction. We observe
+thatv∈Q0, which provides our inductive base. Suppose that v∈Qs−1or|Cv
+s−1|= 1orE(v,Cv
+s−1−v)>0. This is
+our inductive hypothesis. We are going to show that v∈Qsor|Cv
+s|= 1orE(v,Cv
+s−v)>0. Ifv∈Qs, this result is
+obtained in a trivial way. Suppose therefore that v /∈Qs. We then need to show that |Cv
+s|= 1orE(v,Cv
+s−v)>0.
+To do so, we distinguish between two cases.
+We ﬁrst consider the case in which v∈Qs−1. Ifv∈Qs−1andv /∈Qs, nodevhas just been evaluated. We then
+obviously have|Cv
+s|= 1orE(v,Cv
+s−v)>0. Otherwise we would have |Cv
+s|>1andE(v,Cv
+s−v) = 0, which would19
+mean that node vis disconnected from the rest of its community. Since node vhas just been evaluated, this is not
+possible.
+We now consider the case in which v /∈Qs−1. Letu∈Vbe the node that has just been evaluated, i.e., u∈Qs−1
+andu /∈Qs. If nodeuhas not been moved to a diﬀerent community, then Ps=Ps−1. Obviously, if|Cv
+s−1|= 1or
+E(v,Cv
+s−1−v)>0, we then have|Cv
+s|= 1orE(v,Cv
+s−v)>0. On the other hand, if node uhas been moved to a
+diﬀerent community, we have (u,v)/∈E(G)orv∈Cu
+s. To see this, note that if (u,v)∈E(G)andv /∈Cu
+s, we would
+havev∈Qs(following line 21 in Algorithm A.2). This contradicts our assumption that v /∈Qs, so that we must have
+(u,v)/∈E(G)orv∈Cu
+s. In other words, either there is no edge between nodes uandvor nodeuhas been moved
+to the community of node v. In either case, it is not possible that the movement of node ucauses node vto become
+disconnected from the rest of its community. Hence, in either case, if |Cv
+s−1|= 1orE(v,Cv
+s−1−v)>0, then|Cv
+s|= 1
+orE(v,Cv
+s−v)>0. 
+Using Lemma 2, we now prove the following lemma, which states that for partitions provided by the MoveNodes-
+Fastfunction it is guaranteed that singleton communities cannot be merged with each other.
+Lemma 3. LetG= (V,E)be a graph, let Pbe a partition of G, and let P/prime=MoveNodesFast (G,P). Then for
+all pairsC,D∈P/primesuch that|C|=|D|= 1, we have ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0.
+Proof.We are going to prove the lemma for an arbitrary pair of communities C,D∈P/primesuch that|C|=|D|= 1.
+We use the notation introduced above. If C,D∈Psfor alls, it is clear that ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0.
+Otherwise, consider tsuch thatC,D∈Psfor alls≥tand eitherC /∈Pt−1orD /∈Pt−1. Without loss of generality,
+we assume that C /∈Pt−1andD∈Pt−1. Considerv∈Vsuch thatC={v}. Aftert−1node evaluations have taken
+place, there are two possibilities.
+One possibility is that node vis evaluated and is moved to an empty community. This means that moving node v
+to an empty community is more beneﬁcial for the quality function than moving node vto community D. It is then
+clear that ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0.
+The second possibility is that node vis in a community together with one other node u∈V(i.e.{u,v}∈Pt−1)
+and that this node uis evaluated and is moved to a diﬀerent community. In this case, v∈Qt, as we will now show.
+If(u,v)∈E(G), this follows from line 21 in Algorithm A.2. If (u,v)/∈E(G), we have|Cv
+t−1|=|{u,v}|= 2and
+E(v,Cv
+t−1−v) = 0. It then follows from Lemma 2 that v∈Qt−1. Since node vis not evaluated in node evaluation t
+(nodeuis evaluated in this node evaluation), v∈Qt−1implies that v∈Qt. Ifv∈Qt, at some point s≥t, nodevis
+evaluated. Since C,D∈Psfor alls≥t, keeping node vin its own singleton community Cis more beneﬁcial for the
+quality function than moving node vto community D. This means that ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0. 
+Lemma 3 enables us to prove that the property of γ-separation is guaranteed in each iteration of the Leiden
+algorithm, as stated in the following theorem.
+Theorem 4. LetG= (V,E)be a graph, let Ptbe a ﬂat partition of G, and let Pt+1=Leiden (G,Pt). Then Pt+1
+isγ-separated.
+Proof.LetG/lscript= (V/lscript,E/lscript)be the aggregate graph at the highest level in the Leiden algorithm, let P/lscriptbe the initial
+partition of G/lscript, and let P/prime
+/lscript=MoveNodesFast (G/lscript,P/lscript). Since we are at the highest level of aggregation, it follows
+from line 4 in Algorithm A.2 that |P/prime
+/lscript|=|V/lscript|, which means that |C|= 1for allC∈P/prime
+/lscript. In other words, P/prime
+/lscriptis a
+singleton partition of G/lscript. Lemma 3 then implies that for all C,D∈P/prime
+/lscriptwe have ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0.
+SincePt+1= ﬂat∗(P/prime
+/lscript), it follows that for all C,D∈Pt+1we have ∆H(C/mapsto→D) = ∆H(D/mapsto→C)≤0. Hence, Pt+1is
+γ-separated. 
+The property of γ-separation also holds after each iteration of the Louvain algorithm. In fact, for the Louvain
+algorithm this is much easier to see than for the Leiden algorithm. The Louvain algorithm uses the MoveNodes
+functioninsteadofthe MoveNodesFast function. Unlikethe MoveNodesFast function, the MoveNodes function
+yieldspartitionsthatareguaranteedtobenodeoptimal. Thisguaranteeleadsinastraightforwardwaytotheproperty
+ofγ-separation for partitions obtained in each iteration of the Louvain algorithm.
+We now consider the property of γ-connectivity. By constructing a tree corresponding to the decomposition of
+γ-connectivity, we are going to prove that this property is guaranteed in each iteration of the Leiden algorithm.
+Theorem 5. LetG= (V,E)be a graph, let Ptbe a ﬂat partition of G, and let Pt+1=Leiden (G,Pt). Then Pt+1
+isγ-connected.
+Proof.LetG/lscript= (V/lscript,E/lscript)be the aggregate graph at level /lscriptin the Leiden algorithm, with G0=Gbeing the base graph.
+We say that a node v∈V/lscriptisγ-connected if ﬂat(v)isγ-connected. We are going to proceed inductively. Each node
+in the base graph G0is triviallyγ-connected. This provides our inductive base. Suppose that each node v∈V/lscript−1is20
+γ-connected, which is our inductive hypothesis. Each node v∈V/lscriptis obtained by merging one or more nodes at the
+preceding level, i.e. v={u|u∈S}for some set S⊆V/lscript−1. Ifvconsists of only one node at the preceding level, vis
+immediately γ-connected by our inductive hypothesis. The set of nodes Sis constructed in the MergeNodesSubset
+function. There exists some order u1,...,ukin which nodes are added to S. LetSi={u1,...,ui}be the set obtained
+after adding node ui. It follows from line 38 in Algorithm A.2 that E(ui+1,Si)≥γ/bardblui+1/bardbl·/bardblSi/bardblfori= 1,...,k−1.
+Taking into account that each uiisγ-connected by our inductive hypothesis, this implies that each set Siisγ-
+connected. Since S=Skisγ-connected, node visγ-connected. Hence, each node v∈V/lscriptisγ-connected. This
+also holds for the nodes in the aggregate graph at the highest level in the Leiden algorithm, which implies that all
+communities in Pt+1areγ-connected. In other words, Pt+1isγ-connected. 
+Note that the theorem does not require Ptto be connected. Even if a disconnected partition is provided as input
+to the Leiden algorithm, performing a single iteration of the algorithm will give a partition that is γ-connected.
+2. Guarantees in stable iterations
+As discussed earlier, the Leiden algorithm can be iterated until Pt+1=Leiden (G,Pt). Likewise, the Louvain
+algorithm can be iterated until Pt+1=Louvain (G,Pt). We say that an iteration is stableifPt+1=Pt, in which
+case we call Pt(orPt+1) astable partition .
+There is a subtle point when considering stable iterations. In order for the below guarantees to hold, we need to
+ensure that H(Pt+1) =H(Pt)implies Pt+1=Pt. In both the Leiden algorithm and the Louvain algorithm, we
+therefore consider only strictly positive improvements (see line 17 in Algorithm A.1 and line 18 in Algorithm A.2). In
+other words, if a node movement leads to a partition that has the same quality as the current partition, the current
+partition is preferred and the node movement will not take place. This then also implies that H(Pt+1)>H(Pt)if
+Pt+1/negationslash=Pt.
+The Leiden algorithm guarantees that a stable partition is subpartition γ-dense, as stated in the following theorem.
+Note that the proof of the theorem has a structure that is similar to the structure of the proof of Theorem 5 presented
+above.
+Theorem 6. LetG= (V,E)be a graph, let Ptbe a ﬂat partition of G, and let Pt+1=Leiden (G,Pt). IfPt+1=Pt,
+thenPt+1=Ptis subpartition γ-dense.
+Proof.Suppose we have a stable iteration. Hence, Pt+1=Pt. LetG/lscript= (V/lscript,E/lscript)be the aggregate graph at level
+/lscriptin the Leiden algorithm, with G0=Gbeing the base graph. We say that a node v∈V/lscriptis subpartition γ-dense
+if the set of nodes ﬂat(v)is subpartition γ-dense. We ﬁrst observe that for all levels /lscriptand all nodes v∈V/lscriptwe
+have ∆H(v/mapsto→∅)≤0. To see this, note that if ∆H(v/mapsto→∅)>0for some level /lscriptand some node v∈V/lscript, the
+MoveNodesFast function would have removed node vfrom its community, which means that the iteration would
+not have been stable. We are now going to proceed inductively. Since ∆H(v/mapsto→ ∅)≤0for all nodes v∈V0,
+each node in the base graph G0is subpartition γ-dense. This provides our inductive base. Suppose that each node
+v∈V/lscript−1is subpartition γ-dense, which is our inductive hypothesis. Each node v∈V/lscriptis obtained by merging one
+or more nodes at the preceding level, i.e. v={u|u∈S}for some set S⊆V/lscript−1. Ifvconsists of only one node
+at the preceding level, vis immediately subpartition γ-dense by our inductive hypothesis. The set of nodes Sis
+constructed in the MergeNodesSubset function. There exists some order u1,...,ukin which nodes are added to
+S. LetSi={u1,...,ui}be the set obtained after adding node ui. It follows from line 38 in Algorithm A.2 that
+E(ui+1,Si)≥γ/bardblui+1/bardbl·/bardblSi/bardblfori= 1,...,k−1. Furthermore, line 37 in Algorithm A.2 ensures that ∆H(Si/mapsto→∅)≤0
+fori= 1,...,k−1. We also have ∆H(Sk/mapsto→∅)≤0, sinceSk=S=vand since ∆H(v/mapsto→∅)≤0, as observed
+above. Taking into account that each uiis subpartition γ-dense by our inductive hypothesis, this implies that each
+setSiis subpartition γ-dense. Since S=Skis subpartition γ-dense, node vis subpartition γ-dense. Hence, each node
+v∈V/lscriptis subpartition γ-dense. This also holds for the nodes in the aggregate graph at the highest level in the Leiden
+algorithm, which implies that all communities in Pt+1=Ptare subpartition γ-dense. In other words, Pt+1=Ptis
+subpartition γ-dense. 
+Subpartition γ-density does not imply node optimality. It guarantees only that ∆H(v/mapsto→∅)≤0for allv∈V, not
+that ∆H(v/mapsto→D)≤0for allv∈Vand allD∈P. However, it is easy to see that all nodes are locally optimally
+assigned in a stable iteration of the Leiden algorithm. This is stated in the following theorem.
+Theorem 7. LetG= (V,E)be a graph, let Ptbe a ﬂat partition of G, and let Pt+1=Leiden (G,Pt). IfPt+1=Pt,
+thenPt+1=Ptis node optimal.21
+Proof.Suppose we have a stable iteration. Hence, Pt+1=Pt. We are going to give a proof by contradiction. Assume
+thatPt+1=Ptis not node optimal. There then exists a node v∈C∈Ptand a community D∈Pt(orD=∅)
+such that ∆H(v/mapsto→D)>0. The MoveNodesFast function then moves node vto community D. This means that
+Pt+1/negationslash=Ptand that the iteration is not stable. We now have a contradiction, which implies that the assumption of
+Pt+1=Ptnot being node optimal must be false. Hence, Pt+1=Ptis node optimal. 
+In the same way, it is straightforward to see that the Louvain algorithm also guarantees node optimality in a stable
+iteration.
+When the Louvain algorithm reaches a stable iteration, the partition is γ-separated and node optimal. Since the
+Louvain algorithm considers only moving nodes and merging communities, additional iterations of the algorithm will
+not lead to further improvements of the partition. Hence, in the case of the Louvain algorithm, if Pt+1=Pt, then
+Pτ=Ptfor allτ≥t. In other words, when the Louvain algorithm reaches a stable iteration, all future iterations will
+be stable as well. This contrasts with the Leiden algorithm, which may continue to improve a partition after a stable
+iteration. We consider this in more detail below.
+3. Asymptotic guarantees
+When an iteration of the Leiden algorithm is stable, this does not imply that the next iteration will also be stable.
+Because of randomness in the reﬁnement phase of the Leiden algorithm, a partition that is stable in one iteration
+may be improved in the next iteration. However, at some point, a partition will be obtained for which the Leiden
+algorithm is unable to make any further improvements. We call this an asymptotically stable partition. Below, we
+prove that an asymptotically stable partition is uniformly γ-dense and subset optimal.
+We ﬁrst need to show what it means to deﬁne asymptotic properties for the Leiden algorithm. The Leiden algorithm
+considers moving a node to a diﬀerent community only if this results in a strict increase in the quality function. As
+stated in the following lemma, this ensures that at some point the Leiden algorithm will ﬁnd a partition for which it
+can make no further improvements.
+Lemma 8. LetG= (V,E)be a graph, and let Pt+1=Leiden (G,Pt). There exists a τsuch that Pt=Pτfor all
+t≥τ.
+Proof.Only strict improvements can be made in the Leiden algorithm. Consequently, if Pt+1/negationslash=Pt, thenPt+1/negationslash=Pt/prime
+for allt/prime≤t. Assume that there does not exist a τsuch that Pt=Pτfor allt≥τ. Then for any τthere exists a
+t>τsuch that Pt/negationslash=Pt/primefor allt/prime<t. This implies that the number of unique elements in the sequence P0,P1,...
+is inﬁnite. However, this is not possible, because the number of partitions of Gis ﬁnite. Hence, the assumption that
+there does not exist a τsuch that Pt=Pτfor allt≥τis false. 
+According to the above lemma, the Leiden algorithm progresses towards a partition for which no further improve-
+ments can be made. We can therefore deﬁne the notion of an asymptotically stable partition.
+Deﬁnition 11. LetG= (V,E)be a graph, and let Pt+1=Leiden (G,Pt). We call Pτasymptotically stable if
+Pt=Pτfor allt≥τ.
+We also need to deﬁne the notion of a minimal non-optimal subset.
+Deﬁnition 12. LetG= (V,E)be a graph, and let Pbe a partition of G. A setS⊆C∈Pis called a non-optimal
+subsetif∆H(S/mapsto→D)>0for someD∈Por forD=∅. A setS⊆C∈Pis called a minimal non-optimal subset if
+Sis a non-optimal subset and if there does not exist a non-optimal subset S/prime⊂S.
+The following lemma states an important property of minimal non-optimal subsets.
+Lemma 9. LetG= (V,E)be a graph, let Pbe a partition of G, and letS⊆C∈Pbe a minimal non-optimal
+subset. Then{S}is an optimal partition of the subgraph induced by S.
+Proof.Assume that{S}is not an optimal partition of the subgraph induced by S. There then exists a set S1∈S
+such that
+E(S1,S2)−γ/bardblS1/bardbl·/bardblS2/bardbl<0, (D2)
+whereS2=S−S1. LetD∈PorD=∅such that ∆H(S→D)>0. Hence,
+E(S,D)−γ/bardblS/bardbl·/bardblD/bardbl>E(S,C−S)−γ/bardblS/bardbl·/bardblC−S/bardbl. (D3)22
+BecauseSis a minimal non-optimal subset, S1andS2cannot be non-optimal subsets. Therefore, ∆H(S1→D)≤0
+and∆H(S2→D)≤0, or equivalently,
+E(S1,D)−γ/bardblS1/bardbl·/bardblD/bardbl≤E(S1,C−S1)−γ/bardblS1/bardbl·/bardblC−S1/bardbl (D4)
+and
+E(S2,D)−γ/bardblS2/bardbl·/bardblD/bardbl≤E(S2,C−S2)−γ/bardblS2/bardbl·/bardblC−S2/bardbl. (D5)
+It then follows from Eqs. (D4) and (D5) that
+E(S,D)−γ/bardblS/bardbl·/bardblD/bardbl=/parenleftbig
+E(S1,D)−γ/bardblS1/bardbl·/bardblD/bardbl/parenrightbig
++/parenleftbig
+E(S2,D)−γ/bardblS2/bardbl·/bardblD/bardbl/parenrightbig
+≤/parenleftbig
+E(S1,C−S1)−γ/bardblS1/bardbl·/bardblC−S1/bardbl/parenrightbig
++/parenleftbig
+E(S2,C−S2)−γ/bardblS2/bardbl·/bardblC−S2/bardbl/parenrightbig
+.
+This can be written as
+E(S,D)−γ/bardblS/bardbl·/bardblD/bardbl≤/parenleftbig
+E(S1,C−S) +E(S1,S2)−γ/bardblS1/bardbl·/bardblC−S/bardbl−γ/bardblS1/bardbl·/bardblS2/bardbl/parenrightbig
++/parenleftbig
+E(S2,C−S) +E(S2,S1)−γ/bardblS2/bardbl·/bardblC−S/bardbl−γ/bardblS2/bardbl·/bardblS1/bardbl/parenrightbig
+=E(S,C−S) + 2E(S1,S2)−γ/bardblS/bardbl·/bardblC−S/bardbl−2γ/bardblS1/bardbl·/bardblS2/bardbl.
+Using Eq. (D2), we then obtain
+E(S,D)−γ/bardblS/bardbl·/bardblD/bardbl<E(S,C−S)−γ/bardblS/bardbl·/bardblC−S/bardbl.
+However, this contradicts Eq. (D3). The assumption that {S}is not an optimal partition of the subgraph induced by
+Sis therefore false. 
+Building on the results for non-decreasing move sequences reported in Appendix C1, the following lemma states
+that any minimal non-optimal subset can be found by the MergeNodeSubset function.
+Lemma 10. LetG= (V,E)be a graph, let Pbe a partition of G, and letS⊆C∈Pbe a minimal non-optimal
+subset. Let Preﬁned =MergeNodesSubset (G,{{v} |v∈V},C). There then exists a move sequence in the
+MergeNodesSubset function such that S∈Preﬁned.
+Proof.We are going to prove that there exists a move sequence P0,...,P|C|in the MergeNodesSubset function
+such thatS∈P|C|. The move sequence consists of two parts, P0,...,P|S|andP|S|,...,P|C|. In the ﬁrst part, each
+node inSis considered for moving. In the second part, each node in C−Sis considered for moving. Note that in the
+MergeNodesSubset function a node can always stay in its own community when it is considered for moving. We
+ﬁrst consider the ﬁrst part of the move sequence P0,...,P|C|. LetP0,...,P|S|be a non-decreasing move sequence
+such that P0={{v}|v∈V}andS∈P|S|. To see that such a non-decreasing move sequence exists, note that
+according to Lemma 9 {S}is an optimal partition of the subgraph induced by Sand that according to Theorem 1 an
+optimal partition can be reached using a non-decreasing move sequence. This non-decreasing move sequence consists
+of|S|−1moves. There is one node in Sthat can stay in its own community. Note further that each move in the
+move sequence P0,...,P|S|satisﬁes the conditions speciﬁed in lines 34 and 37 in Algorithm A.2. This follows from
+Deﬁnition 12. In the second part of the move sequence P0,...,P|C|, we simply have P|S|=...=P|C|. Hence, each
+node inC−Sstays in its own community. Since S∈P|S|, we then also have S∈P|C|. 
+As long as there are subsets of communities that are not optimally assigned, the MergeNodesSubset function can
+ﬁnd these subsets. In the MoveNodesFast function, these subsets are then moved to a diﬀerent community. In this
+way, the Leiden algorithm continues to identify better partitions. However, at some point, all subsets of communities
+are optimally assigned, and the Leiden algorithm will not be able to further improve the partition. The algorithm has
+then reached an asymptotically stable partition, and this partition is also subset optimal. This result is formalized in
+the following theorem.
+Theorem 11. LetG= (V,E)be a graph, and let Pbe a ﬂat partition of G. Then Pis asymptotically stable if and
+only if Pis subset optimal.
+Proof.IfPis subset optimal, it follows directly from the deﬁnition of the Leiden algorithm that Pis asymptotically
+stable. Conversely, if Pis asymptotically stable, it follows from Lemma 10 that Pis subset optimal. To see this,
+assume that Pis not subset optimal. There then exists a community C∈Pand a setS⊂Csuch thatSis a
+minimal non-optimal subset. Let Preﬁned =MergeNodesSubset (G,{{v}|v∈V},C). Lemma 10 states that there
+exists a move sequence in the MergeNodesSubset function such that S∈Preﬁned. IfS∈Preﬁned, thenSwill be
+moved from Cto a diﬀerent (possibly empty) community in line 3 in Algorithm A.2. However, this contradicts the
+asymptotic stability of P. Asymptotic stability therefore implies subset optimality. 23
+Since subset optimality implies uniform γ-density, we obtain the following corollary.
+Corollary 12. LetG= (V,E)be a graph, and let Pbe a ﬂat partition of G. IfPis asymptotically stable, then P
+is uniformly γ-dense.
+Appendix E: Bounds on optimality
+In this appendix, we prove that the quality of a uniformly γ-dense partition as deﬁned in Deﬁnition 9 in Appendix D
+provides an upper bound on the quality of an optimal partition.
+We ﬁrst deﬁne the intersection of two partitions.
+Deﬁnition 13. LetG= (V,E)be a graph, and let P1andP2be ﬂat partitions of G. We denote the intersection of
+P1andP2byP=P1/intersectionsqP2, which is deﬁned as
+P={C∩D|C∈P1,D∈P2,C∩D/negationslash=∅}. (E1)
+The intersection of two partitions consists of the basic subsets that form both partitions. For S,R∈P=P1/intersectionsqP2,
+we writeSP1∼Rif there exists a community C∈P1such thatS,R⊆C. Hence, if SP1∼R, thenSandRare subsets
+of the same community in P1. Furthermore, for S/negationslash=R, ifSP1∼R, then we cannot have SP2∼R, since otherwise Sand
+Rwould have formed a single subset. In other words, SP1∼R⇒SP2Rand similarly SP2∼R⇒SP1R.
+The following lemma shows how the diﬀerence in quality between two partitions can easily be expressed using the
+intersection.
+Lemma 13. LetG= (V,E)be a graph, let P1andP2be ﬂat partitions of G, and let P=P1/intersectionsqP2be the intersection
+ofP1andP2. Then
+H(P2)−H(P1) =1
+2/summationdisplay
+SP2∼R
+S/negationslash=R/bracketleftbig
+E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl/bracketrightbig
+−1
+2/summationdisplay
+SP1∼R
+S/negationslash=R/bracketleftbig
+E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl/bracketrightbig
+. (E2)
+Proof.For any community C∈Pk(k= 1,2),
+E(C,C) =/summationdisplay
+S∈P
+S⊆CE(S,S) +1
+2/summationdisplay
+S,R∈P
+S,R⊆C
+S/negationslash=RE(S,R)
+and
+/parenleftbigg/bardblC/bardbl
+2/parenrightbigg
+=/summationdisplay
+S∈P
+S⊆C/parenleftbigg/bardblS/bardbl
+2/parenrightbigg
++1
+2/summationdisplay
+S,R∈P
+S,R⊆C
+S/negationslash=R/bardblS/bardbl·/bardblR/bardbl.
+We hence obtain
+H(Pk) =/summationdisplay
+C∈Pk/bracketleftbigg
+E(C,C)−γ/parenleftbigg/bardblC/bardbl
+2/parenrightbigg/bracketrightbigg
+=/summationdisplay
+C∈Pk
+/summationdisplay
+S∈P
+S⊆C/bracketleftbigg
+E(S,S)−γ/parenleftbigg/bardblS/bardbl
+2/parenrightbigg/bracketrightbigg
++1
+2/summationdisplay
+S,R∈P
+S,R⊆C
+S/negationslash=R[E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl]
+
+=/summationdisplay
+S∈P/bracketleftbigg
+E(S,S)−γ/parenleftbigg/bardblS/bardbl
+2/parenrightbigg/bracketrightbigg
++1
+2/summationdisplay
+SPk∼R
+S/negationslash=R[E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl].
+The diﬀerence H(P2)−H(P1)then gives the desired result. 24
+Theabovelemmaenablesustoprovethefollowingtheorem, statingthatthequalityofauniformly γ-densepartition
+is not too far from optimal. We stress that this theorem applies only to unweighted graphs.
+Theorem 14. LetG= (V,E)be an unweighted graph, let Pbe a uniformly γ-dense partition of G, and let P∗be
+an optimal partition of G. Then
+H(P∗)−H(P)≤(1−γ)1
+2/summationdisplay
+C,D∈P
+C/negationslash=DE(C,D). (E3)
+Proof.LetP/prime=P/intersectionsqP∗. Consider any S,R∈P/primesuch thatSP∗
+∼R. Because the graph Gis unweighted, we have
+/bardblS/bardbl·/bardblR/bardbl≥E(S,R). It follows that
+E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl≤(1−γ)E(S,R).
+Furthermore, for any community C∈P, the number of edges connecting this community with other communities is
+E(C,V−C). We therefore have
+/summationdisplay
+S⊆C/summationdisplay
+RP∗
+∼S
+R/negationslash=SE(S,R)≤E(C,V−C).
+To see this, note that RP∗
+∼SimpliesRPS, so thatR/negationslash⊆C. For anyC∈P, we then obtain
+/summationdisplay
+S⊆C/summationdisplay
+RP∗
+∼S
+R/negationslash=S[E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl]≤/summationdisplay
+S⊆C/summationdisplay
+RP∗
+∼S
+R/negationslash=S(1−γ)E(S,R)≤(1−γ)E(C,V−C).
+By summing over all C∈P, this gives
+/summationdisplay
+SP∗
+∼R
+S/negationslash=R[E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl]≤(1−γ)/summationdisplay
+C,D∈P
+C/negationslash=DE(C,D).
+Furthermore, because Pis uniformly γ-dense, we have
+/summationdisplay
+SP∼R
+S/negationslash=R[E(S,R)−γ/bardblS/bardbl·/bardblR/bardbl]≥0.
+Using these results, Eq. (E3) follows from Lemma 13. 
+For weighted graphs, an upper bound analogous to Eq. (E3) is
+H(P∗)−H(P)≤/parenleftBig
+1−γ
+¯w/parenrightBig1
+2/summationdisplay
+C,D∈PE(C,D), (E4)
+where ¯w= maxi,jwi,jis the maximum edge weight.
+For modularity instead of CPM, the upper bound for unweighted graphs in Eq. (E3) needs to be adjusted by
+rescaling the resolution parameter by 2m. This gives
+H(P∗)−H(P)≤/parenleftBig
+1−γ
+2m/parenrightBig1
+2/summationdisplay
+C,D∈P
+C/negationslash=DE(C,D). (E5)
+The approximation factor of modularity cannot be multiplicative [31], and indeed our bound is additive. Depending
+on the partition P, our bound may be better than the bound provided by an SDP algorithm [31].25
+Note that the bound in Eq. (E3) reduces the trivial bound of (1−γ)mbyγtimes the number of missing links within
+communities, i.e., γ/summationtext
+C/bracketleftBig/parenleftbig/bardblC/bardbl
+2/parenrightbig
+−E(C,C)/bracketrightBig
+. To see this, note that m=/summationtext
+CE(C,C) +1
+2/summationtext
+C/negationslash=DE(C,D). Starting
+from Eq. (E3), we then obtain
+H(P∗)≤H(P) + (1−γ)1
+2/summationdisplay
+C,D∈P
+C/negationslash=DE(C,D)
+=/summationdisplay
+C∈P/bracketleftbigg
+E(C,C)−γ/parenleftbigg/bardblC/bardbl
+2/parenrightbigg/bracketrightbigg
++ (1−γ)m−(1−γ)/summationdisplay
+C∈PE(C,C)
+= (1−γ)m−γ/summationdisplay
+C∈P/bracketleftbigg/parenleftbigg/bardblC/bardbl
+2/parenrightbigg
+−E(C,C)/bracketrightbigg
+.
+Finally, Theorem 14 provides a bound on the quality of the optimal partition for a given uniformly γ-dense partition,
+but it does not provide an a priori bound on the minimal quality of a uniformly γ-dense partition. Finding such an
+a priori bound remains an open problem.

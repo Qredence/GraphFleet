@@ -86,6 +86,18 @@ promptflow-tools = "^1.4.0"
 microsoft-bing-websearch = "^1.0.0"
 build = "^1.2.1"
 uvicorn = "^0.30.6"
+requests = "^2.32.3"
+pandas = "^2.2.2"
+detect-secrets = "^1.5.0"
+azure-core = "^1.30.2"
+kubernetes = "^30.1.0"
+httpx = "^0.27.0"
+opencensus-ext-azure = "^1.1.13"
+urllib3 = "^2.2.2"
+opencensus-context = "^0.1.3"
+opencensus = "^0.11.4"
+flake8 = "^7.1.1"
+ipython = "^8.26.0"
 
 
 [tool.poetry.group.dev.dependencies]
