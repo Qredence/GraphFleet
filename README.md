@@ -1,5 +1,14 @@
 # Overview
+<div align="left">
+<a href="https://pypi.org/project/graphfleet/">
+    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/graphfleet"> </a>
+   <img alt="GitHub License" src="https://img.shields.io/github/license/qredence/graphfleet">
+   <img alt="GitHub forks" src="https://img.shields.io/github/forks/qredence/graphfleet">
 
+</div>
+
+
+  
 ![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
 
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
