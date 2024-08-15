@@ -9,14 +9,10 @@
    <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
    <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=flat&label=discord">
 
-
-   
-
 </div>
 
+![thumbnail](https://github.com/user-attachments/assets/6586309f-70fc-40a7-92bc-db4a2bf78d82)
 
-  
-![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
 <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
    <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=for-the-badge&logo=discord">
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
