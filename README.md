@@ -1,16 +1,24 @@
 # Overview
 <div align="left">
 <a href="https://pypi.org/project/graphfleet/">
-    <img alt="PyPI - Downloads" src="https://img.shields.io/pypi/dm/graphfleet"> </a>
+   <img alt="Pepy Total Downlods" src="https://img.shields.io/pepy/dt/graphfleet">
+   </a>
    <img alt="GitHub License" src="https://img.shields.io/github/license/qredence/graphfleet">
    <img alt="GitHub forks" src="https://img.shields.io/github/forks/qredence/graphfleet">
+   <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/qredence/graphfleet">
+   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
+   <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=flat&label=discord">
+
+
+   
 
 </div>
 
 
   
 ![image](https://github.com/user-attachments/assets/c3ca5ec8-1bbf-4a9c-988e-e7f5100ea5d5)
-
+<img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
+   <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=for-the-badge&logo=discord">
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
 ## GraphFleet
@@ -78,10 +86,10 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
 
    ```sh
-   export GRAPHRAG_API_KEY="<apikey>"
-   export GRAPHRAG_API_BASE="custom base api url"
-   export GRAPHRAG_API_VERSION="version (if not OpenAI)"
-   export GRAPHRAG_LLM_MODEL="model name"
+   export GRAPHRAG_API_KEY="fd7763c639184c20962857cacacd1a38"
+   export GRAPHRAG_API_BASE="https://gpt-4o-fr.openai.azure.com"
+   export GRAPHRAG_API_VERSION="2024-04-01-preview"
+   export GRAPHRAG_LLM_MODEL="gpt-4"
    export GRAPHRAG_DEPLOYMENT_NAME="model name"
    export GRAPHRAG_EMBEDDING_MODEL="embedding model"
    ```
