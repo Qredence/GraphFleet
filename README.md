@@ -82,10 +82,10 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
 
    ```sh
-   export GRAPHRAG_API_KEY="fd7763c639184c20962857cacacd1a38"
-   export GRAPHRAG_API_BASE="https://gpt-4o-fr.openai.azure.com"
+   export GRAPHRAG_API_KEY="your API key"
+   export GRAPHRAG_API_BASE="your API endpoint if you use Azure OpenAI"
    export GRAPHRAG_API_VERSION="2024-04-01-preview"
-   export GRAPHRAG_LLM_MODEL="gpt-4"
+   export GRAPHRAG_LLM_MODEL="gpt-4o or gpt-4"
    export GRAPHRAG_DEPLOYMENT_NAME="model name"
    export GRAPHRAG_EMBEDDING_MODEL="embedding model"
    ```
