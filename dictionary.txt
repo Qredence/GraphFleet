@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-
-=======
-# Team
-Alonso
->>>>>>> origin/main
 
 # Pythonisms
 PYTHONPATH
@@ -101,15 +95,12 @@ retryer
 agenerate
 aembed
 dedupe
-<<<<<<< HEAD
 GRAPHRAG
 graphrag
 GraphFleet
 graphfleet
 Qredence
-
-=======
->>>>>>> origin/main
+pydantic
 
 # LLM Terms
 AOAI
@@ -136,43 +127,13 @@ docstore
 datasource
 devcontainers
 codebases
-<<<<<<< HEAD
-gfleetenv
-
-=======
-
-# Microsoft
-MSRC
->>>>>>> origin/main
 
 # Broken Upstream
 # TODO FIX IN DATASHAPER
 Arrary
 
 # Prompt Inputs
-ABILA
-Abila
-ALHAMIA
-Alhamia
-Asadi
-Aurelians
-Bataglani
-BATAGLANI
-Bratinas
-dulce
-Durke
-Firuzabad
-Firuzabad's
-FIRUZABAD
-Krohaara
-KROHAARA
-POKRALLY
-Tazbah
-TIRUZIA
-Tiruzia
-Tiruzia's
-Verdantis
-Verdantis's
+
 
 
 # English
