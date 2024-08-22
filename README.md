@@ -11,10 +11,10 @@
 
 </div>
 
-![thumbnail](https://github.com/user-attachments/assets/6586309f-70fc-40a7-92bc-db4a2bf78d82)
+![GraphFleet_Query](https://github.com/user-attachments/assets/cf32f463-d52f-4568-a795-1f869f33d07f)
 
-<img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
-   <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=for-the-badge&logo=discord">
+
+
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
 ## GraphFleet
@@ -45,14 +45,20 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 - Leave us a star ♥
 - Fork and contribute to the project
-- [![Join the discord](https://discord.gg/BD8MPgzEJc)
+- <a href="https://discord.gg/BD8MPgzEJc">
+    <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=for-the-badge&logo=discord">
+   </a>
+   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet?style=for-the-badge&logo=x&logoColor=white&labelColor=blue&link=https%3A%2F%2Fx.com%2Fagenticfleet">
+
+
+
 
 ## Getting Started
 
 ### Prerequisites
 
 
-- Python 3.10
+- Python 3.11
 - Poetry
 - Make sure to have a virtual environment manager such as `virtualenv` installed
 
@@ -160,6 +166,7 @@ To run the API, save the code in a file named api.py and execute the following c
 ``` bash
 uvicorn api:app --reload --port 8001
 ```
+![GraphFleet_Query](https://github.com/user-attachments/assets/cf32f463-d52f-4568-a795-1f869f33d07f)
 
 ## Security
 
