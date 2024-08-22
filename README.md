@@ -83,15 +83,14 @@ Environment Variables: Set up your environment variables in a .env file (refer t
 
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
-    ```sh
-   export GRAPHRAG_API_KEY="your_api_key_here"
-   export GRAPHRAG_API_BASE="your_api_base_url_here"
-   export GRAPHRAG_API_VERSION="your_api_version_here"
-   export GRAPHRAG_LLM_MODEL="your_llm_model_here"
-   export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
-   export GRAPHRAG_EMBEDDING_MODEL="your_embedding_model_here"
-
-   ```
+    ```bash
+    export GRAPHRAG_API_KEY="your_api_key_here"
+    export GRAPHRAG_API_BASE="your_api_base_url_here"
+    export GRAPHRAG_API_VERSION="your_api_version_here"
+    export GRAPHRAG_LLM_MODEL="your_llm_model_here"
+    export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
+    export GRAPHRAG_EMBEDDING_MODEL="your_embedding_model_here"
+    ```
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
 
