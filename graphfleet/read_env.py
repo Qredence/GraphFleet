@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 """
 Module for reading environment variables and configuration files.
 
@@ -22,15 +21,6 @@ def load_dotenv(
     interpolate: bool = True,
     encoding: str | None = "utf-8"
 ):
-=======
-from dotenv import load_dotenv
-import os
-import yaml
-import re
-
-# Load environment variables from .env file
-load_dotenv()
->>>>>>> origin/main
 
 # Function to replace placeholders with environment variables
 def replace_placeholders(content):

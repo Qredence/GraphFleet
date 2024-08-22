@@ -24,5 +24,6 @@
         "**/*tsconfig.json": true,
         ".cache": true,
         "retool.config.json": true
-    }
+    },
+    "python.analysis.autoImportCompletions": true
 }
