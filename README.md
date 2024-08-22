@@ -80,14 +80,15 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 1. Configuration:
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
+Fill in the .env file in the root folder and the one in the graphfleet folder.
 
-   ```sh
-   export GRAPHRAG_API_KEY="fd7763c639184c20962857cacacd1a38"
-   export GRAPHRAG_API_BASE="https://gpt-4o-fr.openai.azure.com"
-   export GRAPHRAG_API_VERSION="2024-04-01-preview"
-   export GRAPHRAG_LLM_MODEL="gpt-4"
-   export GRAPHRAG_DEPLOYMENT_NAME="model name"
-   export GRAPHRAG_EMBEDDING_MODEL="embedding model"
+    ```sh
+   export GRAPHRAG_API_KEY="your_api_key_here"
+   export GRAPHRAG_API_BASE="your_api_base_url_here"
+   export GRAPHRAG_API_VERSION="your_api_version_here"
+   export GRAPHRAG_LLM_MODEL="your_llm_model_here"
+   export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
+   export GRAPHRAG_EMBEDDING_MODEL="your_embedding_model_here"
    ```
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.

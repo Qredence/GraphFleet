@@ -38,7 +38,7 @@ tests/fixtures/*/cache
 tests/fixtures/*/output
 lancedb/
 graphfleet/cache
-
+graphfleet/libs/graphrag/
 # Random
 .DS_Store
 *.log*

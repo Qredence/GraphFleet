@@ -1,81 +1,174 @@
 
-<<<<<<< HEAD
-You are an expert in Artificial Intelligence and Productivity Research. You are skilled at analyzing the impact and application of generative AI in professional workflows, including software development and multilingual contexts. You are adept at helping people understand the evaluation metrics for AI performance and the integration of AI tools like GitHub Copilot in real-world settings.
+You are an expert in computational linguistics and data science. You are skilled at analyzing complex text data, mapping out relationships, and understanding the structural dynamics within specialized communities. You are adept at helping people identify the relations and structure of the community of interest, specifically within the "Natural Language Processing and Information Retrieval" domain.
 
 # Goal
-Write a comprehensive assessment report of a community taking on the role of a A community analyst that is evaluating the impact and application of generative AI in professional workflows, including software development, multilingual contexts, and productivity studies. The analysis will include the evaluation metrics for AI performance and the integration of AI tools like GitHub Copilot in real-world settings. The report will be used to inform decision-makers about significant developments associated with the community and their potential impact.
+Write a comprehensive assessment report of a community taking on the role of a A community analyst that is examining the "Natural Language Processing and Information Retrieval" domain, given a list of entities that belong to the community as well as their relationships and optional associated claims.
+The analysis will be used to inform researchers and practitioners about significant trends, key contributors, and emerging technologies within the community and their potential impact.
 
-Domain: **Artificial Intelligence and Productivity Research**
-Text: The tasks studied in the lab thus far have tended to be those for which researchers hypothesized generative AI would perform well. This was, in fact, the focus of most of the studies presented in the first AI and Productivity report we published (Cambon et al. 2023). Actual information work, however, often includes a huge variety of tasks and much of the unstructured and informal work in people’s jobs is not yet directly supported by the first-generation of generative AI tools. Software developer workflows, for example, involve far more than the hands-on coding supported by GitHub Copilot (Meyer et al. 2017). The ability to shed light on generative AI's productivity dynamics in the natural complexity of entire workflows is a key advantage of field studies of generative AI’s productivity impacts, and a major reason we hope to see many more field studies emerging in the literature Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., and Liang, P. (2023). Lost in the middle: How language models use long contexts. arXiv:2307.03172. Liu, Y. and Lapata, M. (2019). Hierarchical transformers for multi-document summarization. arXiv preprint arXiv:1905.13164. LlamaIndex (2024). LlamaIndex Knowledge Graph Index. https://docs.llamaindex.ai/en/stable/examples/index_structs/knowledge_graph/KnowledgeGraphDemo.html. Manakul, P., Liusie, A., and Gales, M. J. (2023). Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models. arXiv preprint ar Generative AI in Real-World Workplaces The Second Microsoft Report on AI and Productivity Research
-
-Editors:
-Sonia Jaffe, Neha Parikh Shah, Jenna Butler, Alex Farach, Alexia Cambon, Brent Hecht, Michael Schwarz, and Jaime Teevan
-Contributing Researchers:
-Reid Andersen, Margarita Bermejo-Cano, James Bono, Georg Buscher, Chacha Chen, Steven Clarke, Scott Counts, Eleanor Dillon, Ben Edelman, Ulrike Gruber-Gremlich, Cory Hilke, Ben Hanrahan, Sandra Ho, Brian Houck, Mansi Khemka, Viktor Kewenig, Madeline Kleiner, Eric Knudsen, Sathish Manivannan, Max Meijer, Jennifer Neville, Nam Ngo, Donald Ngwe, Ried Peckham, Sida Peng, Nora Presson, Nagu Rangan, the dominance of majority languages: in interviews conducted by other researchers at Microsoft, some people reported changing the language in which meetings were held to one where Copilot was more effective. This effect might shrink or go away as model performance in other languages improves, and improving model performance in non-English languages is a major direction of research at Microsoft and around the world (e.g., Ahuja et al. 2023). Impact of Generative AI on Metacognition (Lev Tankelevitch, Viktor Kewenig, Auste Simkute, Ava Elizabeth Scott, Advait Sarkar, Abigail Sellen, and Sean Rintel) More details available in The Metacognitive Demands and Opportunities of Generative AI (Tankelevitch, Kewenig et al. 2024) Metacognitive demand—the effort needed for monitoring and controlling of one used it regularly or they lacked training or manager support for use. A Selection of New Lab Studies While the above research focuses on the use of generative AI in the wild, we are also exploring in a lab setting some of the important trends that real-world use highlights. Given AI’s impact appears to vary by role and function, several of these lab studies explore this, diving more deeply into software development and extending the analysis to other important roles like sales and security. Further, because Copilot is deployed globally, we’re also starting to see variation across languages, and thus present research studies looking at AI in multilingual contexts. Finally, the complex trade-offs people are starting to make to incorporate AI into their work practices suggests the cognitive mechanisms underlying its use are important to understand, and we share some early work in that space as well. Comparing the Effect of will, looking forward, be substantially redesigned to better integrate AI. Furthermore, generative AI is still under development and the tools that make use of it are improving rapidly. This means not only that the long-term effects of AI on productivity will differ from those observed in the short-term, but that we are likely to continue to see differences between local task effects and more global productivity effects. Research should try to capture and inform changes in workflows, task design, and business processes in addition to productivity effects for fixed tasks.
-
-One result seen in the above studies and those in our prior work is the common disconnect between the time savings people report from Copilot use and the actual time savings measured. This has been observed not only across studies, where survey measures about time saved tend to be larger than telemetry-based measures, but also within a given study where researchers win across all four metrics.
-Our head-to-head measures computed using an LLM evaluator are as follows:
-•Comprehensiveness. How much detail does the answer provide to cover all aspects and details of the question?
-•Diversity. How varied and rich is the answer in providing different perspectives and insights on the question?
-•Empowerment. How well does the answer help the reader understand and make informed judgments about the topic?
-•Directness. How specifically and clearly does the answer address the question?
-For our evaluation, the LLM is provided with the question, target metric, and a pair of answers, and asked to assess which answer is better according to the metric, as well as why. It returns the winner if one exists, otherwise a tie if they are fundamentally similar and the differences are negligible.
-To account for the stochasticity of LLMs, we run each comparison five times and use mean scores.
-Table 2 shows an example of view the role of policy and regulation
-Questions:
+Domain: "Natural Language Processing and Information Retrieval"
+Text: results,
+i.e., that na ¨ıve RAG produces the most direct responses across all comparisons.
+9Podcast Transcripts News Articles
+C0 C1 C2 C3 TS C0 C1 C2 C3 TS
+Units 34 367 969 1310 1669 55 555 1797 2142 3197
+Tokens 26657 225756 565720 746100 1014611 39770 352641 980898 1140266 1707694
+% Max 2.6 22.2 55.8 73.5 100 2.3 20.7 57.4 66.8 100
+Table 3: Number of context units (community summaries for C0-C3 and text chunks for TS), corre-
+sponding token counts, and percentage of the maximum token count. Map-reduce summarization of
+source texts is the most  , 21(5):88–92.
+Koesten, L., Gregory, K., Groth, P., and Simperl, E. (2021). Talking datasets–understanding data
+sensemaking behaviours. International journal of human-computer studies , 146:102562.
+Kuratov, Y ., Bulatov, A., Anokhin, P., Sorokin, D., Sorokin, A., and Burtsev, M. (2024). In search
+of needles in a 11m haystack: Recurrent memory finds what llms miss.
+LangChain (2024). Langchain graphs. https://python .langchain .com/docs/use cases/graph/.
+Laskar, M. T. R., Hoque, E., and Huang, J. (2020). Query focused abstractive summarization via
+incorporating query relevance and transfer learning with transformer models. In Advances in
+Artificial Intelligence:   system for covid-19 scholarly
+information management. arXiv preprint arXiv:2005.03975 .
+Tang, Y . and Yang, Y . (2024). MultiHop-RAG: Benchmarking retrieval-augmented generation for
+multi-hop queries. arXiv preprint arXiv:2401.15391 .
+Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y ., Bashlykov, N., Batra, S.,
+Bhargava, P., Bhosale, S., et al. (2023). Llama 2: Open foundation and fine-tuned chat models.
+arXiv preprint arXiv:2307.09288 .
+Traag, V . A., Waltman, L., and Van Eck, N. J. (2019). From Louvain to Leiden: guaranteeing
+well . arXiv preprint arXiv:2306.04136 .
+Ban, T., Chen, L., Wang, X., and Chen, H. (2023). From query tools to causal architects: Harnessing
+large language models for advanced causal discovery from data.
+Baumel, T., Eyal, M., and Elhadad, M. (2018). Query focused abstractive summarization: Incorpo-
+rating query relevance, multi-document coverage, and summary length constraints into seq2seq
+models. arXiv preprint arXiv:1801.07704 .
+Blondel, V . D., Guillaume, J.-L., Lambiotte, R., and Lefebvre, E. (2008). Fast unfolding of
+communities in large networks. Journal of statistical mechanics: theory and experiment ,
+2008(10):P10008.
+Brown, T., Mann, B., Ryder, N., Subbia  are the same across
+all six conditions (except for minor modifications to reference styles to match the types of context
+information used). Conditions only differ in how the contents of the context window are created.
+The graph index supporting conditions C0-C3was created using our generic prompts for entity and
+relationship extraction only, with entity types and few-shot examples tailored to the domain of the
+data. The graph indexing process used a context window size of 600 tokens with 1 gleaning for the
+Podcast dataset and 0 gleanings for the News dataset.
+3.4 Metrics
+LLMs have been shown to be good evaluators of natural language generation, achieving state-of-
+the-art or competitive results compared against human judgements (Wang et al., 2023a; Zheng et al.,
+2024). While this approach can generate reference-based metrics when gold standard answers are
+known, it is also capable of measuring the qualities of generated texts (e.g., fluency) in The next step is to create report-like summaries of each community in the Leiden hierarchy, using
+a method designed to scale to very large datasets. These summaries are independently useful in
+their own right as a way to understand the global structure and semantics of the dataset, and may
+themselves be used to make sense of a corpus in the absence of a question. For example, a user
+may scan through community summaries at one level looking for general themes of interest, then
+follow links to the reports at the lower level that provide more details for each of the subtopics. Here,
+however, we focus on their utility as part of a graph-based index used for answering global queries.
+Community summaries are generated in the following way:
+4(a) Root communities at level 0 (b) Sub-communities at level 1
+Figure 3: Graph communities detected using the Leiden algorithm (Traag et al., 2019) over the
+MultiHop-RAG (T  LLM-generated assessment.
+7Question Which public figures are repeatedly mentioned across various entertainment articles?
+Graph
+RAGOverview of Prominent Public Figures in Entertainment
+The entertainment industry is vast and diverse, encompassing film, television, music, sports, and
+digital media. Certain public figures stand out due to their significant contributions and influence
+across these sectors. The following summary highlights key individuals who are repeatedly
+mentioned in various entertainment articles, reflecting their impact and presence within the industry.
+Actors and Directors [...]Public Figures in Controversy [...]Musicians and Executives [...]
+Athletes and Coaches [...]Influencers and Entrepreneurs [...]
+The repeated mention of these figures in entertainment articles signifies their ongoing relevance and
+the public’s interest in their work. Their influence spans across various aspects of entertainment, from
+shaping cultural narratives in film and television to driving trends in music and digital media. These
+individuals not only contribute to their respective fields but also influence the broader cultural , query-focused abstractive summarization that generates natural language summaries and
+not just concatenated excerpts (Baumel et al., 2018; Laskar et al., 2020; Yao et al., 2017) . In recent
+years, however, such distinctions between summarization tasks that are abstractive versus extractive,
+generic versus query-focused, and single-document versus multi-document, have become less rele-
+vant. While early applications of the transformer architecture showed substantial improvements on
+the state-of-the-art for all such summarization tasks (Goodwin et al., 2020; Laskar et al., 2022; Liu
+and Lapata, 2019), these tasks are now trivialized by modern LLMs, including the GPT (Achiam
+et al., 2023; Brown et al., 2020), Llama (Touvron et al., 2023), and Gemini (Anil et al.,  diverse
+answers, we therefore used a fixed context window size of 8k tokens for the final evaluation.
+3.6 Results
+The indexing process resulted in a graph consisting of 8564 nodes and 20691 edges for the Podcast
+dataset, and a larger graph of 15754 nodes and 19520 edges for the News dataset. Table 3 shows the
+number of community summaries at different levels of each graph community hierarchy.
+Global approaches vs. na ¨ıve RAG . As shown in Figure 4, global approaches consistently out-
+performed the na ¨ıve RAG ( SS) approach in both comprehensiveness and diversity metrics across
+datasets. Specifically, global approaches achieved comprehensiveness win rates between 72-83%
+for Podcast transcripts and 72-80% for News articles, while diversity win rates ranged from 75-82%
+and 62-71% respectively. Our use of directness as a validity test also achieved the expected  generated by the LLM based on short
+descriptions of the target datasets. Questions target global understanding rather than specific details.
+3 Evaluation
+3.1 Datasets
+We selected two datasets in the one million token range, each equivalent to about 10 novels of text
+and representative of the kind of corpora that users may encounter in their real world activities:
+•Podcast transcripts . Compiled transcripts of podcast conversations between Kevin Scott,
+Microsoft CTO, and other technology leaders (Behind the Tech, Scott, 2024). Size: 1669
+×600-token text chunks, with 100-token overlaps between chunks ( ∼1 million tokens).
+•News articles . Benchmark dataset comprising news articles published from September
+2013 to December 2023 in a range of categories, including entertainment, business, sports,
+technology, health, and science (MultiHop-RAG; Tang and Yang, 2024). Size: 3197 ×
+600-token text chunks, with 100  view the role of policy and regulation
+Questions :
 1. Which episodes deal primarily with tech policy and government regulation?
 2. How do guests perceive the impact of privacy laws on technology development?
 3. Do any guests discuss the balance between innovation and ethical considerations?
 4. What are the suggested changes to current policies mentioned by the guests?
 5. Are collaborations between tech companies and governments discussed and how?
-News articlesUser: Educator incorporating current affairs into curricula
+News
+articlesUser : Educator incorporating current affairs into curricula
 Task: Teaching about health and wellness
-Questions:
+Questions :
 1. What current topics in health can be integrated into health education curricula?
 2. How do news articles address the concepts of preventive medicine and wellness?
 3. Are there examples of health articles that contradict each other, and if so, why?
 4. What insights can be gleaned about public health priorities based on news coverage?
 5. How can educators use the dataset to highlight the importance of health literacy?
-Table 1: Examples of potential users, tasks, and questions
-landscape, often becoming central figures in social discussions and public discourse.
-Naïve
-RAGPublic figures who are repeatedly mentioned across various entertainment articles include Taylor Swift, Travis Kelce, Britney Spears, and Justin Timberlake. These individuals have been highlighted for various reasons, ranging from their professional achievements to their personal lives.
-Taylor Swift [...]Travis Kelce [...]Britney Spears [...]Justin Timberlake [...]
-These figures are frequently covered due to their high-profile status and the public’s interest in their careers and personal lives. Their activities, whether in music, sports, or personal relationships, have significant cultural and economic impacts, as evidenced by the media coverage and public reactions.
-LLM
-DecisionComprehensiveness: Winner=1 (Graph RAG)
-Answer 1 is better because it provides a more comprehensive and detailed list of public figures from a wider range of entertainment sectors, including film, television, music, sports, gaming, and digital language. Researchers explored Copilot in multilingual contexts, examining how Copilot can facilitate collaboration between colleagues with different native languages.
-
-First, researchers asked 77 native Japanese speakers to review a meeting recorded in English. Half the participants had to watch and listen to the video. The other half could use Copilot Meeting Recap, which gave them an AI meeting summary as well as a chatbot to answer questions about the meeting. Then, researchers asked 83 other native Japanese speakers to review a similar meeting, following the same script, but this time held in Japanese by native Japanese speakers. Again, half of participants had access to Copilot.
-
-For the meeting in English, participants with Copilot answered 16.4% more multiple-choice questions about the meeting correctly, and they were more than twice as likely to get a perfect score. Moreover, in comparing accuracy between the two scenarios, people ang and Yang, 2024) dataset as indexed. Circles represent entity nodes with size proportional to their degree. Node layout was performed via OpenORD (Martin et al., 2011) and Force Atlas 2 (Jacomy et al., 2014). Node colors represent entity communities, shown at two levels of hierarchical clustering: (a) Level 0, corresponding to the hierarchical partition with maximum modularity, and (b) Level 1, which reveals internal structure within these root-level communities.
-•Leaf-level communities. The element summaries of a leaf-level community (nodes, edges, covariates) are prioritized and then iteratively added to the LLM context window until the token limit is reached. The prioritization is as follows: for each community edge in decreasing order of combined source and target node degree (i.e., overall prominence), add descriptions of the source node, target node, linked covari AG incorporates multiple concepts related to other systems. For example, our community summaries are a kind of self-memory (Selfmem, Cheng et al., 2024) for generation-augmented retrieval (GAR, Mao et al., 2020) that facilitates future generation cycles, while our parallel generation of community answers from these summaries is a kind of iterative (Iter-RetGen, Shao et al., 2023) or federated (FeB4RAG, Wang et al., 2024) retrieval-generation strategy. Other systems have also combined these concepts for multi-document summarization (CAiRE-COVID, Su et al., 2020) and multi-hop question answering (ITRG, Feng et al., 2023; IR-CoT, Trivedi et al., 2022; DSP, Khattab et al., 2022). Our use of a hierarchical index and summarization also bears need for thorough validation and human oversight. Job security was a worry for 10% of respondents, reflecting fears of AI encroaching on their roles.
-
-These learnings suggest developers view AI as helpful to improving aspects of their workflows, even as they remain uncertain of AI’s promise and concerned about threats to their job security. To mitigate the negative effects of this uncertainty on productivity and innovation, and to maintain developers’ trust and satisfaction, organizations may identify ways to integrate AI into developers' workflows effectively. These may include acknowledging and addressing concerns and offering training programs.
-Problem-Solving Styles and Confidence Generating Prompts for GitHub Copilot (Steven Clarke and Ben Hanrahan)
-This study explored how developers’ problem-solving styles influence their confidence when generating prompts for GitHub Copilot. The authors hypothesized that variations in developers’ problem-solving approaches and workstyles would significantly influence their specific methods, actions, or outcomes. The importance score, measured by a Random Forest statistical model, should be interpreted relatively, as it shows how much each feature helps in predicting AI power usage compared to others. Higher scores indicate greater importance. In this analysis, scores range from 361 to 882, highlighting the significant factors influencing AI power user classification within this dataset and model.
-
-As with all surveys of this type, it is important to view all the above results through the lens of the limitations of the methodology. While the analysis reveals significant associations, causation cannot be conclusively established due to the observational nature of the data. Similarly, self-selection bias, response bias, and unmeasured confounding variables such as workplace culture and managerial support could influence the outcomes.
-Copilot Usage in the Workplace Survey (Alexia Cambon, Alex Farach, Margarita Bermejo as “Translation and language learning,” “Creative writing and editing,” and “Programming and scripting.” Overall, 72.9% of the Copilot conversations are in knowledge work domains compared to 37% of Bing Search sessions. The researchers also used GPT-4 to directly classify whether the task associated with each Copilot conversation and or search session was knowledge work (instead of classifying based on the category) and see a similar pattern.
-
-Researchers then used GPT-4 to classify the main task associated with each conversation or search sessions according to Anderson and Krathwohl’s Taxonomy (Anderson and Krathwohl 2001), which defines six categories from lowest complexity (for a human) to highest: Remember, Understand, Apply, Analyze, Evaluate, and Create. Over three-quarters of traditional search sessions, but less than half of Copilot conversations were for “Remember. The content of this report includes an overview of the community's key entities and relationships.
-=======
-You are an expert in Organizational Sociology and Artificial Intelligence. You are skilled at analyzing social structures, community dynamics, and the impact of technological advancements on workplace environments. You are adept at helping people understand the relationships and organizational frameworks within communities, particularly in the context of how AI influences productivity and interactions in professional settings.
-
-# Goal
-Write a comprehensive assessment report of a community taking on the role of a A community analyst that is examining the impact of generative AI on productivity in workplace environments, given a list of entities that belong to the community as well as their relationships and optional associated claims.
-The analysis will be used to inform decision-makers about significant developments associated with the community and their potential impact.. The content of this report includes an overview of the community's key entities and relationships.
->>>>>>> origin/main
+Table 1: Examples of potential users, tasks, and questions  public figures, primarily from the music industry
+and sports, and relies heavily on a single source for data, which makes it less diverse in perspectives
+and insights.
+Empowerment: Winner=1 (Graph RAG)
+Answer 1 is better because it provides a comprehensive and structured overview of public figures
+across various sectors of the entertainment industry, including film, television, music, sports, and
+digital media. It lists multiple individuals, providing specific examples of their contributions and the
+context in which they are mentioned in entertainment articles, along with references to data reports
+for each claim. This approach helps the reader understand the breadth of the topic and make informed
+judgments without being misled. In contrast, Answer 2 focuses on a smaller group of public figures
+and primarily discusses their personal lives and relationships, which may not provide as broad an
+understanding of the topic. While Answer 2 also cites sources, it does not match the depth and variety
+of Answer 1  final round of
+query-focused summarization over all community summaries reporting relevance to that query.
+“a motivated, continuous effort to understand connections (which can be among people, places, and
+events) in order to anticipate their trajectories and act effectively ” (Klein et al., 2006a). Supporting
+human-led sensemaking over entire text corpora, however, needs a way for people to both apply and
+refine their mental model of the data (Klein et al., 2006b) by asking questions of a global nature.
+Retrieval-augmented generation (RAG, Lewis et al., 2020) is an established approach to answering
+user questions over entire datasets, but it is designed for situations where these answers are contained
+locally within regions of text whose retrieval provides sufficient grounding for the generation task.
+Instead, a more appropriate task framing is query-focused summarization (QFS, Dang, 2006), and in
+particular  examples provided to the LLM for in-context learning (Brown et al., 2020).
+3For example, while our default prompt extracting the broad class of “named entities” like people,
+places, and organizations is generally applicable, domains with specialized knowledge (e.g., science,
+medicine, law) will benefit from few-shot examples specialized to those domains. We also support
+a secondary extraction prompt for any additional covariates we would like to associate with the
+extracted node instances. Our default covariate prompt aims to extract claims linked to detected
+entities, including the subject, object, type, description, source text span, and start and end dates.
+To balance the needs of efficiency and quality, we use multiple rounds of “gleanings”, up to a
+specified maximum, to encourage the LLM to detect any additional entities it may have missed
+on prior extraction rounds. This is a multi-stage process in which we first ask the LLM to assess
+whether all entities  resource-intensive approach requiring the highest number of context tokens.
+Root-level community summaries ( C0) require dramatically fewer tokens per query (9x-43x).
+Community summaries vs. source texts. When comparing community summaries to source texts
+using Graph RAG, community summaries generally provided a small but consistent improvement
+in answer comprehensiveness and diversity, except for root-level summaries. Intermediate-level
+summaries in the Podcast dataset and low-level community summaries in the News dataset achieved
+comprehensiveness win rates of 57% and 64%, respectively. Diversity win rates were 57% for
+Podcast intermediate-level summaries and 60% for News low-level community summaries. Table 3
+also illustrates the scalability advantages of Graph RAG compared to source text summarization: for
+low-level community summaries ( C3), Graph RAG required 26-33% fewer context tokens, while
+for root-level community summaries ( C0), it required over 97% fewer tokens.
+Role:. The content of this report includes an overview of the community's key entities and relationships.
 
 # Report Structure
 The report should include the following sections:
 - TITLE: community's name that represents its key entities - title should be short but specific. When possible, include representative named entities in the title.
 - SUMMARY: An executive summary of the community's overall structure, how its entities are related to each other, and significant points associated with its entities.
-<<<<<<< HEAD
-- REPORT RATING: A float score between 0-10 that represents the relevance of the text to the impact and application of generative AI in professional workflows, including software development and multilingual contexts, evaluation metrics for AI performance, and the integration of AI tools like GitHub Copilot in real-world settings, with 1 being trivial or irrelevant and 10 being highly significant, impactful, and actionable in promoting understanding and advancement in the field of AI and productivity research.
-=======
-- REPORT RATING: A float score between 0-10 that represents the relevance of the text to the impact of AI on workplace productivity, organizational dynamics, and the integration of AI tools in professional settings, with 1 being trivial or irrelevant and 10 being highly significant, insightful, and impactful in understanding and improving workplace efficiency and interactions.
->>>>>>> origin/main
+- REPORT RATING: A float score between 0-10 that represents the relevance of the text to computational linguistics, data science, and the structural dynamics within specialized communities, with 1 being trivial or irrelevant and 10 being highly significant, impactful, and actionable in advancing the understanding of Natural Language Processing and Information Retrieval.
 - RATING EXPLANATION: Give a single sentence explanation of the rating.
 - DETAILED FINDINGS: A list of 5-10 key insights about the community. Each insight should have a short summary followed by multiple paragraphs of explanatory text grounded according to the grounding rules below. Be comprehensive.
 
@@ -90,7 +183,7 @@ Return output as a well-formed JSON-formatted string with the following format. 
 
 # Grounding Rules
 After each paragraph, add data record reference if the content of the paragraph was derived from one or more data records. Reference is in the format of [records: <record_source> (<record_id_list>, ...<record_source> (<record_id_list>)]. If there are more than 10 data records, show the top 10 most relevant records.
-Each paragraph should contain multiple sentences of explanation and concrete examples with specific named entities. All paragraphs must have these references at the start and end. Use "NONE" if there are no related roles or records. Everything should be in The primary language of the provided text is "English.".
+Each paragraph should contain multiple sentences of explanation and concrete examples with specific named entities. All paragraphs must have these references at the start and end. Use "NONE" if there are no related roles or records. Everything should be in The primary language of the provided text is **English**. The text includes technical terms, references to academic papers, and other content that is characteristic of English-language academic and technical writing..
 
 Example paragraph with references added:
 This is a paragraph of the output text [records: Entities (1, 2, 3), Claims (2, 5), Relationships (10, 12)]
