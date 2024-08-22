@@ -15,7 +15,7 @@ vcs = "git"
 style = "semver"
 
 [tool.poetry.dependencies]
-python = ">=3.11.2,<3.13"
+python = ">=3.11,<3.13"
 environs = "^11.0.0"
 datashaper = "^0.0.49"
 
