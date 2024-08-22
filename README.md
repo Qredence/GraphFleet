@@ -80,6 +80,7 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 1. Configuration:
 Environment Variables: Set up your environment variables in a .env file (refer to the .env.example file for available options). Key variables include:
+
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
     ```sh
@@ -89,6 +90,7 @@ Fill in the .env file in the root folder and the one in the graphfleet folder.
    export GRAPHRAG_LLM_MODEL="your_llm_model_here"
    export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
    export GRAPHRAG_EMBEDDING_MODEL="your_embedding_model_here"
+
    ```
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
