@@ -1,0 +1,5 @@
+#!/bin/sh
+npm install -g azurite
+azurite -L -l ./temp_azurite -d ./temp_azurite/debug.log
+`
+©x^x^xx^XXX

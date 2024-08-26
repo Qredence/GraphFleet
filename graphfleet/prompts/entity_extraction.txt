@@ -18,9 +18,11 @@ For each pair of related entities, extract the following information:
 - relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
 Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
 
-3. Return output in The primary language of the provided text is **English**. The text includes technical terms, references to academic papers, and other content that is characteristic of English-language academic and technical writing. as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+3. Return output in Analysis:
+The provided text is primarily in "English." The text consists of academic references, descriptions of research papers, and technical discussions related to natural language processing, machine learning, and information retrieval. The structure, vocabulary, and syntax are consistent with English academic writing. as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
 
-4. If you have to translate into The primary language of the provided text is **English**. The text includes technical terms, references to academic papers, and other content that is characteristic of English-language academic and technical writing., just translate the descriptions, nothing else!
+4. If you have to translate into Analysis:
+The provided text is primarily in "English." The text consists of academic references, descriptions of research papers, and technical discussions related to natural language processing, machine learning, and information retrieval. The structure, vocabulary, and syntax are consistent with English academic writing., just translate the descriptions, nothing else!
 
 5. When finished, output {completion_delimiter}.
 
@@ -30,75 +32,30 @@ Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tupl
 Example 1:
 
 text:
- results,
-i.e., that na ¨ıve RAG produces the most direct responses across all comparisons.
-9Podcast Transcripts News Articles
-C0 C1 C2 C3 TS C0 C1 C2 C3 TS
-Units 34 367 969 1310 1669 55 555 1797 2142 3197
-Tokens 26657 225756 565720 746100 1014611 39770 352641 980898 1140266 1707694
-% Max 2.6 22.2 55.8 73.5 100 2.3 20.7 57.4 66.8 100
-Table 3: Number of context units (community summaries for C0-C3 and text chunks for TS), corre-
-sponding token counts, and percentage of the maximum token count. Map-reduce summarization of
-source texts is the most
+ system for covid-19 scholarly
+information management. arXiv preprint arXiv:2005.03975 .
+Tang, Y . and Yang, Y . (2024). MultiHop-RAG: Benchmarking retrieval-augmented generation for
+multi-hop queries. arXiv preprint arXiv:2401.15391 .
+Touvron, H., Martin, L., Stone, K., Albert, P., Almahairi, A., Babaei, Y ., Bashlykov, N., Batra, S.,
+Bhargava, P., Bhosale, S., et al. (2023). Llama 2: Open foundation and fine-tuned chat models.
+arXiv preprint arXiv:2307.09288 .
+Traag, V . A., Waltman, L., and Van Eck, N. J. (2019). From Louvain to Leiden: guaranteeing
+well
 ------------------------
 output:
-("entity"{tuple_delimiter}RAG{tuple_delimiter}METHOD{tuple_delimiter}RAG (Retrieval-Augmented Generation) is a method that produces direct responses in text generation tasks)
+("entity"{tuple_delimiter}COVID-19 SCHOLARLY INFORMATION MANAGEMENT SYSTEM{tuple_delimiter}SYSTEM{tuple_delimiter}A system designed for managing scholarly information related to COVID-19, as described in the arXiv preprint arXiv:2005.03975)
 {record_delimiter}
-("entity"{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}DATASET{tuple_delimiter}A dataset consisting of transcripts from podcasts used for analysis)
+("entity"{tuple_delimiter}MULTIHOP-RAG{tuple_delimiter}SYSTEM{tuple_delimiter}A system for benchmarking retrieval-augmented generation for multi-hop queries, as described in the arXiv preprint arXiv:2401.15391)
 {record_delimiter}
-("entity"{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}DATASET{tuple_delimiter}A dataset consisting of news articles used for analysis)
+("entity"{tuple_delimiter}LLAMA 2{tuple_delimiter}MODEL{tuple_delimiter}Open foundation and fine-tuned chat models, as described in the arXiv preprint arXiv:2307.09288)
 {record_delimiter}
-("entity"{tuple_delimiter}C0{tuple_delimiter}CATEGORY{tuple_delimiter}A category or cluster used in the analysis, representing a specific subset of the data)
+("entity"{tuple_delimiter}LOUVAIN TO LEIDEN{tuple_delimiter}METHOD{tuple_delimiter}A method for guaranteeing well-formedness in community detection, as described by Traag, Waltman, and Van Eck in 2019)
 {record_delimiter}
-("entity"{tuple_delimiter}C1{tuple_delimiter}CATEGORY{tuple_delimiter}A category or cluster used in the analysis, representing a specific subset of the data)
+("relationship"{tuple_delimiter}MULTIHOP-RAG{tuple_delimiter}RETRIEVAL-AUGMENTED GENERATION{tuple_delimiter}MultiHop-RAG is a system designed for benchmarking retrieval-augmented generation{tuple_delimiter}8)
 {record_delimiter}
-("entity"{tuple_delimiter}C2{tuple_delimiter}CATEGORY{tuple_delimiter}A category or cluster used in the analysis, representing a specific subset of the data)
+("relationship"{tuple_delimiter}LLAMA 2{tuple_delimiter}CHAT MODELS{tuple_delimiter}Llama 2 includes fine-tuned chat models{tuple_delimiter}7)
 {record_delimiter}
-("entity"{tuple_delimiter}C3{tuple_delimiter}CATEGORY{tuple_delimiter}A category or cluster used in the analysis, representing a specific subset of the data)
-{record_delimiter}
-("entity"{tuple_delimiter}TS{tuple_delimiter}CATEGORY{tuple_delimiter}A category or cluster used in the analysis, representing a specific subset of the data)
-{record_delimiter}
-("entity"{tuple_delimiter}UNITS{tuple_delimiter}METRIC{tuple_delimiter}The number of context units, such as community summaries or text chunks, used in the analysis)
-{record_delimiter}
-("entity"{tuple_delimiter}TOKENS{tuple_delimiter}METRIC{tuple_delimiter}The number of tokens, or individual words, used in the analysis)
-{record_delimiter}
-("entity"{tuple_delimiter}% MAX{tuple_delimiter}METRIC{tuple_delimiter}The percentage of the maximum token count used in the analysis)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAG{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}RAG is used to produce direct responses from podcast transcripts{tuple_delimiter}7)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAG{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}RAG is used to produce direct responses from news articles{tuple_delimiter}7)
-{record_delimiter}
-("relationship"{tuple_delimiter}C0{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}C0 is a category used in the analysis of podcast transcripts{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C1{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}C1 is a category used in the analysis of podcast transcripts{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C2{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}C2 is a category used in the analysis of podcast transcripts{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C3{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}C3 is a category used in the analysis of podcast transcripts{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}TS{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}TS is a category used in the analysis of podcast transcripts{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C0{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}C0 is a category used in the analysis of news articles{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C1{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}C1 is a category used in the analysis of news articles{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C2{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}C2 is a category used in the analysis of news articles{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}C3{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}C3 is a category used in the analysis of news articles{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}TS{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}TS is a category used in the analysis of news articles{tuple_delimiter}5)
-{record_delimiter}
-("relationship"{tuple_delimiter}UNITS{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}Units are used to measure the context in podcast transcripts{tuple_delimiter}6)
-{record_delimiter}
-("relationship"{tuple_delimiter}UNITS{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}Units are used to measure the context in news articles{tuple_delimiter}6)
-{record_delimiter}
-("relationship"{tuple_delimiter}TOKENS{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}Tokens are used to measure the word count in podcast transcripts{tuple_delimiter}6)
-{record_delimiter}
-("relationship"{tuple_delimiter}TOKENS{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}Tokens are used to measure the word count in news articles{tuple_delimiter}6)
-{record_delimiter}
-("relationship"{tuple_delimiter}% MAX{tuple_delimiter}PODCAST TRANSCRIPTS{tuple_delimiter}% Max is used to measure the percentage of maximum token count in podcast transcripts{tuple_delimiter}6)
-{record_delimiter}
-("relationship"{tuple_delimiter}% MAX{tuple_delimiter}NEWS ARTICLES{tuple_delimiter}% Max is used to measure the percentage of maximum token count in news articles{tuple_delimiter}6)
+("relationship"{tuple_delimiter}LOUVAIN TO LEIDEN{tuple_delimiter}COMMUNITY DETECTION{tuple_delimiter}Louvain to Leiden is a method for community detection{tuple_delimiter}6)
 {completion_delimiter}
 #############################
 
@@ -106,101 +63,154 @@ output:
 Example 2:
 
 text:
- , 21(5):88–92.
-Koesten, L., Gregory, K., Groth, P., and Simperl, E. (2021). Talking datasets–understanding data
-sensemaking behaviours. International journal of human-computer studies , 146:102562.
-Kuratov, Y ., Bulatov, A., Anokhin, P., Sorokin, D., Sorokin, A., and Burtsev, M. (2024). In search
-of needles in a 11m haystack: Recurrent memory finds what llms miss.
-LangChain (2024). Langchain graphs. https://python .langchain .com/docs/use cases/graph/.
-Laskar, M. T. R., Hoque, E., and Huang, J. (2020). Query focused abstractive summarization via
-incorporating query relevance and transfer learning with transformer models. In Advances in
-Artificial Intelligence: 
+-connected communities. Scientific Reports , 9(1).
+Trajanoska, M., Stojanov, R., and Trajanov, D. (2023). Enhancing knowledge graph construction
+using large language models. ArXiv , abs/2305.04676.
+Trivedi, H., Balasubramanian, N., Khot, T., and Sabharwal, A. (2022). Interleaving retrieval
+with chain-of-thought reasoning for knowledge-intensive multi-step questions. arXiv preprint
+arXiv:2212.10509 .
+Wang, J., Liang, Y ., Meng, F., Sun, Z., Shi, H., Li, Z., Xu, J., Qu, J., and Zhou, J. (2023a). Is chatgpt
+a good nlg evaluator? a preliminary study. arXiv preprint arXiv:2303.04048 .
+Wang
 ------------------------
 output:
-("entity"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}PERSON{tuple_delimiter}Koesten, L. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}SCIENTIFIC REPORTS{tuple_delimiter}PUBLICATION{tuple_delimiter}Scientific Reports is a peer-reviewed open access scientific journal covering all areas of the natural sciences)
 {record_delimiter}
-("entity"{tuple_delimiter}GREGORY, K.{tuple_delimiter}PERSON{tuple_delimiter}Gregory, K. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}TRAJANOSKA, M.{tuple_delimiter}PERSON{tuple_delimiter}M. Trajanoska is an author who contributed to the research on enhancing knowledge graph construction using large language models)
 {record_delimiter}
-("entity"{tuple_delimiter}GROTH, P.{tuple_delimiter}PERSON{tuple_delimiter}Groth, P. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}STOJANOV, R.{tuple_delimiter}PERSON{tuple_delimiter}R. Stojanov is an author who contributed to the research on enhancing knowledge graph construction using large language models)
 {record_delimiter}
-("entity"{tuple_delimiter}SIMPERL, E.{tuple_delimiter}PERSON{tuple_delimiter}Simperl, E. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}TRAJANOV, D.{tuple_delimiter}PERSON{tuple_delimiter}D. Trajanov is an author who contributed to the research on enhancing knowledge graph construction using large language models)
 {record_delimiter}
-("entity"{tuple_delimiter}INTERNATIONAL JOURNAL OF HUMAN-COMPUTER STUDIES{tuple_delimiter}PUBLICATION{tuple_delimiter}The journal where the paper "Talking datasets–understanding data sensemaking behaviours" was published)
+("entity"{tuple_delimiter}KNOWLEDGE GRAPH CONSTRUCTION{tuple_delimiter}RESEARCH TOPIC{tuple_delimiter}The process of creating a knowledge graph, which is a structured representation of knowledge in the form of entities and their relationships)
 {record_delimiter}
-("entity"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}PERSON{tuple_delimiter}Kuratov, Y. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}LARGE LANGUAGE MODELS{tuple_delimiter}TECHNOLOGY{tuple_delimiter}Advanced machine learning models that are trained on vast amounts of text data to understand and generate human language)
 {record_delimiter}
-("entity"{tuple_delimiter}BULATOV, A.{tuple_delimiter}PERSON{tuple_delimiter}Bulatov, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}ARXIV{tuple_delimiter}PUBLICATION PLATFORM{tuple_delimiter}arXiv is an open-access repository of electronic preprints approved for publication after moderation, but not full peer review)
 {record_delimiter}
-("entity"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}PERSON{tuple_delimiter}Anokhin, P. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}TRIVEDI, H.{tuple_delimiter}PERSON{tuple_delimiter}H. Trivedi is an author who contributed to the research on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions)
 {record_delimiter}
-("entity"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, D. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}BALASUBRAMANIAN, N.{tuple_delimiter}PERSON{tuple_delimiter}N. Balasubramanian is an author who contributed to the research on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions)
 {record_delimiter}
-("entity"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}KHOT, T.{tuple_delimiter}PERSON{tuple_delimiter}T. Khot is an author who contributed to the research on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions)
 {record_delimiter}
-("entity"{tuple_delimiter}BURTSEV, M.{tuple_delimiter}PERSON{tuple_delimiter}Burtsev, M. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}SABHARWAL, A.{tuple_delimiter}PERSON{tuple_delimiter}A. Sabharwal is an author who contributed to the research on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions)
 {record_delimiter}
-("entity"{tuple_delimiter}LANGCHAIN{tuple_delimiter}ORGANIZATION{tuple_delimiter}LangChain is an organization that developed Langchain graphs)
+("entity"{tuple_delimiter}RETRIEVAL-AUGMENTED GENERATION{tuple_delimiter}TECHNIQUE{tuple_delimiter}A method that combines information retrieval with text generation to improve the quality and relevance of generated content)
 {record_delimiter}
-("entity"{tuple_delimiter}LANGCHAIN GRAPHS{tuple_delimiter}TECHNOLOGY{tuple_delimiter}Langchain graphs is a technology developed by LangChain)
+("entity"{tuple_delimiter}CHAIN-OF-THOUGHT REASONING{tuple_delimiter}TECHNIQUE{tuple_delimiter}A reasoning process that involves breaking down complex problems into a series of simpler, interconnected steps)
 {record_delimiter}
-("entity"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}PERSON{tuple_delimiter}Laskar, M. T. R. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
+("entity"{tuple_delimiter}WANG, J.{tuple_delimiter}PERSON{tuple_delimiter}J. Wang is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("entity"{tuple_delimiter}HOQUE, E.{tuple_delimiter}PERSON{tuple_delimiter}Hoque, E. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
+("entity"{tuple_delimiter}LIANG, Y.{tuple_delimiter}PERSON{tuple_delimiter}Y. Liang is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("entity"{tuple_delimiter}HUANG, J.{tuple_delimiter}PERSON{tuple_delimiter}Huang, J. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
+("entity"{tuple_delimiter}MENG, F.{tuple_delimiter}PERSON{tuple_delimiter}F. Meng is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("entity"{tuple_delimiter}ADVANCES IN ARTIFICIAL INTELLIGENCE{tuple_delimiter}PUBLICATION{tuple_delimiter}The conference where the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models" was presented)
+("entity"{tuple_delimiter}SUN, Z.{tuple_delimiter}PERSON{tuple_delimiter}Z. Sun is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GREGORY, K.{tuple_delimiter}Koesten, L. and Gregory, K. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}SHI, H.{tuple_delimiter}PERSON{tuple_delimiter}H. Shi is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GROTH, P.{tuple_delimiter}Koesten, L. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}LI, Z.{tuple_delimiter}PERSON{tuple_delimiter}Z. Li is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Koesten, L. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}XU, J.{tuple_delimiter}PERSON{tuple_delimiter}J. Xu is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}GROTH, P.{tuple_delimiter}Gregory, K. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}QU, J.{tuple_delimiter}PERSON{tuple_delimiter}J. Qu is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Gregory, K. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}ZHOU, J.{tuple_delimiter}PERSON{tuple_delimiter}J. Zhou is an author who contributed to the research on evaluating ChatGPT as a natural language generation evaluator)
 {record_delimiter}
-("relationship"{tuple_delimiter}GROTH, P.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Groth, P. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+("entity"{tuple_delimiter}CHATGPT{tuple_delimiter}TECHNOLOGY{tuple_delimiter}ChatGPT is a large language model developed by OpenAI, designed to generate human-like text based on the input it receives)
 {record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BULATOV, A.{tuple_delimiter}Kuratov, Y. and Bulatov, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("entity"{tuple_delimiter}NATURAL LANGUAGE GENERATION{tuple_delimiter}TECHNOLOGY{tuple_delimiter}The process of generating coherent and contextually relevant text from structured data or other forms of input)
 {record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Kuratov, Y. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TRAJANOSKA, M.{tuple_delimiter}STOJANOV, R.{tuple_delimiter}M. Trajanoska and R. Stojanov co-authored a paper on enhancing knowledge graph construction using large language models{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Kuratov, Y. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TRAJANOSKA, M.{tuple_delimiter}TRAJANOV, D.{tuple_delimiter}M. Trajanoska and D. Trajanov co-authored a paper on enhancing knowledge graph construction using large language models{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Kuratov, Y. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}STOJANOV, R.{tuple_delimiter}TRAJANOV, D.{tuple_delimiter}R. Stojanov and D. Trajanov co-authored a paper on enhancing knowledge graph construction using large language models{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Kuratov, Y. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}KNOWLEDGE GRAPH CONSTRUCTION{tuple_delimiter}LARGE LANGUAGE MODELS{tuple_delimiter}Large language models are used to enhance the process of knowledge graph construction{tuple_delimiter}7)
 {record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Bulatov, A. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TRIVEDI, H.{tuple_delimiter}BALASUBRAMANIAN, N.{tuple_delimiter}H. Trivedi and N. Balasubramanian co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Bulatov, A. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TRIVEDI, H.{tuple_delimiter}KHOT, T.{tuple_delimiter}H. Trivedi and T. Khot co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Bulatov, A. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TRIVEDI, H.{tuple_delimiter}SABHARWAL, A.{tuple_delimiter}H. Trivedi and A. Sabharwal co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Bulatov, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}BALASUBRAMANIAN, N.{tuple_delimiter}KHOT, T.{tuple_delimiter}N. Balasubramanian and T. Khot co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Anokhin, P. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}BALASUBRAMANIAN, N.{tuple_delimiter}SABHARWAL, A.{tuple_delimiter}N. Balasubramanian and A. Sabharwal co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Anokhin, P. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}KHOT, T.{tuple_delimiter}SABHARWAL, A.{tuple_delimiter}T. Khot and A. Sabharwal co-authored a paper on interleaving retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Anokhin, P. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}RETRIEVAL-AUGMENTED GENERATION{tuple_delimiter}CHAIN-OF-THOUGHT REASONING{tuple_delimiter}Chain-of-thought reasoning is used in conjunction with retrieval-augmented generation to improve the quality of responses to knowledge-intensive multi-step questions{tuple_delimiter}7)
 {record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Sorokin, D. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}LIANG, Y.{tuple_delimiter}J. Wang and Y. Liang co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, D. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}MENG, F.{tuple_delimiter}J. Wang and F. Meng co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}SUN, Z.{tuple_delimiter}J. Wang and Z. Sun co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}LANGCHAIN{tuple_delimiter}LANGCHAIN GRAPHS{tuple_delimiter}LangChain developed Langchain graphs{tuple_delimiter}9)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}SHI, H.{tuple_delimiter}J. Wang and H. Shi co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HOQUE, E.{tuple_delimiter}Laskar, M. T. R. and Hoque, E. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}LI, Z.{tuple_delimiter}J. Wang and Z. Li co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HUANG, J.{tuple_delimiter}Laskar, M. T. R. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}XU, J.{tuple_delimiter}J. Wang and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}HOQUE, E.{tuple_delimiter}HUANG, J.{tuple_delimiter}Hoque, E. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
-{completion_delimiter}
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}QU, J.{tuple_delimiter}J. Wang and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}WANG, J.{tuple_delimiter}ZHOU, J.{tuple_delimiter}J. Wang and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}MENG, F.{tuple_delimiter}Y. Liang and F. Meng co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}SUN, Z.{tuple_delimiter}Y. Liang and Z. Sun co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}SHI, H.{tuple_delimiter}Y. Liang and H. Shi co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}LI, Z.{tuple_delimiter}Y. Liang and Z. Li co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}XU, J.{tuple_delimiter}Y. Liang and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}QU, J.{tuple_delimiter}Y. Liang and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LIANG, Y.{tuple_delimiter}ZHOU, J.{tuple_delimiter}Y. Liang and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}SUN, Z.{tuple_delimiter}F. Meng and Z. Sun co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}SHI, H.{tuple_delimiter}F. Meng and H. Shi co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}LI, Z.{tuple_delimiter}F. Meng and Z. Li co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}XU, J.{tuple_delimiter}F. Meng and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}QU, J.{tuple_delimiter}F. Meng and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MENG, F.{tuple_delimiter}ZHOU, J.{tuple_delimiter}F. Meng and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SUN, Z.{tuple_delimiter}SHI, H.{tuple_delimiter}Z. Sun and H. Shi co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SUN, Z.{tuple_delimiter}LI, Z.{tuple_delimiter}Z. Sun and Z. Li co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SUN, Z.{tuple_delimiter}XU, J.{tuple_delimiter}Z. Sun and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SUN, Z.{tuple_delimiter}QU, J.{tuple_delimiter}Z. Sun and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SUN, Z.{tuple_delimiter}ZHOU, J.{tuple_delimiter}Z. Sun and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SHI, H.{tuple_delimiter}LI, Z.{tuple_delimiter}H. Shi and Z. Li co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SHI, H.{tuple_delimiter}XU, J.{tuple_delimiter}H. Shi and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SHI, H.{tuple_delimiter}QU, J.{tuple_delimiter}H. Shi and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SHI, H.{tuple_delimiter}ZHOU, J.{tuple_delimiter}H. Shi and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LI, Z.{tuple_delimiter}XU, J.{tuple_delimiter}Z. Li and J. Xu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LI, Z.{tuple_delimiter}QU, J.{tuple_delimiter}Z. Li and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LI, Z.{tuple_delimiter}ZHOU, J.{tuple_delimiter}Z. Li and J. Zhou co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}XU, J.{tuple_delimiter}QU, J.{tuple_delimiter}J. Xu and J. Qu co-authored a paper on evaluating ChatGPT as a natural language generation evaluator{
 #############################
 
 
