@@ -1,19 +1,20 @@
+
 encoding_model: cl100k_base
 skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
   type: azure_openai_chat # or azure_openai_chat
   model: gpt-4o
-  model_supports_json: true # recommended if this is available for your model.
+  model_supports_json: True # recommended if this is available for your model.
   max_tokens: 4000
   # request_timeout: 180.0
-  api_base: https://fleet-openai.openai.azure.com
-  api_version: "2024-04-01-preview"
+  api_base: https://fleet-france.openai.azure.com
+  api_version: 2024-04-01-preview
   # organization: <organization_id>
   deployment_name: gpt-4o
-  tokens_per_minute: 150000 # set a leaky bucket throttle
+  tokens_per_minute: 150_000 # set a leaky bucket throttle
   requests_per_minute: 10_000 # set a leaky bucket throttle
-  # max_retries: 10
+  max_retries: 10
   max_retry_wait: 10.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
   # concurrent_requests: 25 # the number of parallel inflight requests that may be made
@@ -30,29 +31,30 @@ async_mode: threaded # or asyncio
 embeddings:
   ## parallelization: override the global parallelization settings for embeddings
   async_mode: threaded # or asyncio
+  # target: required # or all
   llm:
     api_key: ${GRAPHRAG_API_KEY}
-    type: azure_openai_embedding # or openai_embedding
+    type: azure_openai_embedding # or azure_openai_embedding
     model: text-embedding-ada-002
-    api_base: https://fleet-openai.openai.azure.com
-    api_version: "2024-04-01-preview"
+    api_base: https://fleet-france.openai.azure.com
+    api_version: 2024-04-01-preview
     # organization: <organization_id>
     deployment_name: text-embedding-ada-002
-    tokens_per_minute: 250000 # set a leaky bucket throttle
-    requests_per_minute: 10000 # set a leaky bucket throttle
+    tokens_per_minute: 150_000 # set a leaky bucket throttle
+    requests_per_minute: 10_000 # set a leaky bucket throttle
     max_retries: 10
-    # max_retry_wait: 10.0
+    max_retry_wait: 10.0
     sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
     # concurrent_requests: 25 # the number of parallel inflight requests that may be made
     # batch_size: 16 # the number of documents to send in a single request
     # batch_max_tokens: 8191 # the maximum number of tokens to send in a single request
-    # target: required # or optional
+    
   
 
 
 chunks:
-  size: 512
-  overlap: 64
+  size: 1200
+  overlap: 100
   group_by_columns: [id] # by default, we don't allow chunks to cross documents
     
 input:

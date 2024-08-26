@@ -1,4 +1,5 @@
 # Overview
+
 <div align="left">
 <a href="https://pypi.org/project/graphfleet/">
    <img alt="Pepy Total Downlods" src="https://img.shields.io/pepy/dt/graphfleet">
@@ -6,8 +7,6 @@
    <img alt="GitHub License" src="https://img.shields.io/github/license/qredence/graphfleet">
    <img alt="GitHub forks" src="https://img.shields.io/github/forks/qredence/graphfleet">
    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/qredence/graphfleet">
-   <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet">
-   <img alt="Discord" src="https://img.shields.io/discord/1053300403149733969?style=flat&label=discord">
 
 </div>
 
@@ -21,9 +20,7 @@ GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://gi
 
 GraphFleet uses knowledge graphs to provide substantial improvements in question-and-answer performance when reasoning about complex information. It addresses limitations of traditional RAG approaches:
 
-
 ## Roadmap
-
 
 - [ ] Provide a FleetUI Design Kit and a quicker way of starting GraphFleet locally.
 - [ ] Provide a Toddle interface ready to use for GraphFleet
@@ -57,30 +54,26 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 
 ### Prerequisites
 
-
 - Python 3.11
+
 - Poetry
 - Make sure to have a virtual environment manager such as `virtualenv` installed
-
 
 ### Installation
 
 1. Clone the repository:
 
-``` bash
+   ```bash
    git clone https://github.com/Qredence/GraphFleet.git
    cd GraphFleet
-```
+   ```
 
+2. Install the dependencies:
 
-2. Simply run these in your terminal:
-
-   ``` bash
+   ```bash
    poetry shell
    poetry install
    ```
-
-
 
 ### Usage
 
@@ -89,14 +82,23 @@ Environment Variables: Set up your environment variables in a .env file (refer t
 
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
-    ```bash
-    export GRAPHRAG_API_KEY="your_api_key_here"
-    export GRAPHRAG_API_BASE="your_api_base_url_here"
-    export GRAPHRAG_API_VERSION="your_api_version_here"
-    export GRAPHRAG_LLM_MODEL="your_llm_model_here"
-    export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
-    export GRAPHRAG_EMBEDDING_MODEL="your_embedding_model_here"
-    ```
+
+    ```sh
+export GRAPHRAG_API_KEY="your_api_key_here"
+export GRAPHRAG_API_BASE="<https://your-azure-openai-resource.openai.azure.com/>"
+export GRAPHRAG_API_VERSION=""
+export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name"
+export GRAPHRAG_API_TYPE="azure_openai"
+export GRAPHRAG_EMBEDDING_MODEL="text-embedding-ada-002"
+export GRAPHRAG_LLM_MODEL="gpt-4"
+export GRAPHRAG_DATA_PATH="./your_data_directory"
+export GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding"
+export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
+export GRAPHRAG_EMBEDDING_ENDPOINT="<https://your-azure-openai-embedding-resource.openai.azure.com/>"
+export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
+
+   ```
+
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
 
@@ -115,12 +117,10 @@ Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks
 ### Start the application API only
 
 ``` bash
-uvicorn graphfleet.api.api:app --host 0.0.0.0 --port 8001
+>> soon
 ```
 
 Access the interface in your web browser at the provided URL  <http://0.0.0.0:8001/docs> .
-
-
 
 1. Data Indexing:
 
@@ -139,13 +139,13 @@ app.py (FastAPI Application): Run a Streamlit-powered web interface to interact 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-uvicorn api:app --reload --port 8001
+uvicorn app:main --reload --port 8001 
 ```
 
-### Start the application
+### Start the application (Follow the get-started-graphfleet.ipynb notebook)
 
 ``` bash
-streamlit run app.py # Access the interface in your web browser at the provided URL (usually http://localhost:8080).
+### streamlit run app.py # Access the interface in your web browser at the provided URL (usually http://localhost:8080).
 ```
 
 ``` bash
@@ -158,7 +158,6 @@ For Global query mode :
 python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
 ```
 
-
 ### Running the API only
 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
@@ -170,11 +169,12 @@ uvicorn api:app --reload --port 8001
 
 ## Security
 
-[Security](SECURITY.md)
+For details about our security policy, please see [Security](SECURITY.md) or [Security](docs/SECURITY.md).
 
 ## License
 
-[text](LICENSE)
+This project is licensed under the Apache License 2.0. For the full license text, please see [License](LICENSE) or [License](docs/LICENSE).
 
 ## Star History
+
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)

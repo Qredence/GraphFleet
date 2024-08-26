@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.5.11"
+version = "0.5.2"
 description = "Build upon GraphRAG, provide a quick solution setup and is part of the overall Qredence System like AgenticFleet and FleetUI"
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "Apache-2.0"
@@ -15,7 +15,9 @@ vcs = "git"
 style = "semver"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
+
+python = ">=3.11.2,<3.13"
+
 environs = "^11.0.0"
 datashaper = "^0.0.49"
 
@@ -26,80 +28,91 @@ lancedb = "^0.11.0"
 uvloop = {version = ">=0.20.0,<0.21.0", markers = "platform_system != 'Windows'"}
 nest-asyncio = {version = "^1.6.0", markers = "platform_system == 'Windows'"}
 
-# Async IO
-aiolimiter = "^1.1.0"
+
+# Core dependencies
 aiofiles = "^24.1.0"
+aiolimiter = "^1.1.0"
+at = "^0.0.3"
+build = "^1.2.1"
+datashaper = "^0.0.49"
+devtools = "^0.12.2"
+environs = "^11.0.0"
+fastapi = "^0.110.1"
+httpx = "^0.27.0"
+jq = "^1.7.0"
+nest-asyncio = {version = "^1.6.0", markers = "platform_system == 'Windows'"}
+packaging = ">=23.1,<24.1"
+pydantic = "^2"
+pyautogen = "^0.2.35"
+python-dotenv = "^1.0.0"
+python-magic = "^0.4.27"
+python-multipart = "^0.0.9"
+pyyaml = "^6.0.1"
+pyaml-env = "^1.2.1"
+requests = "^2.32.3"
+rich = "^13.6.0"
+tenacity = ">=8.2.0,<10.0.0"
+textual = ">=0.74.0"
+typing-extensions = "^4.12.2"
+urllib3 = "^2.2.2"
+uvicorn = "^0.25.0"
+uvloop = {version = ">=0.20.0,<0.21.0", markers = "platform_system != 'Windows'"}
+yq = "^3.4.3"
 
-# LLM
+# AI and LLM
+nltk = "^3.9.1"
 openai = "^1.35.7"
-nltk = "^3.9.1"  # Changed from "3.8.1" to "^3.9.1"
+promptflow = "^1.14.0"
+promptflow-tools = "^1.4.0"
 tiktoken = "^0.7.0"
+transformers = "^4.44.2"
 
-# Data-Sci
-numba = "^0.60.0"
-numpy = "^1.25.2"
+# Data Science and Machine Learning
+fastparquet = "^2024.2.0"
 graspologic = "^3.4.1"
 graspologic-native = "^1.2.1"
 networkx = "^3"
-fastparquet = "^2024.2.0"
+numba = "^0.60.0"
+numpy = "^1.25.2"
+pandas = "^2.2.2"
+scikit-learn = "^1.5.1"
 scipy = "^1.12.0"
-
-# Configuration
-pyyaml = "^6.0.1"
-pyaml-env = "^1.2.1"
-python-dotenv = "^1.0.0"
-
-# Network
-tenacity = ">=8.2.0,<10.0.0"
-
 swifter = "^1.4.0"
-pydantic = "^2"
-rich = "^13.6.0"
-textual = ">=0.74.0"
-devtools = "^0.12.2"
 
-typing-extensions = "^4.12.2"
+# Vector Stores
+lancedb = "^0.11.0"
 
-# Azure dependencies
-azure-search-documents = "^11.4.0"
-azure-cosmos = "^4.7.0"
-azure-storage-blob = "^12.19.0"
-azure-identity = "^1.17.1"
+# Azure
 azure-cli-core = "^2.62.0"
 azure-core = "^1.30.2"
-
-at = "^0.0.3"
-yfiles-jupyter-graphs = "^1.7.3"
-jupyter-contrib-nbextensions = "^0.7.0"
-jupyter = "^1.0.0"
-
-packaging = ">=23.1,<24.1"
-
-yq = "^3.4.3"
-jq = "^1.7.0"
-fastapi = "^0.110.1"
-uvicorn = "^0.25.0"
-
-promptflow = "^1.14.0"
-promptflow-tools = "^1.4.0"
+azure-cosmos = "^4.7.0"
+azure-identity = "^1.17.1"
+azure-search-documents = "^11.4.0"
+azure-storage-blob = "^12.19.0"
 microsoft-bing-websearch = "^1.0.0"
-build = "^1.2.1"
-requests = "^2.32.3"
-pandas = "^2.2.2"
+
+# Jupyter and Visualization
+ipython = "^8.26.0"
+ipywidgets = "^8.1.3"
+jupyter = "^1.0.0"
+jupyter-contrib-nbextensions = "^0.7.0"
+yfiles-jupyter-graphs = "^1.7.3"
+
+# Monitoring and Logging
 detect-secrets = "^1.5.0"
 kubernetes = "^30.1.0"
-httpx = "^0.27.0"
-opencensus-ext-azure = "^1.1.13"
-urllib3 = "^2.2.2"
-opencensus-context = "^0.1.3"
 opencensus = "^0.11.4"
+opencensus-context = "^0.1.3"
+
+
+
+# Utilities
 flake8 = "^7.1.1"
-ipython = "^8.26.0"
-python-magic = "^0.4.27"
-tqdm = "^4.66.5"
-python-multipart = "^0.0.9"
-ipywidgets = "^8.1.3"
+prompt-toolkit = "^3.0.47"
 pypdf = "^4.3.1"
+pytest = "^8.3.2"
+tqdm = "^4.66.5"
+future = "^1.0.0"
 graphrag = "^0.3.1"
 
 [tool.poetry.group.dev.dependencies]
@@ -112,18 +125,17 @@ pyright = "^1.1.371"
 pytest = "^8.2.0"
 pytest-asyncio = "^0.23.4"
 pytest-timeout = "^2.3.1"
-ruff = "^0.5.2"
 semversioner = "^2.0.3"
-
 update-toml = "^0.2.1"
-graphrag = "^0.3.1"
 
 [tool.ruff]
+target-version = "py310"
+extend-include = ["*.ipynb"]
 select = ["E", "F", "I"]
 fix = true
 
 [tool.ruff.isort]
-known-first-party = ["graphfleet"]
+known-first-party = ["graphrag", "graphfleet"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
@@ -133,3 +145,48 @@ build-backend = "poetry_dynamic_versioning.backend"
 _sort_imports = "ruff check --select I --fix . --preview"
 _format_code = "ruff format  . --preview"
 _ruff_check = 'ruff check . --preview'
+
+_pyright = "pyright"
+_convert_local_search_nb = 'jupyter nbconvert --output-dir=docsite/posts/query/notebooks/ --output="{notebook_name}_nb" --template=docsite/nbdocsite_template --to markdown examples_notebooks/local_search.ipynb'
+_convert_global_search_nb = 'jupyter nbconvert --output-dir=docsite/posts/query/notebooks/ --output="{notebook_name}_nb" --template=docsite/nbdocsite_template --to markdown examples_notebooks/global_search.ipynb'
+_semversioner_release = "semversioner release"
+_semversioner_changelog = "semversioner changelog > CHANGELOG.md"
+_semversioner_update_toml_version = "update-toml update --path tool.poetry.version --value $(poetry run semversioner current-version)"
+coverage_report = 'coverage report --omit "**/tests/**" --show-missing'
+check_format = 'ruff format . --check --preview'
+fix = "ruff  --preview check --fix ."
+fix_unsafe = "ruff check --preview --fix --unsafe-fixes ."
+
+_test_all = "coverage run -m pytest ./tests"
+test_unit = "pytest ./tests/unit"
+test_integration = "pytest ./tests/integration"
+test_smoke = "pytest ./tests/smoke"
+test_notebook = "pytest ./tests/notebook"
+index = "python -m graphrag.index"
+query = "python -m graphrag.query"
+prompt_tune = "python -m graphrag.prompt_tune"
+test_only = "pytest -s -k"
+
+[[tool.poe.tasks.release]]
+sequence = [
+    '_semversioner_release',
+    '_semversioner_changelog',
+    '_semversioner_update_toml_version',
+]
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.convert_docsite_notebooks]]
+sequence = ['_convert_local_search_nb', '_convert_global_search_nb']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.format]]
+sequence = ['_sort_imports', '_format_code']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.check]]
+sequence = ['check_format', '_ruff_check', '_pyright']
+ignore_fail = 'return_non_zero'
+
+[[tool.poe.tasks.test]]
+sequence = ['_test_all', 'coverage_report']
+ignore_fail = 'return_non_zero'
