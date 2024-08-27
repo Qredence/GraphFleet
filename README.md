@@ -12,8 +12,6 @@
 
 ![GraphFleet_Query](https://github.com/user-attachments/assets/cf32f463-d52f-4568-a795-1f869f33d07f)
 
-
-
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
 ## GraphFleet
@@ -47,9 +45,6 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
    </a>
    <img alt="X (formerly Twitter) Follow" src="https://img.shields.io/twitter/follow/agenticfleet?style=for-the-badge&logo=x&logoColor=white&labelColor=blue&link=https%3A%2F%2Fx.com%2Fagenticfleet">
 
-
-
-
 ## Getting Started
 
 ### Prerequisites
@@ -82,8 +77,7 @@ Environment Variables: Set up your environment variables in a .env file (refer t
 
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
-
-    ```sh
+ ```sh
 export GRAPHRAG_API_KEY="your_api_key_here"
 export GRAPHRAG_API_BASE="<https://your-azure-openai-resource.openai.azure.com/>"
 export GRAPHRAG_API_VERSION=""
@@ -97,8 +91,7 @@ export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
 export GRAPHRAG_EMBEDDING_ENDPOINT="<https://your-azure-openai-embedding-resource.openai.azure.com/>"
 export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
 
-   ```
-
+```
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
 
@@ -114,19 +107,31 @@ Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks
 
    app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface.
 
-### Start the application API only
+### Add your text files in ./graphfleet/input/ and run the auto_prompt function
 
 ``` bash
->> soon
+!python -m graphrag.prompt_tune \
+    --config ./graphfleet/settings.yaml \
+    --root ./graphfleet \
+    --no-entity-types \
+    --output ./graphfleet/prompts
 ```
 
-Access the interface in your web browser at the provided URL  <http://0.0.0.0:8001/docs> .
 
-1. Data Indexing:
+
+### Data Indexing:
 
 Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
 
-3. Interacting with GraphFleet:
+``` bash
+! python -m graphrag.index \
+    --verbose \
+    --root ./graphfleet \
+    --config ./graphfleet/settings.yaml
+```
+
+
+## Interacting with GraphFleet:
 Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
 
 get-started-graphfleet.ipynb: A comprehensive guide to indexing your data and running basic queries.
@@ -134,38 +139,40 @@ Local Search Notebook.ipynb: Demonstrates local search techniques.
 [Add descriptions of other notebooks and their purpose here]
 app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface:
 
+### Running the API only (or run CLI commands for local search or global search)
+
+To run the API, save the code in a file named api.py and execute the following command in your terminal:
+
+``` bash
+## uvicorn app:main --reload --port 8001 
+```
+
+### Run the CLI commands to query the graph (Follow the get-started-graphfleet.ipynb notebook)
+
+``` bash
+! python -m graphrag.query \
+--root ./graphfleet \
+--method global \
+--streaming \ #stream the response
+"Language Agent Tree Search?"
+```
+
+``` bash
+! python -m graphrag.query \
+--root ./graphfleet \
+--method global \
+--streaming \ #stream the response
+"What are the key features of GraphRAG ??"
+```
+
 ### Running the API only
 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-uvicorn app:main --reload --port 8001 
+## uvicorn api:app --reload --port 8001 SOON
 ```
 
-### Start the application (Follow the get-started-graphfleet.ipynb notebook)
-
-``` bash
-### streamlit run app.py # Access the interface in your web browser at the provided URL (usually http://localhost:8080).
-```
-
-``` bash
-python -m graphrag.query --root ./graphfleet --method local "What are the key features of GraphRAG ??"
-```
-
-For Global query mode :
-
-``` bash
-python -m graphrag.query --root ./graphfleet --method global "What are the top main features of GraphRAG"
-```
-
-### Running the API only
-
-To run the API, save the code in a file named api.py and execute the following command in your terminal:
-
-``` bash
-uvicorn api:app --reload --port 8001
-```
-![GraphFleet_Query](https://github.com/user-attachments/assets/cf32f463-d52f-4568-a795-1f869f33d07f)
 
 ## Security
 

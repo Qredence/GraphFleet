@@ -55,7 +55,7 @@ build.zip
 __pycache__
 
 .pipeline
-
+.genaiscript
 # Azurite
 temp_azurite/
 __azurite*.json
