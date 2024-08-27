@@ -6,7 +6,7 @@ llm:
   type: azure_openai_chat # or azure_openai_chat
   model: gpt-4o
   model_supports_json: True # recommended if this is available for your model.
-  max_tokens: 4000
+  max_tokens: 5000
   # request_timeout: 180.0
   api_base: https://fleet-france.openai.azure.com
   api_version: 2024-04-01-preview
