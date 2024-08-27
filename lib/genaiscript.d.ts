@@ -67,9 +67,9 @@ interface PromptLike extends PromptDefinition {
     text?: string
 }
 
-type SystemPromptId = OptionsOrString<"system" | "system.annotations" | "system.changelog" | "system.diagrams" | "system.diff" | "system.explanations" | "system.files" | "system.files_schema" | "system.fs_find_files" | "system.fs_read_file" | "system.math" | "system.python" | "system.python_code_interpreter" | "system.retrieval_fuzz_search" | "system.retrieval_vector_search" | "system.retrieval_web_search" | "system.schema" | "system.tasks" | "system.technical" | "system.tools" | "system.typescript" | "system.zero_shot_cot">
+type SystemPromptId = OptionsOrString<"system" | "system.annotations" | "system.changelog" | "system.diagrams" | "system.diff" | "system.explanations" | "system.files" | "system.files_schema" | "system.fs_find_files" | "system.fs_read_file" | "system.math" | "system.md_frontmatter" | "system.python" | "system.python_code_interpreter" | "system.retrieval_fuzz_search" | "system.retrieval_vector_search" | "system.retrieval_web_search" | "system.schema" | "system.tasks" | "system.technical" | "system.tools" | "system.typescript" | "system.zero_shot_cot">
 
-type SystemToolId = OptionsOrString<"fs_find_files" | "fs_read_file" | "math_eval" | "python_code_interpreter" | "retrieval_fuzz_search" | "retrieval_vector_search" | "retrieval_web_search">
+type SystemToolId = OptionsOrString<"fs_find_files" | "fs_read_file" | "math_eval" | "md_read_frontmatter" | "python_code_interpreter" | "retrieval_fuzz_search" | "retrieval_vector_search" | "retrieval_web_search">
 
 type FileMergeHandler = (
     filename: string,
@@ -111,11 +111,13 @@ interface ModelConnectionOptions {
      * Which LLM model to use.
      *
      * @default gpt-4
-     * @example gpt-4 gpt-4-32k gpt-3.5-turbo ollama:phi3 ollama:llama3 ollama:mixtral aici:mixtral
+     * @example gpt-4
      */
     model?:
         | "openai:gpt-4"
-        | "openai:gpt-4-32k"
+        | "openai:gpt-4-turbo"
+        | "openai:gpt-4o"
+        | "openai:gpt-4o-mini"
         | "openai:gpt-3.5-turbo"
         | "ollama:phi3"
         | "ollama:llama3"
@@ -218,6 +220,7 @@ interface ScriptRuntimeOptions {
 * - `system.fs_find_files`: File find files
 * - `system.fs_read_file`: File Read File
 * - `system.math`: Math expression evaluator
+* - `system.md_frontmatter`: Frontmatter reader
 * - `system.python`: Expert at generating and understanding Python code.
 * - `system.python_code_interpreter`: Python Dockerized code execution for data analysis
 * - `system.retrieval_fuzz_search`: Full Text Fuzzy Search
@@ -316,6 +319,10 @@ type PromptAssertion = {
 )
 
 interface PromptTest {
+    /**
+     * Short name of the test
+     */
+    name?: string
     /**
      * Description of the test.
      */
@@ -500,7 +507,13 @@ interface ToolCallContent {
     edits?: Edits[]
 }
 
-type ToolCallOutput = string | ToolCallContent | ShellOutput | WorkspaceFile
+type ToolCallOutput =
+    | string
+    | number
+    | boolean
+    | ToolCallContent
+    | ShellOutput
+    | WorkspaceFile
 
 interface WorkspaceFileCache<K, V> {
     /**
@@ -586,10 +599,20 @@ interface ToolCallContext {
 }
 
 interface ToolCallback {
-    definition: ToolDefinition
-    fn: (
+    spec: ToolDefinition
+    impl: (
         args: { context: ToolCallContext } & Record<string, any>
-    ) => ToolCallOutput | Promise<ToolCallOutput>
+    ) => Awaitable<ToolCallOutput>
+}
+
+type AgenticToolCallback = Omit<ToolCallback, "spec"> & {
+    spec: Omit<ToolDefinition, "parameters"> & {
+        parameters: Record<string, any>
+    }
+}
+
+interface AgenticToolProviderCallback {
+    functions: Iterable<AgenticToolCallback>
 }
 
 type ChatParticipantHandler = (
@@ -654,6 +677,7 @@ type PromptSystemArgs = Omit<
     | "maxTokens"
     | "seed"
     | "tests"
+    | "responseLanguage"
     | "responseType"
     | "responseSchema"
     | "files"
@@ -1142,7 +1166,32 @@ interface XML {
      * Parses an XML payload to an object
      * @param text
      */
-    parse(text: string): any
+    parse(text: string, options?: XMLParseOptions): any
+}
+
+interface MD {
+    /**
+     * Parses front matter from markdown
+     * @param text
+     */
+    frontmatter(text: string, format?: "yaml" | "json" | "toml" | "text"): any
+
+    /**
+     * Removes the front matter from the markdown text
+     */
+    content(text: string): string
+
+    /**
+     * Merges frontmatter with the existing text
+     * @param text
+     * @param frontmatter
+     * @param format
+     */
+    updateFrontmatter(
+        text: string,
+        frontmatter: any,
+        format?: "yaml" | "json"
+    ): string
 }
 
 interface JSONL {
@@ -1329,7 +1378,7 @@ interface DefSchemaOptions {
 
 type ChatFunctionHandler = (
     args: { context: ToolCallContext } & Record<string, any>
-) => ToolCallOutput | Promise<ToolCallOutput>
+) => Awaitable<ToolCallOutput>
 
 interface WriteTextOptions extends ContextExpansionOptions {
     /**
@@ -1361,7 +1410,7 @@ interface FileOutputOptions {
 
 interface FileOutput {
     pattern: string
-    description: string
+    description?: string
     options?: FileOutputOptions
 }
 
@@ -1391,6 +1440,7 @@ interface ChatGenerationContext extends ChatTurnGenerationContext {
         options?: DefSchemaOptions
     ): string
     defImages(files: StringLike, options?: DefImagesOptions): void
+    defTool(tool: ToolCallback | AgenticToolCallback | AgenticToolProviderCallback): void
     defTool(
         name: string,
         description: string,
@@ -1403,7 +1453,7 @@ interface ChatGenerationContext extends ChatTurnGenerationContext {
     ): void
     defFileOutput(
         pattern: string,
-        description: string,
+        description?: string,
         options?: FileOutputOptions
     ): void
 }
@@ -1701,12 +1751,6 @@ interface PromptContext extends ChatGenerationContext {
      */
     fs: WorkspaceFileSystem
     workspace: WorkspaceFileSystem
-    YAML: YAML
-    XML: XML
-    JSONL: JSONL
-    CSV: CSV
-    INI: INI
-    AICI: AICI
     host: PromptHost
 }
 
@@ -1774,17 +1818,21 @@ declare function def(
  */
 declare function defFileOutput(
     pattern: string,
-    description: string,
+    description?: string,
     options?: FileOutputOptions
 ): void
 
 /**
  * Declares a tool that can be called from the prompt.
+ * @param tool Agentic tool function.
  * @param name The name of the tool to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
  * @param description A description of what the function does, used by the model to choose when and how to call the function.
  * @param parameters The parameters the tool accepts, described as a JSON Schema object.
  * @param fn callback invoked when the LLM requests to run this function
  */
+declare function defTool(
+    tool: ToolCallback | AgenticToolCallback | AgenticToolProviderCallback
+): void
 declare function defTool(
     name: string,
     description: string,
@@ -1842,6 +1890,11 @@ declare var CSV: CSV
  * XML parsing and stringifying.
  */
 declare var XML: XML
+
+/**
+ * Markdown and frontmatter parsing.
+ */
+declare var MD: MD
 
 /**
  * JSONL parsing and stringifying.
