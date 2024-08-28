@@ -1,0 +1,126 @@
+# yaml-language-server: $schema=https://app.stainlessapi.com/config.schema.json
+
+organization:
+  name: graphfleet
+  docs: https://docs.agenticfleet.com
+  contact: dev-feedback@graphfleet.com
+  github_org: Qredence
+resources:
+  data:
+    methods:
+      list: get /data
+      create: post /data
+      delete: delete /data/{storage_name}
+    models:
+      storagenamelist: StorageNameList
+  index:
+    methods:
+      create: post /index
+      list: get /index
+      delete: delete /index/{index_name}
+    subresources:
+      status:
+        methods:
+          retrieve: get /index/status/{index_name}
+        models:
+          indexstatusresponse: IndexStatusResponse
+      config:
+        subresources:
+          prompts:
+            methods:
+              retrieve: get /index/config/prompts
+    models:
+      indexnamelist: IndexNameList
+  query:
+    methods:
+      global: post /query/global
+      local: post /query/local
+    models:
+      graphresponse: GraphResponse
+  sources:
+    subresources:
+      reports:
+        methods:
+          retrieve: get /source/report/{index_name}/{report_id}
+        models:
+          reportresponse: ReportResponse
+      texts:
+        methods:
+          retrieve: get /source/text/{index_name}/{text_unit_id}
+        models:
+          textunitresponse: TextUnitResponse
+      entities:
+        methods:
+          retrieve: get /source/entity/{index_name}/{entity_id}
+        models:
+          entityresponse: EntityResponse
+      claims:
+        methods:
+          retrieve: get /source/claim/{index_name}/{claim_id}
+        models:
+          claimresponse: ClaimResponse
+      relationships:
+        methods:
+          retrieve: get /source/relationship/{index_name}/{relationship_id}
+        models:
+          relationshipresponse: RelationshipResponse
+  graph_operations:
+    subresources:
+      graphml:
+        methods:
+          retrieve: get /graph/graphml/{index_name}
+      stats:
+        methods:
+          retrieve: get /graph/stats/{index_name}
+        models:
+          graphdataresponse: GraphDataResponse
+  experimental_operations:
+    methods:
+      global_query: post /experimental/query/global/streaming
+  health:
+    methods:
+      retrieve: get /health
+  $shared:
+    models:
+      baseresponse: BaseResponse
+targets:
+  node:
+    package_name: graphfleet
+    production_repo: null
+    publish:
+      npm: false
+  python:
+    package_name: graphfleet
+    production_repo: null
+    publish:
+      pypi: false
+settings:
+  license: Apache-2.0
+client_settings:
+  opts: {}
+  omit_platform_headers: false
+  default_headers: {}
+  default_timeout: PT60S
+  default_retries:
+    max_retries: 2
+    initial_delay_seconds: 0.5
+    max_delay_seconds: 8
+environments:
+  production: https://localhost:8080/test-api
+query_settings:
+  nested_format: brackets
+  array_format: comma
+readme:
+  example_requests:
+    default:
+      type: request
+      endpoint: get /health
+      params: &ref_0 {}
+    headline:
+      type: request
+      endpoint: get /health
+      params: *ref_0
+    pagination:
+      type: request
+      endpoint: get /data
+      params: {}
