@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.5.25"
+version = "0.5.3"
 description = "Advanced implementation of GraphRAG for enhanced LLM reasoning"
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "Apache-2.0"
@@ -48,6 +48,7 @@ isort = "^5.13.0"
 mypy = "^1.8.0"
 flake8 = "^7.1.1"
 pre-commit = "^3.6.0"
+ipykernel = "^6.29.5"
 
 [tool.poetry.extras]
 redis = ["redis"]

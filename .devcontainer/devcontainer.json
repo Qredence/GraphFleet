@@ -6,6 +6,13 @@
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/poetry:2": {}
 	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-toolsai.prompty"
+			]
+		}
+	},
 
 	// Uncomment and adjust the following lines as needed
 	// "forwardPorts": [8000],

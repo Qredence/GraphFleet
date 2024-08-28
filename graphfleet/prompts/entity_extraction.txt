@@ -30,100 +30,38 @@ Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tupl
 Example 1:
 
 text:
-ck, Amir Yazdanbakhsh, and Peter
-Clark. Self-refine: Iterative refinement with self-feedback.
-InNeurIPS , 2023.
-Ramesh Nallapati, Bowen Zhou, Cicero dos Santos, Caglar
-Gulcehre, and Bing Xiang. Abstractive text summariza-
-tion using sequence-to-sequence RNNs and beyond. In
-Special Interest Group on Natural Language Learning ,
-2016.
-OpenAI. GPT-4 technical report. arXiv:2303.08774 , 2023.
-Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan
-Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill
-Qian, Sihan Zhao, Runchu Tian, Ruobing Xie, Jie Zhou,
-Mark Gerstein, Dahai Li, Zhiyuan
+ prefers the outputs of
+the evaluated model over a reference answer [14].
+–InfoBench : InfoBench is also evaluated using GPT-4 (version 1106-preview) as
+the judge determining if the model response follows the decomposed instruction
+and we use the implementation provided by the creators of the benchmark [ 25].
+30Hallucination Judge Example
+You will be given a summary instruction and a generated summary.
+Your task to decide if there is any hallucination in the generated
+summary.
+User Message:
+{{place summary task here}}
+Generated Summary:
+{{place response here}}
+=========================
+Go through each section in the generated summary, do the following:
+- Extract relevant facts from the article that can be used to verify
+the correctness of the summary
+- Decide if any section contains hallucination or not.
+At the end output a JSON with the format:
+{"hallucination_detected": "yes/no", "hallucinated_span": "If yes,
+the exact span
 ------------------------
 output:
-("entity"{tuple_delimiter}AMIR YAZDANBAKHSH{tuple_delimiter}PERSON{tuple_delimiter}Amir Yazdanbakhsh is one of the authors of the paper titled "Self-refine: Iterative refinement with self-feedback" published in NeurIPS 2023)
+("entity"{tuple_delimiter}INFOBENCH{tuple_delimiter}TOOL/BENCHMARK{tuple_delimiter}InfoBench is a benchmark evaluated using GPT-4 to determine if the model response follows the decomposed instruction)
 {record_delimiter}
-("entity"{tuple_delimiter}PETER CLARK{tuple_delimiter}PERSON{tuple_delimiter}Peter Clark is one of the authors of the paper titled "Self-refine: Iterative refinement with self-feedback" published in NeurIPS 2023)
+("entity"{tuple_delimiter}GPT-4{tuple_delimiter}MODEL{tuple_delimiter}GPT-4 is a version of OpenAI's language model used to evaluate InfoBench)
 {record_delimiter}
-("entity"{tuple_delimiter}NEURIPS{tuple_delimiter}EVENT{tuple_delimiter}NeurIPS is a conference where the paper "Self-refine: Iterative refinement with self-feedback" was published in 2023)
+("entity"{tuple_delimiter}HALLUCINATION JUDGE{tuple_delimiter}TOOL/PROCESS{tuple_delimiter}A process where a judge determines if there is any hallucination in a generated summary)
 {record_delimiter}
-("entity"{tuple_delimiter}RAMESH NALLAPATI{tuple_delimiter}PERSON{tuple_delimiter}Ramesh Nallapati is one of the authors of the paper titled "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016)
+("relationship"{tuple_delimiter}INFOBENCH{tuple_delimiter}GPT-4{tuple_delimiter}InfoBench is evaluated using GPT-4 to determine if the model response follows the decomposed instruction{tuple_delimiter}8)
 {record_delimiter}
-("entity"{tuple_delimiter}BOWEN ZHOU{tuple_delimiter}PERSON{tuple_delimiter}Bowen Zhou is one of the authors of the paper titled "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016)
-{record_delimiter}
-("entity"{tuple_delimiter}CICERO DOS SANTOS{tuple_delimiter}PERSON{tuple_delimiter}Cicero dos Santos is one of the authors of the paper titled "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016)
-{record_delimiter}
-("entity"{tuple_delimiter}CAGLAR GULCEHRE{tuple_delimiter}PERSON{tuple_delimiter}Caglar Gulcehre is one of the authors of the paper titled "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016)
-{record_delimiter}
-("entity"{tuple_delimiter}BING XIANG{tuple_delimiter}PERSON{tuple_delimiter}Bing Xiang is one of the authors of the paper titled "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016)
-{record_delimiter}
-("entity"{tuple_delimiter}SPECIAL INTEREST GROUP ON NATURAL LANGUAGE LEARNING{tuple_delimiter}EVENT{tuple_delimiter}The Special Interest Group on Natural Language Learning is an event where the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" was published in 2016)
-{record_delimiter}
-("entity"{tuple_delimiter}OPENAI{tuple_delimiter}ORGANIZATION{tuple_delimiter}OpenAI is the organization that published the GPT-4 technical report on arXiv in 2023)
-{record_delimiter}
-("entity"{tuple_delimiter}GPT-4 TECHNICAL REPORT{tuple_delimiter}DOCUMENT{tuple_delimiter}The GPT-4 technical report is a document published by OpenAI on arXiv in 2023)
-{record_delimiter}
-("entity"{tuple_delimiter}YUJIA QIN{tuple_delimiter}PERSON{tuple_delimiter}Yujia Qin is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}SHIHAO LIANG{tuple_delimiter}PERSON{tuple_delimiter}Shihao Liang is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}YINING YE{tuple_delimiter}PERSON{tuple_delimiter}Yining Ye is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}KUNLUN ZHU{tuple_delimiter}PERSON{tuple_delimiter}Kunlun Zhu is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}LAN YAN{tuple_delimiter}PERSON{tuple_delimiter}Lan Yan is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}YAXI LU{tuple_delimiter}PERSON{tuple_delimiter}Yaxi Lu is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}YANKAI LIN{tuple_delimiter}PERSON{tuple_delimiter}Yankai Lin is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}XIN CONG{tuple_delimiter}PERSON{tuple_delimiter}Xin Cong is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}XIANGRU TANG{tuple_delimiter}PERSON{tuple_delimiter}Xiangru Tang is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}BILL QIAN{tuple_delimiter}PERSON{tuple_delimiter}Bill Qian is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}SIHAN ZHAO{tuple_delimiter}PERSON{tuple_delimiter}Sihan Zhao is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}RUNCHU TIAN{tuple_delimiter}PERSON{tuple_delimiter}Runchu Tian is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}RUOBING XIE{tuple_delimiter}PERSON{tuple_delimiter}Ruobing Xie is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}JIE ZHOU{tuple_delimiter}PERSON{tuple_delimiter}Jie Zhou is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}MARK GERSTEIN{tuple_delimiter}PERSON{tuple_delimiter}Mark Gerstein is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}DAHAI LI{tuple_delimiter}PERSON{tuple_delimiter}Dahai Li is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("entity"{tuple_delimiter}ZHIYUAN{tuple_delimiter}PERSON{tuple_delimiter}Zhiyuan is one of the authors of a paper mentioned in the text)
-{record_delimiter}
-("relationship"{tuple_delimiter}AMIR YAZDANBAKHSH{tuple_delimiter}PETER CLARK{tuple_delimiter}Amir Yazdanbakhsh and Peter Clark co-authored the paper "Self-refine: Iterative refinement with self-feedback" published in NeurIPS 2023{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAMESH NALLAPATI{tuple_delimiter}BOWEN ZHOU{tuple_delimiter}Ramesh Nallapati and Bowen Zhou co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAMESH NALLAPATI{tuple_delimiter}CICERO DOS SANTOS{tuple_delimiter}Ramesh Nallapati and Cicero dos Santos co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAMESH NALLAPATI{tuple_delimiter}CAGLAR GULCEHRE{tuple_delimiter}Ramesh Nallapati and Caglar Gulcehre co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}RAMESH NALLAPATI{tuple_delimiter}BING XIANG{tuple_delimiter}Ramesh Nallapati and Bing Xiang co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BOWEN ZHOU{tuple_delimiter}CICERO DOS SANTOS{tuple_delimiter}Bowen Zhou and Cicero dos Santos co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BOWEN ZHOU{tuple_delimiter}CAGLAR GULCEHRE{tuple_delimiter}Bowen Zhou and Caglar Gulcehre co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BOWEN ZHOU{tuple_delimiter}BING XIANG{tuple_delimiter}Bowen Zhou and Bing Xiang co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}CICERO DOS SANTOS{tuple_delimiter}CAGLAR GULCEHRE{tuple_delimiter}Cicero dos Santos and Caglar Gulcehre co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}CICERO DOS SANTOS{tuple_delimiter}BING XIANG{tuple_delimiter}Cicero dos Santos and Bing Xiang co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}CAGLAR GULCEHRE{tuple_delimiter}BING XIANG{tuple_delimiter}Caglar Gulcehre and Bing Xiang co-authored the paper "Abstractive text summarization using sequence-to-sequence RNNs and beyond" published in the Special Interest Group on Natural Language Learning in 2016{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}OPENAI{tuple_delimiter}GPT-4 TECHNICAL REPORT{tuple_delimiter}OpenAI published the GPT-4 technical report on arXiv in 2023{tuple_delimiter}9)
+("relationship"{tuple_delimiter}HALLUCINATION JUDGE{tuple_delimiter}GPT-4{tuple_delimiter}GPT-4 is used in the Hallucination Judge process to evaluate generated summaries{tuple_delimiter}7)
 {completion_delimiter}
 #############################
 
@@ -131,55 +69,96 @@ output:
 Example 2:
 
 text:
- attempts; (4) LLM-Debate (Du
-et al., 2023), which enables different LLMs to debate with each other, leveraging diverse perspectives
-to find better answers; (5) Quality-Diversity, a simplified version of Intelligent Go-Explore (Lu et al.,
-2024c), which produces and ensembles diverse answers to better explore potential solutions. We also
-use all baselines as initial seeds in the archive for Meta Agent Search. More details about baselines
-can be found in Appendix E.
-Results and Analysis. As shown in Figure 3a, Meta Agent Search effectively and progressively
-discovers agents that perform better than state-of-the-art hand-designed baselines. Important break-
-throughs are highlighted in the text boxes. As is critical in prior works on open-endedness and AI-GAs
-(Faldor et al., 2024; Lehman & Stanley, 2011; Wang et al., 2019, 202
+ , 21(5):88–92.
+Koesten, L., Gregory, K., Groth, P., and Simperl, E. (2021). Talking datasets–understanding data
+sensemaking behaviours. International journal of human-computer studies , 146:102562.
+Kuratov, Y ., Bulatov, A., Anokhin, P., Sorokin, D., Sorokin, A., and Burtsev, M. (2024). In search
+of needles in a 11m haystack: Recurrent memory finds what llms miss.
+LangChain (2024). Langchain graphs. https://python .langchain .com/docs/use cases/graph/.
+Laskar, M. T. R., Hoque, E., and Huang, J. (2020). Query focused abstractive summarization via
+incorporating query relevance and transfer learning with transformer models. In Advances in
+Artificial Intelligence: 
 ------------------------
 output:
-("entity"{tuple_delimiter}LLM-DEBATE{tuple_delimiter}TECHNOLOGY{tuple_delimiter}LLM-Debate is a system that enables different Large Language Models (LLMs) to debate with each other to leverage diverse perspectives and find better answers)
+("entity"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}PERSON{tuple_delimiter}Koesten, L. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
 {record_delimiter}
-("entity"{tuple_delimiter}QUALITY-DIVERSITY{tuple_delimiter}TECHNOLOGY{tuple_delimiter}Quality-Diversity is a simplified version of Intelligent Go-Explore that produces and ensembles diverse answers to better explore potential solutions)
+("entity"{tuple_delimiter}GREGORY, K.{tuple_delimiter}PERSON{tuple_delimiter}Gregory, K. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
 {record_delimiter}
-("entity"{tuple_delimiter}INTELLIGENT GO-EXPLORE{tuple_delimiter}TECHNOLOGY{tuple_delimiter}Intelligent Go-Explore is a system that explores potential solutions by producing and combining diverse answers)
+("entity"{tuple_delimiter}GROTH, P.{tuple_delimiter}PERSON{tuple_delimiter}Groth, P. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
 {record_delimiter}
-("entity"{tuple_delimiter}META AGENT SEARCH{tuple_delimiter}TECHNOLOGY{tuple_delimiter}Meta Agent Search is a method that uses all baselines as initial seeds in the archive to progressively discover agents that perform better than state-of-the-art hand-designed baselines)
+("entity"{tuple_delimiter}SIMPERL, E.{tuple_delimiter}PERSON{tuple_delimiter}Simperl, E. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
 {record_delimiter}
-("entity"{tuple_delimiter}FALDOR{tuple_delimiter}PERSON{tuple_delimiter}Faldor is an author who has worked on open-endedness and AI-GAs)
+("entity"{tuple_delimiter}INTERNATIONAL JOURNAL OF HUMAN-COMPUTER STUDIES{tuple_delimiter}PUBLICATION{tuple_delimiter}The journal where the paper "Talking datasets–understanding data sensemaking behaviours" was published")
 {record_delimiter}
-("entity"{tuple_delimiter}LEHMAN{tuple_delimiter}PERSON{tuple_delimiter}Lehman is an author who has worked on open-endedness and AI-GAs)
+("entity"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}PERSON{tuple_delimiter}Kuratov, Y. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("entity"{tuple_delimiter}STANLEY{tuple_delimiter}PERSON{tuple_delimiter}Stanley is an author who has worked on open-endedness and AI-GAs)
+("entity"{tuple_delimiter}BULATOV, A.{tuple_delimiter}PERSON{tuple_delimiter}Bulatov, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("entity"{tuple_delimiter}WANG{tuple_delimiter}PERSON{tuple_delimiter}Wang is an author who has worked on open-endedness and AI-GAs)
+("entity"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}PERSON{tuple_delimiter}Anokhin, P. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("relationship"{tuple_delimiter}LLM-DEBATE{tuple_delimiter}QUALITY-DIVERSITY{tuple_delimiter}Both LLM-Debate and Quality-Diversity are systems designed to leverage diverse perspectives to find better answers{tuple_delimiter}5)
+("entity"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, D. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("relationship"{tuple_delimiter}QUALITY-DIVERSITY{tuple_delimiter}INTELLIGENT GO-EXPLORE{tuple_delimiter}Quality-Diversity is a simplified version of Intelligent Go-Explore{tuple_delimiter}8)
+("entity"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("relationship"{tuple_delimiter}META AGENT SEARCH{tuple_delimiter}QUALITY-DIVERSITY{tuple_delimiter}Meta Agent Search uses Quality-Diversity as one of the initial seeds in the archive{tuple_delimiter}6)
+("entity"{tuple_delimiter}BURTSEV, M.{tuple_delimiter}PERSON{tuple_delimiter}Burtsev, M. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
 {record_delimiter}
-("relationship"{tuple_delimiter}META AGENT SEARCH{tuple_delimiter}LLM-DEBATE{tuple_delimiter}Meta Agent Search uses LLM-Debate as one of the initial seeds in the archive{tuple_delimiter}6)
+("entity"{tuple_delimiter}LANGCHAIN{tuple_delimiter}ORGANIZATION{tuple_delimiter}LangChain is the organization behind the LangChain graphs project)
 {record_delimiter}
-("relationship"{tuple_delimiter}META AGENT SEARCH{tuple_delimiter}INTELLIGENT GO-EXPLORE{tuple_delimiter}Meta Agent Search uses Intelligent Go-Explore as one of the initial seeds in the archive{tuple_delimiter}6)
+("entity"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}PERSON{tuple_delimiter}Laskar, M. T. R. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
 {record_delimiter}
-("relationship"{tuple_delimiter}FALDOR{tuple_delimiter}LEHMAN{tuple_delimiter}Faldor and Lehman have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("entity"{tuple_delimiter}HOQUE, E.{tuple_delimiter}PERSON{tuple_delimiter}Hoque, E. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
 {record_delimiter}
-("relationship"{tuple_delimiter}FALDOR{tuple_delimiter}STANLEY{tuple_delimiter}Faldor and Stanley have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("entity"{tuple_delimiter}HUANG, J.{tuple_delimiter}PERSON{tuple_delimiter}Huang, J. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
 {record_delimiter}
-("relationship"{tuple_delimiter}FALDOR{tuple_delimiter}WANG{tuple_delimiter}Faldor and Wang have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("entity"{tuple_delimiter}ADVANCES IN ARTIFICIAL INTELLIGENCE{tuple_delimiter}PUBLICATION{tuple_delimiter}The conference where the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models" was presented)
 {record_delimiter}
-("relationship"{tuple_delimiter}LEHMAN{tuple_delimiter}STANLEY{tuple_delimiter}Lehman and Stanley have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GREGORY, K.{tuple_delimiter}Koesten, L. and Gregory, K. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}LEHMAN{tuple_delimiter}WANG{tuple_delimiter}Lehman and Wang have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GROTH, P.{tuple_delimiter}Koesten, L. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}STANLEY{tuple_delimiter}WANG{tuple_delimiter}Stanley and Wang have both worked on open-endedness and AI-GAs{tuple_delimiter}7)
+("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Koesten, L. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}GROTH, P.{tuple_delimiter}Gregory, K. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Gregory, K. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}GROTH, P.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Groth, P. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BULATOV, A.{tuple_delimiter}Kuratov, Y. and Bulatov, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Kuratov, Y. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Kuratov, Y. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Kuratov, Y. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Kuratov, Y. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Bulatov, A. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Bulatov, A. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Bulatov, A. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Bulatov, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Anokhin, P. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Anokhin, P. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Anokhin, P. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Sorokin, D. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, D. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HOQUE, E.{tuple_delimiter}Laskar, M. T. R. and Hoque, E. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HUANG, J.{tuple_delimiter}Laskar, M. T. R. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}HOQUE, E.{tuple_delimiter}HUANG, J.{tuple_delimiter}Hoque, E. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
 {completion_delimiter}
 #############################
 
