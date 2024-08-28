@@ -67,3 +67,28 @@ ragtest/
 .ragtest/
 .pipelines
 .pipeline
+
+# Large files
+*.zip
+*.tar.gz
+*.7z
+*.rar
+*.iso
+*.dmg
+*.pkg
+*.exe
+*.deb
+*.rpm
+
+# Data and model files
+*.csv
+*.tsv
+*.json
+*.pkl
+*.h5
+*.pb
+
+# Directories
+data/
+models/
+logs/

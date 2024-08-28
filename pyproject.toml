@@ -9,7 +9,7 @@ repository = "https://github.com/Qredence/GraphFleet"
 keywords = ["knowledge", "graph", "rag", "agentic", "agent"]
 
 packages = [
-    {include = "graphfleet"}
+    {include = "graphfleet" }, {include = "app"}
 ]
 
 [tool.poetry.dependencies]
@@ -39,10 +39,14 @@ pandas = "^2.2.2"
 scikit-learn = "^1.5.1"
 networkx = "^3.0"
 
+
+
+
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.2"
-pytest-asyncio = "^0.23.4"
-pytest-cov = "^4.1.0"
+pytest-cov = "^5.0.0"
+pytest-asyncio = "^0.24.0"
+
 black = "^24.1.0"
 isort = "^5.13.0"
 mypy = "^1.8.0"
