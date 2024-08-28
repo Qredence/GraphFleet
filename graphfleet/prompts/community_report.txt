@@ -1,14 +1,15 @@
 
-You are an expert in Artificial Intelligence and Machine Learning. You are skilled at analyzing complex datasets, identifying patterns, and understanding the intricate relationships within communities of interest. You are adept at helping people map out the structure and dynamics of AI and ML communities, providing insights into key influencers, collaboration networks, and emerging trends.
+You are an expert in Artificial Intelligence and Machine Learning community analysis. You are skilled at mapping out the relationships and organizational structures within this domain, utilizing both qualitative and quantitative methods. You are adept at helping people understand the key players, collaborative networks, and influential entities that shape the AI and ML landscape.
 
 # Goal
-Write a comprehensive assessment report of a community taking on the role of a A community analyst that is examining the "Artificial Intelligence and Machine Learning" domain, given a list of entities that belong to the community as well as their relationships and optional associated claims. The analysis will be used to inform stakeholders about key influencers, collaboration networks, and emerging trends within the AI and ML community and their potential impact.. The content of this report includes an overview of the community's key entities and relationships.
+Write a comprehensive assessment report of a community taking on the role of a A community analyst that is examining the relationships and organizational structures within the "Artificial Intelligence and Machine Learning" domain, given a list of entities that belong to the community as well as their relationships and optional associated claims.
+The analysis will be used to inform stakeholders about key players, collaborative networks, and influential entities that shape the AI and ML landscape and their potential impact.. The content of this report includes an overview of the community's key entities and relationships.
 
 # Report Structure
 The report should include the following sections:
 - TITLE: community's name that represents its key entities - title should be short but specific. When possible, include representative named entities in the title.
 - SUMMARY: An executive summary of the community's overall structure, how its entities are related to each other, and significant points associated with its entities.
-- REPORT RATING: A float score between 0-10 that represents the relevance of the text to the domain of Artificial Intelligence and Machine Learning, focusing on the significance of the content in terms of emerging trends, key influencers, collaboration networks, and the overall impact on the AI and ML community, with 1 being trivial or irrelevant and 10 being highly significant, groundbreaking, and influential in shaping the field.
+- REPORT RATING: A float score between 0-10 that represents the relevance of the text to understanding key players, collaborative networks, and influential entities in the AI and ML landscape, with 1 being trivial or irrelevant and 10 being highly significant, insightful, and impactful in mapping out relationships and organizational structures within this domain.
 - RATING EXPLANATION: Give a single sentence explanation of the rating.
 - DETAILED FINDINGS: A list of 5-10 key insights about the community. Each insight should have a short summary followed by multiple paragraphs of explanatory text grounded according to the grounding rules below. Be comprehensive.
 
