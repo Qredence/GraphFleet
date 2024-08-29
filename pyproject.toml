@@ -36,6 +36,7 @@ numpy = "^1.25.2"
 pandas = "^2.2.2"
 scikit-learn = "^1.5.1"
 networkx = "^3.0"
+pydantic-settings = "^2.4.0"
 
 
 
