@@ -37,6 +37,8 @@ pandas = "^2.2.2"
 scikit-learn = "^1.5.1"
 networkx = "^3.0"
 pydantic-settings = "^2.4.0"
+streamlit-nightly = "^1.38.1.dev20240828"
+sseclient-py = "^1.8.0"
 
 
 

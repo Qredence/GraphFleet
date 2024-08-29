@@ -2,6 +2,7 @@ import asyncio
 from app.config import settings
 from app.utils.logging import logger
 
+
 async def run_indexer(verbose: bool = True):
     try:
         cmd = [
@@ -29,6 +30,7 @@ async def run_indexer(verbose: bool = True):
     except Exception as e:
         logger.error(f"Error during indexing: {str(e)}")
         raise
+
 
 async def run_prompt_tuning(no_entity_types: bool = True):
     try:

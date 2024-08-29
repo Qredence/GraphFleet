@@ -13,7 +13,8 @@
                 "ms-toolsai.vscode-jupyter-cell-tags",
                 "ms-toolsai.jupyter",
                 "VisualStudioExptTeam.vscodeintellicode",
-                "github.vscode-github-actions"
+                "github.vscode-github-actions",
+                "mikestead.dotenv"
             ]
         }
     },
