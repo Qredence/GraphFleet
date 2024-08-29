@@ -3,6 +3,8 @@
         "ms-azuretools.vscode-azurefunctions",
         "genaiscript.genaiscript-vscode",
         "ms-vscode.azurecli",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "mikestead.dotenv",
+        "bartosz-dude.folder-scopes"
     ]
 }

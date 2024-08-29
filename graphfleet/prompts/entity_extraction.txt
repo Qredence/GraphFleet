@@ -30,38 +30,54 @@ Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tupl
 Example 1:
 
 text:
- prefers the outputs of
-the evaluated model over a reference answer [14].
-–InfoBench : InfoBench is also evaluated using GPT-4 (version 1106-preview) as
-the judge determining if the model response follows the decomposed instruction
-and we use the implementation provided by the creators of the benchmark [ 25].
-30Hallucination Judge Example
-You will be given a summary instruction and a generated summary.
-Your task to decide if there is any hallucination in the generated
-summary.
-User Message:
-{{place summary task here}}
-Generated Summary:
-{{place response here}}
-=========================
-Go through each section in the generated summary, do the following:
-- Extract relevant facts from the article that can be used to verify
-the correctness of the summary
-- Decide if any section contains hallucination or not.
-At the end output a JSON with the format:
-{"hallucination_detected": "yes/no", "hallucinated_span": "If yes,
-the exact span
+s to the ideal score of 1.0, analyze the following
+trajectory, then at the last line conclude, “Thus the correct-
+ness score is s”, where s is an integer from 1 to 10.
+Here are some examples
+Webshop
+Instruction:i am looking for dairy free and apple variety pack of chips,
+and price lower than 30.00 dollars
+[Search]
+Action: search[dairy free and apple variety pack of chips]
+Observation:
+[Back to Search]
+Page 1 (Total results: 50)
+[Next]
+[B07HRFJWP8]
+Enjoy Life Foods Soft Baked Ovals, Breakfast Bars, Nut
+Free Bars, Soy Free, Dairy Free, Non GMO, Gluten Free,
+Vegan, Variety Pack, 4 Boxes (20 Bars Total)
+$100.0
+[B01KMHY5PG]
+Enjoy Life Soft Baked Chewy Bars, Variety Pack, Nut Free
+Bars, Soy Free, Dairy
 ------------------------
 output:
-("entity"{tuple_delimiter}INFOBENCH{tuple_delimiter}TOOL/BENCHMARK{tuple_delimiter}InfoBench is a benchmark evaluated using GPT-4 to determine if the model response follows the decomposed instruction)
+("entity"{tuple_delimiter}WEB SHOP{tuple_delimiter}ORGANIZATION{tuple_delimiter}An online platform where users can search for and purchase products)
 {record_delimiter}
-("entity"{tuple_delimiter}GPT-4{tuple_delimiter}MODEL{tuple_delimiter}GPT-4 is a version of OpenAI's language model used to evaluate InfoBench)
+("entity"{tuple_delimiter}DAIRY FREE{tuple_delimiter}PRODUCT ATTRIBUTE{tuple_delimiter}A characteristic of a product indicating it does not contain dairy)
 {record_delimiter}
-("entity"{tuple_delimiter}HALLUCINATION JUDGE{tuple_delimiter}TOOL/PROCESS{tuple_delimiter}A process where a judge determines if there is any hallucination in a generated summary)
+("entity"{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}PRODUCT{tuple_delimiter}A pack of chips that includes different varieties of apple flavors)
 {record_delimiter}
-("relationship"{tuple_delimiter}INFOBENCH{tuple_delimiter}GPT-4{tuple_delimiter}InfoBench is evaluated using GPT-4 to determine if the model response follows the decomposed instruction{tuple_delimiter}8)
+("entity"{tuple_delimiter}PRICE LOWER THAN 30.00 DOLLARS{tuple_delimiter}PRICE CONSTRAINT{tuple_delimiter}A price limit set by the user for the products they are searching for)
 {record_delimiter}
-("relationship"{tuple_delimiter}HALLUCINATION JUDGE{tuple_delimiter}GPT-4{tuple_delimiter}GPT-4 is used in the Hallucination Judge process to evaluate generated summaries{tuple_delimiter}7)
+("entity"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}PRODUCT{tuple_delimiter}A type of breakfast bar that is nut-free, soy-free, dairy-free, non-GMO, gluten-free, and vegan, available in a variety pack)
+{record_delimiter}
+("entity"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}PRODUCT{tuple_delimiter}A type of chewy bar that is nut-free, soy-free, and dairy-free, available in a variety pack)
+{record_delimiter}
+("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}DAIRY FREE{tuple_delimiter}The web shop allows users to search for products with specific attributes like being dairy-free{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}The web shop allows users to search for specific products like an apple variety pack of chips{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}PRICE LOWER THAN 30.00 DOLLARS{tuple_delimiter}The web shop allows users to set price constraints for their searches{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}DAIRY FREE{tuple_delimiter}Enjoy Life Foods Soft Baked Ovals are dairy-free{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}DAIRY FREE{tuple_delimiter}Enjoy Life Soft Baked Chewy Bars are dairy-free{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}Both are products that can be searched for in the web shop{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}Both are products that can be searched for in the web shop{tuple_delimiter}5)
 {completion_delimiter}
 #############################
 
@@ -69,96 +85,44 @@ output:
 Example 2:
 
 text:
- , 21(5):88–92.
-Koesten, L., Gregory, K., Groth, P., and Simperl, E. (2021). Talking datasets–understanding data
-sensemaking behaviours. International journal of human-computer studies , 146:102562.
-Kuratov, Y ., Bulatov, A., Anokhin, P., Sorokin, D., Sorokin, A., and Burtsev, M. (2024). In search
-of needles in a 11m haystack: Recurrent memory finds what llms miss.
-LangChain (2024). Langchain graphs. https://python .langchain .com/docs/use cases/graph/.
-Laskar, M. T. R., Hoque, E., and Huang, J. (2020). Query focused abstractive summarization via
-incorporating query relevance and transfer learning with transformer models. In Advances in
-Artificial Intelligence: 
+ algorithm similar to LATS, which reveals
+the importance of external feedback for difficult reasoning
+tasks such as programming. With GPT-4, using LATS sets
+the state of the art for HumanEval, validating that LATS can
+be used with more advanced LMs for higher performance.
+1Some baselines use 161 questions from HumanEval. We
+use all 164 questions for LATS and find minimal performance
+differences, so we report baselines for both settings.
+7Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models
+Method Score↑SR↑
+ReAct (Yao et al., 2023b) 53.8 28.0
+ReAct (best of k) 59.1 32.0
+Reflexion (Shinn et al., 2023) 64.2 35.0
+LATS (ReAct) 75.9 38.0
+IL(Y
 ------------------------
 output:
-("entity"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}PERSON{tuple_delimiter}Koesten, L. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}LATS{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}LATS is an algorithm that reveals the importance of external feedback for difficult reasoning tasks such as programming. It sets the state of the art for HumanEval when used with GPT-4, validating its use with more advanced language models for higher performance.)
 {record_delimiter}
-("entity"{tuple_delimiter}GREGORY, K.{tuple_delimiter}PERSON{tuple_delimiter}Gregory, K. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}GPT-4{tuple_delimiter}TECHNOLOGY, LANGUAGE MODEL{tuple_delimiter}GPT-4 is an advanced language model that, when used with LATS, sets the state of the art for HumanEval.)
 {record_delimiter}
-("entity"{tuple_delimiter}GROTH, P.{tuple_delimiter}PERSON{tuple_delimiter}Groth, P. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}HUMANEVAL{tuple_delimiter}BENCHMARK, DATASET{tuple_delimiter}HumanEval is a benchmark consisting of 164 questions used to evaluate the performance of algorithms like LATS.)
 {record_delimiter}
-("entity"{tuple_delimiter}SIMPERL, E.{tuple_delimiter}PERSON{tuple_delimiter}Simperl, E. is an author of the paper "Talking datasets–understanding data sensemaking behaviours")
+("entity"{tuple_delimiter}REACT{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}ReAct is an algorithm with different performance scores, including a best-of-k variant, used for reasoning, acting, and planning in language models.)
 {record_delimiter}
-("entity"{tuple_delimiter}INTERNATIONAL JOURNAL OF HUMAN-COMPUTER STUDIES{tuple_delimiter}PUBLICATION{tuple_delimiter}The journal where the paper "Talking datasets–understanding data sensemaking behaviours" was published")
+("entity"{tuple_delimiter}REFLEXION{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}Reflexion is an algorithm developed by Shinn et al. in 2023, used for reasoning, acting, and planning in language models.)
 {record_delimiter}
-("entity"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}PERSON{tuple_delimiter}Kuratov, Y. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("entity"{tuple_delimiter}SHINN ET AL., 2023{tuple_delimiter}AUTHOR, RESEARCHER{tuple_delimiter}Shinn et al. are the authors of the Reflexion algorithm, published in 2023.)
 {record_delimiter}
-("entity"{tuple_delimiter}BULATOV, A.{tuple_delimiter}PERSON{tuple_delimiter}Bulatov, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("relationship"{tuple_delimiter}LATS{tuple_delimiter}GPT-4{tuple_delimiter}LATS, when used with GPT-4, sets the state of the art for HumanEval, indicating a high level of performance.{tuple_delimiter}9)
 {record_delimiter}
-("entity"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}PERSON{tuple_delimiter}Anokhin, P. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("relationship"{tuple_delimiter}LATS{tuple_delimiter}HUMANEVAL{tuple_delimiter}LATS sets the state of the art for HumanEval, validating its effectiveness in difficult reasoning tasks.{tuple_delimiter}8)
 {record_delimiter}
-("entity"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, D. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("relationship"{tuple_delimiter}REACT{tuple_delimiter}HUMANEVAL{tuple_delimiter}ReAct is evaluated using the HumanEval benchmark, with different performance scores reported.{tuple_delimiter}7)
 {record_delimiter}
-("entity"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}PERSON{tuple_delimiter}Sorokin, A. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
+("relationship"{tuple_delimiter}REFLEXION{tuple_delimiter}HUMANEVAL{tuple_delimiter}Reflexion is evaluated using the HumanEval benchmark, with performance scores reported.{tuple_delimiter}7)
 {record_delimiter}
-("entity"{tuple_delimiter}BURTSEV, M.{tuple_delimiter}PERSON{tuple_delimiter}Burtsev, M. is an author of the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss")
-{record_delimiter}
-("entity"{tuple_delimiter}LANGCHAIN{tuple_delimiter}ORGANIZATION{tuple_delimiter}LangChain is the organization behind the LangChain graphs project)
-{record_delimiter}
-("entity"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}PERSON{tuple_delimiter}Laskar, M. T. R. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
-{record_delimiter}
-("entity"{tuple_delimiter}HOQUE, E.{tuple_delimiter}PERSON{tuple_delimiter}Hoque, E. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
-{record_delimiter}
-("entity"{tuple_delimiter}HUANG, J.{tuple_delimiter}PERSON{tuple_delimiter}Huang, J. is an author of the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models")
-{record_delimiter}
-("entity"{tuple_delimiter}ADVANCES IN ARTIFICIAL INTELLIGENCE{tuple_delimiter}PUBLICATION{tuple_delimiter}The conference where the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models" was presented)
-{record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GREGORY, K.{tuple_delimiter}Koesten, L. and Gregory, K. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}GROTH, P.{tuple_delimiter}Koesten, L. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KOESTEN, L.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Koesten, L. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}GROTH, P.{tuple_delimiter}Gregory, K. and Groth, P. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}GREGORY, K.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Gregory, K. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}GROTH, P.{tuple_delimiter}SIMPERL, E.{tuple_delimiter}Groth, P. and Simperl, E. co-authored the paper "Talking datasets–understanding data sensemaking behaviours"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BULATOV, A.{tuple_delimiter}Kuratov, Y. and Bulatov, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Kuratov, Y. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Kuratov, Y. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Kuratov, Y. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}KURATOV, Y.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Kuratov, Y. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}Bulatov, A. and Anokhin, P. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Bulatov, A. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Bulatov, A. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}BULATOV, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Bulatov, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, D.{tuple_delimiter}Anokhin, P. and Sorokin, D. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Anokhin, P. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}ANOKHIN, P.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Anokhin, P. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}SOROKIN, A.{tuple_delimiter}Sorokin, D. and Sorokin, A. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, D.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, D. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}SOROKIN, A.{tuple_delimiter}BURTSEV, M.{tuple_delimiter}Sorokin, A. and Burtsev, M. co-authored the paper "In search of needles in a 11m haystack: Recurrent memory finds what llms miss"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HOQUE, E.{tuple_delimiter}Laskar, M. T. R. and Hoque, E. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}LASKAR, M. T. R.{tuple_delimiter}HUANG, J.{tuple_delimiter}Laskar, M. T. R. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
-{record_delimiter}
-("relationship"{tuple_delimiter}HOQUE, E.{tuple_delimiter}HUANG, J.{tuple_delimiter}Hoque, E. and Huang, J. co-authored the paper "Query focused abstractive summarization via incorporating query relevance and transfer learning with transformer models"{tuple_delimiter}8)
+("relationship"{tuple_delimiter}SHINN ET AL., 2023{tuple_delimiter}REFLEXION{tuple_delimiter}Shinn et al. are the authors of the Reflexion algorithm, published in 2023.{tuple_delimiter}6)
 {completion_delimiter}
 #############################
 
