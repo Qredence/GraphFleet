@@ -2,6 +2,7 @@
     "recommendations": [
         "ms-azuretools.vscode-azurefunctions",
         "genaiscript.genaiscript-vscode",
-        "ms-vscode.azurecli"
+        "ms-vscode.azurecli",
+        "github.vscode-github-actions"
     ]
 }

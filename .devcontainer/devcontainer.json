@@ -9,7 +9,11 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-toolsai.prompty"
+                "ms-toolsai.prompty",
+                "ms-toolsai.vscode-jupyter-cell-tags",
+                "ms-toolsai.jupyter",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "github.vscode-github-actions"
             ]
         }
     },
