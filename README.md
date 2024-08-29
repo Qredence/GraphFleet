@@ -10,7 +10,10 @@
 
 </div>
 
-![GraphFleet_Query](https://github.com/user-attachments/assets/cf32f463-d52f-4568-a795-1f869f33d07f)
+
+https://github.com/user-attachments/assets/ac3271fa-cab5-412f-a441-bbedfe4a009f
+
+
 
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
@@ -131,13 +134,14 @@ Jupyter Notebook Guide: Follow the instructions provided in the get-started-grap
 ```
 
 
-## Interacting with GraphFleet:
+## IMPORTANT : Run these notebook to get started  with GraphFleet:
 Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
 
-get-started-graphfleet.ipynb: A comprehensive guide to indexing your data and running basic queries.
-Local Search Notebook.ipynb: Demonstrates local search techniques.
-[Add descriptions of other notebooks and their purpose here]
-app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface:
+([Get Started Quickly.ipynb](https://github.com/Qredence/GraphFleet/blob/a67eaeb295d99dd2ef48bcdd8f8a719b830ffb7d/notebook/Get%20Started%20Quickly.ipynb)): A comprehensive guide to indexing your data and running basic queries.
+([Local Search Notebook.ipynb:](https://github.com/Qredence/GraphFleet/blob/a67eaeb295d99dd2ef48bcdd8f8a719b830ffb7d/notebook/Local%20Search%20Notebook.ipynb)) Demonstrates local search techniques.
+
+([Global Search Notebook](https://github.com/Qredence/GraphFleet/blob/a67eaeb295d99dd2ef48bcdd8f8a719b830ffb7d/notebook/Global%20Search%20Notebook.ipynb))
+
 
 ### Running the API only (or run CLI commands for local search or global search)
 
@@ -165,14 +169,13 @@ To run the API, save the code in a file named api.py and execute the following c
 "What are the key features of GraphRAG ??"
 ```
 
-### Running the API only
+### Running Streamlit
 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-## uvicorn api:app --reload --port 8001 SOON
+streamlit run app/streamlit_app.py
 ```
-
 
 ## Security
 
