@@ -1,15 +1,28 @@
 import os
+from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
 
-class Settings:
-    def __init__(self):
-        self.API_KEY: str = os.environ.get("GRAPHRAG_API_KEY", "")
-        self.LLM_MODEL: str = os.environ.get("GRAPHRAG_LLM_MODEL", "")
-        self.EMBEDDING_MODEL: str = os.environ.get("GRAPHRAG_EMBEDDING_MODEL", "")
-        self.API_BASE: str = os.environ.get("GRAPHRAG_API_BASE", "")
-        self.API_VERSION: str = os.environ.get("GRAPHRAG_API_VERSION", "")
-        self.INPUT_DIR: str = os.environ.get("GRAPHRAG_INPUT_DIR", "graphfleet/output/20240828-113421/artifacts")
-        self.LANCEDB_URI: str = f"{self.INPUT_DIR}/lancedb"
-        self.COMMUNITY_LEVEL: int = 2
-        self.MAX_TOKENS: int = 12000
+
+load_dotenv()
+
+
+class Settings(BaseSettings):
+    API_KEY: str = os.getenv("GRAPHRAG_API_KEY", "default_api_key")
+    LLM_MODEL: str = os.getenv("GRAPHRAG_LLM_MODEL", "default_llm_model")
+    EMBEDDING_MODEL: str = os.getenv("GRAPHRAG_EMBEDDING_MODEL", "default_embedding_model")
+    API_BASE: str = os.getenv("GRAPHRAG_API_BASE", "default_api_base")
+    API_VERSION: str = os.getenv("GRAPHRAG_API_VERSION", "default_api_version")
+    INPUT_DIR: str = os.getenv("GRAPHRAG_INPUT_DIR", "graphfleet/output/20240829-184001/artifacts")
+    LANCEDB_URI: str = os.getenv("GRAPHRAG_LANCEDB_URI", "graphfleet/output/20240829-184001/artifacts/lancedb")
+    COMMUNITY_LEVEL: int = int(os.getenv("GRAPHRAG_COMMUNITY_LEVEL", 2))
+    MAX_TOKENS: int = int(os.getenv("GRAPHRAG_MAX_TOKENS", 12000))
+
+    class Config:
+        env_prefix = "GRAPHRAG_"
+
+    @property
+    def lancedb_uri(self) -> str:
+        return f"{self.INPUT_DIR}/lancedb"
+
 
 settings = Settings()

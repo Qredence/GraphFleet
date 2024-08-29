@@ -12,8 +12,8 @@ llm:
   api_version: 2024-04-01-preview
   # organization: <organization_id>
   deployment_name: gpt-4o
-  tokens_per_minute: 150_000 # set a leaky bucket throttle
-  requests_per_minute: 10_000 # set a leaky bucket throttle
+  tokens_per_minute: 318000 # set a leaky bucket throttle
+  requests_per_minute: 2000 # set a leaky bucket throttle
   max_retries: 10
   max_retry_wait: 10.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times

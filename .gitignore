@@ -38,14 +38,15 @@ tests/fixtures/*/cache
 tests/fixtures/*/output
 lancedb/
 graphfleet/cache
-graphfleet/libs/graphrag/
+graphfleet/output/20240828-113421
+graphfleet/output/20240828-113421/reports
 # Random
 .DS_Store
 *.log*
 .venv
 .conda
 .tmp
-
+.genaiscript
 
 .env
 build.zip
@@ -67,3 +68,28 @@ ragtest/
 .ragtest/
 .pipelines
 .pipeline
+
+# Large files
+*.zip
+*.tar.gz
+*.7z
+*.rar
+*.iso
+*.dmg
+*.pkg
+*.exe
+*.deb
+*.rpm
+
+# Data and model files
+*.csv
+*.tsv
+*.json
+*.pkl
+*.h5
+*.pb
+
+# Directories
+data/
+models/
+logs/
