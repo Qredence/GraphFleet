@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "graphfleet"
-version = "0.5.3"
+version = "0.5.35"
 description = "Advanced implementation of GraphRAG for enhanced LLM reasoning"
 authors = ["Zachary <zachary@qredence.ai>"]
 license = "Apache-2.0"
@@ -24,7 +24,7 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-multipart = "^0.0.9"
 structlog = "^24.1.0"
 
-graphrag = "^0.3.1"
+graphrag = "^0.3.2"
 
 # AI and LLM dependencies
 openai = "^1.35.7"
