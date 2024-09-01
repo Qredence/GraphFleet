@@ -11,8 +11,8 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config import settings, Settings
 
-# Define the API base URL
-API_BASE_URL = "http://localhost:8000"  # Adjust this if your API is hosted elsewhere
+# Define the API base URL Adjust this if your API is hosted elsewhere
+API_BASE_URL = "http://localhost:8000" 
 
 st.title("GraphFleet Search App")
 
@@ -149,5 +149,10 @@ with tab3:
             return value.startswith("default_") or value == "Not set"
         return False
 
-    if any(is_default_value(value) for value in settings_dict.values()):
-        st.warning("Some settings are using default values. Please update them for full functionality.")
+# Move this check before displaying the settings
+if any(is_default_value(value) for value in settings_dict.values()):
+    st.warning("Some settings are using default values. Please update them for full functionality.")
+
+# Display current settings
+st.subheader("Current Settings")
+st.json(settings_dict)
