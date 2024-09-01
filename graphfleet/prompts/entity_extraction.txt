@@ -18,9 +18,9 @@ For each pair of related entities, extract the following information:
 - relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
 Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
 
-3. Return output in The primary language of the provided text is "English." as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+3. Return output in The primary language of the provided text is **English**. as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
 
-4. If you have to translate into The primary language of the provided text is "English.", just translate the descriptions, nothing else!
+4. If you have to translate into The primary language of the provided text is **English**., just translate the descriptions, nothing else!
 
 5. When finished, output {completion_delimiter}.
 
@@ -30,54 +30,65 @@ Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tupl
 Example 1:
 
 text:
-s to the ideal score of 1.0, analyze the following
-trajectory, then at the last line conclude, “Thus the correct-
-ness score is s”, where s is an integer from 1 to 10.
-Here are some examples
-Webshop
-Instruction:i am looking for dairy free and apple variety pack of chips,
-and price lower than 30.00 dollars
-[Search]
-Action: search[dairy free and apple variety pack of chips]
-Observation:
-[Back to Search]
-Page 1 (Total results: 50)
-[Next]
-[B07HRFJWP8]
-Enjoy Life Foods Soft Baked Ovals, Breakfast Bars, Nut
-Free Bars, Soy Free, Dairy Free, Non GMO, Gluten Free,
-Vegan, Variety Pack, 4 Boxes (20 Bars Total)
-$100.0
-[B01KMHY5PG]
-Enjoy Life Soft Baked Chewy Bars, Variety Pack, Nut Free
-Bars, Soy Free, Dairy
+:2112.09332 , 2021.
+Andrew Ng. Issue 253. https://www.deeplearning.ai/the-batch/issue-253/ , June 2024.
+Newsletter issue.
+Ben Norman and Jeff Clune. First-explore, then exploit: Meta-learning intelligent exploration. arXiv
+preprint arXiv:2307.02276 , 2023.
+OpenAI. Introducing chatgpt. https://openai.com/index/chatgpt/ , November 2022. Blog
+post.
+OpenAI. Simple evals, 2023. URL https://github.com/openai/simple-evals . Accessed:
+2024-08-10.
+OpenAI. Gpt-4 technical report, 2024.
+Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S
+Bernstein. Generative agents: Interactive simulacra of human behavior. In Proceedings
 ------------------------
 output:
-("entity"{tuple_delimiter}WEB SHOP{tuple_delimiter}ORGANIZATION{tuple_delimiter}An online platform where users can search for and purchase products)
+("entity"{tuple_delimiter}ANDREW NG{tuple_delimiter}PERSON{tuple_delimiter}Andrew Ng is a prominent figure in the field of artificial intelligence and is associated with the newsletter issue referenced.)
 {record_delimiter}
-("entity"{tuple_delimiter}DAIRY FREE{tuple_delimiter}PRODUCT ATTRIBUTE{tuple_delimiter}A characteristic of a product indicating it does not contain dairy)
+("entity"{tuple_delimiter}BEN NORMAN{tuple_delimiter}PERSON{tuple_delimiter}Ben Norman is a researcher who co-authored a paper on meta-learning intelligent exploration.)
 {record_delimiter}
-("entity"{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}PRODUCT{tuple_delimiter}A pack of chips that includes different varieties of apple flavors)
+("entity"{tuple_delimiter}JEFF CLUNE{tuple_delimiter}PERSON{tuple_delimiter}Jeff Clune is a researcher who co-authored a paper on meta-learning intelligent exploration.)
 {record_delimiter}
-("entity"{tuple_delimiter}PRICE LOWER THAN 30.00 DOLLARS{tuple_delimiter}PRICE CONSTRAINT{tuple_delimiter}A price limit set by the user for the products they are searching for)
+("entity"{tuple_delimiter}OPENAI{tuple_delimiter}ORGANIZATION{tuple_delimiter}OpenAI is an artificial intelligence research organization known for developing models like ChatGPT and GPT-4.)
 {record_delimiter}
-("entity"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}PRODUCT{tuple_delimiter}A type of breakfast bar that is nut-free, soy-free, dairy-free, non-GMO, gluten-free, and vegan, available in a variety pack)
+("entity"{tuple_delimiter}CHATGPT{tuple_delimiter}TECHNOLOGY{tuple_delimiter}ChatGPT is a conversational AI model developed by OpenAI, designed to generate human-like text responses.)
 {record_delimiter}
-("entity"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}PRODUCT{tuple_delimiter}A type of chewy bar that is nut-free, soy-free, and dairy-free, available in a variety pack)
+("entity"{tuple_delimiter}GPT-4{tuple_delimiter}TECHNOLOGY{tuple_delimiter}GPT-4 is a state-of-the-art language model developed by OpenAI, known for its advanced capabilities in natural language processing.)
 {record_delimiter}
-("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}DAIRY FREE{tuple_delimiter}The web shop allows users to search for products with specific attributes like being dairy-free{tuple_delimiter}8)
+("entity"{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}RESEARCH{tuple_delimiter}Generative agents are interactive models that simulate human behavior, as discussed in a paper by Joon Sung Park and others.)
 {record_delimiter}
-("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}The web shop allows users to search for specific products like an apple variety pack of chips{tuple_delimiter}8)
+("entity"{tuple_delimiter}JOON SUNG PARK{tuple_delimiter}PERSON{tuple_delimiter}Joon Sung Park is a researcher who co-authored a paper on generative agents.)
 {record_delimiter}
-("relationship"{tuple_delimiter}WEB SHOP{tuple_delimiter}PRICE LOWER THAN 30.00 DOLLARS{tuple_delimiter}The web shop allows users to set price constraints for their searches{tuple_delimiter}8)
+("entity"{tuple_delimiter}JOSEPH O’BRIEN{tuple_delimiter}PERSON{tuple_delimiter}Joseph O’Brien is a researcher who co-authored a paper on generative agents.)
 {record_delimiter}
-("relationship"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}DAIRY FREE{tuple_delimiter}Enjoy Life Foods Soft Baked Ovals are dairy-free{tuple_delimiter}9)
+("entity"{tuple_delimiter}CARRIE JUN CAI{tuple_delimiter}PERSON{tuple_delimiter}Carrie Jun Cai is a researcher who co-authored a paper on generative agents.)
 {record_delimiter}
-("relationship"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}DAIRY FREE{tuple_delimiter}Enjoy Life Soft Baked Chewy Bars are dairy-free{tuple_delimiter}9)
+("entity"{tuple_delimiter}MEREDITH RINGEL MORRIS{tuple_delimiter}PERSON{tuple_delimiter}Meredith Ringel Morris is a researcher who co-authored a paper on generative agents.)
 {record_delimiter}
-("relationship"{tuple_delimiter}ENJOY LIFE FOODS SOFT BAKED OVALS{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}Both are products that can be searched for in the web shop{tuple_delimiter}5)
+("entity"{tuple_delimiter}PERCY LIANG{tuple_delimiter}PERSON{tuple_delimiter}Percy Liang is a researcher who co-authored a paper on generative agents.)
 {record_delimiter}
-("relationship"{tuple_delimiter}ENJOY LIFE SOFT BAKED CHEWY BARS{tuple_delimiter}APPLE VARIETY PACK OF CHIPS{tuple_delimiter}Both are products that can be searched for in the web shop{tuple_delimiter}5)
+("entity"{tuple_delimiter}MICHAEL S BERNSTEIN{tuple_delimiter}PERSON{tuple_delimiter}Michael S Bernstein is a researcher who co-authored a paper on generative agents.)
+{record_delimiter}
+("relationship"{tuple_delimiter}ANDREW NG{tuple_delimiter}OPENAI{tuple_delimiter}Andrew Ng is associated with the AI community that includes OpenAI, contributing to advancements in the field.{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}BEN NORMAN{tuple_delimiter}JEFF CLUNE{tuple_delimiter}Ben Norman and Jeff Clune co-authored a paper on meta-learning intelligent exploration.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}OPENAI{tuple_delimiter}CHATGPT{tuple_delimiter}OpenAI developed ChatGPT, a significant advancement in conversational AI technology.{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}OPENAI{tuple_delimiter}GPT-4{tuple_delimiter}OpenAI developed GPT-4, a leading model in natural language processing.{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}JOON SUNG PARK{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Joon Sung Park co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}JOSEPH O’BRIEN{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Joseph O’Brien co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}CARRIE JUN CAI{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Carrie Jun Cai co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEREDITH RINGEL MORRIS{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Meredith Ringel Morris co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}PERCY LIANG{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Percy Liang co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MICHAEL S BERNSTEIN{tuple_delimiter}GENERIC AGENTS{tuple_delimiter}Michael S Bernstein co-authored a paper discussing generative agents, contributing to the research in this area.{tuple_delimiter}8)
 {completion_delimiter}
 #############################
 
@@ -85,44 +96,41 @@ output:
 Example 2:
 
 text:
- algorithm similar to LATS, which reveals
-the importance of external feedback for difficult reasoning
-tasks such as programming. With GPT-4, using LATS sets
-the state of the art for HumanEval, validating that LATS can
-be used with more advanced LMs for higher performance.
-1Some baselines use 161 questions from HumanEval. We
-use all 164 questions for LATS and find minimal performance
-differences, so we report baselines for both settings.
-7Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models
-Method Score↑SR↑
-ReAct (Yao et al., 2023b) 53.8 28.0
-ReAct (best of k) 59.1 32.0
-Reflexion (Shinn et al., 2023) 64.2 35.0
-LATS (ReAct) 75.9 38.0
-IL(Y
+
+favorable performance over source text summarization on these same metrics, at lower token costs.
+2 Graph RAG Approach & Pipeline
+We now unpack the high-level data flow of the Graph RAG approach (Figure 1) and pipeline, de-
+scribing key design parameters, techniques, and implementation details for each step.
+2.1 Source Documents →Text Chunks
+A fundamental design decision is the granularity with which input texts extracted from source doc-
+uments should be split into text chunks for processing. In the following step, each of these chunks
+will be passed to a set of LLM prompts designed to extract the various elements of a graph index.
+Longer text chunks require fewer LLM calls for such extraction, but suffer from the recall degrada-
+tion of longer LLM context windows (Kuratov et al., 2024; Liu et al., 2023). This behavior can be
+observed in Figure 2 in the case of a single extraction round
 ------------------------
 output:
-("entity"{tuple_delimiter}LATS{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}LATS is an algorithm that reveals the importance of external feedback for difficult reasoning tasks such as programming. It sets the state of the art for HumanEval when used with GPT-4, validating its use with more advanced language models for higher performance.)
+("entity"{tuple_delimiter}GRAPH RAG APPROACH{tuple_delimiter}TECHNIQUE{tuple_delimiter}The Graph RAG approach is a method for processing text data using a pipeline that involves extracting elements from source documents.)
 {record_delimiter}
-("entity"{tuple_delimiter}GPT-4{tuple_delimiter}TECHNOLOGY, LANGUAGE MODEL{tuple_delimiter}GPT-4 is an advanced language model that, when used with LATS, sets the state of the art for HumanEval.)
+("entity"{tuple_delimiter}TEXT CHUNKS{tuple_delimiter}DATA FORMAT{tuple_delimiter}Text chunks are segments of input texts extracted from source documents, which are processed for further analysis.)
 {record_delimiter}
-("entity"{tuple_delimiter}HUMANEVAL{tuple_delimiter}BENCHMARK, DATASET{tuple_delimiter}HumanEval is a benchmark consisting of 164 questions used to evaluate the performance of algorithms like LATS.)
+("entity"{tuple_delimiter}LLM PROMPTS{tuple_delimiter}TECHNIQUE{tuple_delimiter>LLM prompts are specific instructions or queries designed to extract various elements from text chunks in the Graph RAG approach.)
 {record_delimiter}
-("entity"{tuple_delimiter}REACT{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}ReAct is an algorithm with different performance scores, including a best-of-k variant, used for reasoning, acting, and planning in language models.)
+("entity"{tuple_delimiter}SOURCE DOCUMENTS{tuple_delimiter}DATA FORMAT{tuple_delimiter}Source documents are the original texts from which input texts are extracted for processing in the Graph RAG approach.)
 {record_delimiter}
-("entity"{tuple_delimiter}REFLEXION{tuple_delimiter}ALGORITHM, METHOD{tuple_delimiter}Reflexion is an algorithm developed by Shinn et al. in 2023, used for reasoning, acting, and planning in language models.)
+("entity"{tuple_delimiter}KURATOV ET AL. (2024){tuple_delimiter}PERSON{tuple_delimiter}Kuratov et al. (2024) is a reference to a study or work that discusses the behavior of longer text chunks in LLM context windows.)
 {record_delimiter}
-("entity"{tuple_delimiter}SHINN ET AL., 2023{tuple_delimiter}AUTHOR, RESEARCHER{tuple_delimiter}Shinn et al. are the authors of the Reflexion algorithm, published in 2023.)
+("entity"{tuple_delimiter}LIU ET AL. (2023){tuple_delimiter}PERSON{tuple_delimiter}Liu et al. (2023) is a reference to a study or work that discusses the behavior of longer text chunks in LLM context windows.)
 {record_delimiter}
-("relationship"{tuple_delimiter}LATS{tuple_delimiter}GPT-4{tuple_delimiter}LATS, when used with GPT-4, sets the state of the art for HumanEval, indicating a high level of performance.{tuple_delimiter}9)
+("relationship"{tuple_delimiter}GRAPH RAG APPROACH{tuple_delimiter}TEXT CHUNKS{tuple_delimiter}The Graph RAG approach processes text chunks extracted from source documents for analysis.{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}LATS{tuple_delimiter}HUMANEVAL{tuple_delimiter}LATS sets the state of the art for HumanEval, validating its effectiveness in difficult reasoning tasks.{tuple_delimiter}8)
+("relationship"{tuple_delimiter}TEXT CHUNKS{tuple_delimiter}SOURCE DOCUMENTS{tuple_delimiter}Text chunks are derived from source documents for further processing in the Graph RAG approach.{tuple_delimiter}7)
 {record_delimiter}
-("relationship"{tuple_delimiter}REACT{tuple_delimiter}HUMANEVAL{tuple_delimiter}ReAct is evaluated using the HumanEval benchmark, with different performance scores reported.{tuple_delimiter}7)
+("relationship"{tuple_delimiter}GRAPH RAG APPROACH{tuple_delimiter}LLM PROMPTS{tuple_delimiter}The Graph RAG approach utilizes LLM prompts to extract elements from text chunks.{tuple_delimiter}8)
 {record_delimiter}
-("relationship"{tuple_delimiter}REFLEXION{tuple_delimiter}HUMANEVAL{tuple_delimiter}Reflexion is evaluated using the HumanEval benchmark, with performance scores reported.{tuple_delimiter}7)
+("relationship"{tuple_delimiter}KURATOV ET AL. (2024){tuple_delimiter}GRAPH RAG APPROACH{tuple_delimiter}Kuratov et al. (2024) provides insights relevant to the performance of the Graph RAG approach.{tuple_delimiter}5)
 {record_delimiter}
-("relationship"{tuple_delimiter}SHINN ET AL., 2023{tuple_delimiter}REFLEXION{tuple_delimiter}Shinn et al. are the authors of the Reflexion algorithm, published in 2023.{tuple_delimiter}6)
+("relationship"{tuple_delimiter}LIU ET AL. (2023){tuple_delimiter}GRAPH RAG APPROACH{tuple_delimiter}Liu et al. (2023) provides insights relevant to the performance of the Graph RAG approach.{tuple_delimiter}5)
 {completion_delimiter}
 #############################
 

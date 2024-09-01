@@ -4,16 +4,16 @@ skip_workflows: []
 llm:
   api_key: ${GRAPHRAG_API_KEY}
   type: azure_openai_chat # or azure_openai_chat
-  model: gpt-4o
+  model: gpt-4o-mini
   model_supports_json: True # recommended if this is available for your model.
   max_tokens: 4000
   # request_timeout: 180.0
-  api_base: https://fleet-france.openai.azure.com
+  api_base: https://sweden-azure-oai.openai.azure.com
   api_version: 2024-04-01-preview
   # organization: <organization_id>
-  deployment_name: gpt-4o
-  tokens_per_minute: 318000 # set a leaky bucket throttle
-  requests_per_minute: 2000 # set a leaky bucket throttle
+  deployment_name: gpt-4o-mini
+  tokens_per_minute: 418000 # set a leaky bucket throttle
+  requests_per_minute: 5000 # set a leaky bucket throttle
   max_retries: 10
   max_retry_wait: 10.0
   sleep_on_rate_limit_recommendation: true # whether to sleep when azure suggests wait-times
@@ -35,12 +35,12 @@ embeddings:
   llm:
     api_key: ${GRAPHRAG_API_KEY}
     type: azure_openai_embedding # or azure_openai_embedding
-    model: text-embedding-ada-002
-    api_base: https://fleet-france.openai.azure.com
+    model: text-embedding-3-large
+    api_base: https://sweden-azure-oai.openai.azure.com
     api_version: 2024-04-01-preview
     # organization: <organization_id>
-    deployment_name: text-embedding-ada-002
-    tokens_per_minute: 150_000 # set a leaky bucket throttle
+    deployment_name: text-embedding-3-large
+    tokens_per_minute: 200000 # set a leaky bucket throttle
     requests_per_minute: 10_000 # set a leaky bucket throttle
     max_retries: 10
     max_retry_wait: 10.0

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict  # Updated import
 from app.services.question_generator import create_question_generator
 from app.services.search_engine import create_search_engines, LocalSearchWrapper, GlobalSearchWrapper
 from app.routers import search
@@ -118,3 +119,5 @@ app.include_router(search.router, prefix="/search", tags=["search"])
 @app.get("/")
 async def root():
     return {"message": "Welcome to GraphFleet API"}
+
+main = app

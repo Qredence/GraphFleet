@@ -1,0 +1,9 @@
+[theme]
+base="light"
+primaryColor="#2b2b2b"
+
+[server]
+port = 8501
+address = "0.0.0.0"
+
+[settings]

@@ -148,7 +148,7 @@ Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-## uvicorn app:main --reload --port 8001 
+uvicorn app:main --reload --port 8001 
 ```
 
 ### Run the CLI commands to query the graph (Follow the get-started-graphfleet.ipynb notebook)

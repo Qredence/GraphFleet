@@ -31,22 +31,21 @@ python/*/lib/
 .coverage
 coverage/
 licenses.txt
-notebooks/*/lancedb
-notebooks/*/data
+examples_notebooks/*/lancedb
+examples_notebooks/*/data
 tests/fixtures/cache
 tests/fixtures/*/cache
 tests/fixtures/*/output
 lancedb/
-graphfleet/cache
-graphfleet/output/20240828-113421
-graphfleet/output/20240828-113421/reports
+
 # Random
 .DS_Store
 *.log*
 .venv
+venv/
 .conda
 .tmp
-.genaiscript
+
 
 .env
 build.zip
@@ -56,7 +55,7 @@ build.zip
 __pycache__
 
 .pipeline
-.genaiscript
+
 # Azurite
 temp_azurite/
 __azurite*.json
@@ -68,28 +67,3 @@ ragtest/
 .ragtest/
 .pipelines
 .pipeline
-
-# Large files
-*.zip
-*.tar.gz
-*.7z
-*.rar
-*.iso
-*.dmg
-*.pkg
-*.exe
-*.deb
-*.rpm
-
-# Data and model files
-*.csv
-*.tsv
-*.json
-*.pkl
-*.h5
-*.pb
-
-# Directories
-data/
-models/
-logs/
