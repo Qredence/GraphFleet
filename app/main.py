@@ -10,6 +10,20 @@ import logging
 import numpy as np
 from app.utils import convert_numpy
 from app.api import _reformat_context_data
+import sentry_sdk
+
+
+sentry_sdk.init(
+    dsn="https://741dc950f3465d2db0b8f869832dabc0@o4507875835314176.ingest.de.sentry.io/4507875863429200",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for tracing.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
+
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -119,5 +133,12 @@ app.include_router(search.router, prefix="/search", tags=["search"])
 @app.get("/")
 async def root():
     return {"message": "Welcome to GraphFleet API"}
+
+
+@app.get("/sentry-debug")
+async def trigger_error():
+    division_by_zero = 1 / 0
+    return {"message": "This should never be reached"}
+
 
 main = app
