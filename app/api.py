@@ -1,46 +1,50 @@
-from typing import Any, Dict, List, Tuple, AsyncGenerator
-from fastapi import HTTPException
-from app.services.search_engine import local_search_engine, global_search_engine
+from typing import Any, Dict, List, Tuple, AsyncGenerator, Union, cast
+from fastapi import FastAPI, HTTPException
+from src.graphfleet.graphfleet import GraphFleet
+from pandas import DataFrame
 
+app = FastAPI()
+
+graph_fleet = GraphFleet()
+
+@app.get("/global-search")
 async def global_search(query: str) -> Tuple[str, Dict[str, List[Dict[str, Any]]]]:
     try:
-        result = await global_search_engine.asearch(query)
-        response = result.response
-        context_data = _reformat_context_data(result.context_data)
-        return response, context_data
+        result, confidence = graph_fleet.query(query, method="global")
+        context_data = _reformat_context_data(result)
+        return result, context_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Global search error: {str(e)}")
 
-async def global_search_streaming(query: str) -> AsyncGenerator[str, None]:
+@app.get("/global-search-streaming")
+async def global_search_streaming(query: str) -> AsyncGenerator[Union[str, DataFrame], None]:
     try:
-        async for token in global_search_engine.astream(query):
-            yield token
+        result, _ = graph_fleet.query(query, method="global")
+        yield result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Global search streaming error: {str(e)}")
 
+@app.get("/local-search")
 async def local_search(query: str) -> Tuple[str, Dict[str, List[Dict[str, Any]]]]:
     try:
-        result = await local_search_engine.asearch(query)
-        response = result.response
-        context_data = _reformat_context_data(result.context_data)
-        return response, context_data
+        result, confidence = graph_fleet.query(query, method="local")
+        context_data = _reformat_context_data(result)
+        return result, context_data
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Local search error: {str(e)}")
 
-async def local_search_streaming(query: str) -> AsyncGenerator[str, None]:
+@app.get("/local-search-streaming")
+async def local_search_streaming(query: str) -> AsyncGenerator[Union[str, DataFrame], None]:
     try:
-        async for token in local_search_engine.astream(query):
-            yield token
+        result, _ = graph_fleet.query(query, method="local")
+        yield result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Local search streaming error: {str(e)}")
 
-def _reformat_context_data(context_data: Dict[str, Any]) -> Dict[str, List[Dict[str, Any]]]:
-    reformatted_data = {}
-    for key, value in context_data.items():
-        if hasattr(value, 'to_dict'):
-            reformatted_data[key] = value.to_dict(orient='records')
-        elif isinstance(value, list):
-            reformatted_data[key] = value
-        else:
-            reformatted_data[key] = [value]
-    return reformatted_data
+def _reformat_context_data(context_data: Union[str, List[DataFrame], Dict[str, DataFrame]]) -> Dict[str, Any]:
+    if isinstance(context_data, str):
+        return {"data": context_data}
+    elif isinstance(context_data, list):
+        return {"data": [df.to_dict(orient='records') for df in context_data]}
+    else:
+        return context_data

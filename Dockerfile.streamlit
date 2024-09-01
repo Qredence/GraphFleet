@@ -1,0 +1,22 @@
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install poetry
+RUN pip install --no-cache-dir poetry
+
+# Copy the project files into the container
+COPY pyproject.toml poetry.lock ./
+RUN poetry config virtualenvs.create false \
+    && poetry install --no-dev --no-interaction --no-ansi
+
+# Copy the app directory
+COPY app ./app
+
+# Make port 8501 available to the world outside this container
+EXPOSE 8501
+
+# Run the Streamlit app when the container launches
+CMD ["streamlit", "run", "app/streamlit_app.py"]

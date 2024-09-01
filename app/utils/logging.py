@@ -1,5 +1,6 @@
 import logging
 
+
 def setup_logger():
     logger = logging.getLogger("graphrag_api")
     logger.setLevel(logging.INFO)
@@ -10,5 +11,6 @@ def setup_logger():
     logger.addHandler(console_handler)
     
     return logger
+
 
 logger = setup_logger()

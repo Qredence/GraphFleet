@@ -1,5 +1,6 @@
 import os
 
+
 class Settings:
     def __init__(self):
         self.API_KEY: str = os.environ.get("GRAPHRAG_API_KEY", "")
@@ -11,5 +12,7 @@ class Settings:
         self.LANCEDB_URI: str = f"{self.INPUT_DIR}/lancedb"
         self.COMMUNITY_LEVEL: int = 2
         self.MAX_TOKENS: int = 12000
+        self.API_TYPE: str = os.environ.get("GRAPHRAG_API_TYPE", "")
+
 
 settings = Settings()

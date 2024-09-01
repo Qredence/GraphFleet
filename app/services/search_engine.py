@@ -12,6 +12,7 @@ from app.utils.context_builder import create_context_builder
 from app.config import settings
 from app.utils.data_processing import read_indexer_entities, read_indexer_reports
 
+
 def create_search_engines():
     try:
         # Check if the directory exists
@@ -114,5 +115,6 @@ def create_search_engines():
         raise HTTPException(status_code=500, detail=f"File not found: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating search engines: {str(e)}")
+
 
 local_search_engine, global_search_engine = create_search_engines()

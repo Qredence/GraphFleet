@@ -12,4 +12,5 @@ def create_question_generator():
         context_builder_params=search_engine.context_builder_params,
     )
 
+
 question_generator = create_question_generator()

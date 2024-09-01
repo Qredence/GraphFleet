@@ -93,3 +93,46 @@ ragtest/
 data/
 models/
 logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.log
+*.sqlite
+*.db
+parquet_files/
+knowledge_graph.png
+
+# Build and distribution
+dist/
+build/
+*.egg-info/
+
+# Documentation
+docs/_build/
+
+# Test coverage
+.coverage
+htmlcov/
+
+# Poetry
+poetry.lock

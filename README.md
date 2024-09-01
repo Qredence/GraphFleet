@@ -35,6 +35,10 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 - Community hierarchy building.
 - Hierarchical summarization.
 - Enhanced reasoning capabilities for LLMs on private datasets.
+- Multiple storage backend support (PostgreSQL, MongoDB, LanceDB, local file system, Neo4j)
+- Web-enhanced querying for improved answer accuracy
+- Self-improvement mechanism for continuous learning
+- Monthy web scraping feature for gathering external information
 
 ## Contribute
 
@@ -78,18 +82,18 @@ Environment Variables: Set up your environment variables in a .env file (refer t
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
  ```sh
-export GRAPHRAG_API_KEY="your_api_key_here"
-export GRAPHRAG_API_BASE="<https://your-azure-openai-resource.openai.azure.com/>"
-export GRAPHRAG_API_VERSION=""
-export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name"
+export GRAPHRAG_API_KEY="fcfff4cda4ae4277aa9bac2d6d740431"
+export GRAPHRAG_API_BASE="https://sweden-azure-oai.openai.azure.com"
+export GRAPHRAG_API_VERSION="2024-07-18"
+export GRAPHRAG_DEPLOYMENT_NAME="gpt-4o-mini"
 export GRAPHRAG_API_TYPE="azure_openai"
 export GRAPHRAG_EMBEDDING_MODEL="text-embedding-ada-002"
-export GRAPHRAG_LLM_MODEL="gpt-4"
+export GRAPHRAG_LLM_MODEL="gpt-4o-mini"
 export GRAPHRAG_DATA_PATH="./your_data_directory"
 export GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding"
-export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
-export GRAPHRAG_EMBEDDING_ENDPOINT="<https://your-azure-openai-embedding-resource.openai.azure.com/>"
-export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
+export GRAPHRAG_EMBEDDING_KEY="fcfff4cda4ae4277aa9bac2d6d740431"
+export GRAPHRAG_EMBEDDING_ENDPOINT="https://sweden-azure-oai.openai.azure.com/"
+export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="text-embedding-ada-002"
 
 ```
 
@@ -144,7 +148,7 @@ app.py (FastAPI Application): Run a Streamlit-powered web interface to interact 
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-## uvicorn app:main --reload --port 8001 
+uvicorn api:app --reload --port 8001 
 ```
 
 ### Run the CLI commands to query the graph (Follow the get-started-graphfleet.ipynb notebook)
@@ -170,7 +174,7 @@ To run the API, save the code in a file named api.py and execute the following c
 To run the API, save the code in a file named api.py and execute the following command in your terminal:
 
 ``` bash
-## uvicorn api:app --reload --port 8001 SOON
+uvicorn api:app --reload --port 8001
 ```
 
 
@@ -185,3 +189,71 @@ This project is licensed under the Apache License 2.0. For the full license text
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Qredence/GraphFleet&type=Date)](https://star-history.com/#Qredence/GraphFleet&Date)
+
+## API Usage
+
+You can run the GraphFleet API using the following command:
+
+```
+uvicorn api:app --reload --port 8001 
+```
+## Streamlit Interface
+
+GraphFleet comes with a user-friendly Streamlit interface for easy interaction with the API. To run the Streamlit app:
+
+```
+## Monthy Web Scraper
+
+GraphFleet includes a powerful web scraping feature called Monthy. This feature allows you to scrape content from websites and retrieve it in either text or CSV format. To use Monthy:
+
+1. Select "Monthy Scrape" from the action menu in the Streamlit interface.
+2. Enter the URL of the website you want to scrape.
+3. Choose the desired output format (text or CSV).
+4. Click "Scrape" to start the process.
+
+Monthy uses GenAIScript's WebScraper tool to intelligently extract content from web pages, making it easy to gather information from various sources.
+
+```
+## Quick Start with Docker
+
+To quickly get started with the GraphFleet Streamlit interface, you can use our Docker container:
+
+1. Build the Streamlit Docker image:
+   ```
+   make docker-build-streamlit
+   ```
+
+2. Run the GraphFleet API (if not already running):
+   ```
+   make api
+   ```
+
+3. In a new terminal, run the Streamlit Docker container:
+   ```
+   make docker-run-streamlit
+   ```
+
+4. Open your web browser and navigate to `http://localhost:8501` to access the GraphFleet Streamlit interface.
+
+Note: The Streamlit container assumes that the API is running on the host machine. If you're running the API in a different location, you can set the `API_URL` environment variable when running the container:
+
+```
+## Features
+
+- Advanced querying with global and local search methods
+- Document indexing and searching
+- Knowledge graph visualization
+- Web-enhanced querying for improved accuracy
+- Self-improvement mechanism
+- Monthy web scraping feature
+- Multiple storage backend support (PostgreSQL, MongoDB, LanceDB, local file system, Neo4j)
+- Advanced reasoning capabilities
+- Release notes generation
+- Containerized processing
+- Ask Monty feature for versatile AI assistance
+
+## Usage
+
+### API
+
+Run the GraphFleet API:

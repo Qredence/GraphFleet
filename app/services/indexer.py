@@ -2,6 +2,7 @@ import asyncio
 from app.config import settings
 from app.utils.logging import logger
 
+
 async def run_indexer(verbose: bool = True):
     try:
         cmd = [

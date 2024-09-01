@@ -3,6 +3,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from app.utils.logging import logger
 import time
 
+
 class RequestLoggerMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         start_time = time.time()
