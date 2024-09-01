@@ -93,7 +93,6 @@ export GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding"
 export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
 export GRAPHRAG_EMBEDDING_ENDPOINT="<https://your-azure-openai-embedding-resource.openai.azure.com/>"
 export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
-
 ```
 
    settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
@@ -134,7 +133,7 @@ Jupyter Notebook Guide: Follow the instructions provided in the get-started-grap
 ```
 
 
-## IMPORTANT : Run these notebook to get started  with GraphFleet:
+## Recommanded : Run these notebook to get started  with GraphFleet:
 Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
 
 ([Get Started Quickly.ipynb](https://github.com/Qredence/GraphFleet/blob/a67eaeb295d99dd2ef48bcdd8f8a719b830ffb7d/notebook/Get%20Started%20Quickly.ipynb)): A comprehensive guide to indexing your data and running basic queries.
@@ -151,8 +150,18 @@ To run the API, save the code in a file named api.py and execute the following c
 uvicorn app:main --reload --port 8001 
 ```
 
-### Run the CLI commands to query the graph (Follow the get-started-graphfleet.ipynb notebook)
+### Running Streamlit
 
+To run the API, save the code in a file named api.py and execute the following command in your terminal:
+
+``` bash
+streamlit run app/streamlit_app.py
+```
+
+
+### CLI Command:
+
+#### Run the CLI commands to query the graph
 ``` bash
 ! python -m graphrag.query \
 --root ./graphfleet \
@@ -169,21 +178,13 @@ uvicorn app:main --reload --port 8001
 "What are the key features of GraphRAG ??"
 ```
 
-### Running Streamlit
-
-To run the API, save the code in a file named api.py and execute the following command in your terminal:
-
-``` bash
-streamlit run app/streamlit_app.py
-```
-
 ## Security
 
-For details about our security policy, please see [Security](SECURITY.md) or [Security](docs/SECURITY.md).
+For details about our security policy, please see [Security](SECURITY.md)
 
 ## License
 
-This project is licensed under the Apache License 2.0. For the full license text, please see [License](LICENSE) or [License](docs/LICENSE).
+This project is licensed under the Apache License 2.0. For the full license text, please see [License](LICENSE) 
 
 ## Star History
 
