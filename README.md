@@ -82,17 +82,17 @@ Environment Variables: Set up your environment variables in a .env file (refer t
 Fill in the .env file in the root folder and the one in the graphfleet folder.
 
  ```sh
-export GRAPHRAG_API_KEY="fcfff4cda4ae4277aa9bac2d6d740431"
-export GRAPHRAG_API_BASE="https://sweden-azure-oai.openai.azure.com"
-export GRAPHRAG_API_VERSION="2024-07-18"
-export GRAPHRAG_DEPLOYMENT_NAME="gpt-4o-mini"
+export GRAPHRAG_API_KEY="your_api_key_here"
+export GRAPHRAG_API_BASE="your_api_base_url_here"
+export GRAPHRAG_API_VERSION="your_api_version_here"
+export GRAPHRAG_DEPLOYMENT_NAME="your_deployment_name_here"
 export GRAPHRAG_API_TYPE="azure_openai"
 export GRAPHRAG_EMBEDDING_MODEL="text-embedding-ada-002"
-export GRAPHRAG_LLM_MODEL="gpt-4o-mini"
+export GRAPHRAG_LLM_MODEL="your_llm_model_here"
 export GRAPHRAG_DATA_PATH="./your_data_directory"
 export GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding"
-export GRAPHRAG_EMBEDDING_KEY="fcfff4cda4ae4277aa9bac2d6d740431"
-export GRAPHRAG_EMBEDDING_ENDPOINT="https://sweden-azure-oai.openai.azure.com/"
+export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
+export GRAPHRAG_EMBEDDING_ENDPOINT="your_embedding_endpoint_here"
 export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="text-embedding-ada-002"
 
 ```
