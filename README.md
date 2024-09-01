@@ -93,7 +93,6 @@ export GRAPHRAG_EMBEDDING_TYPE="azure_openai_embedding"
 export GRAPHRAG_EMBEDDING_KEY="your_embedding_key_here"
 export GRAPHRAG_EMBEDDING_ENDPOINT="<https://your-azure-openai-embedding-resource.openai.azure.com/>"
 export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
-
 ```
 
 
@@ -155,13 +154,15 @@ To run the API, save the code in a file named api.py and execute the following c
 streamlit run app/streamlit_app.py
 ```
 
+
+
 ## Security
 
-For details about our security policy, please see [Security](SECURITY.md) or [Security](docs/SECURITY.md).
+For details about our security policy, please see [Security](SECURITY.md)
 
 ## License
 
-This project is licensed under the Apache License 2.0. For the full license text, please see [License](LICENSE) or [License](docs/LICENSE).
+This project is licensed under the Apache License 2.0. For the full license text, please see [License](LICENSE) 
 
 ## Star History
 
