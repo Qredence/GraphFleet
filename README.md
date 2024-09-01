@@ -96,18 +96,16 @@ export GRAPHRAG_EMBEDDING_DEPLOYMENT_NAME="your_embedding_deployment_name"
 
 ```
 
-   settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
 
-1. Data Indexing:
-Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
+settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
+
+
 
 1. Interacting with GraphFleet:
-Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
-
+   settings.yaml: Customize GraphFleet's behavior further by modifying the settings.yaml file within the graphfleet directory.
+   Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
    get-started-graphfleet.ipynb: A comprehensive guide to indexing your data and running basic queries.
-
    Local Search Notebook.ipynb: Demonstrates local search techniques.
-
    app.py (FastAPI Application): Run a Streamlit-powered web interface to interact with GraphFleet using a user-friendly chat-like interface.
 
 ### Add your text files in ./graphfleet/input/ and run the auto_prompt function
@@ -120,9 +118,7 @@ Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks
     --output ./graphfleet/prompts
 ```
 
-
-
-### Data Indexing:
+### Data Indexing
 
 Jupyter Notebook Guide: Follow the instructions provided in the get-started-graphfleet.ipynb notebook to learn how to index your data with GraphFleet. This notebook provides a hands-on experience for setting up your knowledge base.
 
@@ -133,8 +129,8 @@ Jupyter Notebook Guide: Follow the instructions provided in the get-started-grap
     --config ./graphfleet/settings.yaml
 ```
 
+### Recommended Run these notebook to get started  with GraphFleet
 
-## IMPORTANT : Run these notebook to get started  with GraphFleet:
 Jupyter Notebooks: Explore GraphFleet's capabilities with the provided notebooks:
 
 ([Get Started Quickly.ipynb](https://github.com/Qredence/GraphFleet/blob/a67eaeb295d99dd2ef48bcdd8f8a719b830ffb7d/notebook/Get%20Started%20Quickly.ipynb)): A comprehensive guide to indexing your data and running basic queries.
@@ -149,24 +145,6 @@ To run the API, save the code in a file named api.py and execute the following c
 
 ``` bash
 uvicorn app:main --reload --port 8001 
-```
-
-### Run the CLI commands to query the graph (Follow the get-started-graphfleet.ipynb notebook)
-
-``` bash
-! python -m graphrag.query \
---root ./graphfleet \
---method global \
---streaming \ #stream the response
-"Language Agent Tree Search?"
-```
-
-``` bash
-! python -m graphrag.query \
---root ./graphfleet \
---method global \
---streaming \ #stream the response
-"What are the key features of GraphRAG ??"
 ```
 
 ### Running Streamlit
