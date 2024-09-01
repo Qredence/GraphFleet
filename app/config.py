@@ -8,7 +8,7 @@ load_dotenv()
 
 class Settings(BaseSettings):
     API_KEY: str = os.getenv("GRAPHRAG_API_KEY", "default_api_key")
-    LLM_MODEL: str = os.getenv("GRAPHRAG_LLM_MODEL", "gpt-4o-mini")
+    LLM_MODEL: str = os.getenv("GRAPHRAG_LLM_MODEL", "default_llm_model")
     EMBEDDING_MODEL: str = os.getenv("GRAPHRAG_EMBEDDING_MODEL", "text-embedding-3-large")
     API_BASE: str = os.getenv("GRAPHRAG_API_BASE", "default_api_base")
     API_VERSION: str = os.getenv("GRAPHRAG_API_VERSION", "default_api_version")

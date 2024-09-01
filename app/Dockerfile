@@ -13,6 +13,9 @@ RUN git clone https://github.com/Qredence/GraphFleet.git .
 
 RUN pip3 install -r requirements.txt
 
+# Install python-dotenv
+RUN pip3 install python-dotenv
+
 EXPOSE 8501
 
 HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
