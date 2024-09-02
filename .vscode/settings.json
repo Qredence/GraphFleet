@@ -25,5 +25,11 @@
         ".cache": true,
         "retool.config.json": true
     },
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "docwriter.progress.trackFunctions": true,
+    "docwriter.progress.trackMethods": true,
+    "docwriter.style": "NumPy",
+    "docwriter.hotkey.mac": "⌘ + .",
+    "docwriter.progress.trackClasses": true,
+    "docwriter.progress.trackTypes": true
 }
