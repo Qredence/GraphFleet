@@ -28,7 +28,7 @@
     "python.analysis.autoImportCompletions": true,
     "docwriter.progress.trackFunctions": true,
     "docwriter.progress.trackMethods": true,
-    "docwriter.style": "Auto-detect",
+    "docwriter.style": "NumPy",
     "docwriter.hotkey.mac": "⌘ + .",
     "docwriter.progress.trackClasses": true,
     "docwriter.progress.trackTypes": true
