@@ -1,4 +1,6 @@
 import os
+import asyncio
+import logging
 import pandas as pd
 import tiktoken
 from fastapi import HTTPException
@@ -22,8 +24,7 @@ from app.utils.data_processing import (
     read_indexer_entities,
     read_indexer_reports
 )
-import asyncio
-import logging
+
 
 logger = logging.getLogger(__name__)
 

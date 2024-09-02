@@ -12,6 +12,8 @@ from app.utils import convert_numpy
 from app.api import _reformat_context_data
 import sentry_sdk
 
+app = FastAPI()
+
 
 sentry_sdk.init(
     dsn="https://741dc950f3465d2db0b8f869832dabc0@o4507875835314176.ingest.de.sentry.io/4507875863429200",
