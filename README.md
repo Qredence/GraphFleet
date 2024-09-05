@@ -39,6 +39,8 @@ GraphFleet uses knowledge graphs to provide substantial improvements in question
 - Hierarchical summarization.
 - Enhanced reasoning capabilities for LLMs on private datasets.
 
+Our current API Endpoints : https://agenticfleet.apidocumentation.com/reference#tag/search/POST/search/global
+
 ## Contribute
 
 - Leave us a star ♥
