@@ -42,7 +42,8 @@ sseclient-py = "^1.8.0"
 sentry-sdk = {extras = ["fastapi"], version = "^2.13.0"}
 langsmith = "^0.1.108"
 
-
+# Native dependencies
+graspologic-native = "1.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -56,6 +57,7 @@ mypy = "^1.8.0"
 flake8 = "^7.1.1"
 pre-commit = "^3.6.0"
 ipykernel = "^6.29.5"
+maturin = "^1.7.1"
 
 [tool.poetry.extras]
 
