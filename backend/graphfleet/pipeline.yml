@@ -1,0 +1,45 @@
+version: 1.0
+name: graphrag-pipeline
+
+input:
+  source_dir: input
+  output_dir: output
+  prompts_dir: prompts
+
+workflows:
+  - name: create_final_nodes
+    type: node_creation
+    params:
+      min_node_weight: 1
+      max_node_weight: 100
+
+  - name: create_final_relationships
+    type: relationship_creation
+    params:
+      min_relationship_weight: 0.1
+      max_relationship_weight: 1.0
+
+  - name: create_final_communities
+    type: community_detection
+    params:
+      min_community_size: 3
+      max_community_size: 1000
+      community_levels: [1, 2, 3]
+
+  - name: create_final_entities
+    type: entity_embedding
+    params:
+      embedding_model: text-embedding-3-large
+      batch_size: 100
+
+  - name: create_final_text_units
+    type: text_unit_processing
+    params:
+      min_text_length: 50
+      max_text_length: 5000
+
+  - name: create_final_community_reports
+    type: community_reporting
+    params:
+      report_types: ["summary", "detailed"]
+      max_report_length: 2000

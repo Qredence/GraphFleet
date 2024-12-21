@@ -1,0 +1,12 @@
+import pandas as pd
+
+# Create sample relationships data
+relationships_data = {
+    'source': ['e1', 'e2', 'e2'],
+    'target': ['e2', 'e3', 'e1'],
+    'type': ['uses', 'implements', 'type_of'],
+    'weight': [0.8, 0.9, 0.7]
+}
+
+df = pd.DataFrame(relationships_data)
+df.to_parquet('/Volumes/Samsung-SSD-T7/QredenceBeta/GraphFleet/graphrag/graphfleet/tests/test_data/output/relationships.parquet')

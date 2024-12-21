@@ -1,82 +1,43 @@
-[tool.poetry]
+[project]
 name = "graphfleet"
-version = "0.5.35"
-description = "Advanced implementation of GraphRAG for enhanced LLM reasoning"
-authors = ["Zachary <zachary@qredence.ai>"]
-license = "Apache-2.0"
-readme = ["README.md", "SECURITY.md", "CONTRIBUTING.md"]
-repository = "https://github.com/Qredence/GraphFleet"
-keywords = ["knowledge", "graph", "rag", "agentic", "agent"]
+version = "0.1.0"
+description = "A powerful document search and analysis tool built on top of GraphRAG"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" },
+]
+dependencies = [
+    "fastapi>=0.68.0",
+    "uvicorn>=0.15.0",
+    "python-multipart>=0.0.5",
+    "pydantic>=2.0.0",
+    "graphrag>=1.0.1",
+    "lancedb>=0.1.0",
+    "python-dotenv>=0.19.0",
+]
 
-
-
-[tool.poetry.dependencies]
-python = "^3.11.2,<3.13"
-fastapi = "^0.110.1"
-pydantic = "^2.0"
-uvicorn = {extras = ["standard"], version = "^0.25.0"}
-httpx = "^0.27.0"
-asyncpg = "^0.29.0"
-sqlalchemy = {extras = ["asyncio"], version = "^2.0.0"}
-alembic = "^1.13.0"
-python-jose = {extras = ["cryptography"], version = "^3.3.0"}
-
-python-multipart = "^0.0.9"
-structlog = "^24.1.0"
-
-graphrag = "^0.3.2"
-
-# AI and LLM dependencies
-openai = "^1.35.7"
-tiktoken = "^0.7.0"
-transformers = "^4.44.2"
-
-# Data Science dependencies
-numpy = "^1.25.2"
-pandas = "^2.2.2"
-scikit-learn = "^1.5.1"
-networkx = "^3.0"
-
-
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.2"
-pytest-cov = "^5.0.0"
-pytest-asyncio = "^0.24.0"
-
-black = "^24.1.0"
-isort = "^5.13.0"
-mypy = "^1.8.0"
-flake8 = "^7.1.1"
-pre-commit = "^3.6.0"
-ipykernel = "^6.29.5"
-
-[tool.poetry.extras]
-
-
-
-[tool.poetry-dynamic-versioning]
-enable = true
-vcs = "git"
-style = "semver"
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black>=21.0",
+    "isort>=5.0",
+    "mypy>=0.910",
+    "jupyter>=1.0.0",
+]
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
-build-backend = "poetry_dynamic_versioning.backend"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["graphfleet"]
 
 [tool.black]
-line-length = 100
-target-version = ['py311']
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
 
 [tool.isort]
 profile = "black"
-line_length = 100
-
-[tool.mypy]
-python_version = "3.11"
-strict = true
-ignore_missing_imports = true
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
+multi_line_output = 3

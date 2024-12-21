@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./shared:/app/shared
+    environment:
+      - GRAPHFLEET_PROJECT_DIR=/app/data
+      - GRAPHFLEET_INDEX_TYPE=lancedb
+      - GRAPHFLEET_MODEL=gpt-4
+      - CORS_ORIGINS=http://localhost:3000
+    networks:
+      - graphfleet
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - ./shared:/app/shared
+      - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - graphfleet
+
+  lancedb:
+    image: lancedb/lancedb
+    ports:
+      - "8080:8080"
+    volumes:
+      - lancedb_data:/data
+    networks:
+      - graphfleet
+
+networks:
+  graphfleet:
+    driver: bridge
+
+volumes:
+  lancedb_data:

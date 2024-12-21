@@ -1,0 +1,56 @@
+standard:
+  template: |
+    Based on the following context:
+    {context}
+    
+    Please answer: {query}
+    
+    Provide your answer in a clear and concise manner.
+  metadata:
+    description: Standard template for general queries
+    version: 1.0
+
+technical:
+  template: |
+    You are a technical expert. Based on the following technical documentation:
+    {context}
+    
+    Please answer this technical question: {query}
+    
+    Provide your answer in this format:
+    1. Direct answer (1-2 sentences)
+    2. Supporting details from documentation
+    3. Any relevant caveats or limitations
+  metadata:
+    description: Template for technical documentation queries
+    version: 1.0
+
+drift:
+  template: |
+    Analyze the following information for concept drift:
+    {context}
+    
+    Question: {query}
+    
+    Consider:
+    1. Changes in terminology or definitions
+    2. Evolution of concepts over time
+    3. Differences between sources
+  metadata:
+    description: Template for analyzing concept drift
+    version: 1.0
+
+multihop:
+  template: |
+    Using the following interconnected information:
+    {context}
+    
+    Answer this multi-step question: {query}
+    
+    Break down your reasoning:
+    1. Initial understanding
+    2. Intermediate steps
+    3. Final conclusion
+  metadata:
+    description: Template for multi-hop reasoning
+    version: 1.0

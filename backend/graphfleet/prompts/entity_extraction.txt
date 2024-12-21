@@ -1,0 +1,132 @@
+
+-Goal-
+Given a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: One of the following types: [technology, domain, principle, user, study, task, system, research, organization]
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+- relationship_strength: an integer score between 1 to 10, indicating strength of the relationship between the source entity and target entity
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
+3. Return output in The primary language of the provided text is "English." as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+
+4. If you have to translate into The primary language of the provided text is "English.", just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
+-Examples-
+######################
+
+Example 1:
+
+entity_types: [technology, domain, principle, user, study, task, system, research, organization]
+text:
+  We  focus  primarily
+on  programming  due  to  the  early  adoption  of  tools  like
+GitHub  Copilot  and  the  accompanying  usability  research,
+but  we  also  reflect  on  emerging  studies  from  other  domains,
+such  as  healthcare,  writing,  and  design,  showing  that  these
+issues  are  not  limited  to  a  single  domain.  Moreover,  we  dis-
+cuss  potential  design  solutions,  emphasizing  the  importance
+of  following  the  Human  Factors  principles  of  feedback  and
+flexibility  when  designing  GenAI  systems.  We  suggest  that
+the  fast-paced  innovation  of  GenAI  will  benefit  from  the
+decades  of  Human  Factors  research  in  order  to  design
+Gen
+------------------------
+output:
+("entity"{tuple_delimiter}GITHUB COPILOT{tuple_delimiter}TECHNOLOGY{tuple_delimiter}GitHub Copilot is a programming tool that assists developers by providing code suggestions and completions based on context.)
+{record_delimiter}
+("entity"{tuple_delimiter}HEALTHCARE{tuple_delimiter}DOMAIN{tuple_delimiter}Healthcare is a domain that encompasses the study and practice of maintaining and improving health through various services and interventions.)
+{record_delimiter}
+("entity"{tuple_delimiter}WRITING{tuple_delimiter}DOMAIN{tuple_delimiter}Writing is a domain that involves the creation of text for various purposes, including communication, storytelling, and documentation.)
+{record_delimiter}
+("entity"{tuple_delimiter}DESIGN{tuple_delimiter}DOMAIN{tuple_delimiter}Design is a domain focused on the creation and planning of objects, systems, or experiences to meet specific needs and preferences.)
+{record_delimiter}
+("entity"{tuple_delimiter}HUMAN FACTORS PRINCIPLES{tuple_delimiter}PRINCIPLE{tuple_delimiter}Human Factors principles are guidelines that aim to improve the interaction between humans and systems by emphasizing usability, feedback, and flexibility.)
+{record_delimiter}
+("entity"{tuple_delimiter}GENAI SYSTEMS{tuple_delimiter}SYSTEM{tuple_delimiter}GenAI systems refer to generative artificial intelligence systems that create content or solutions based on input data and algorithms.)
+{record_delimiter}
+("entity"{tuple_delimiter}HUMAN FACTORS RESEARCH{tuple_delimiter}RESEARCH{tuple_delimiter}Human Factors research studies the interactions between humans and systems to enhance usability and performance in various applications.)
+{record_delimiter}
+("relationship"{tuple_delimiter}GITHUB COPILOT{tuple_delimiter}HUMAN FACTORS PRINCIPLES{tuple_delimiter}GitHub Copilot's design can benefit from Human Factors principles to enhance usability and user experience{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}GENAI SYSTEMS{tuple_delimiter}HUMAN FACTORS RESEARCH{tuple_delimiter}The design of GenAI systems can leverage insights from Human Factors research to improve user interaction and satisfaction{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}HEALTHCARE{tuple_delimiter}HUMAN FACTORS RESEARCH{tuple_delimiter}Human Factors research can be applied to the healthcare domain to improve patient outcomes and system usability{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}WRITING{tuple_delimiter}HUMAN FACTORS RESEARCH{tuple_delimiter}Human Factors research can inform writing tools and processes to enhance clarity and effectiveness in communication{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}DESIGN{tuple_delimiter}HUMAN FACTORS PRINCIPLES{tuple_delimiter}Design practices can incorporate Human Factors principles to create more user-friendly products and experiences{tuple_delimiter}8)
+{completion_delimiter}
+#############################
+
+
+Example 2:
+
+entity_types: [technology, domain, principle, user, study, task, system, research, organization]
+text:
+ A.  M.                             tools.  In  The  2024  ACM  Conference  on  Fairness,  Accountability,  and
+    Casares,  P.,  Sheng  Loe,  B.,  Reichart,  R.,                    O  h�
+                                                                            � Eigeartaigh,  S.,        Transparency  (pp.  1475–1493).  ACM,  Rio  de  Janeiro,  Brazil.  https://
+    Korhonen,  A.,  &  Hern�andez-Orallo,  J.  (2023).  Your  prompt  is  my                           doi.org/10.1145/3630106.3658984
+    command:  On  assessing  the  human-centred  generality  of  multi-                             Warm,  J.  S.,  Parasuraman,  R.,  &  Matthews,  G.
+------------------------
+output:
+("entity"{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}ORGANIZATION{tuple_delimiter}The ACM Conference on Fairness, Accountability, and Transparency is a conference focused on research and discussions related to fairness and accountability in technology and society.)
+{record_delimiter}
+("entity"{tuple_delimiter}RIO DE JANEIRO{tuple_delimiter}GEO{tuple_delimiter}Rio de Janeiro is a city in Brazil where the ACM Conference on Fairness, Accountability, and Transparency was held.)
+{record_delimiter}
+("entity"{tuple_delimiter}A. M. CASA{tuple_delimiter}PERSON{tuple_delimiter}A. M. Casa is one of the authors contributing to the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}P. SHENG LOE{tuple_delimiter}PERSON{tuple_delimiter}P. Sheng Loe is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}B. REICHART{tuple_delimiter}PERSON{tuple_delimiter}B. Reichart is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}R. KORHONEN{tuple_delimiter}PERSON{tuple_delimiter}R. Korhonen is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}J. HERNÁNDEZ-ORALLO{tuple_delimiter}PERSON{tuple_delimiter}J. Hernández-Orallo is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}J. S. WARM{tuple_delimiter}PERSON{tuple_delimiter}J. S. Warm is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}R. PARASURAMAN{tuple_delimiter}PERSON{tuple_delimiter}R. Parasuraman is a co-author of the research presented at the conference.)
+{record_delimiter}
+("entity"{tuple_delimiter}G. MATTHEWS{tuple_delimiter}PERSON{tuple_delimiter}G. Matthews is a co-author of the research presented at the conference.)
+{record_delimiter}
+("relationship"{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}RIO DE JANEIRO{tuple_delimiter}The ACM Conference on Fairness, Accountability, and Transparency was held in Rio de Janeiro, Brazil{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}A. M. CASA{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}A. M. Casa contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}P. SHENG LOE{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}P. Sheng Loe contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}B. REICHART{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}B. Reichart contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}R. KORHONEN{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}R. Korhonen contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}J. HERNÁNDEZ-ORALLO{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}J. Hernández-Orallo contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}J. S. WARM{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}J. S. Warm contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}R. PARASURAMAN{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}R. Parasuraman contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}G. MATTHEWS{tuple_delimiter}ACM CONFERENCE ON FAIRNESS, ACCOUNTABILITY, AND TRANSPARENCY{tuple_delimiter}G. Matthews contributed to the research presented at the ACM Conference on Fairness, Accountability, and Transparency{tuple_delimiter}9)
+{completion_delimiter}
+#############################
+
+
+
+-Real Data-
+######################
+entity_types: [technology, domain, principle, user, study, task, system, research, organization]
+text: {input_text}
+######################
+output:

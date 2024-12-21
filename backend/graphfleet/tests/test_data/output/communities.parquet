@@ -1,0 +1,18 @@
+import pandas as pd
+
+# Create sample communities data
+communities_data = {
+    'id': ['c1', 'c2'],
+    'level': [1, 1],
+    'members': [
+        ['n1', 'n2'],
+        ['n3']
+    ],
+    'description': [
+        'AI and Azure related documents',
+        'RAG implementation documents'
+    ]
+}
+
+df = pd.DataFrame(communities_data)
+df.to_parquet('/Volumes/Samsung-SSD-T7/QredenceBeta/GraphFleet/graphrag/graphfleet/tests/test_data/output/communities.parquet')

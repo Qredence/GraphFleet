@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Create sample entities data
+entities_data = {
+    'id': ['e1', 'e2', 'e3'],
+    'name': ['AI', 'Azure OpenAI', 'RAG'],
+    'type': ['concept', 'service', 'technology'],
+    'description': [
+        'Artificial Intelligence and its applications',
+        'Cloud-based AI services from Microsoft',
+        'Retrieval Augmented Generation for better AI responses'
+    ]
+}
+
+df = pd.DataFrame(entities_data)
+df.to_parquet('/Volumes/Samsung-SSD-T7/QredenceBeta/GraphFleet/graphrag/graphfleet/tests/test_data/output/entities.parquet')

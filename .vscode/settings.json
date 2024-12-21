@@ -25,5 +25,15 @@
         ".cache": true,
         "retool.config.json": true
     },
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "graalvm.installations": [
+        "/Users/zocho/Java/graalvm-ce-java19-22.3.1/graalvm-ce-java19-22.3.1/Contents/Home"
+    ],
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-19",
+            "path": "/Users/zocho/Java/graalvm-ce-java19-22.3.1/graalvm-ce-java19-22.3.1/Contents/Home"
+        }
+    ],
+    "graalvm.home": "/Users/zocho/Java/graalvm-ce-java19-22.3.1/graalvm-ce-java19-22.3.1/Contents/Home"
 }

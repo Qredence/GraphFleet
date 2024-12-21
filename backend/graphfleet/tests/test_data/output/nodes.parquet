@@ -1,0 +1,20 @@
+import pandas as pd
+
+# Create sample nodes data
+nodes_data = {
+    'id': ['n1', 'n2', 'n3'],
+    'type': ['document', 'document', 'document'],
+    'content': [
+        'This is a sample document about AI and machine learning.',
+        'Azure OpenAI services provide powerful language models.',
+        'Graph-based RAG systems improve information retrieval.'
+    ],
+    'metadata': [
+        {'source': 'test1.txt', 'date': '2024-01-01'},
+        {'source': 'test2.txt', 'date': '2024-01-02'},
+        {'source': 'test3.txt', 'date': '2024-01-03'}
+    ]
+}
+
+df = pd.DataFrame(nodes_data)
+df.to_parquet('/Volumes/Samsung-SSD-T7/QredenceBeta/GraphFleet/graphrag/graphfleet/tests/test_data/output/nodes.parquet')
