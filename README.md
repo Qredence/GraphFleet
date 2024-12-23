@@ -1,5 +1,11 @@
 # Overview
 
+> [!CAUTION]
+> DEPRECATED NEW FULL REVAMP COMING SOON.
+GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), an important update is expected by the end of december
+
+
+
 <div align="left">
 <a href="https://pypi.org/project/graphfleet/">
    <img alt="Pepy Total Downlods" src="https://img.shields.io/pepy/dt/graphfleet">
@@ -13,9 +19,7 @@
 
 https://github.com/user-attachments/assets/ac3271fa-cab5-412f-a441-bbedfe4a009f
 
-# ** /!\ DEPRECATED NEW FULL REVAMP COMING SOON /!\**
 
-GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), designed to enhance large language models' ability to reason about complex information and private datasets. It builds upon GraphRAG (Retrieval Augmented Generation using Graph structures) and will gradually adopt its own path to fulfill our roadmap at Qredence.
 
 ## GraphFleet
 
