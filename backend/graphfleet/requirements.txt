@@ -1,52 +1,33 @@
+# Core dependencies
 fastapi==0.104.1
 uvicorn==0.24.0
-pydantic>=2.10.3,<3.0.0
-PyYAML>=6.0.2,<7.0.0
-python-dotenv>=1.0.1,<2.0.0
-pandas>=2.2.3
-pyarrow>=15.0.0,<16.0.0
-graphrag==1.0.0
-openai
-azure-identity
-lancedb = "^0.17.0"
+pydantic==2.5.2
+python-dotenv==1.0.0
 
-# Async IO
-aiofiles = "^24.1.0"
+# Graph dependencies
+networkx>=3.4.2
+types-networkx>=3.4.2
+lancedb==0.4.0
+tenacity>=9.0.0,<10.0.0
 
-# LLM
-openai = "^1.57.0"
-nltk = "3.9.1"
-tiktoken = "^0.8.0"
+# Data processing
+pandas==2.1.3
+numpy==1.26.2
+scikit-learn==1.3.2
 
-# Data-Sci
-numpy = "^1.25.2"
-graspologic = "^3.4.1"
-networkx = "^3.4.2"
-pandas = "^2.2.3"
-matplotlib = "^3.9.3"
-pyarrow = "^15.0.0"
-umap-learn = "^0.5.6"
+# Azure OpenAI
+openai==1.3.5
+azure-identity==1.15.0
+azure-keyvault-secrets==4.7.0
 
-# Configuration
-pyyaml = "^6.0.2"
-pyaml-env = "^1.2.1"
-python-dotenv = "^1.0.1"
+# Utilities
+python-multipart==0.0.6
+aiofiles==23.2.1
+httpx==0.25.2
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
 
-pydantic = "^2.10.3"
-rich = "^13.9.4"
-devtools = "^0.12.2"
-typing-extensions = "^4.12.2"
-
-#Azure
-azure-storage-blob = "^12.24.0"
-azure-identity = "^1.19.0"
-
-future = "^1.0.0" # Needed until graspologic fixes their dependency
-typer = "^0.15.1"
-fnllm = "^0.0.10"
-
-tenacity = "^9.0.0"
-json-repair = "^0.30.3"
-tqdm = "^4.67.1"
-httpx = "^0.28.1"
-poethepoet = "^0.31.1"
+# Type checking
+types-requests==2.31.0.10
+types-python-jose==3.3.4.8
+pandas-stubs==2.1.1.230928

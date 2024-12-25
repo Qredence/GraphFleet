@@ -1,109 +1,110 @@
 # GraphFleet
 
-GraphFleet is a powerful Python package for building graph-based RAG (Retrieval-Augmented Generation) applications. Built on top of GraphRAG with enhanced features and improved usability.
+A powerful graph-based knowledge management and query system.
 
 ## Features
 
-- **Advanced Document Processing**: Intelligent text chunking and document handling
-- **Graph-Based Knowledge**: Leverage graph structures for better context understanding
-- **Smart Prompting**: Template management and auto-prompt generation
-- **Optimized Querying**: Query optimization and result evaluation
-- **FastAPI Integration**: Ready-to-use API endpoints
-- **Comprehensive Examples**: Jupyter notebooks demonstrating all features
+- Project initialization and management
+- Advanced document indexing
+- Semantic search capabilities
+- Custom query pipelines
+- Knowledge graph analytics
+- Concept drift analysis
+- Batch processing support
 
-## Installation
-
-```bash
-pip install graphfleet
-```
-
-## Quick Start
-
-```python
-from graphfleet import GraphFleet
-
-# Initialize project
-graph_fleet = GraphFleet.init_project("./my_project")
-
-# Add documents
-await graph_fleet.add_documents("./docs")
-
-# Create index
-await graph_fleet.create_index()
-
-# Query
-result = await graph_fleet.query("What is machine learning?")
-print(result.result)
-```
-
-## Documentation
-
-### Core Components
-
-1. **Document Processing**
-   - Text chunking with overlap
-   - Metadata handling
-   - Multiple file formats support
-
-2. **Indexing**
-   - Vector indexing with LanceDB
-   - Graph construction
-   - Custom index configurations
-
-3. **Prompting**
-   - Template management
-   - Auto-prompt generation
-   - Template customization
-
-4. **Querying**
-   - Multiple query types
-   - Context window management
-   - Query optimization
-   - Result evaluation
-
-### Example Notebooks
-
-1. `01_quickstart.ipynb`: Basic usage and setup
-2. `02_advanced_features.ipynb`: Advanced features demo
-3. `03_indexing.ipynb`: Document indexing guide
-4. `04_auto_prompting.ipynb`: Prompt management
-5. `05_advanced_querying.ipynb`: Advanced query features
-
-## API Reference
-
-See [API Documentation](docs/api.md) for detailed endpoint descriptions.
-
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file:
-
-```env
-GRAPHFLEET_PROJECT_DIR=./data
-GRAPHFLEET_INDEX_TYPE=lancedb
-GRAPHFLEET_MODEL=gpt-4
-GRAPHFLEET_CHUNK_SIZE=512
-GRAPHFLEET_CHUNK_OVERLAP=50
-```
-
-### Project Structure
+## Project Structure
 
 ```
 graphfleet/
-├── app/                    # FastAPI application
-├── data/                   # Data directories
-├── docs/                   # Documentation
-├── examples/               # Jupyter notebooks
-├── graphfleet/            # Core package
-├── templates/             # GraphRAG templates
-└── tests/                 # Test suite
+├── backend/                 # Backend service
+│   ├── app/                # Main application code
+│   │   ├── api/           # API endpoints
+│   │   ├── core/          # Core business logic
+│   │   ├── models/        # Data models
+│   │   └── utils/         # Utility functions
+│   ├── graphfleet/        # GraphFleet core library
+│   ├── tests/             # Backend tests
+│   └── templates/         # Template files
+├── frontend/              # Frontend application
+│   ├── src/              # Source code
+│   │   ├── components/   # React components
+│   │   ├── pages/        # Page components
+│   │   └── utils/        # Utility functions
+│   └── public/           # Static assets
+├── shared/               # Shared utilities
+├── scripts/              # Development scripts
+└── examples/             # Example code and notebooks
 ```
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/graphfleet.git
+cd graphfleet
+```
+
+2. Set up the backend:
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+3. Set up the frontend:
+```bash
+cd frontend
+npm install
+```
+
+4. Configure environment variables:
+```bash
+cp .env.example .env
+# Edit .env with your settings
+```
+
+## Development
+
+### Backend Development
+
+```bash
+cd backend
+uvicorn app.main:app --reload
+```
+
+### Frontend Development
+
+```bash
+cd frontend
+npm run dev
+```
+
+### Docker Development
+
+```bash
+docker-compose up
+```
+
+## API Documentation
+
+The API documentation is available at `/docs` when running the backend server.
+
+Key endpoints:
+- `/v1/init` - Initialize a new project
+- `/v1/index` - Create document index
+- `/v1/query` - Process queries
+- `/v1/semantic-search` - Perform semantic search
+- `/v1/custom-pipeline` - Run custom query pipelines
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## Security
+
+For security concerns, please refer to our [Security Policy](SECURITY.md).

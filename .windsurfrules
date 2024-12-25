@@ -1,7 +1,0 @@
-## Global rules for Windsurf
-- Repository is published on PyPI
-- Utilize API endpoints and features natively for GraphFleet
-- Reference GraphRAG from https://github.com/microsoft/graphrag.git
-- Use GraphRAG documentation at microsoft.github.io/graphrag/
-- Implement with GraphRAG version 1.0.1
-- Build API using FastAPI framework

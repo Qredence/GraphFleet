@@ -1,185 +1,264 @@
 """
-Enhanced features for GraphFleet core functionality.
+GraphFleet Core Features
+
+This module provides the core functionality for GraphFleet operations,
+including graph analysis, search, and drift detection.
 """
 
-import asyncio
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional, Any, Union
+from datetime import datetime
 
+import networkx as nx
 import numpy as np
-from graphrag.utils.storage import load_table_from_storage
+from sklearn.metrics.pairwise import cosine_similarity
+
+from graphfleet.core.types import (
+    QueryType,
+    ChunkStrategy,
+    EmbeddingConfig,
+    QueryConfig,
+    IndexConfig,
+    GraphStats,
+    SearchResult,
+    DriftAnalysis,
+)
 
 class GraphFleetFeatures:
-    """Enhanced features for GraphFleet."""
+    """Core features for graph operations and analysis."""
     
     def __init__(self, storage):
+        """Initialize GraphFleet features.
+        
+        Args:
+            storage: Storage backend instance
+        """
         self.storage = storage
+        self.graph = nx.Graph()
+        self._load_graph()
+    
+    def _load_graph(self) -> None:
+        """Load the knowledge graph from storage."""
+        # Load nodes and edges from storage
+        nodes = self.storage.get_nodes()
+        edges = self.storage.get_edges()
+        
+        # Build networkx graph
+        self.graph.add_nodes_from(nodes)
+        self.graph.add_edges_from(edges)
     
     async def batch_query(
         self,
         queries: List[str],
-        query_type: str = "standard",
-        batch_size: int = 5,
-        **kwargs
+        query_type: str = "semantic",
+        batch_size: int = 10,
+        **options: Any
     ) -> List[Dict[str, Any]]:
-        """
-        Process multiple queries in batches.
+        """Process multiple queries in batch.
         
         Args:
-            queries: List of query strings
-            query_type: Type of query to perform
-            batch_size: Number of queries to process simultaneously
-            **kwargs: Additional query parameters
+            queries: List of queries to process
+            query_type: Type of queries to perform
+            batch_size: Number of queries to process in parallel
+            **options: Additional query options
+            
+        Returns:
+            List of query results
+            
+        Raises:
+            ValueError: If query_type is invalid
+        """
+        if query_type not in QueryType.__members__:
+            raise ValueError(f"Invalid query type: {query_type}")
+        
+        # Process queries in batches
+        results = []
+        for i in range(0, len(queries), batch_size):
+            batch = queries[i:i + batch_size]
+            batch_results = await self._process_batch(
+                batch,
+                query_type,
+                **options
+            )
+            results.extend(batch_results)
+        
+        return results
+    
+    async def knowledge_graph_stats(self) -> Dict[str, Any]:
+        """Get statistics about the knowledge graph.
+        
+        Returns:
+            Dict containing graph statistics
+        """
+        stats = {
+            "node_count": self.graph.number_of_nodes(),
+            "edge_count": self.graph.number_of_edges(),
+            "avg_degree": float(
+                2 * self.graph.number_of_edges()
+            ) / self.graph.number_of_nodes(),
+            "density": nx.density(self.graph),
+            "communities": len(list(nx.community.greedy_modularity_communities(self.graph))),
+            "updated_at": datetime.now().isoformat()
+        }
+        return stats
+    
+    async def analyze_drift(
+        self,
+        query: str,
+        window_size: int = 100
+    ) -> DriftAnalysis:
+        """Analyze concept drift over time.
+        
+        Args:
+            query: Query for drift analysis
+            window_size: Size of the analysis window
+            
+        Returns:
+            DriftAnalysis object with results
+        """
+        # Get temporal embeddings
+        embeddings = await self.storage.get_temporal_embeddings(
+            query,
+            window_size
+        )
+        
+        if not embeddings:
+            return DriftAnalysis(
+                query=query,
+                window_size=window_size,
+                drift_score=0.0,
+                trends=[],
+                metadata={"error": "No temporal data available"}
+            )
+        
+        # Calculate drift scores
+        scores = []
+        for i in range(len(embeddings) - 1):
+            similarity = cosine_similarity(
+                embeddings[i].reshape(1, -1),
+                embeddings[i + 1].reshape(1, -1)
+            )[0][0]
+            scores.append(1 - similarity)
+        
+        # Calculate overall drift score
+        drift_score = np.mean(scores) if scores else 0.0
+        
+        # Get timestamps
+        timestamps = await self.storage.get_temporal_timestamps(
+            query,
+            window_size
+        )
+        
+        # Build trends
+        trends = [
+            {
+                "timestamp": ts.isoformat(),
+                "score": score
+            }
+            for ts, score in zip(timestamps, scores)
+        ]
+        
+        return DriftAnalysis(
+            query=query,
+            window_size=window_size,
+            drift_score=float(drift_score),
+            trends=trends,
+            metadata={
+                "method": "cosine_similarity",
+                "num_points": len(scores)
+            }
+        )
+    
+    async def _process_batch(
+        self,
+        queries: List[str],
+        query_type: str,
+        **options: Any
+    ) -> List[Dict[str, Any]]:
+        """Process a batch of queries.
+        
+        Args:
+            queries: List of queries to process
+            query_type: Type of queries to perform
+            **options: Additional query options
             
         Returns:
             List of query results
         """
-        results = []
-        for i in range(0, len(queries), batch_size):
-            batch = queries[i:i + batch_size]
-            tasks = [
-                self._process_query(query, query_type, **kwargs)
-                for query in batch
-            ]
-            batch_results = await asyncio.gather(*tasks)
-            results.extend(batch_results)
-        return results
+        # Get query embeddings
+        embeddings = await self.storage.get_embeddings(queries)
+        
+        # Process based on query type
+        if query_type == QueryType.SEMANTIC:
+            return await self._semantic_search_batch(
+                queries,
+                embeddings,
+                **options
+            )
+        elif query_type == QueryType.LOCAL:
+            return await self._local_search_batch(
+                queries,
+                embeddings,
+                **options
+            )
+        elif query_type == QueryType.GLOBAL:
+            return await self._global_search_batch(
+                queries,
+                embeddings,
+                **options
+            )
+        else:  # DRIFT
+            return await self._drift_search_batch(
+                queries,
+                embeddings,
+                **options
+            )
     
-    async def query_analysis(
+    async def _semantic_search_batch(
         self,
-        query: str,
-        **kwargs
-    ) -> Dict[str, Any]:
-        """
-        Perform detailed analysis of query results.
+        queries: List[str],
+        embeddings: np.ndarray,
+        **options: Any
+    ) -> List[Dict[str, Any]]:
+        """Perform semantic search for a batch of queries.
         
         Args:
-            query: Query string
-            **kwargs: Additional query parameters
+            queries: List of queries
+            embeddings: Query embeddings
+            **options: Search options
             
         Returns:
-            Analysis results including:
-            - Confidence scores
-            - Source diversity
-            - Context relevance
+            List of search results
         """
-        # Get standard query results
-        result = await self._process_query(query, "standard", **kwargs)
+        k = options.get("k", 10)
+        threshold = options.get("threshold", 0.5)
         
-        # Analyze confidence scores
-        confidence_scores = self._analyze_confidence(result)
+        results = []
+        for query, embedding in zip(queries, embeddings):
+            # Get similar documents
+            docs = await self.storage.search_similar(
+                embedding,
+                k=k,
+                threshold=threshold
+            )
+            
+            # Format results
+            query_results = [
+                SearchResult(
+                    id=doc["id"],
+                    score=float(doc["score"]),
+                    content=doc["content"],
+                    metadata=doc.get("metadata", {})
+                )
+                for doc in docs
+            ]
+            
+            results.append({
+                "query": query,
+                "results": [result.dict() for result in query_results],
+                "metadata": {
+                    "k": k,
+                    "threshold": threshold
+                }
+            })
         
-        # Analyze source diversity
-        source_diversity = self._analyze_sources(result)
-        
-        # Analyze context relevance
-        context_relevance = self._analyze_context(result)
-        
-        return {
-            "query_result": result,
-            "confidence_scores": confidence_scores,
-            "source_diversity": source_diversity,
-            "context_relevance": context_relevance,
-        }
-    
-    async def knowledge_graph_stats(self) -> Dict[str, Any]:
-        """
-        Get statistics about the knowledge graph.
-        
-        Returns:
-            Statistics including:
-            - Node count
-            - Edge count
-            - Community statistics
-            - Embedding space analysis
-        """
-        # Load graph data
-        nodes = await load_table_from_storage("nodes.parquet", self.storage)
-        edges = await load_table_from_storage("edges.parquet", self.storage)
-        communities = await load_table_from_storage(
-            "communities.parquet",
-            self.storage
-        )
-        
-        return {
-            "node_count": len(nodes),
-            "edge_count": len(edges),
-            "community_stats": self._analyze_communities(communities),
-            "embedding_stats": self._analyze_embeddings(nodes),
-        }
-    
-    def _analyze_confidence(self, result: Dict[str, Any]) -> Dict[str, float]:
-        """Analyze confidence scores in results."""
-        scores = []
-        for item in result.get("evidence", []):
-            score = item.get("score", 0.0)
-            scores.append(score)
-        
-        return {
-            "mean": float(np.mean(scores)),
-            "std": float(np.std(scores)),
-            "min": float(np.min(scores)),
-            "max": float(np.max(scores)),
-        }
-    
-    def _analyze_sources(self, result: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze diversity of sources in results."""
-        sources = []
-        for item in result.get("evidence", []):
-            source = item.get("source")
-            if source:
-                sources.append(source)
-        
-        unique_sources = set(sources)
-        return {
-            "total_sources": len(sources),
-            "unique_sources": len(unique_sources),
-            "source_distribution": {
-                source: sources.count(source)
-                for source in unique_sources
-            },
-        }
-    
-    def _analyze_context(self, result: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze relevance of context in results."""
-        contexts = []
-        for item in result.get("evidence", []):
-            context = item.get("context", "")
-            contexts.append(context)
-        
-        return {
-            "context_lengths": [len(ctx) for ctx in contexts],
-            "avg_context_length": np.mean([len(ctx) for ctx in contexts]),
-            "total_context_used": sum(len(ctx) for ctx in contexts),
-        }
-    
-    def _analyze_communities(self, communities: Any) -> Dict[str, Any]:
-        """Analyze community structure."""
-        community_sizes = communities["size"].value_counts().to_dict()
-        return {
-            "total_communities": len(community_sizes),
-            "size_distribution": community_sizes,
-            "avg_size": float(np.mean(list(community_sizes.values()))),
-            "max_size": max(community_sizes.values()),
-            "min_size": min(community_sizes.values()),
-        }
-    
-    def _analyze_embeddings(self, nodes: Any) -> Dict[str, Any]:
-        """Analyze embedding space statistics."""
-        embeddings = np.stack(nodes["embedding"].values)
-        return {
-            "dimension": embeddings.shape[1],
-            "mean_norm": float(np.mean(np.linalg.norm(embeddings, axis=1))),
-            "std_norm": float(np.std(np.linalg.norm(embeddings, axis=1))),
-        }
-    
-    async def _process_query(
-        self,
-        query: str,
-        query_type: str,
-        **kwargs
-    ) -> Dict[str, Any]:
-        """Process a single query."""
-        # Implementation depends on query_type
-        # This should be implemented based on the specific query type
-        pass
+        return results

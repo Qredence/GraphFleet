@@ -1,93 +1,115 @@
 """
-Pydantic models for GraphFleet API requests and responses.
+GraphFleet Data Models
+
+This module defines the Pydantic models used throughout the GraphFleet application.
+These models handle data validation and serialization for API requests and responses.
 """
 
-from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional, Any, Union
+from pydantic import BaseModel, Field, validator
+from datetime import datetime
 
-from pydantic import BaseModel, Field
+class InitRequest(BaseModel):
+    """Request model for project initialization."""
+    project_path: str = Field(..., description="Path where the project will be initialized")
+    options: Dict[str, Any] = Field(default_factory=dict, description="Additional initialization options")
 
-class QueryType(str, Enum):
-    """Types of queries supported by GraphFleet."""
-    STANDARD = "standard"
-    LOCAL = "local"
-    GLOBAL = "global"
-    DRIFT = "drift"
-    DYNAMIC = "dynamic"
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "project_path": "/path/to/project",
+                "options": {
+                    "chunk_size": 1000,
+                    "embedding_model": "text-embedding-3-large"
+                }
+            }
+        }
 
-class BaseRequest(BaseModel):
-    """Base request model with project path."""
-    project_path: str = Field(..., description="Path to the project directory")
-    options: Dict[str, Any] = Field(default_factory=dict, description="Additional options")
+class IndexRequest(BaseModel):
+    """Request model for document indexing."""
+    project_path: str = Field(..., description="Path to the project")
+    options: Dict[str, Any] = Field(default_factory=dict, description="Indexing options")
 
-class QueryRequest(BaseRequest):
-    """Query request model."""
-    query_text: str = Field(..., description="The query text to process")
-    query_type: QueryType = Field(default=QueryType.STANDARD, description="Type of query to perform")
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "project_path": "/path/to/project",
+                "options": {
+                    "chunk_strategy": "sentence",
+                    "chunk_overlap": 200
+                }
+            }
+        }
 
-class BatchQueryRequest(BaseRequest):
-    """Batch query request model."""
+class QueryRequest(BaseModel):
+    """Request model for querying the knowledge graph."""
+    project_path: str = Field(..., description="Path to the project")
+    query_text: str = Field(..., description="Query text to process")
+    query_type: str = Field(
+        default="semantic",
+        description="Type of query to perform",
+        regex="^(semantic|local|global|drift)$"
+    )
+    options: Dict[str, Any] = Field(default_factory=dict, description="Query options")
+
+    @validator("query_type")
+    def validate_query_type(cls, v):
+        allowed = {"semantic", "local", "global", "drift"}
+        if v not in allowed:
+            raise ValueError(f"query_type must be one of {allowed}")
+        return v
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "project_path": "/path/to/project",
+                "query_text": "What is GraphFleet?",
+                "query_type": "semantic",
+                "options": {
+                    "max_results": 5,
+                    "similarity_threshold": 0.7
+                }
+            }
+        }
+
+class BatchQueryRequest(BaseModel):
+    """Request model for batch query processing."""
+    project_path: str = Field(..., description="Path to the project")
     queries: List[str] = Field(..., description="List of queries to process")
-    query_type: QueryType = Field(default=QueryType.STANDARD, description="Type of query to perform")
-    batch_size: int = Field(default=5, description="Number of queries to process simultaneously")
-
-class QueryAnalysisRequest(BaseRequest):
-    """Query analysis request model."""
-    query_text: str = Field(..., description="The query text to analyze")
-
-class InitRequest(BaseRequest):
-    """Project initialization request model."""
-    project_name: str = Field(..., description="Name of the project to initialize")
-
-class IndexRequest(BaseRequest):
-    """Index creation request model."""
-    pass
-
-class AutoPromptRequest(BaseRequest):
-    """Auto-prompt generation request model."""
-    pass
+    query_type: str = Field(
+        default="semantic",
+        description="Type of queries to perform",
+        regex="^(semantic|local|global|drift)$"
+    )
+    batch_size: int = Field(
+        default=10,
+        ge=1,
+        le=100,
+        description="Number of queries to process in parallel"
+    )
+    options: Dict[str, Any] = Field(default_factory=dict, description="Query options")
 
 class QueryResponse(BaseModel):
-    """Query response model."""
-    result: Dict[str, Any] = Field(..., description="Query result")
-    metadata: Dict[str, Any] = Field(default_factory=dict, description="Additional metadata about the query")
-
-class ConfidenceScores(BaseModel):
-    """Confidence score statistics."""
-    mean: float
-    std: float
-    min: float
-    max: float
-
-class SourceDiversity(BaseModel):
-    """Source diversity statistics."""
-    total_sources: int
-    unique_sources: int
-    source_distribution: Dict[str, int]
-
-class ContextAnalysis(BaseModel):
-    """Context analysis statistics."""
-    context_lengths: List[int]
-    avg_context_length: float
-    total_context_used: int
-
-class CommunityStats(BaseModel):
-    """Community statistics."""
-    total_communities: int
-    size_distribution: Dict[str, int]
-    avg_size: float
-    max_size: int
-    min_size: int
-
-class EmbeddingStats(BaseModel):
-    """Embedding space statistics."""
-    dimension: int
-    mean_norm: float
-    std_norm: float
+    """Response model for query results."""
+    result: Union[str, List[Dict[str, Any]]] = Field(..., description="Query result")
+    metadata: Dict[str, Any] = Field(default_factory=dict, description="Response metadata")
 
 class GraphStats(BaseModel):
-    """Knowledge graph statistics."""
-    node_count: int
-    edge_count: int
-    community_stats: CommunityStats
-    embedding_stats: EmbeddingStats
+    """Model for knowledge graph statistics."""
+    node_count: int = Field(..., description="Total number of nodes")
+    edge_count: int = Field(..., description="Total number of edges")
+    avg_degree: float = Field(..., description="Average node degree")
+    density: float = Field(..., description="Graph density")
+    communities: int = Field(..., description="Number of communities")
+    last_updated: datetime = Field(default_factory=datetime.now, description="Last update timestamp")
+
+class AutoPromptRequest(BaseModel):
+    """Request model for automatic prompt generation."""
+    project_path: str = Field(..., description="Path to the project")
+    options: Dict[str, Any] = Field(default_factory=dict, description="Prompt generation options")
+
+class QueryAnalysisRequest(BaseModel):
+    """Request model for query analysis."""
+    project_path: str = Field(..., description="Path to the project")
+    query_text: str = Field(..., description="Query text to analyze")
+    options: Dict[str, Any] = Field(default_factory=dict, description="Analysis options")

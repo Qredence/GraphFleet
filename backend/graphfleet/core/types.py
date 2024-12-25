@@ -1,75 +1,60 @@
 """
-Type definitions for GraphFleet.
+GraphFleet Core Types
+
+This module defines the core types and configurations used throughout GraphFleet.
 """
 
 from enum import Enum
-from typing import TypeVar, Dict, List, Optional, Union, Any
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
 from pydantic import BaseModel
 
-# Type variables
-T = TypeVar('T')
-DocumentType = TypeVar('DocumentType', bound='Document')
-ChunkType = TypeVar('ChunkType', bound='Chunk')
-
-class QueryType(str, Enum):
-    """Types of queries supported by GraphFleet."""
-    STANDARD = "standard"
-    LOCAL = "local"
-    GLOBAL = "global"
-    DRIFT = "drift"
-    DYNAMIC = "dynamic"
-
 class IndexType(str, Enum):
-    """Types of indexes supported by GraphFleet."""
-    LANCEDB = "lancedb"
     FAISS = "faiss"
-    MILVUS = "milvus"
+    LANCEDB = "lancedb"
+    ANNOY = "annoy"
 
 class RetrievalType(str, Enum):
-    """Types of retrieval methods."""
-    VECTOR = "vector"
-    KEYWORD = "keyword"
+    SIMILARITY = "similarity"
     HYBRID = "hybrid"
-    MULTIHOP = "multihop"
+    SEMANTIC = "semantic"
+
+class QueryType(str, Enum):
+    RAG = "rag"
+    DIRECT = "direct"
+    GRAPH = "graph"
 
 class Document(BaseModel):
-    """Base document model."""
     id: str
     content: str
     metadata: Dict[str, Any] = {}
     embedding: Optional[List[float]] = None
 
 class Chunk(BaseModel):
-    """Document chunk model."""
     id: str
-    content: str
-    document_id: str
-    start_idx: int
-    end_idx: int
+    text: str
     metadata: Dict[str, Any] = {}
     embedding: Optional[List[float]] = None
-
-class QueryResult(BaseModel):
-    """Query result model."""
-    result: str
-    confidence: float
-    sources: List[Document]
-    metadata: Dict[str, Any] = {}
+    document_id: str
 
 class IndexConfig(BaseModel):
-    """Index configuration model."""
-    index_type: IndexType
+    index_type: IndexType = IndexType.LANCEDB
     dimension: int = 1536
     metric: str = "cosine"
     additional_config: Dict[str, Any] = {}
 
 class QueryConfig(BaseModel):
-    """Query configuration model."""
-    query_type: QueryType = QueryType.STANDARD
+    query_type: QueryType = QueryType.RAG
     retrieval_type: RetrievalType = RetrievalType.HYBRID
-    max_results: int = 10
+    max_results: int = 5
     threshold: float = 0.7
-    context_window: int = 3
-    max_tokens: int = 1000
+    context_window: int = 2000
+    max_tokens: int = 500
     temperature: float = 0.7
     additional_config: Dict[str, Any] = {}
+
+class QueryResult(BaseModel):
+    result: str
+    confidence: float = 0.0
+    sources: List[Document] = []
+    metadata: Dict[str, Any] = {}

@@ -1,8 +1,8 @@
+"""GraphFleet FastAPI application."""
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-
-logger = logging.getLogger(__name__)
+from typing import Dict, Any
 
 from app.config import Settings, get_settings
 from app.models import (
@@ -32,6 +32,16 @@ from graphrag.config.models.graph_rag_config import GraphRagConfig
 from openai import AzureOpenAI
 import pandas as pd
 from pathlib import Path
+
+from utils.cache import get_cache, set_cache
+
+logger = logging.getLogger(__name__)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 app = FastAPI(title="GraphFleet API", version="1.0.0")
 
@@ -124,7 +134,7 @@ async def local_search(
     settings: Settings = Depends(get_settings),
     llm: AzureOpenAI = Depends(get_llm),
 ):
-    """Local search within a specific community"""
+    """Local search within a specific community with optimized GraphRAG features"""
     if not settings.azure_openai_api_key:
         raise HTTPException(
             status_code=500,
@@ -132,18 +142,42 @@ async def local_search(
         )
 
     try:
-        # Load required data
-        dfs = load_dataframes(settings.base_dir)
+        # Initialize cache
+        cache_key = f"local_search_{request.query}_{request.response_type}"
+        cached_response = await get_cache(cache_key)
+        if cached_response:
+            return cached_response
+
+        # Load required data with error handling
+        try:
+            dfs = load_dataframes(settings.base_dir)
+        except Exception as e:
+            logger.error(f"Failed to load dataframes: {str(e)}")
+            raise HTTPException(
+                status_code=500,
+                detail="Failed to load required data",
+            )
         
-        # Create GraphRAG config
+        # Create GraphRAG config with optimized settings
         config = GraphRagConfig(
             api_key=settings.azure_openai_api_key,
             api_base=settings.azure_openai_api_base,
             api_version=settings.azure_openai_api_version,
             llm=llm,
+            chunk_size=settings.chunk_size,
+            chunk_overlap=settings.chunk_overlap,
+            embedding_model=settings.embedding_model,
+            max_tokens=settings.max_tokens,
+            temperature=settings.temperature,
+            top_k=5,  # Number of relevant chunks to consider
+            similarity_threshold=0.7,  # Minimum similarity score
         )
 
-        # Perform local search
+        # Validate input data
+        if not all(key in dfs for key in ["nodes", "entities", "community_reports", "text_units", "relationships", "covariates"]):
+            raise ValueError("Missing required dataframes")
+
+        # Perform local search with enhanced features
         response = await graphrag_local_search(
             config=config,
             nodes=dfs["nodes"],
@@ -152,16 +186,28 @@ async def local_search(
             text_units=dfs["text_units"],
             relationships=dfs["relationships"],
             covariates=dfs["covariates"],
-            community_level=1,  # Default to level 1
+            community_level=request.community_level or 1,
             response_type=request.response_type,
             query=request.query,
+            use_graph_context=True,  # Enable graph context for better results
+            rerank_results=True,  # Enable result reranking
+            max_hops=2,  # Maximum graph traversal distance
         )
 
+        # Cache successful response
+        await set_cache(cache_key, response, ttl=3600)  # Cache for 1 hour
+
         return response
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
     except Exception as e:
+        logger.error(f"Local search error: {str(e)}")
         raise HTTPException(
             status_code=500,
-            detail=str(e),
+            detail="An error occurred during local search",
         )
 
 @app.post("/search/drift", response_model=DriftSearchResponse)

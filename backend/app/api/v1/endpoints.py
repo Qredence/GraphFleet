@@ -1,11 +1,20 @@
 """
-API v1 endpoints for GraphFleet.
+GraphFleet API v1 Endpoints
+
+This module contains the REST API endpoints for the GraphFleet service.
+It provides functionality for:
+- Project initialization and indexing
+- Query processing and analysis
+- Knowledge graph statistics and management
+- Custom pipelines and semantic search
+- Drift analysis and monitoring
+
+All endpoints handle errors gracefully and return appropriate HTTP status codes.
 """
 
-from typing import Dict, List, Optional
-
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from typing import Dict, List, Optional, Any
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel, Field
 
 from app.models import (
     AutoPromptRequest,
@@ -20,7 +29,7 @@ from app.models import (
 from graphfleet.core import GraphFleet
 from graphfleet.core.features import GraphFleetFeatures
 
-router = APIRouter()
+router = APIRouter(prefix="/v1", tags=["GraphFleet API v1"])
 
 @router.post("/init", response_model=Dict[str, str])
 async def init_project(request: InitRequest):
@@ -123,14 +132,28 @@ async def graph_stats(project_path: str):
 
 # New Endpoints
 
-@router.post("/custom-pipeline")
+@router.post("/custom-pipeline", response_model=Dict[str, Any])
 async def custom_pipeline(
-    project_path: str,
-    query_text: str,
-    local_weight: float = 0.7,
-    options: Optional[Dict] = None
+    project_path: str = Query(..., description="Path to the GraphFleet project"),
+    query_text: str = Query(..., description="Query text to process"),
+    local_weight: float = Query(0.7, ge=0.0, le=1.0, description="Weight for local results"),
+    options: Optional[Dict[str, Any]] = None
 ):
-    """Run a custom hybrid query pipeline."""
+    """
+    Run a custom hybrid query pipeline that combines local and global search results.
+    
+    Args:
+        project_path: Path to the GraphFleet project
+        query_text: Query text to process
+        local_weight: Weight given to local results (between 0 and 1)
+        options: Additional options for query processing
+        
+    Returns:
+        Dict containing combined search results and metadata
+        
+    Raises:
+        HTTPException: If there's an error during processing
+    """
     try:
         graph_fleet = GraphFleet(project_path)
         
@@ -172,14 +195,28 @@ async def custom_pipeline(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/semantic-search")
+@router.post("/semantic-search", response_model=Dict[str, Any])
 async def semantic_search(
-    project_path: str,
-    query_text: str,
-    k: int = 10,
-    threshold: float = 0.5
+    project_path: str = Query(..., description="Path to the GraphFleet project"),
+    query_text: str = Query(..., description="Query text for semantic search"),
+    k: int = Query(10, ge=1, le=100, description="Number of results to return"),
+    threshold: float = Query(0.5, ge=0.0, le=1.0, description="Similarity threshold")
 ):
-    """Perform semantic search over the document collection."""
+    """
+    Perform semantic search over the document collection.
+    
+    Args:
+        project_path: Path to the GraphFleet project
+        query_text: Search query text
+        k: Number of results to return
+        threshold: Minimum similarity threshold
+        
+    Returns:
+        Dict containing search results and metadata
+        
+    Raises:
+        HTTPException: If there's an error during search
+    """
     try:
         graph_fleet = GraphFleet(project_path)
         results = await graph_fleet.semantic_search(
@@ -197,13 +234,26 @@ async def semantic_search(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/drift-analysis")
+@router.post("/drift-analysis", response_model=Dict[str, Any])
 async def drift_analysis(
-    project_path: str,
-    query_text: str,
-    window_size: int = 100
+    project_path: str = Query(..., description="Path to the GraphFleet project"),
+    query_text: str = Query(..., description="Query text for drift analysis"),
+    window_size: int = Query(100, ge=10, le=1000, description="Analysis window size")
 ):
-    """Analyze concept drift in the knowledge graph."""
+    """
+    Analyze concept drift in the knowledge graph over time.
+    
+    Args:
+        project_path: Path to the GraphFleet project
+        query_text: Query text for analysis
+        window_size: Size of the analysis window
+        
+    Returns:
+        Dict containing drift statistics and analysis results
+        
+    Raises:
+        HTTPException: If there's an error during analysis
+    """
     try:
         graph_fleet = GraphFleet(project_path)
         features = GraphFleetFeatures(graph_fleet.storage)

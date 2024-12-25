@@ -1,38 +1,30 @@
 """
-GraphFleet - A Python package for graph-based RAG applications.
-Built on top of GraphRAG with enhanced features and improved usability.
+GraphFleet - A powerful graph-based knowledge management and query system.
+
+This package provides tools for building and querying knowledge graphs,
+with features for semantic search, concept drift analysis, and more.
 """
 
-from .core.base import GraphFleet
-from .core.types import (
-    QueryType,
-    IndexType,
-    RetrievalType,
-    Document,
-    Chunk,
-    QueryResult,
-    IndexConfig,
-    QueryConfig,
-)
-from .indexing.chunker import TextProcessor
-from .prompting.generator import PromptGenerator
-from .querying.optimizer import QueryOptimizer, OptimizationResult
-
-__version__ = "1.0.1"
+__version__ = "1.0.0"
 __author__ = "GraphFleet Team"
+__email__ = "team@graphfleet.io"
+
+from graphfleet.core import GraphFleet
+from graphfleet.core.features import GraphFleetFeatures
+from graphfleet.core.types import (
+    QueryType,
+    ChunkStrategy,
+    EmbeddingConfig,
+    QueryConfig,
+    IndexConfig,
+)
 
 __all__ = [
     "GraphFleet",
+    "GraphFleetFeatures",
     "QueryType",
-    "IndexType",
-    "RetrievalType",
-    "Document",
-    "Chunk",
-    "QueryResult",
-    "IndexConfig",
+    "ChunkStrategy",
+    "EmbeddingConfig",
     "QueryConfig",
-    "TextProcessor",
-    "PromptGenerator",
-    "QueryOptimizer",
-    "OptimizationResult",
+    "IndexConfig",
 ]
