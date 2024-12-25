@@ -1,91 +1,160 @@
 # GraphFleet Examples
 
-This directory contains examples demonstrating how to use GraphFleet for various tasks.
+This directory contains example code demonstrating various features and use cases of GraphFleet.
 
-## Text File Indexing Example
+## Directory Structure
 
-The `index_text.py` script shows how to index a text file using GraphFleet. It demonstrates:
-- Text chunking with configurable size and overlap
-- Metadata handling
-- Basic search functionality
+```
+examples/
+├── basic/                  # Basic usage examples
+│   ├── document_search.py  # Document indexing and search
+│   └── knowledge_graph.py  # Knowledge graph creation and querying
+├── advanced/              # Advanced usage examples
+│   └── custom_pipeline.py # Custom processing pipelines
+├── integrations/          # Integration examples
+│   └── external_services.py # S3, Elasticsearch, ML models
+└── performance/           # Performance optimization examples
+    └── optimization.py    # Performance tuning techniques
+```
 
-### Prerequisites
+## Basic Examples
 
-1. Install GraphFleet with development dependencies:
+### Document Search (`basic/document_search.py`)
+
+Demonstrates basic document indexing and semantic search capabilities:
+- Document indexing with metadata
+- Simple semantic search
+- Filtered search
+- Hybrid search (semantic + keyword)
+
 ```bash
-./scripts/uv_install.sh install --dev
+python examples/basic/document_search.py
 ```
 
-2. Set up your environment variables in `.env`:
-```env
-GRAPHRAG_API_KEY=your_api_key
-AZURE_OPENAI_API_KEY=your_azure_openai_key
-AZURE_OPENAI_ENDPOINT=your_azure_endpoint
-```
+### Knowledge Graph (`basic/knowledge_graph.py`)
 
-### Usage
+Shows how to create and query knowledge graphs:
+- Graph creation from documents
+- Entity and relationship extraction
+- Basic and advanced queries
+- Graph analytics and visualization
 
-1. Basic usage with default settings:
 ```bash
-python examples/index_text.py examples/sample.txt
+python examples/basic/knowledge_graph.py
 ```
 
-2. Custom chunk size and overlap:
+## Integration Examples
+
+### External Services (`integrations/external_services.py`)
+
+Demonstrates integration with external services:
+- S3 storage backend
+- Elasticsearch search engine
+- HuggingFace models
+- Custom processing pipelines
+
 ```bash
-python examples/index_text.py examples/sample.txt --chunk-size 800 --chunk-overlap 150
+# First, start required services
+docker-compose up -d elasticsearch redis localstack
+
+# Then run the example
+python examples/integrations/external_services.py
 ```
 
-### Example Output
+## Performance Examples
 
+### Optimization (`performance/optimization.py`)
+
+Shows various performance optimization techniques:
+- Batch processing
+- Parallel processing
+- Query optimization
+- Memory management
+- Caching strategies
+- Resource monitoring
+
+```bash
+python examples/performance/optimization.py
 ```
-Created 5 chunks from text
-Indexed chunk 1/5
-Indexed chunk 2/5
-Indexed chunk 3/5
-Indexed chunk 4/5
-Indexed chunk 5/5
-Indexing complete!
 
-Test Query: What is the main topic discussed in this text?
-Result: The main topic discussed in this text is GraphRAG, which is an innovative approach...
+## Prerequisites
+
+1. Install GraphFleet with all dependencies:
+```bash
+pip install graphfleet[all]
 ```
 
-### Understanding the Code
+2. For integration examples, install additional dependencies:
+```bash
+pip install graphfleet[integrations]
+```
 
-The example demonstrates several key concepts:
+3. For performance examples:
+```bash
+pip install graphfleet[performance]
+```
 
-1. Text Chunking:
-   - Uses sentence-based chunking for better context preservation
-   - Configurable chunk size and overlap
-   - Handles text splitting intelligently
+## Configuration
 
-2. Metadata Handling:
-   - Tracks source file information
-   - Maintains chunk ordering
-   - Preserves relationships between chunks
+Most examples use a default configuration suitable for local development. For production use, you should configure:
 
-3. Indexing Process:
-   - Asynchronous processing for better performance
-   - Progress tracking
-   - Error handling
+1. Environment variables:
+```bash
+export GRAPHFLEET_ENV=development
+export GRAPHFLEET_DEBUG=true
+```
 
-4. Search Capabilities:
-   - Simple query interface
-   - Context-aware responses
-   - Graph-based retrieval
+2. Service endpoints (for integration examples):
+```bash
+export ELASTICSEARCH_URL=http://localhost:9200
+export REDIS_URL=redis://localhost:6379
+export AWS_ENDPOINT_URL=http://localhost:4566
+```
 
-### Customization
+## Best Practices
 
-You can modify the script to:
-- Add custom metadata
-- Implement different chunking strategies
-- Add additional processing steps
-- Customize the search behavior
+1. **Document Processing**
+   - Use batch processing for large datasets
+   - Include relevant metadata
+   - Configure appropriate index settings
 
-### Additional Examples
+2. **Graph Operations**
+   - Define clear node and edge types
+   - Use appropriate relationship labels
+   - Implement proper indexing strategies
 
-Check out other examples in this directory for more advanced usage scenarios:
-- Batch document processing
-- Custom entity extraction
-- Advanced search patterns
-- Graph visualization 
+3. **Performance**
+   - Enable caching for frequent operations
+   - Use batch processing when possible
+   - Monitor resource usage
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Memory Issues**
+```python
+# Configure memory limits
+gf.configure_memory(max_heap="4G")
+```
+
+2. **Performance Issues**
+```python
+# Enable debug logging
+import logging
+logging.basicConfig(level=logging.DEBUG)
+```
+
+3. **Integration Issues**
+```python
+# Check service connectivity
+from graphfleet.utils.health import check_services
+check_services()
+```
+
+## Support
+
+For help with the examples:
+- Documentation: https://docs.graphfleet.ai
+- Discord: https://discord.gg/graphfleet
+- GitHub Issues: https://github.com/qredence/graphfleet/issues 

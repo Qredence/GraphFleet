@@ -1,110 +1,161 @@
 # GraphFleet
 
-A powerful graph-based knowledge management and query system.
+A powerful graph-based knowledge management and query system designed for large-scale data processing and analysis. GraphFleet combines semantic search, knowledge graphs, and advanced analytics to provide deep insights into your data.
 
-## Features
+## 🚀 Key Features
 
-- Project initialization and management
-- Advanced document indexing
-- Semantic search capabilities
-- Custom query pipelines
-- Knowledge graph analytics
-- Concept drift analysis
-- Batch processing support
+- **Advanced Document Processing**
+  - Semantic indexing and search
+  - Automatic knowledge graph construction
+  - Multi-format document support (PDF, Markdown, Code, etc.)
 
-## Project Structure
+- **Graph Analytics**
+  - Custom query pipelines
+  - Concept drift analysis
+  - Community detection
+  - Path analysis and recommendations
 
+- **Performance & Scale**
+  - Distributed processing support
+  - Native extensions for performance-critical operations
+  - Efficient batch processing
+  - Real-time query capabilities
+
+- **Developer Experience**
+  - Modern React frontend
+  - RESTful and GraphQL APIs
+  - Comprehensive documentation
+  - Docker-based development environment
+
+## 🏗️ Architecture
+
+GraphFleet consists of three main components:
+
+1. **Core Engine (graphfleet)**
+   - Document processing and indexing
+   - Knowledge graph management
+   - Query processing
+
+2. **Graph Processing (graspologic)**
+   - Graph algorithms implementation
+   - Analytics and metrics
+   - Visualization utilities
+
+3. **Native Extensions (graspologic-native)**
+   - Performance-critical operations in Rust
+   - SIMD optimizations
+   - Custom memory management
+
+## 🛠️ Installation
+
+### Using uv
+
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install graphfleet
+uv pip install graphfleet[all]
 ```
-graphfleet/
-├── backend/                 # Backend service
-│   ├── app/                # Main application code
-│   │   ├── api/           # API endpoints
-│   │   ├── core/          # Core business logic
-│   │   ├── models/        # Data models
-│   │   └── utils/         # Utility functions
-│   ├── graphfleet/        # GraphFleet core library
-│   ├── tests/             # Backend tests
-│   └── templates/         # Template files
-├── frontend/              # Frontend application
-│   ├── src/              # Source code
-│   │   ├── components/   # React components
-│   │   ├── pages/        # Page components
-│   │   └── utils/        # Utility functions
-│   └── public/           # Static assets
-├── shared/               # Shared utilities
-├── scripts/              # Development scripts
-└── examples/             # Example code and notebooks
-```
 
-## Installation
+### Development Setup
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/graphfleet.git
+git clone https://github.com/qredence/graphfleet.git
 cd graphfleet
 ```
 
-2. Set up the backend:
+2. Set up development environment:
 ```bash
-cd backend
+# Using Docker (recommended)
+docker compose up -d
+
+# Or manual setup
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+
+# Install dependencies with uv
+uv pip install --upgrade uv  # Ensure latest uv version
+uv pip install build hatchling  # Install build tools
+uv sync  # Install all dependencies from pyproject.toml
+uv pip install -e ".[dev]"  # Install package in editable mode
 ```
 
-3. Set up the frontend:
-```bash
-cd frontend
-npm install
-```
-
-4. Configure environment variables:
+3. Configure environment:
 ```bash
 cp .env.example .env
 # Edit .env with your settings
 ```
 
-## Development
+## 📚 Documentation
 
-### Backend Development
+- [Getting Started Guide](./docs/guides/getting-started.md)
+- [API Reference](./docs/api/README.md)
+- [Architecture Overview](./docs/architecture/README.md)
+- [Contributing Guidelines](./CONTRIBUTING.md)
 
-```bash
-cd backend
-uvicorn app.main:app --reload
+## 🧪 Examples
+
+The `examples/` directory contains various use cases and tutorials:
+
+- Basic document indexing and search
+- Custom query pipeline creation
+- Knowledge graph visualization
+- Performance optimization techniques
+
+## 🛣️ Project Structure
+
+```
+graphfleet/
+├── backend/                    # Backend service
+│   ├── app/                   # Main application code
+│   │   ├── api/              # API endpoints
+│   │   ├── core/             # Core business logic
+│   │   ├── models/           # Data models
+│   │   └── utils/            # Utility functions
+│   ├── graphfleet/           # GraphFleet core library
+│   └── tests/                # Backend tests
+├── graspologic/               # Graph processing library
+│   ├── src/                  # Source code
+│   ├── tests/                # Tests
+│   └─�� docs/                 # Library documentation
+├── graspologic-native/        # Native extensions
+│   ├── src/                  # Rust/C++ source
+│   └── python/               # Python bindings
+├── frontend/                  # Frontend application
+└── docs/                     # Project documentation
 ```
 
-### Frontend Development
+## 🤝 Contributing
 
-```bash
-cd frontend
-npm run dev
-```
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
-### Docker Development
+### Development Process
 
-```bash
-docker-compose up
-```
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
 
-## API Documentation
-
-The API documentation is available at `/docs` when running the backend server.
-
-Key endpoints:
-- `/v1/init` - Initialize a new project
-- `/v1/index` - Create document index
-- `/v1/query` - Process queries
-- `/v1/semantic-search` - Perform semantic search
-- `/v1/custom-pipeline` - Run custom query pipelines
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## License
+## 📄 License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-## Security
+## 🔒 Security
 
 For security concerns, please refer to our [Security Policy](SECURITY.md).
+
+## 🌟 Acknowledgments
+
+GraphFleet is built on top of several amazing open-source projects:
+
+- [NetworkX](https://networkx.org/)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [React](https://reactjs.org/)
+- [sentence-transformers](https://www.sbert.net/)
+
+## ✨ Core Team
+
+- Zachary BENSALEM ([@zbensalem](https://github.com/zbensalem)) - Project Lead
