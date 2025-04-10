@@ -20,6 +20,9 @@ GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://gi
 
 https://github.com/user-attachments/assets/ac3271fa-cab5-412f-a441-bbedfe4a009f
 
+## GitAds Sponsored
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=qredence/graphfleet@github)](https://gitads.dev/v1/ad-track?source=qredence/graphfleet@github)
+
 
 
 ## GraphFleet
