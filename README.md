@@ -4,6 +4,7 @@
 > DEPRECATED NEW FULL REVAMP COMING SOON.
 GraphFleet is an advanced implementation of [GraphRAG from Microsoft](https://github.com/microsoft/graphrag), an important update is expected by the end of december
 
+<!-- GitAds-Verify: HCFP2M96G9BUATVQKGUZ2LPPP1WLDHDB -->
 
 
 <div align="left">
