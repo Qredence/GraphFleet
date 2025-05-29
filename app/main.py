@@ -19,7 +19,7 @@ import sentry_sdk
 app = FastAPI()
 
 app.add_middleware(APIKeyMiddleware)
-app.add_middleware(RateLimiter, max_requests=100, window_seconds=60)
+app.add_middleware(RateLimiter, max_requests=settings.RATE_LIMIT_MAX_REQUESTS, window_seconds=settings.RATE_LIMIT_WINDOW_SECONDS)
 app.add_middleware(RequestLoggerMiddleware)
 
 sentry_sdk.init(
