@@ -7,6 +7,7 @@ from app.services.search_engine import (
 import logging
 import numpy as np
 from app.utils import convert_numpy
+from app.utils.security import sanitize_search_query
 
 # ... existing imports ...
 
@@ -16,8 +17,9 @@ logger = logging.getLogger(__name__)
 
 async def global_search(query: str) -> Dict[str, Any]:
     try:
-        logger.debug(f"Starting global search with query: {query}")
-        result = await global_search_engine.asearch(query)
+        sanitized_query = sanitize_search_query(query)
+        logger.debug(f"Starting global search with sanitized query: {sanitized_query}")
+        result = await global_search_engine.asearch(sanitized_query)
         logger.debug("Global search completed successfully")
         context_data = _reformat_context_data(result.context_data)
         logger.debug(f"Context data reformatted: {list(context_data.keys())}")
@@ -35,7 +37,9 @@ async def global_search(query: str) -> Dict[str, Any]:
 
 async def global_search_streaming(query: str) -> AsyncGenerator[str, None]:
     try:
-        async for chunk in global_search_engine.asearch_streaming(query):
+        sanitized_query = sanitize_search_query(query)
+        logger.debug(f"Starting global search streaming with sanitized query: {sanitized_query}")
+        async for chunk in global_search_engine.asearch_streaming(sanitized_query):
             yield chunk
     except Exception as e:
         raise HTTPException(
@@ -48,8 +52,9 @@ async def global_search_streaming(query: str) -> AsyncGenerator[str, None]:
 
 async def local_search(query: str) -> Dict[str, Any]:
     try:
-        logger.debug(f"Starting local search with query: {query}")
-        result = await local_search_engine.asearch(query)
+        sanitized_query = sanitize_search_query(query)
+        logger.debug(f"Starting local search with sanitized query: {sanitized_query}")
+        result = await local_search_engine.asearch(sanitized_query)
         logger.debug("Local search completed successfully")
         context_data = _reformat_context_data(result.context_data)
         logger.debug(f"Context data reformatted: {list(context_data.keys())}")
@@ -67,7 +72,9 @@ async def local_search(query: str) -> Dict[str, Any]:
 
 async def local_search_streaming(query: str) -> AsyncGenerator[str, None]:
     try:
-        async for chunk in local_search_engine.asearch_streaming(query):
+        sanitized_query = sanitize_search_query(query)
+        logger.debug(f"Starting local search streaming with sanitized query: {sanitized_query}")
+        async for chunk in local_search_engine.asearch_streaming(sanitized_query):
             yield chunk
     except Exception as e:
         raise HTTPException(

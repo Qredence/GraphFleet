@@ -5,15 +5,22 @@ from pydantic_settings import BaseSettings, SettingsConfigDict  # Updated import
 from app.services.question_generator import create_question_generator
 from app.services.search_engine import create_search_engines, LocalSearchWrapper, GlobalSearchWrapper
 from app.routers import search
+from app.middleware.auth import APIKeyMiddleware
+from app.middleware.rate_limiter import RateLimiter
+from app.middleware.request_logger import RequestLoggerMiddleware
 import pandas as pd
 import logging
 import numpy as np
 from app.utils import convert_numpy
+from app.utils.security import sanitize_search_query
 from app.api import _reformat_context_data
 import sentry_sdk
 
 app = FastAPI()
 
+app.add_middleware(APIKeyMiddleware)
+app.add_middleware(RateLimiter, max_requests=settings.RATE_LIMIT_MAX_REQUESTS, window_seconds=settings.RATE_LIMIT_WINDOW_SECONDS)
+app.add_middleware(RequestLoggerMiddleware)
 
 sentry_sdk.init(
     dsn="https://741dc950f3465d2db0b8f869832dabc0@o4507875835314176.ingest.de.sentry.io/4507875863429200",
@@ -39,6 +46,8 @@ class SearchQuery(BaseModel):
 async def local_search(search_query: SearchQuery):
     try:
         logger.debug(f"Received local search query: {search_query.query}")
+        sanitized_query = sanitize_search_query(search_query.query)
+        logger.debug(f"Sanitized local search query: {sanitized_query}")
         
         search_engines = create_search_engines()
         logger.debug("Search engines created successfully")
@@ -47,7 +56,7 @@ async def local_search(search_query: SearchQuery):
         logger.debug("Local search engine retrieved")
         
         logger.debug("Starting local search")
-        result = await local_search_engine.asearch(search_query.query)
+        result = await local_search_engine.asearch(sanitized_query)
         logger.debug("Local search completed")
         
         logger.debug(f"Raw context_data keys: {result.context_data.keys()}")
@@ -77,7 +86,9 @@ async def global_search(search_query: SearchQuery):
     global_search_engine = search_engines[1]
     try:
         logger.debug(f"Received global search query: {search_query.query}")
-        result = await global_search_engine.asearch(search_query.query)
+        sanitized_query = sanitize_search_query(search_query.query)
+        logger.debug(f"Sanitized global search query: {sanitized_query}")
+        result = await global_search_engine.asearch(sanitized_query)
         context_data = _reformat_context_data(result.context_data)
         logger.debug(f"Context data reformatted: {list(context_data.keys())}")
         
@@ -102,8 +113,10 @@ async def local_search_stream(search_query: SearchQuery):
     search_engines = create_search_engines()
     local_search_engine = search_engines[0]
     try:
+        sanitized_query = sanitize_search_query(search_query.query)
+        logger.debug(f"Sanitized local stream search query: {sanitized_query}")
         async def stream_generator():
-            async for chunk in local_search_engine.astream(search_query.query):
+            async for chunk in local_search_engine.astream(sanitized_query):
                 yield f"data: {chunk}\n\n"
         return StreamingResponse(stream_generator(), media_type="text/event-stream")
     except Exception as e:
@@ -114,8 +127,10 @@ async def global_search_stream(search_query: SearchQuery):
     search_engines = create_search_engines()
     global_search_engine = search_engines[1]
     try:
+        sanitized_query = sanitize_search_query(search_query.query)
+        logger.debug(f"Sanitized global stream search query: {sanitized_query}")
         async def stream_generator():
-            async for chunk in global_search_engine.astream(search_query.query):
+            async for chunk in global_search_engine.astream(sanitized_query):
                 yield f"data: {chunk}\n\n"
         return StreamingResponse(stream_generator(), media_type="text/event-stream")
     except Exception as e:
@@ -125,7 +140,9 @@ async def global_search_stream(search_query: SearchQuery):
 async def generate_questions(search_query: SearchQuery):
     question_generator = create_question_generator()
     try:
-        result = await question_generator.agenerate(question_history=[search_query.query], context_data=None, question_count=5)
+        sanitized_query = sanitize_search_query(search_query.query)
+        logger.debug(f"Sanitized query for question generation: {sanitized_query}")
+        result = await question_generator.agenerate(question_history=[sanitized_query], context_data=None, question_count=5)
         return {"questions": result.response}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
