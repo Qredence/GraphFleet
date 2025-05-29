@@ -7,6 +7,6 @@ def sanitize_search_query(query: str) -> str:
     """
     if query is None:
         return ""
-    # Remove characters that are not alphanumeric, space, period, hyphen, or underscore
-    sanitized_query = re.sub(r'[^a-zA-Z0-9 ._-]', '', query)
+    # Use the compiled regex pattern to remove unwanted characters
+    sanitized_query = SANITIZE_PATTERN.sub('', query)
     return sanitized_query
