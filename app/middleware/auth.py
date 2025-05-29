@@ -1,3 +1,4 @@
+import secrets
 from fastapi import Request, HTTPException
 from fastapi.security import APIKeyHeader
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -11,7 +12,7 @@ class APIKeyMiddleware(BaseHTTPMiddleware):
             return await call_next(request)
 
         api_key = request.headers.get("X-API-Key")
-        if api_key != settings.API_KEY:
+        if not secrets.compare_digest(api_key or "", settings.API_KEY):
             raise HTTPException(status_code=403, detail="Invalid API Key")
 
         return await call_next(request)
