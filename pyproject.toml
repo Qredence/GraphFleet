@@ -21,7 +21,7 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.0"}
 alembic = "^1.13.0"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 
-python-multipart = "^0.0.9"
+python-multipart = "^0.0.18"
 structlog = "^24.1.0"
 
 graphrag = "^0.3.2"
